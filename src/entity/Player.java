@@ -59,22 +59,60 @@ public class Player extends Entity {
             direct = "right";
             x += speed;
         }
+        counter++;
+        if(counter>5){
+            if (spriteNum==1){
+                spriteNum=2;
+            }
+            else if(spriteNum==2){
+                spriteNum=1;
+            }
+            counter=0;
+        }
 
     }
 
     public void drawing(Graphics2D graphics2D) {
 
 
-        BufferedImage image = switch (direct) {
-            case "up" -> up1;
-            case "down" -> down1;
-            case "left" -> left1;
-            case "right" -> right1;
-            default -> null;
+        BufferedImage image = null;
+        switch (direct){
+            case "up":
+                if (spriteNum==1) {
+                    image = up1;
+                }
+                if (spriteNum==2){
+                    image=up2;
+                }
+                break;
+            case "down":
+                if (spriteNum==1) {
+                    image = down1;
+                }
+                if (spriteNum==2){
+                    image=down2;
+                }
+                break;
+            case "left":
+                if (spriteNum==1) {
+                    image = left1;
+                }
+                if (spriteNum==2){
+                    image=left2;
+                }
+                break;
+            case "right":
+                if (spriteNum==1) {
+                    image = right1;
+                }
+                if (spriteNum==2){
+                    image=right2;
+                }
+                break;
+
         };
 
         graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
-
 
     }
 }
