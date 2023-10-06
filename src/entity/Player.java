@@ -64,8 +64,6 @@ public class Player extends Entity {
 
     public void drawing(Graphics2D graphics2D) {
 
-     graphics2D.setColor(new Color(119, 52, 6));
-
 
         BufferedImage image = switch (direct) {
             case "up" -> up1;
