@@ -35,10 +35,13 @@ public class TileManager {
     }
 
     public void drawing(Graphics2D graphics2D) {
+        for (int row = 0; row < gamePanel.maxScreenRow; row++) {
+            for (int col = 0; col < gamePanel.maxScreenCol; col++) {
+                graphics2D.drawImage(tiles[0].image, col * gamePanel.tileSize,
+                        row * gamePanel.tileSize, gamePanel.tileSize, gamePanel.tileSize, null);
+            }
 
-        graphics2D.drawImage(tiles[0].image, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        graphics2D.drawImage(tiles[1].image, 48, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        graphics2D.drawImage(tiles[2].image, 96, 0, gamePanel.tileSize, gamePanel.tileSize, null);
+        }
 
     }
 }
