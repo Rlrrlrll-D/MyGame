@@ -24,11 +24,13 @@ public class Player extends Entity {
         x = gamePanel.dfl_X;
         y = gamePanel.dfl_Y;
         speed = 3;
-        direct = "down";
+        direct = "stay";
     }
 
     public void getPlayerImg() {
         try {
+            stay1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay1.png")));
+            stay2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay2.png")));
             up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up1.png")));
             up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up2.png")));
             down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_down1.png.")));
@@ -40,77 +42,95 @@ public class Player extends Entity {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getLocalizedMessage();
         }
     }
 
     public void update() {
 
-        if (keyHandler.upPressed) {
-            direct = "up";
-            y -= speed;
-        } else if (keyHandler.downPressed) {
-            direct = "down";
-            y += speed;
-        } else if (keyHandler.leftPressed) {
-            direct = "left";
-            x -= speed;
-        } else if (keyHandler.rightPressed) {
-            direct = "right";
-            x += speed;
-        }
-        counter++;
-        if(counter>5){
-            if (spriteNum==1){
-                spriteNum=2;
+        if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed) {
+
+            if (keyHandler.upPressed) {
+                direct = "up";
+                y -= speed;
+            } else if (keyHandler.downPressed) {
+                direct = "down";
+                y += speed;
+            } else if (keyHandler.leftPressed) {
+                direct = "left";
+                x -= speed;
+            } else {
+                direct = "right";
+                x += speed;
             }
-            else if(spriteNum==2){
-                spriteNum=1;
-            }
-            counter=0;
+            spriteImageChange(10);
+        } else {
+            direct = "stay";
+            spriteImageChange(19);
         }
 
+    }
+
+    private void spriteImageChange(int delta) {
+        counter++;
+        if (counter > delta) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            } else if (spriteNum == 2) {
+                spriteNum = 1;
+            }
+            counter = 0;
+        }
     }
 
     public void drawing(Graphics2D graphics2D) {
 
 
         BufferedImage image = null;
-        switch (direct){
+        switch (direct) {
             case "up":
-                if (spriteNum==1) {
+                if (spriteNum == 1) {
                     image = up1;
                 }
-                if (spriteNum==2){
-                    image=up2;
+                if (spriteNum == 2) {
+                    image = up2;
                 }
                 break;
             case "down":
-                if (spriteNum==1) {
+                if (spriteNum == 1) {
                     image = down1;
                 }
-                if (spriteNum==2){
-                    image=down2;
+                if (spriteNum == 2) {
+                    image = down2;
                 }
                 break;
             case "left":
-                if (spriteNum==1) {
+                if (spriteNum == 1) {
                     image = left1;
                 }
-                if (spriteNum==2){
-                    image=left2;
+                if (spriteNum == 2) {
+                    image = left2;
                 }
                 break;
             case "right":
-                if (spriteNum==1) {
+                if (spriteNum == 1) {
                     image = right1;
                 }
-                if (spriteNum==2){
-                    image=right2;
+                if (spriteNum == 2) {
+                    image = right2;
                 }
                 break;
 
-        };
+            case "stay":
+                if (spriteNum == 1) {
+                    image = stay1;
+                }
+                if (spriteNum == 2) {
+                    image = stay2;
+                }
+                break;
+
+        }
 
         graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
 
