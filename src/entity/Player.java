@@ -13,16 +13,21 @@ public class Player extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
 
+    public final int screenX;
+    public final int screenY;
+
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
         setDefaultVal();
         getPlayerImg();
+        screenX = gamePanel.dfl_X;
+        screenY = gamePanel.dfl_Y;
     }
 
     public void setDefaultVal() {
-        x = gamePanel.dfl_X;
-        y = gamePanel.dfl_Y;
+        worldX = gamePanel.dfl_X + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenWidth / 2;//gamePanel.worldHeight/2- gamePanel.tileSize/2;
+        worldY = gamePanel.dfl_Y + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenHeight / 2;//gamePanel.worldWidth/2- gamePanel.tileSize/2;
         speed = 3;
         direct = "stay";
     }
@@ -52,21 +57,21 @@ public class Player extends Entity {
 
             if (keyHandler.upPressed) {
                 direct = "up";
-                y -= speed;
+                worldY -= speed;
             } else if (keyHandler.downPressed) {
                 direct = "down";
-                y += speed;
+                worldY += speed;
             } else if (keyHandler.leftPressed) {
                 direct = "left";
-                x -= speed;
+                worldX -= speed;
             } else {
                 direct = "right";
-                x += speed;
+                worldX += speed;
             }
             spriteImageChange(10);
         } else {
             direct = "stay";
-            spriteImageChange(19);
+            spriteImageChange(20);
         }
 
     }
@@ -132,7 +137,7 @@ public class Player extends Entity {
 
         }
 
-        graphics2D.drawImage(image, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+        graphics2D.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
 
     }
 }
