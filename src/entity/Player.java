@@ -38,7 +38,7 @@ public class Player extends Entity {
             stay2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay2.png")));
             up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up1.png")));
             up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up2.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_down1.png.")));
+            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_down1.png")));
             down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_down2.png")));
             left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_left1.png")));
             left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_left2.png")));
