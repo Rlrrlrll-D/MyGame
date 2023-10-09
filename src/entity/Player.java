@@ -19,15 +19,21 @@ public class Player extends Entity {
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
-        setDefaultVal();
-        getPlayerImg();
         screenX = gamePanel.dfl_X;
         screenY = gamePanel.dfl_Y;
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidArea.width = 32;
+        solidArea.height = 32;
+        setDefaultVal();
+        getPlayerImg();
+
     }
 
     public void setDefaultVal() {
-        worldX = gamePanel.dfl_X + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenWidth / 2;//gamePanel.worldHeight/2- gamePanel.tileSize/2;
-        worldY = gamePanel.dfl_Y + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenHeight / 2;//gamePanel.worldWidth/2- gamePanel.tileSize/2;
+        worldX = gamePanel.dfl_X + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenWidth / 2;
+        worldY = gamePanel.dfl_Y + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenHeight / 2;
         speed = 3;
         direct = "stay";
     }
@@ -57,17 +63,39 @@ public class Player extends Entity {
 
             if (keyHandler.upPressed) {
                 direct = "up";
-                worldY -= speed;
+
             } else if (keyHandler.downPressed) {
                 direct = "down";
-                worldY += speed;
+
             } else if (keyHandler.leftPressed) {
                 direct = "left";
-                worldX -= speed;
+
             } else {
                 direct = "right";
-                worldX += speed;
+
             }
+            collisionOn = false;
+            gamePanel.checker.checkTile(this);
+
+            if(!collisionOn){
+
+                switch (direct){
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                }
+
+            }
+
             spriteImageChange(10);
         } else {
             direct = "stay";
