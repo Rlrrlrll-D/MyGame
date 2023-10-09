@@ -34,7 +34,7 @@ public class Player extends Entity {
     public void setDefaultVal() {
         worldX = gamePanel.dfl_X + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenWidth / 2;
         worldY = gamePanel.dfl_Y + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenHeight / 2;
-        speed = 3;
+        speed =4;
         direct = "stay";
     }
 
