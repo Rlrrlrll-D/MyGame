@@ -34,7 +34,7 @@ public class Player extends Entity {
     public void setDefaultVal() {
         worldX = gamePanel.dfl_X + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenWidth / 2;
         worldY = gamePanel.dfl_Y + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenHeight / 2;
-        speed =4;
+        speed = 4;
         direct = "stay";
     }
 
@@ -77,9 +77,9 @@ public class Player extends Entity {
             collisionOn = false;
             gamePanel.checker.checkTile(this);
 
-            if(!collisionOn){
+            if (!collisionOn) {
 
-                switch (direct){
+                switch (direct) {
                     case "up":
                         worldY -= speed;
                         break;
