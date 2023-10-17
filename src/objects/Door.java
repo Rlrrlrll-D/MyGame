@@ -1,0 +1,20 @@
+package objects;
+
+import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.util.Objects;
+
+public class Door extends MotherObject {
+
+    public Door(){
+        name = "Key";
+        try {
+
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/objects/door.png")));
+
+        }catch (IOException e){
+            e.getLocalizedMessage();
+        }
+    }
+
+}

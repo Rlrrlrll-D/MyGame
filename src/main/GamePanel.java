@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import objects.MotherObject;
 import tile.TileManager;
 
 import javax.swing.*;
@@ -30,7 +31,11 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
 
     public CollisionChecker checker = new CollisionChecker(this);
+
+    public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
+
+    public MotherObject[] motherObject =new MotherObject[10];
     TileManager tileManager = new TileManager(this);
 
     final int FPS = 60;
@@ -43,6 +48,9 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyHandler);
         this.setFocusable(true);
 
+    }
+    public void setupGame(){
+        assetSetter.setObject();
     }
 
     public void startGameThread() {
@@ -77,6 +85,11 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
         tileManager.drawing(graphics2D);
+        for (MotherObject object : motherObject) {
+            if (object != null) {
+                object.drawing(graphics2D, this);
+            }
+        }
         player.drawing(graphics2D);
         graphics2D.dispose();
 
