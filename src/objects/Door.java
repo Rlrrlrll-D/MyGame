@@ -15,6 +15,7 @@ public class Door extends MotherObject {
         }catch (IOException e){
             e.getLocalizedMessage();
         }
+        collision = true;
     }
 
 }

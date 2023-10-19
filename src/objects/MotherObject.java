@@ -12,6 +12,9 @@ public class MotherObject {
     public boolean collision;
 
     public int worldX, worldY;
+    public Rectangle solidArea = new Rectangle(0,0,48,48);
+    public int solidAreaDfltX = 0;
+    public int solidAreaDfltY = 0;
 
     public void drawing(Graphics2D graphics2D,GamePanel gamePanel){
         int scrX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;

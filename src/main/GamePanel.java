@@ -35,7 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter assetSetter = new AssetSetter(this);
     public Player player = new Player(this, keyHandler);
 
-    public MotherObject[] motherObject =new MotherObject[10];
+    public MotherObject[] motherObject =new MotherObject[20];
     TileManager tileManager = new TileManager(this);
 
     final int FPS = 60;

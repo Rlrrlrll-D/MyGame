@@ -24,6 +24,8 @@ public class Player extends Entity {
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
+        solidAreaDfltX = solidArea.x;
+        solidAreaDfltY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
         setDefaultVal();
@@ -76,6 +78,7 @@ public class Player extends Entity {
             }
             collisionOn = false;
             gamePanel.checker.checkTile(this);
+            int objectIndex = gamePanel.checker.checkObject(this,true);
 
             if (!collisionOn) {
 

@@ -15,6 +15,7 @@ public class Key extends MotherObject {
         }catch (IOException e){
             e.getLocalizedMessage();
         }
+       // solidArea.x = 5;
     }
 
 }

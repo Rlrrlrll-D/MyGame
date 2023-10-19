@@ -68,4 +68,57 @@ public class CollisionChecker {
         }
 
     }
+
+    public int checkObject(Entity entity, boolean player) {
+
+        int index = 999;
+
+        for (int i = 0; i < gamePanel.motherObject.length; i++) {
+
+            if (gamePanel.motherObject[i] != null) {
+                entity.solidArea.x = entity.worldX + entity.solidArea.x;
+                entity.solidArea.y = entity.worldY + entity.solidArea.y;
+
+                gamePanel.motherObject[i].solidArea.x = gamePanel.motherObject[i].worldX + gamePanel.motherObject[i].solidArea.x;
+                gamePanel.motherObject[i].solidArea.y = gamePanel.motherObject[i].worldY + gamePanel.motherObject[i].solidArea.y;
+
+                switch (entity.direct) {
+                    case "up":
+                        entity.solidArea.y -= entity.speed;
+                        if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
+                            System.out.println("сверху");
+                        }
+                        break;
+                    case "down":
+                        entity.solidArea.y += entity.speed;
+                        if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
+                            System.out.println("снизу");
+                        }
+                        break;
+                    case "left":
+                        entity.solidArea.x -= entity.speed;
+                        if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
+                            System.out.println("слева");
+                        }
+
+                        break;
+                    case "right":
+                        entity.solidArea.x += entity.speed;
+                        if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
+                            System.out.println("справа");
+                        }
+
+                        break;
+                }
+                entity.solidArea.x = entity.solidAreaDfltX;
+                entity.solidArea.y = entity.solidAreaDfltY;
+                assert gamePanel.motherObject[i] != null;
+                gamePanel.motherObject[i].solidArea.x = gamePanel.motherObject[i].solidAreaDfltX;
+                gamePanel.motherObject[i].solidArea.y = gamePanel.motherObject[i].solidAreaDfltY;
+            }
+
+
+        }
+        return index;
+    }
 }
