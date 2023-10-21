@@ -132,14 +132,18 @@ public class Player extends Entity {
                     System.out.println(objectName+": "+haskey);
                     break;
                 case "Door":
-                   if (haskey>0){
+                   if (haskey>0) {
 
                        gamePanel.motherObject[counter] = null;
                        haskey--;
+                   }
                        System.out.println(objectName+" open, Key: "+haskey);
                        break;
-                   }
 
+                case "Boots":
+                    speed+=1;
+                    gamePanel.motherObject[counter]=null;
+                    break;
             }
 
         }
