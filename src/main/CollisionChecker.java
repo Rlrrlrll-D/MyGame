@@ -85,30 +85,30 @@ public class CollisionChecker {
                 switch (entity.direct) {
                     case "up":
                         entity.solidArea.y -= entity.speed;
-                        if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
-                            System.out.println("сверху");
-                        }
+                        index = getIndex(entity, player, i, index);
                         break;
                     case "down":
                         entity.solidArea.y += entity.speed;
                         if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
-                            System.out.println("снизу");
+                            index = getIndex(entity, player, i, index);
                         }
                         break;
                     case "left":
                         entity.solidArea.x -= entity.speed;
                         if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
-                            System.out.println("слева");
+                            index = getIndex(entity, player, i, index);
                         }
 
                         break;
                     case "right":
                         entity.solidArea.x += entity.speed;
                         if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
-                            System.out.println("справа");
+                            index = getIndex(entity, player, i, index);
                         }
 
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + entity.direct);
                 }
                 entity.solidArea.x = entity.solidAreaDfltX;
                 entity.solidArea.y = entity.solidAreaDfltY;
@@ -118,6 +118,18 @@ public class CollisionChecker {
             }
 
 
+        }
+        return index;
+    }
+
+    private int getIndex(Entity entity, boolean player, int i, int index) {
+        if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
+            if (gamePanel.motherObject[i].collision) {
+                entity.collisionOn = true;
+            }
+            if (player){
+                index = i;
+            }
         }
         return index;
     }

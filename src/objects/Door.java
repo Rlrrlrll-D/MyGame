@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Door extends MotherObject {
 
     public Door(){
-        name = "Key";
+        name = "Door";
         try {
 
             image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/objects/door.png")));
@@ -15,7 +15,7 @@ public class Door extends MotherObject {
         }catch (IOException e){
             e.getLocalizedMessage();
         }
-        collision = true;
+        collision =true;
     }
 
 }

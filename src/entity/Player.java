@@ -15,6 +15,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
+    int haskey = 0;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -80,6 +81,8 @@ public class Player extends Entity {
             gamePanel.checker.checkTile(this);
             int objectIndex = gamePanel.checker.checkObject(this,true);
 
+            pickUp(objectIndex);
+
             if (!collisionOn) {
 
                 switch (direct) {
@@ -116,6 +119,29 @@ public class Player extends Entity {
                 spriteNum = 1;
             }
             counter = 0;
+        }
+    }
+
+    public void pickUp(int counter){
+        if (counter!=999){
+            String objectName = gamePanel.motherObject[counter].name;
+            switch (objectName){
+                case "Key":
+                    haskey++;
+                    gamePanel.motherObject[counter] = null;
+                    System.out.println(objectName+haskey);
+                    break;
+                case "Door":
+                   if (haskey>0){
+
+                       gamePanel.motherObject[counter] = null;
+                       haskey--;
+                       System.out.println(objectName+haskey);
+                       break;
+                   }
+
+            }
+
         }
     }
 

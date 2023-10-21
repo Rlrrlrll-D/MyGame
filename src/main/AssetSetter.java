@@ -28,8 +28,8 @@ public class AssetSetter {
         gamePanel.motherObject[2].worldY = 11 * gamePanel.tileSize;
 
         gamePanel.motherObject[3] = new Door();
-        gamePanel.motherObject[3].worldX = 23 * gamePanel.tileSize;
-        gamePanel.motherObject[3].worldY = 21 * gamePanel.tileSize;
+        gamePanel.motherObject[3].worldX = 47 * gamePanel.tileSize;
+        gamePanel.motherObject[3].worldY = 10 * gamePanel.tileSize;
 
         gamePanel.motherObject[4] = new Chest();
         gamePanel.motherObject[4].worldX = 23 * gamePanel.tileSize;
