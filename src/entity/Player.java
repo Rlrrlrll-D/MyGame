@@ -15,7 +15,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    int haskey = 0;
+    int keys = 0;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -127,20 +127,24 @@ public class Player extends Entity {
             String objectName = gamePanel.motherObject[counter].name;
             switch (objectName){
                 case "Key":
-                    haskey++;
+                    gamePanel.playSFX(1);
+                    keys++;
                     gamePanel.motherObject[counter] = null;
-                    System.out.println(objectName+": "+haskey);
+                    System.out.println(objectName+": "+keys);
                     break;
                 case "Door":
-                   if (haskey>0) {
-
+                   if (keys>0) {
+                       gamePanel.playSFX(2);
                        gamePanel.motherObject[counter] = null;
-                       haskey--;
-                   }
-                       System.out.println(objectName+" open, Key: "+haskey);
+                       keys--;
+                       System.out.println(objectName+" open, Key: "+keys);
+                   }else {
+                       gamePanel.playSFX(3);
+                    System.out.println(objectName+" close, Key: "+keys);}
                        break;
 
                 case "Boots":
+                    gamePanel.playSFX(4);
                     speed+=1;
                     gamePanel.motherObject[counter]=null;
                     break;
@@ -148,6 +152,7 @@ public class Player extends Entity {
 
         }
     }
+
 
     public void drawing(Graphics2D graphics2D) {
 
