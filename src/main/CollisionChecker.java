@@ -9,7 +9,6 @@ public class CollisionChecker {
     public CollisionChecker(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
-
     }
 
     public void checkTile(Entity entity) {
@@ -66,7 +65,6 @@ public class CollisionChecker {
             default:
                 throw new IllegalStateException("Unexpected value: " + entity.direct);
         }
-
     }
 
     public int checkObject(Entity entity, boolean player) {
