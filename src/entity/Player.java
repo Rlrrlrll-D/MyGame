@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,7 +17,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    public int keys = 0;
+    public int keys = 0, temp;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -122,13 +123,15 @@ public class Player extends Entity {
             counter = 0;
         }
     }
-    private void sfxDelay(int delay) {
-        counter++;
-        if (counter>delay){
+
+    public void sfxDelay(int delay) {
+        temp++;
+        if (temp > delay) {
             gamePanel.playSFX(3);
-            counter=0;
+            temp = 0;
         }
     }
+
 
     public void pickUp(int counter) {
         if (counter != 999) {
@@ -138,7 +141,7 @@ public class Player extends Entity {
                     gamePanel.playSFX(1);
                     keys++;
                     gamePanel.motherObject[counter] = null;
-                    System.out.println(objectName + ": " + keys);
+                    gamePanel.ui.showMsg("You got a key!");
                     break;
                 case "Door":
 
@@ -146,16 +149,28 @@ public class Player extends Entity {
                         gamePanel.playSFX(2);
                         gamePanel.motherObject[counter] = null;
                         keys--;
+                        gamePanel.ui.showMsg("You opened the door!");
                         System.out.println(objectName + " open, Key: " + keys);
                     } else {
-                        sfxDelay(10);
+                        sfxDelay(20);
+
+                        gamePanel.ui.showMsg("You need a key!");
                         System.out.println(objectName + " close, Key: " + keys);
+                        System.out.println(temp);
                     }
                     break;
 
                 case "Boots":
                     gamePanel.playSFX(4);
                     speed += 1;
+                    gamePanel.motherObject[counter] = null;
+                    gamePanel.ui.showMsg("Speed up!");
+                    break;
+
+                case "Chest":
+                    gamePanel.ui.finished=true;
+                    gamePanel.stopMusic();
+                    gamePanel.playSFX(5);
                     gamePanel.motherObject[counter] = null;
                     break;
             }
@@ -165,7 +180,6 @@ public class Player extends Entity {
 
 
     public void drawing(Graphics2D graphics2D) {
-
 
 
         switch (direct) {
