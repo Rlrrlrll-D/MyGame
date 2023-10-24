@@ -12,10 +12,11 @@ import java.util.Objects;
 public class Player extends Entity {
     GamePanel gamePanel;
     KeyHandler keyHandler;
+    BufferedImage image;
 
     public final int screenX;
     public final int screenY;
-    int keys = 0;
+    public int keys = 0;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -37,7 +38,7 @@ public class Player extends Entity {
     public void setDefaultVal() {
         worldX = gamePanel.dfl_X + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenWidth / 2;
         worldY = gamePanel.dfl_Y + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenHeight / 2;
-        speed =4;
+        speed = 4;
         direct = "stay";
     }
 
@@ -79,13 +80,13 @@ public class Player extends Entity {
             }
             collisionOn = false;
             gamePanel.checker.checkTile(this);
-            int objectIndex = gamePanel.checker.checkObject(this,true);
+            int objectIndex = gamePanel.checker.checkObject(this, true);
 
             pickUp(objectIndex);
 
-            if(!collisionOn){
+            if (!collisionOn) {
 
-                switch (direct){
+                switch (direct) {
                     case "up":
                         worldY -= speed;
                         break;
@@ -121,32 +122,41 @@ public class Player extends Entity {
             counter = 0;
         }
     }
+    private void sfxDelay(int delay) {
+        counter++;
+        if (counter>delay){
+            gamePanel.playSFX(3);
+            counter=0;
+        }
+    }
 
-    public void pickUp(int counter){
-        if (counter!=999){
+    public void pickUp(int counter) {
+        if (counter != 999) {
             String objectName = gamePanel.motherObject[counter].name;
-            switch (objectName){
+            switch (objectName) {
                 case "Key":
                     gamePanel.playSFX(1);
                     keys++;
                     gamePanel.motherObject[counter] = null;
-                    System.out.println(objectName+": "+keys);
+                    System.out.println(objectName + ": " + keys);
                     break;
                 case "Door":
-                   if (keys>0) {
-                       gamePanel.playSFX(2);
-                       gamePanel.motherObject[counter] = null;
-                       keys--;
-                       System.out.println(objectName+" open, Key: "+keys);
-                   }else {
-                       gamePanel.playSFX(3);
-                    System.out.println(objectName+" close, Key: "+keys);}
-                       break;
+
+                    if (keys > 0) {
+                        gamePanel.playSFX(2);
+                        gamePanel.motherObject[counter] = null;
+                        keys--;
+                        System.out.println(objectName + " open, Key: " + keys);
+                    } else {
+                        sfxDelay(10);
+                        System.out.println(objectName + " close, Key: " + keys);
+                    }
+                    break;
 
                 case "Boots":
                     gamePanel.playSFX(4);
-                    speed+=1;
-                    gamePanel.motherObject[counter]=null;
+                    speed += 1;
+                    gamePanel.motherObject[counter] = null;
                     break;
             }
 
@@ -157,7 +167,7 @@ public class Player extends Entity {
     public void drawing(Graphics2D graphics2D) {
 
 
-        BufferedImage image = null;
+
         switch (direct) {
             case "up":
                 if (spriteNum == 1) {
@@ -204,6 +214,8 @@ public class Player extends Entity {
         }
 
         graphics2D.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+        graphics2D.setColor(Color.red);
+        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
     }
 }

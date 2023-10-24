@@ -37,6 +37,8 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter assetSetter = new AssetSetter(this);
 
     Sound sound = new Sound();
+    Sound SFX = new Sound();
+    public UI ui = new UI(this);
 
     public Player player = new Player(this, keyHandler);
 
@@ -97,7 +99,9 @@ public class GamePanel extends JPanel implements Runnable {
             }
         }
         player.drawing(graphics2D);
+        ui.drawing(graphics2D);
         graphics2D.dispose();
+
 
     }
     public void playMusic(int count){
@@ -113,7 +117,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void playSFX(int count){
-        sound.setFile(count);
-        sound.play();
+        SFX.setFile(count);
+        SFX.play();
     }
 }
