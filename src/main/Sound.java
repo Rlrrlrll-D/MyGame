@@ -15,7 +15,7 @@ public class Sound {
     public Sound(){
 
 
-        sounds[0] = new File("src/sound/epic .wav");
+        sounds[0] = new File("src/sound/epic.wav");
         sounds[1] = new File("src/sound/coin.wav");
         sounds[2] = new File("src/sound/unlock.wav");
         sounds[3] = new File("src/sound/close.wav");
