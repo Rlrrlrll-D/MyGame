@@ -3,7 +3,6 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,7 +16,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    public int keys = 0, temp;
+    public int keys, temp;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -40,6 +39,7 @@ public class Player extends Entity {
         worldX = gamePanel.dfl_X + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenWidth / 2;
         worldY = gamePanel.dfl_Y + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenHeight / 2;
         speed = 4;
+        stayPosition = "begin";
         direct = "stay";
     }
 
@@ -47,6 +47,10 @@ public class Player extends Entity {
         try {
             stay1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay1.png")));
             stay2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay2.png")));
+            stay3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay3.png")));
+            stayup1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up1.png")));
+            stayup2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up2.png")));
+            stayup3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up3.png")));
             up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up1.png")));
             up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up2.png")));
             down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_down1.png")));
@@ -90,9 +94,11 @@ public class Player extends Entity {
                 switch (direct) {
                     case "up":
                         worldY -= speed;
+                        stayPosition = "up";
                         break;
                     case "down":
                         worldY += speed;
+                        stayPosition = "down";
                         break;
                     case "left":
                         worldX -= speed;
@@ -103,25 +109,41 @@ public class Player extends Entity {
                 }
 
             }
+            spriteImageChange(3);
+            //spriteImageChange();
 
-            spriteImageChange(10);
         } else {
-            direct = "stay";
-            spriteImageChange(20);
+            switch (stayPosition){
+                case "begin", "down":
+                    direct = "stay";
+                    break;
+                case "up":
+                    direct = "stayup";
+                    break;
+            }
+
+            spriteImageChange(15);
+            //spriteImageChange();
+
         }
 
     }
 
-    private void spriteImageChange(int delta) {
+
+
+    private void spriteImageChange(int delay) {
         counter++;
-        if (counter > delta) {
+        if (counter > delay) {
             if (spriteNum == 1) {
                 spriteNum = 2;
             } else if (spriteNum == 2) {
+                spriteNum = 3;
+            } else if (spriteNum == 3) {
                 spriteNum = 1;
             }
             counter = 0;
         }
+
     }
 
     public void sfxDelay(int delay) {
@@ -168,7 +190,7 @@ public class Player extends Entity {
                     break;
 
                 case "Chest":
-                    gamePanel.ui.finished=true;
+                    gamePanel.ui.finished = true;
                     gamePanel.stopMusic();
                     gamePanel.playSFX(5);
                     gamePanel.motherObject[counter] = null;
@@ -223,7 +245,23 @@ public class Player extends Entity {
                 if (spriteNum == 2) {
                     image = stay2;
                 }
+                if (spriteNum == 3) {
+                    image = stay3;
+                }
                 break;
+
+            case "stayup":
+                if (spriteNum == 1) {
+                    image = stayup1;
+                }
+                if (spriteNum == 2) {
+                    image = stayup2;
+                }
+                if (spriteNum == 3) {
+                    image = stayup3;
+                }
+                break;
+
 
         }
 
