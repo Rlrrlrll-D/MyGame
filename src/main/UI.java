@@ -4,6 +4,7 @@ import objects.Key;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 
 public class UI {
 
@@ -15,6 +16,9 @@ public class UI {
     public int counter;
 
     public boolean finished;
+
+    double playTime;
+    DecimalFormat decimalFormat = new DecimalFormat("#0.0");
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         Unispace_Bold = new Font("Unispace-Bold", Font.PLAIN, 17);
@@ -44,7 +48,7 @@ public class UI {
         if (finished){
 
             graphics2D.setFont(Unispace_Bold);
-            graphics2D.setColor(new Color(9, 25, 126));
+            graphics2D.setColor(new Color(5, 18, 91));
 
             String txt;
             int txtLength;
@@ -54,6 +58,12 @@ public class UI {
             txtLength = (int)graphics2D.getFontMetrics().getStringBounds(txt,graphics2D).getWidth();
             x = gamePanel.screenWidth/2 - txtLength/2;
             y = gamePanel.screenHeight/2-(gamePanel.tileSize*3);
+            graphics2D.drawString(txt,x,y);
+
+            txt = "You Time is: "+ decimalFormat.format(playTime)+"!";
+            txtLength = (int)graphics2D.getFontMetrics().getStringBounds(txt,graphics2D).getWidth();
+            x = gamePanel.screenWidth/2 - txtLength/2;
+            y = gamePanel.screenHeight/2-(gamePanel.tileSize);
             graphics2D.drawString(txt,x,y);
 
             graphics2D.setFont(Unispace_Bold2);
@@ -70,9 +80,12 @@ public class UI {
             graphics2D.setFont(Unispace_Bold);
             graphics2D.setColor(new Color(6, 18, 94));
             graphics2D.drawImage(key, gamePanel.tileSize / 2, gamePanel.tileSize / 2, gamePanel.tileSize / 2 + 10, gamePanel.tileSize / 2 + 10, null);
-            graphics2D.drawString("x " + gamePanel.player.keys, 57, 50);
+            graphics2D.drawString("x " + gamePanel.player.keys, 57, gamePanel.tileSize);
+
+            playTime+=(double) 1/60;
+            graphics2D.drawString("Time: "+ decimalFormat.format(playTime), gamePanel.screenWidth- gamePanel.tileSize*3, gamePanel.tileSize);
             if (msgOn) {
-                graphics2D.drawString(msg, (gamePanel.tileSize / 2) * 6, gamePanel.tileSize);
+                graphics2D.drawString(msg, (gamePanel.tileSize / 2) * 5, gamePanel.tileSize);
                 msgDelay(180);
             }
         }
