@@ -110,7 +110,7 @@ public class Player extends Entity {
 
             }
             spriteImageChange(3);
-            //spriteImageChange();
+
 
         } else {
             switch (stayPosition){
@@ -123,7 +123,7 @@ public class Player extends Entity {
             }
 
             spriteImageChange(15);
-            //spriteImageChange();
+
 
         }
 
