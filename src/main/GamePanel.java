@@ -76,7 +76,7 @@ public class GamePanel extends JPanel implements Runnable {
             currentTime = System.nanoTime();
             accumulate += (currentTime - lastTime) / interval;
             lastTime = currentTime;
-            while (accumulate >= 1) {
+            while (accumulate > 1) {
                 update();
                 repaint();
                 accumulate--;

@@ -39,7 +39,7 @@ public class Player extends Entity {
         worldX = gamePanel.dfl_X + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenWidth / 2;
         worldY = gamePanel.dfl_Y + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenHeight / 2;
         speed = 4;
-        stayPosition = "begin";
+        stayDirect = "begin";
         direct = "stay";
     }
 
@@ -94,11 +94,11 @@ public class Player extends Entity {
                 switch (direct) {
                     case "up":
                         worldY -= speed;
-                        stayPosition = "up";
+                        stayDirect = "up";
                         break;
                     case "down":
                         worldY += speed;
-                        stayPosition = "down";
+                        stayDirect = "down";
                         break;
                     case "left":
                         worldX -= speed;
@@ -109,16 +109,16 @@ public class Player extends Entity {
                 }
 
             }
-            spriteImageChange(3);
+            spriteImageChange(4);
 
 
         } else {
-            switch (stayPosition){
+            switch (stayDirect) {
                 case "begin", "down":
                     direct = "stay";
                     break;
                 case "up":
-                    direct = "stayup";
+                    direct = "stay_up";
                     break;
             }
 
@@ -137,7 +137,14 @@ public class Player extends Entity {
             if (spriteNum == 1) {
                 spriteNum = 2;
             } else if (spriteNum == 2) {
-                spriteNum = 3;
+                switch (direct) {
+                    case "left", "right":
+                        spriteNum = 1;
+                        break;
+                    default:
+                        spriteNum = 3;
+                }
+
             } else if (spriteNum == 3) {
                 spriteNum = 1;
             }
@@ -250,7 +257,7 @@ public class Player extends Entity {
                 }
                 break;
 
-            case "stayup":
+            case "stay_up":
                 if (spriteNum == 1) {
                     image = stayup1;
                 }

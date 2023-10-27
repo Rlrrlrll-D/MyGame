@@ -8,7 +8,7 @@ public class Entity {
     public int speed;
 
     public BufferedImage stay1, stay2, stay3, stayup1, stayup2, stayup3, up1, up2, down1, down2, left1, left2, right1, right2;
-    public String direct, stayPosition;
+    public String direct, stayDirect;
 
     public int spriteNum = 1, counter = 0;
 

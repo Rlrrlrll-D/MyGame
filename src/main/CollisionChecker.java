@@ -85,6 +85,7 @@ public class CollisionChecker {
                         entity.solidArea.y -= entity.speed;
                         index = getIndex(entity, player, i, index);
                         break;
+
                     case "down":
                         entity.solidArea.y += entity.speed;
                         if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
