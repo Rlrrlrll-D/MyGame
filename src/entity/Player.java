@@ -48,9 +48,15 @@ public class Player extends Entity {
             stay1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay1.png")));
             stay2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay2.png")));
             stay3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay3.png")));
-            stayup1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up1.png")));
-            stayup2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up2.png")));
-            stayup3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up3.png")));
+            stay_up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up1.png")));
+            stay_up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up2.png")));
+            stay_up3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up3.png")));
+            stay_left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_left1.png")));
+            stay_left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_left2.png")));
+            stay_left3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_left3.png")));
+            stay_right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_right1.png")));
+            stay_right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_right2.png")));
+            stay_right3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_right3.png")));
             up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up1.png")));
             up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up2.png")));
             down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_down1.png")));
@@ -102,14 +108,16 @@ public class Player extends Entity {
                         break;
                     case "left":
                         worldX -= speed;
+                        stayDirect = "left";
                         break;
                     case "right":
                         worldX += speed;
+                        stayDirect = "right";
                         break;
                 }
 
             }
-            spriteImageChange(4);
+            spriteImageChange(3);
 
 
         } else {
@@ -120,15 +128,20 @@ public class Player extends Entity {
                 case "up":
                     direct = "stay_up";
                     break;
+                case "left":
+                    direct = "stay_left";
+                    break;
+                case "right":
+                    direct = "stay_right";
+                    break;
             }
 
-            spriteImageChange(15);
+            spriteImageChange(10);
 
 
         }
 
     }
-
 
 
     private void spriteImageChange(int delay) {
@@ -259,13 +272,35 @@ public class Player extends Entity {
 
             case "stay_up":
                 if (spriteNum == 1) {
-                    image = stayup1;
+                    image = stay_up1;
                 }
                 if (spriteNum == 2) {
-                    image = stayup2;
+                    image = stay_up2;
                 }
                 if (spriteNum == 3) {
-                    image = stayup3;
+                    image = stay_up3;
+                }
+                break;
+            case "stay_left":
+                if (spriteNum == 1) {
+                    image = stay_left1;
+                }
+                if (spriteNum == 2) {
+                    image = stay_left2;
+                }
+                if (spriteNum == 3) {
+                    image = stay_left3;
+                }
+                break;
+            case "stay_right":
+                if (spriteNum == 1) {
+                    image = stay_right1;
+                }
+                if (spriteNum == 2) {
+                    image = stay_right2;
+                }
+                if (spriteNum == 3) {
+                    image = stay_right3;
                 }
                 break;
 
