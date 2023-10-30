@@ -22,7 +22,7 @@ public class TileManager {
         mapTileNum = new int[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
         getTileImage();
         try {
-            loadMap("/maps/world_02.txt");
+            loadMap("/maps/world01.txt");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -86,8 +86,9 @@ public class TileManager {
                         wrdX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
                         wrdY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
                         wrdY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
-                    graphics2D.drawImage(tiles[tNum].image, scrX,
-                            scrY, gamePanel.tileSize, gamePanel.tileSize, null);
+                    graphics2D.drawImage(tiles[tNum].image, scrX, scrY, gamePanel.tileSize, gamePanel.tileSize, null);
+//                    graphics2D.setColor(Color.blue);
+//                    graphics2D.drawRect( scrX, scrY, gamePanel.tileSize, gamePanel.tileSize);
                 }
             }
 

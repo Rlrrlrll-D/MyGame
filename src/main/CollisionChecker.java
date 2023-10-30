@@ -62,8 +62,8 @@ public class CollisionChecker {
                 }
                 break;
 
-            default:
-                throw new IllegalStateException("Unexpected value: " + entity.direct);
+//            default:
+//                throw new IllegalStateException("Unexpected value: " + entity.direct);
         }
     }
 
@@ -106,8 +106,8 @@ public class CollisionChecker {
                         }
 
                         break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + entity.direct);
+//                    default:
+//                        throw new IllegalStateException("Unexpected value: " + entity.direct);
                 }
                 entity.solidArea.x = entity.solidAreaDfltX;
                 entity.solidArea.y = entity.solidAreaDfltY;
@@ -126,7 +126,7 @@ public class CollisionChecker {
             if (gamePanel.motherObject[i].collision) {
                 entity.collisionOn = true;
             }
-            if (player){
+            if (player) {
                 index = i;
             }
         }
