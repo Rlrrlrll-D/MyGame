@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -44,32 +45,40 @@ public class Player extends Entity {
     }
 
     public void getPlayerImg() {
-        try {
-            stay1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay1.png")));
-            stay2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay2.png")));
-            stay3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay3.png")));
-            stay_up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up1.png")));
-            stay_up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up2.png")));
-            stay_up3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_up3.png")));
-            stay_left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_left1.png")));
-            stay_left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_left2.png")));
-            stay_left3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_left3.png")));
-            stay_right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_right1.png")));
-            stay_right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_right2.png")));
-            stay_right3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/stay_right3.png")));
-            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up1.png")));
-            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_up2.png")));
-            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_down1.png")));
-            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_down2.png")));
-            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_left1.png")));
-            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_left2.png")));
-            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_right1.png")));
-            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/me_right2.png")));
 
+        stay1 = setup("stay1");
+        stay2 = setup("stay2");
+        stay3 = setup("stay3");
+        stay_up1 = setup("stay_up1");
+        stay_up2 = setup("stay_up2");
+        stay_up3 = setup("stay_up3");
+        stay_left1 = setup("stay_left1");
+        stay_left2 = setup("stay_left2");
+        stay_left3 = setup("stay_left3");
+        stay_right1 = setup("stay_right1");
+        stay_right2 = setup("stay_right2");
+        stay_right3 = setup("stay_right3");
+        up1 = setup("me_up1");
+        up2 = setup("me_up2");
+        down1 = setup("me_down1");
+        down2 = setup("me_down2");
+        left1 = setup("me_left1");
+        left2 = setup("me_left2");
+        right1 = setup("me_right1");
+        right2 = setup("me_right2");
+    }
+
+    public BufferedImage setup(String name) {
+        UtilityTool utilityTool = new UtilityTool();
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/" + name + ".png")));
+            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
 
         } catch (IOException e) {
-            e.getLocalizedMessage();
+            e.printStackTrace();
         }
+        return image;
     }
 
     public void update() {

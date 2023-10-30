@@ -25,8 +25,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    public final int worldWidth = tileSize * maxWorldCol;
-    public final int worldHeight = tileSize * maxWorldRow;
     final int FPS = 60;
     KeyHandler keyHandler = new KeyHandler();
     Thread gameThread;
@@ -42,10 +40,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public Player player = new Player(this, keyHandler);
 
-    public MotherObject[] motherObject =new MotherObject[20];
-
-
-
+    public MotherObject[] motherObject = new MotherObject[20];
 
 
     public GamePanel() {
@@ -56,7 +51,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.setFocusable(true);
 
     }
-    public void setupGame(){
+
+    public void setupGame() {
         assetSetter.setObject();
         playMusic(0);
     }
@@ -92,6 +88,10 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
+        long drawStart = 0;
+        if (keyHandler.chkDrawTime) {
+            drawStart = System.nanoTime();
+        }
         tileManager.drawing(graphics2D);
         for (MotherObject object : motherObject) {
             if (object != null) {
@@ -100,11 +100,19 @@ public class GamePanel extends JPanel implements Runnable {
         }
         player.drawing(graphics2D);
         ui.drawing(graphics2D);
+        if (keyHandler.chkDrawTime) {
+            long drawEnd = System.nanoTime();
+            long passTime = drawEnd - drawStart;
+            graphics2D.setColor((Color.black));
+            graphics2D.drawString("Draw Time: " + passTime, 20, 400);
+            System.out.println("Draw Time:" + passTime);
+        }
         graphics2D.dispose();
 
 
     }
-    public void playMusic(int count){
+
+    public void playMusic(int count) {
 
         sound.setFile(count);
         sound.play();
@@ -112,11 +120,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void stopMusic(){
+    public void stopMusic() {
         sound.stop();
     }
 
-    public void playSFX(int count){
+    public void playSFX(int count) {
         SFX.setFile(count);
         SFX.play();
     }

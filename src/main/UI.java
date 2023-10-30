@@ -23,7 +23,7 @@ public class UI {
         this.gamePanel = gamePanel;
         Unispace_Bold = new Font("Unispace-Bold", Font.PLAIN, 17);
         Unispace_Bold2 = new Font("Unispace-Bold", Font.BOLD, 30);
-        Key key = new Key();
+        Key key = new Key(gamePanel);
         this.key = key.image;
     }
 
