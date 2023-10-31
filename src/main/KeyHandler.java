@@ -4,9 +4,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-
+    public boolean musicOn;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
     public boolean chkDrawTime = false;
+    GamePanel gamePanel;
+
+    public KeyHandler(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -29,9 +34,30 @@ public class KeyHandler implements KeyListener {
         if (value == KeyEvent.VK_D || value == KeyEvent.VK_RIGHT) {
             rightPressed = true;
         }
+        if (value == KeyEvent.VK_P) {
+            if (gamePanel.gameBehavior == gamePanel.playBehavior) {
+                gamePanel.gameBehavior = gamePanel.pauseBehavior;
+            } else if (gamePanel.gameBehavior == gamePanel.pauseBehavior) {
+                gamePanel.gameBehavior = gamePanel.playBehavior;
+            }
+        }
+
         if (value == KeyEvent.VK_T) {
+
             chkDrawTime = !chkDrawTime;
         }
+        if (value == KeyEvent.VK_M) {
+
+            if (musicOn) {
+                gamePanel.stopMusic();
+                musicOn = false;
+            } else {
+                gamePanel.playMusic(0);
+                musicOn = true;
+            }
+            System.out.println(musicOn);
+        }
+
     }
 
 

@@ -112,8 +112,8 @@ public class CollisionChecker {
                 entity.solidArea.x = entity.solidAreaDfltX;
                 entity.solidArea.y = entity.solidAreaDfltY;
                 assert gamePanel.motherObject[i] != null;
-                gamePanel.motherObject[i].solidArea.x = gamePanel.motherObject[i].solidAreaDfltX;
-                gamePanel.motherObject[i].solidArea.y = gamePanel.motherObject[i].solidAreaDfltY;
+                gamePanel.motherObject[i].solidArea.x = gamePanel.motherObject[i].solidAreaDefaultX;
+                gamePanel.motherObject[i].solidArea.y = gamePanel.motherObject[i].solidAreaDefaultY;
             }
 
 

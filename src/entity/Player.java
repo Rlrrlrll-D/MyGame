@@ -17,7 +17,7 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    public int keys, temp;
+    public int /*keys,*/ temp;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
@@ -186,45 +186,45 @@ public class Player extends Entity {
 
     public void pickUp(int counter) {
         if (counter != 999) {
-            String objectName = gamePanel.motherObject[counter].name;
-            switch (objectName) {
-                case "Key":
-                    gamePanel.playSFX(1);
-                    keys++;
-                    gamePanel.motherObject[counter] = null;
-                    gamePanel.ui.showMsg("You got a key!");
-                    break;
-                case "Door":
-
-                    if (keys > 0) {
-                        gamePanel.playSFX(2);
-                        gamePanel.motherObject[counter] = null;
-                        keys--;
-                        gamePanel.ui.showMsg("You opened the door!");
-                        System.out.println(objectName + " open, Key: " + keys);
-                    } else {
-                        sfxDelay(20);
-
-                        gamePanel.ui.showMsg("You need a key!");
-                        System.out.println(objectName + " close, Key: " + keys);
-                        System.out.println(temp);
-                    }
-                    break;
-
-                case "Boots":
-                    gamePanel.playSFX(4);
-                    speed += 1;
-                    gamePanel.motherObject[counter] = null;
-                    gamePanel.ui.showMsg("Speed up!");
-                    break;
-
-                case "Chest":
-                    gamePanel.ui.finished = true;
-                    gamePanel.stopMusic();
-                    gamePanel.playSFX(5);
-                    gamePanel.motherObject[counter] = null;
-                    break;
-            }
+//            String objectName = gamePanel.motherObject[counter].name;
+//            switch (objectName) {
+//                case "Key":
+//                    gamePanel.playSFX(1);
+//                    keys++;
+//                    gamePanel.motherObject[counter] = null;
+//                    gamePanel.ui.showMsg("You got a key!");
+//                    break;
+//                case "Door":
+//
+//                    if (keys > 0) {
+//                        gamePanel.playSFX(2);
+//                        gamePanel.motherObject[counter] = null;
+//                        keys--;
+//                        gamePanel.ui.showMsg("You opened the door!");
+//                        System.out.println(objectName + " open, Key: " + keys);
+//                    } else {
+//                        sfxDelay(20);
+//
+//                        gamePanel.ui.showMsg("You need a key!");
+//                        System.out.println(objectName + " close, Key: " + keys);
+//                        System.out.println(temp);
+//                    }
+//                    break;
+//
+//                case "Boots":
+//                    gamePanel.playSFX(4);
+//                    speed += 1;
+//                    gamePanel.motherObject[counter] = null;
+//                    gamePanel.ui.showMsg("Speed up!");
+//                    break;
+//
+//                case "Chest":
+//                    gamePanel.ui.finished = true;
+//                    gamePanel.stopMusic();
+//                    gamePanel.playSFX(5);
+//                    gamePanel.motherObject[counter] = null;
+//                    break;
+//            }
 
         }
     }

@@ -21,14 +21,14 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dfl_X = screenWidth / 2 - tileSize / 2;
     public final int dfl_Y = screenHeight / 2 - tileSize / 2;
 
-    // world settings
 
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
     final int FPS = 60;
-    KeyHandler keyHandler = new KeyHandler();
-    Thread gameThread;
+
     TileManager tileManager = new TileManager(this);
+    public final int pauseBehavior = 1;
+
 
     public CollisionChecker checker = new CollisionChecker(this);
 
@@ -37,10 +37,16 @@ public class GamePanel extends JPanel implements Runnable {
     Sound sound = new Sound();
     Sound SFX = new Sound();
     public UI ui = new UI(this);
+    public final int playBehavior = 0;
+    public int gameBehavior;
+    KeyHandler keyHandler = new KeyHandler(this);
 
     public Player player = new Player(this, keyHandler);
-
     public MotherObject[] motherObject = new MotherObject[20];
+    Thread gameThread;
+
+
+    //public boolean musicOn;
 
 
     public GamePanel() {
@@ -54,8 +60,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         assetSetter.setObject();
+        keyHandler.musicOn = true;
+        gameBehavior = playBehavior;
         playMusic(0);
+
     }
+
 
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -81,7 +91,14 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        player.update();
+
+        if (gameBehavior == playBehavior) {
+
+            player.update();
+        }
+        if (gameBehavior == pauseBehavior) {
+
+        }
 
     }
 
@@ -103,7 +120,8 @@ public class GamePanel extends JPanel implements Runnable {
         if (keyHandler.chkDrawTime) {
             long drawEnd = System.nanoTime();
             long passTime = drawEnd - drawStart;
-            graphics2D.setColor((Color.black));
+            graphics2D.setFont(ui.Unispace_Bold);
+            graphics2D.setColor(Color.black);
             graphics2D.drawString("Draw Time: " + passTime, 20, 400);
             System.out.println("Draw Time:" + passTime);
         }
@@ -112,8 +130,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
-    public void playMusic(int count) {
 
+    public void playMusic(int count) {
         sound.setFile(count);
         sound.play();
         sound.loop();

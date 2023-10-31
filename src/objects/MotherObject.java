@@ -15,8 +15,8 @@ public class MotherObject {
 
     public int worldX, worldY;
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
-    public int solidAreaDfltX = 0;
-    public int solidAreaDfltY = 0;
+    public int solidAreaDefaultX = 0;
+    public int solidAreaDefaultY = 0;
     UtilityTool utilityTool = new UtilityTool();
 
     public void drawing(Graphics2D graphics2D, GamePanel gamePanel) {
