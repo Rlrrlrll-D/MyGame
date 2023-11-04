@@ -1,5 +1,6 @@
 package main;
 
+import entity.Entity;
 import entity.Player;
 import objects.MotherObject;
 import tile.TileManager;
@@ -27,7 +28,6 @@ public class GamePanel extends JPanel implements Runnable {
     final int FPS = 60;
 
     TileManager tileManager = new TileManager(this);
-    public final int pauseBehavior = 1;
 
 
     public CollisionChecker checker = new CollisionChecker(this);
@@ -37,29 +37,35 @@ public class GamePanel extends JPanel implements Runnable {
     Sound sound = new Sound();
     Sound SFX = new Sound();
     public UI ui = new UI(this);
+    public final int pauseBehavior = 1;
     public final int playBehavior = 0;
     public int gameBehavior;
+
     KeyHandler keyHandler = new KeyHandler(this);
 
     public Player player = new Player(this, keyHandler);
     public MotherObject[] motherObject = new MotherObject[20];
+    public Entity[] npc = new Entity[10];
     Thread gameThread;
+    public int gameState;
 
 
     //public boolean musicOn;
 
 
     public GamePanel() {
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(new Color(38, 37, 37));
-        this.setDoubleBuffered(true);
-        this.addKeyListener(keyHandler);
-        this.setFocusable(true);
+        setPreferredSize(new Dimension(screenWidth, screenHeight));
+        setBackground(new Color(38, 37, 37));
+        setDoubleBuffered(true);
+        addKeyListener(keyHandler);
+        setFocusable(true);
+
 
     }
 
     public void setupGame() {
-        assetSetter.setObject();
+        //assetSetter.setObject();
+        assetSetter.setNPC();
         keyHandler.musicOn = true;
         gameBehavior = playBehavior;
         playMusic(0);
@@ -95,6 +101,13 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameBehavior == playBehavior) {
 
             player.update();
+
+            for (Entity entity : npc) {
+
+                if (entity != null) {
+                    entity.update();
+                }
+            }
         }
         if (gameBehavior == pauseBehavior) {
 
@@ -115,7 +128,13 @@ public class GamePanel extends JPanel implements Runnable {
                 object.drawing(graphics2D, this);
             }
         }
+
         player.drawing(graphics2D);
+        for (Entity entity : npc) {
+            if (entity != null) {
+                entity.drawing(graphics2D);
+            }
+        }
         ui.drawing(graphics2D);
         if (keyHandler.chkDrawTime) {
             long drawEnd = System.nanoTime();

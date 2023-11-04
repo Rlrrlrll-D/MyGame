@@ -2,16 +2,13 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
-import main.UtilityTool;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Objects;
+
 
 public class Player extends Entity {
-    GamePanel gamePanel;
+
     KeyHandler keyHandler;
     BufferedImage image;
 
@@ -20,15 +17,16 @@ public class Player extends Entity {
     public int /*keys,*/ temp;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
-        this.gamePanel = gamePanel;
+        super(gamePanel);
+
         this.keyHandler = keyHandler;
         screenX = gamePanel.dfl_X;
         screenY = gamePanel.dfl_Y;
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
-        solidAreaDfltX = solidArea.x;
-        solidAreaDfltY = solidArea.y;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
         setDefaultVal();
@@ -46,40 +44,28 @@ public class Player extends Entity {
 
     public void getPlayerImg() {
 
-        stay1 = setup("stay1");
-        stay2 = setup("stay2");
-        stay3 = setup("stay3");
-        stay_up1 = setup("stay_up1");
-        stay_up2 = setup("stay_up2");
-        stay_up3 = setup("stay_up3");
-        stay_left1 = setup("stay_left1");
-        stay_left2 = setup("stay_left2");
-        stay_left3 = setup("stay_left3");
-        stay_right1 = setup("stay_right1");
-        stay_right2 = setup("stay_right2");
-        stay_right3 = setup("stay_right3");
-        up1 = setup("me_up1");
-        up2 = setup("me_up2");
-        down1 = setup("me_down1");
-        down2 = setup("me_down2");
-        left1 = setup("me_left1");
-        left2 = setup("me_left2");
-        right1 = setup("me_right1");
-        right2 = setup("me_right2");
+        stay1 = setup("/res/stay1");
+        stay2 = setup("/res/stay2");
+        stay3 = setup("/res/stay3");
+        stay_up1 = setup("/res/stay_up1");
+        stay_up2 = setup("/res/stay_up2");
+        stay_up3 = setup("/res/stay_up3");
+        stay_left1 = setup("/res/stay_left1");
+        stay_left2 = setup("/res/stay_left2");
+        stay_left3 = setup("/res/stay_left3");
+        stay_right1 = setup("/res/stay_right1");
+        stay_right2 = setup("/res/stay_right2");
+        stay_right3 = setup("/res/stay_right3");
+        up1 = setup("/res/me_up1");
+        up2 = setup("/res/me_up2");
+        down1 = setup("/res/me_down1");
+        down2 = setup("/res/me_down2");
+        left1 = setup("/res/me_left1");
+        left2 = setup("/res/me_left2");
+        right1 = setup("/res/me_right1");
+        right2 = setup("/res/me_right2");
     }
 
-    public BufferedImage setup(String name) {
-        UtilityTool utilityTool = new UtilityTool();
-        BufferedImage image = null;
-        try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/" + name + ".png")));
-            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return image;
-    }
 
     public void update() {
 
@@ -103,7 +89,8 @@ public class Player extends Entity {
             int objectIndex = gamePanel.checker.checkObject(this, true);
 
             pickUp(objectIndex);
-
+            int npcIndex = gamePanel.checker.checkEntity(this, gamePanel.npc);
+            interactNPC(npcIndex);
             if (!collisionOn) {
 
                 switch (direct) {
@@ -152,28 +139,13 @@ public class Player extends Entity {
 
     }
 
+    private void interactNPC(int i) {
 
-    private void spriteImageChange(int delay) {
-        counter++;
-        if (counter > delay) {
-            if (spriteNum == 1) {
-                spriteNum = 2;
-            } else if (spriteNum == 2) {
-                switch (direct) {
-                    case "left", "right":
-                        spriteNum = 1;
-                        break;
-                    default:
-                        spriteNum = 3;
-                }
-
-            } else if (spriteNum == 3) {
-                spriteNum = 1;
-            }
-            counter = 0;
+        if (i != 999) {
+            System.out.println("you're hitting an npc!");
         }
-
     }
+
 
     public void sfxDelay(int delay) {
         temp++;

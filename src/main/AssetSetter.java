@@ -1,5 +1,7 @@
 package main;
 
+import entity.NPC_Oldman;
+
 public class AssetSetter {
 
     GamePanel gamePanel;
@@ -42,6 +44,12 @@ public class AssetSetter {
 //        gamePanel.motherObject[7] = new Boots(gamePanel);
 //        gamePanel.motherObject[7].worldX = 49 * gamePanel.tileSize;
 //        gamePanel.motherObject[7].worldY = 48 * gamePanel.tileSize;
+    }
+
+    public void setNPC() {
+        gamePanel.npc[0] = new NPC_Oldman(gamePanel);
+        gamePanel.npc[0].worldX = gamePanel.tileSize * 15;
+        gamePanel.npc[0].worldY = gamePanel.tileSize * 15;
     }
 
 }

@@ -83,7 +83,9 @@ public class CollisionChecker {
                 switch (entity.direct) {
                     case "up":
                         entity.solidArea.y -= entity.speed;
-                        index = getIndex(entity, player, i, index);
+                        if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
+                            index = getIndex(entity, player, i, index);
+                        }
                         break;
 
                     case "down":
@@ -97,20 +99,18 @@ public class CollisionChecker {
                         if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
                             index = getIndex(entity, player, i, index);
                         }
-
                         break;
                     case "right":
                         entity.solidArea.x += entity.speed;
                         if (entity.solidArea.intersects(gamePanel.motherObject[i].solidArea)) {
                             index = getIndex(entity, player, i, index);
                         }
-
                         break;
 //                    default:
 //                        throw new IllegalStateException("Unexpected value: " + entity.direct);
                 }
-                entity.solidArea.x = entity.solidAreaDfltX;
-                entity.solidArea.y = entity.solidAreaDfltY;
+                entity.solidArea.x = entity.solidAreaDefaultX;
+                entity.solidArea.y = entity.solidAreaDefaultY;
                 assert gamePanel.motherObject[i] != null;
                 gamePanel.motherObject[i].solidArea.x = gamePanel.motherObject[i].solidAreaDefaultX;
                 gamePanel.motherObject[i].solidArea.y = gamePanel.motherObject[i].solidAreaDefaultY;
@@ -132,4 +132,111 @@ public class CollisionChecker {
         }
         return index;
     }
+
+    public int checkEntity(Entity entity, Entity[] target) {
+        int index = 999;
+
+        for (int i = 0; i < target.length; i++) {
+
+            if (target[i] != null) {
+                entity.solidArea.x = entity.worldX + entity.solidArea.x;
+                entity.solidArea.y = entity.worldY + entity.solidArea.y;
+
+                target[i].solidArea.x = target[i].worldX + target[i].solidArea.x;
+                target[i].solidArea.y = target[i].worldY + target[i].solidArea.y;
+
+                switch (entity.direct) {
+                    case "up":
+                        entity.solidArea.y -= entity.speed;
+                        if (entity.solidArea.intersects(target[i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+
+                    case "down":
+                        entity.solidArea.y += entity.speed;
+                        if (entity.solidArea.intersects(target[i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+                    case "left":
+                        entity.solidArea.x -= entity.speed;
+                        if (entity.solidArea.intersects(target[i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+
+                        break;
+                    case "right":
+                        entity.solidArea.x += entity.speed;
+                        if (entity.solidArea.intersects(target[i].solidArea)) {
+                            entity.collisionOn = true;
+                            index = i;
+                        }
+                        break;
+//                    default:
+//                        throw new IllegalStateException("Unexpected value: " + entity.direct);
+                }
+                entity.solidArea.x = entity.solidAreaDefaultX;
+                entity.solidArea.y = entity.solidAreaDefaultY;
+                assert target[i] != null;
+                target[i].solidArea.x = target[i].solidAreaDefaultX;
+                target[i].solidArea.y = target[i].solidAreaDefaultY;
+            }
+        }
+        return index;
+
+    }
+
+    public void checkPlayer(Entity entity) {
+
+        entity.solidArea.x = entity.worldX + entity.solidArea.x;
+        entity.solidArea.y = entity.worldY + entity.solidArea.y;
+
+        gamePanel.player.solidArea.x = gamePanel.player.worldX + gamePanel.player.solidArea.x;
+        gamePanel.player.solidArea.y = gamePanel.player.worldY + gamePanel.player.solidArea.y;
+
+        switch (entity.direct) {
+            case "up":
+                entity.solidArea.y -= entity.speed;
+                if (entity.solidArea.intersects(gamePanel.player.solidArea)) {
+                    entity.collisionOn = true;
+
+                }
+                break;
+
+            case "down":
+                entity.solidArea.y += entity.speed;
+                if (entity.solidArea.intersects(gamePanel.player.solidArea)) {
+                    entity.collisionOn = true;
+
+                }
+                break;
+            case "left":
+                entity.solidArea.x -= entity.speed;
+                if (entity.solidArea.intersects(gamePanel.player.solidArea)) {
+                    entity.collisionOn = true;
+
+                }
+
+                break;
+            case "right":
+                entity.solidArea.x += entity.speed;
+                if (entity.solidArea.intersects(gamePanel.player.solidArea)) {
+                    entity.collisionOn = true;
+
+                }
+                break;
+//                    default:
+//                        throw new IllegalStateException("Unexpected value: " + entity.direct);
+        }
+        entity.solidArea.x = entity.solidAreaDefaultX;
+        entity.solidArea.y = entity.solidAreaDefaultY;
+        assert gamePanel.player != null;
+        gamePanel.player.solidArea.x = gamePanel.player.solidAreaDefaultX;
+        gamePanel.player.solidArea.y = gamePanel.player.solidAreaDefaultY;
+    }
+
 }
