@@ -39,7 +39,9 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public final int pauseBehavior = 1;
     public final int playBehavior = 0;
+    public final int dialogBehavior = 2;
     public int gameBehavior;
+
 
     KeyHandler keyHandler = new KeyHandler(this);
 
@@ -67,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setNPC();
         keyHandler.musicOn = true;
         gameBehavior = playBehavior;
-        playMusic(0);
+        //playMusic(0);
 
     }
 

@@ -1,12 +1,11 @@
 package main;
 
 import java.awt.*;
-import java.text.DecimalFormat;
 
 public class UI {
 
     GamePanel gamePanel;
-    //BufferedImage key;
+
     public boolean msgOn;
     Font Unispace_Bold, Unispace_Bold2;
     Graphics2D graphics2D;
@@ -15,15 +14,11 @@ public class UI {
 
     public boolean finished;
 
-    double playTime;
-    DecimalFormat decimalFormat = new DecimalFormat("#0.0");
 
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         Unispace_Bold = new Font("Unispace-Bold", Font.PLAIN, 17);
         Unispace_Bold2 = new Font("Unispace-Bold", Font.BOLD, 50);
-        // Key key = new Key(gamePanel);
-        //this.key = key.image;
     }
 
     public void showMsg(String text) {
@@ -57,7 +52,9 @@ public class UI {
             drawPauseScreenYellow();
 
         }
-
+        if (gamePanel.gameBehavior == gamePanel.dialogBehavior) {
+            drawDialogScreen();
+        }
 
 //        if (finished){
 //
@@ -123,6 +120,24 @@ public class UI {
         graphics2D.drawString(txt, x, y);
 
     }
+
+    public void drawDialogScreen() {
+        int x = gamePanel.tileSize * 2;
+        int y = gamePanel.tileSize;
+        int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
+        int height = gamePanel.tileSize * 4;
+        drawSubWindow(x, y, width, height);
+    }
+
+    public void drawSubWindow(int x, int y, int width, int height) {
+        graphics2D.setColor(new Color(1, 4, 14, 220));
+        graphics2D.fillRoundRect(x, y, width, height, 35, 35);
+
+        graphics2D.setColor((new Color(229, 152, 9)));
+        graphics2D.setStroke(new BasicStroke(3));
+        graphics2D.drawRoundRect(x + 5, y + 5, width - 10, height - 10, 25, 25);
+    }
+
 
     public int getX_Text(String txt) {
         int txtLength = (int) graphics2D.getFontMetrics().getStringBounds(txt, graphics2D).getWidth();

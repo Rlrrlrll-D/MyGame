@@ -142,7 +142,7 @@ public class Player extends Entity {
     private void interactNPC(int i) {
 
         if (i != 999) {
-            System.out.println("you're hitting an npc!");
+            gamePanel.gameBehavior = gamePanel.dialogBehavior;
         }
     }
 
