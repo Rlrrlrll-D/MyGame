@@ -47,7 +47,6 @@ public class GamePanel extends JPanel implements Runnable {
     public MotherObject[] motherObject = new MotherObject[20];
     public Entity[] npc = new Entity[10];
     Thread gameThread;
-    public int gameState;
 
 
     //public boolean musicOn;
