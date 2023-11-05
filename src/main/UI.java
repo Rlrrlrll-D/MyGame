@@ -46,13 +46,16 @@ public class UI {
     public void drawing(Graphics2D graphics2D) {
         this.graphics2D = graphics2D;
         graphics2D.setFont(Unispace_Bold2);
-        graphics2D.setColor(new Color(229, 152, 9));
+
 
         if (gamePanel.gameBehavior == gamePanel.playBehavior) {
 
         }
         if (gamePanel.gameBehavior == gamePanel.pauseBehavior) {
-            drawPauseScreen();
+
+            drawPauseScreenShadow();
+            drawPauseScreenYellow();
+
         }
 
 
@@ -103,11 +106,20 @@ public class UI {
 
     }
 
-    public void drawPauseScreen() {
+    public void drawPauseScreenYellow() {
+        graphics2D.setColor(new Color(229, 152, 9));
         String txt = "PAUSED!";
-
         int x = getX_Text(txt);
         int y = gamePanel.screenHeight / 2;
+        graphics2D.drawString(txt, x, y);
+
+    }
+
+    public void drawPauseScreenShadow() {
+        graphics2D.setColor(new Color(12, 6, 2, 171));
+        String txt = "PAUSED!";
+        int x = getX_Text(txt) + 2;
+        int y = gamePanel.screenHeight / 2 + 2;
         graphics2D.drawString(txt, x, y);
 
     }
