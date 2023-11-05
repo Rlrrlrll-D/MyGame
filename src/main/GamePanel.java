@@ -69,8 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setNPC();
         keyHandler.musicOn = true;
         gameBehavior = playBehavior;
-        //playMusic(0);
-
+        playMusic(0);
     }
 
 
