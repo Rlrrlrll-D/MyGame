@@ -4,15 +4,14 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
-import java.net.URL;
 
 public class Sound {
 
     Clip clip;
     File[] sounds = new File[6];
-   // URL[] soundURL =new URL[30];
+    // URL[] soundURL =new URL[30];
 
-    public Sound(){
+    public Sound() {
 
 
         sounds[0] = new File("src/sound/epic.wav");
@@ -29,28 +28,29 @@ public class Sound {
 //        soundURL[5] = getClass().getResource("/sound/win.wav");
 
 
-
-
     }
 
-    public void setFile(int count){
-        try{
+    public void setFile(int count) {
+        try {
             AudioInputStream audio = AudioSystem.getAudioInputStream(sounds[count]);
             clip = AudioSystem.getClip();
             clip.open(audio);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
     }
-    public void play(){
+
+    public void play() {
         clip.start();
 
     }
-    public void loop(){
+
+    public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
 
     }
-    public void stop(){
+
+    public void stop() {
         clip.stop();
 
     }

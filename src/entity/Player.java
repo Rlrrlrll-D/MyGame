@@ -143,6 +143,7 @@ public class Player extends Entity {
 
         if (i != 999) {
             gamePanel.gameBehavior = gamePanel.dialogBehavior;
+            gamePanel.npc[i].speak();
         }
     }
 

@@ -21,9 +21,11 @@ public class Entity {
 
     public int spriteNum = 1, counter = 0;
     public int actionCounter;
+    public int dialogCount;
     BufferedImage image;
     GamePanel gamePanel;
     public boolean collisionOn;
+    String[] dialogues = new String[20];
 
 
     public Entity(GamePanel gamePanel) {
@@ -32,6 +34,30 @@ public class Entity {
     }
 
     public void setAction() {
+    }
+
+    public void speak() {
+        if (dialogues[dialogCount] == null) {
+            dialogCount = 0;
+        }
+        gamePanel.ui.dialogue = dialogues[dialogCount];
+        dialogCount++;
+
+        switch (gamePanel.player.direct) {
+            case "up":
+                direct = "down";
+                break;
+            case "down":
+                direct = "up";
+                break;
+            case "left":
+                direct = "right";
+                break;
+            case "right":
+                direct = "left";
+                break;
+        }
+
     }
 
     public void update() {

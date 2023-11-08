@@ -22,41 +22,49 @@ public class KeyHandler implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int value = e.getKeyCode();
-        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-            upPressed = true;
-        }
-        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-            downPressed = true;
-        }
-        if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
-            leftPressed = true;
-        }
-        if (value == KeyEvent.VK_D || value == KeyEvent.VK_RIGHT) {
-            rightPressed = true;
-        }
-        if (value == KeyEvent.VK_P) {
-            if (gamePanel.gameBehavior == gamePanel.playBehavior) {
+        if (gamePanel.gameBehavior == gamePanel.playBehavior) {
+            if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+                upPressed = true;
+            }
+            if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+                downPressed = true;
+            }
+            if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
+                leftPressed = true;
+            }
+            if (value == KeyEvent.VK_D || value == KeyEvent.VK_RIGHT) {
+                rightPressed = true;
+            }
+            if (value == KeyEvent.VK_P) {
                 gamePanel.gameBehavior = gamePanel.pauseBehavior;
-            } else if (gamePanel.gameBehavior == gamePanel.pauseBehavior) {
+            }
+            if (value == KeyEvent.VK_T) {
+
+                chkDrawTime = !chkDrawTime;
+            }
+            if (value == KeyEvent.VK_M) {
+
+                if (musicOn) {
+                    gamePanel.stopMusic();
+                    musicOn = false;
+                } else {
+                    gamePanel.playMusic(0);
+                    musicOn = true;
+                }
+                System.out.println(musicOn);
+            }
+        } else if (gamePanel.gameBehavior == gamePanel.pauseBehavior) {
+            if (value == KeyEvent.VK_P) {
                 gamePanel.gameBehavior = gamePanel.playBehavior;
             }
-        }
 
-        if (value == KeyEvent.VK_T) {
-
-            chkDrawTime = !chkDrawTime;
-        }
-        if (value == KeyEvent.VK_M) {
-
-            if (musicOn) {
-                gamePanel.stopMusic();
-                musicOn = false;
-            } else {
-                gamePanel.playMusic(0);
-                musicOn = true;
+        } else if (gamePanel.gameBehavior == gamePanel.dialogBehavior) {
+            if (value == KeyEvent.VK_ENTER) {
+                gamePanel.gameBehavior = gamePanel.playBehavior;
             }
-            System.out.println(musicOn);
+
         }
+
 
     }
 

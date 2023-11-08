@@ -44,10 +44,12 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     KeyHandler keyHandler = new KeyHandler(this);
-
-    public Player player = new Player(this, keyHandler);
     public MotherObject[] motherObject = new MotherObject[20];
     public Entity[] npc = new Entity[10];
+
+    public Player player = new Player(this, keyHandler);
+
+
     Thread gameThread;
 
 
@@ -100,14 +102,13 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (gameBehavior == playBehavior) {
 
-            player.update();
-
             for (Entity entity : npc) {
 
                 if (entity != null) {
                     entity.update();
                 }
             }
+            player.update();
         }
         if (gameBehavior == pauseBehavior) {
 
@@ -128,13 +129,14 @@ public class GamePanel extends JPanel implements Runnable {
                 object.drawing(graphics2D, this);
             }
         }
-
-        player.drawing(graphics2D);
         for (Entity entity : npc) {
             if (entity != null) {
                 entity.drawing(graphics2D);
             }
         }
+
+        player.drawing(graphics2D);
+
         ui.drawing(graphics2D);
         if (keyHandler.chkDrawTime) {
             long drawEnd = System.nanoTime();

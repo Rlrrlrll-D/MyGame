@@ -13,6 +13,7 @@ public class UI {
     public int counter;
 
     public boolean finished;
+    public String dialogue;
 
 
     public UI(GamePanel gamePanel) {
@@ -40,19 +41,19 @@ public class UI {
 
     public void drawing(Graphics2D graphics2D) {
         this.graphics2D = graphics2D;
-        graphics2D.setFont(Unispace_Bold2);
 
 
         if (gamePanel.gameBehavior == gamePanel.playBehavior) {
 
         }
         if (gamePanel.gameBehavior == gamePanel.pauseBehavior) {
-
+            graphics2D.setFont(Unispace_Bold2);
             drawPauseScreenShadow();
             drawPauseScreenYellow();
 
         }
         if (gamePanel.gameBehavior == gamePanel.dialogBehavior) {
+            graphics2D.setFont(Unispace_Bold);
             drawDialogScreen();
         }
 
@@ -127,6 +128,16 @@ public class UI {
         int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
         int height = gamePanel.tileSize * 4;
         drawSubWindow(x, y, width, height);
+        for (String line : dialogue.split("\n")) {
+            drawDialogText(line, x, y);
+            y += 30;
+        }
+    }
+
+    private void drawDialogText(String str, int x, int y) {
+        x += gamePanel.tileSize;
+        y += gamePanel.tileSize;
+        graphics2D.drawString(str, x, y);
     }
 
     public void drawSubWindow(int x, int y, int width, int height) {
