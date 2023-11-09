@@ -9,10 +9,11 @@ public class UI {
     GamePanel gamePanel;
 
     public boolean msgOn;
-    Font Greekpixi, Purisa, Pixel;
+    public int commandNum = 0;
     Graphics2D graphics2D;
     public String msg = "";
     public int counter;
+    Font Purisa, Pixel;
 
     public boolean finished;
     public String dialogue;
@@ -23,8 +24,10 @@ public class UI {
 
         try {
             InputStream inputStream = getClass().getResourceAsStream("/res/fonts/Purisa Bold.ttf");
+            assert inputStream != null;
             Purisa = Font.createFont(Font.TRUETYPE_FONT, inputStream);
             inputStream = getClass().getResourceAsStream("/res/fonts/Pixel Regular.otf");
+            assert inputStream != null;
             Pixel = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
         } catch (FontFormatException | IOException e) {
@@ -55,6 +58,10 @@ public class UI {
         this.graphics2D = graphics2D;
 
         graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+
+        if (gamePanel.gameBehavior == gamePanel.titleBehavior) {
+            drawTitleScreen();
+        }
 
         if (gamePanel.gameBehavior == gamePanel.playBehavior) {
 
@@ -114,6 +121,48 @@ public class UI {
 //                msgDelay(180);
 //            }
 //        }
+
+    }
+
+    private void drawTitleScreen() {
+        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 48F));
+        String text = "My Hero Adventure";
+        int x = getX_Text(text);
+        int y = (int) (gamePanel.tileSize * 2.5);
+        graphics2D.setColor(new Color(0, 0, 7));
+        graphics2D.drawString(text, x + 4, y + 4);
+        graphics2D.setColor(new Color(229, 152, 9));
+        graphics2D.drawString(text, x, y);
+
+        x = gamePanel.screenWidth / 2;
+        y += (int) (gamePanel.tileSize * 1.5);
+        graphics2D.drawImage(gamePanel.player.down1, x - gamePanel.tileSize, y, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
+        graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
+
+        text = "NEW GAME";
+        x = getX_Text(text);
+        y += gamePanel.tileSize * 4;
+        graphics2D.drawString(text, x, y);
+        if (commandNum == 0) {
+            graphics2D.drawString(">", x - gamePanel.tileSize, y);
+        }
+
+        text = "LOAD GAME";
+        x = getX_Text(text);
+        y += gamePanel.tileSize;
+        graphics2D.drawString(text, x, y);
+        if (commandNum == 1) {
+            graphics2D.drawString(">", x - gamePanel.tileSize, y);
+        }
+
+
+        text = "QUIT";
+        x = getX_Text(text);
+        y += gamePanel.tileSize;
+        graphics2D.drawString(text, x, y);
+        if (commandNum == 2) {
+            graphics2D.drawString(">", x - gamePanel.tileSize, y);
+        }
 
     }
 

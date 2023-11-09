@@ -38,9 +38,10 @@ public class GamePanel extends JPanel implements Runnable {
     Sound sound = new Sound();
     Sound SFX = new Sound();
     public UI ui = new UI(this);
-    public final int pauseBehavior = 1;
-    public final int playBehavior = 0;
-    public final int dialogBehavior = 2;
+    public final int pauseBehavior = 2;
+    public final int titleBehavior = 0;
+    public final int playBehavior = 1;
+    public final int dialogBehavior = 3;
     public int gameBehavior;
 
 
@@ -59,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GamePanel() throws IOException, FontFormatException {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
-        setBackground(new Color(38, 37, 37));
+        setBackground(new Color(12, 23, 30));
         setDoubleBuffered(true);
         addKeyListener(keyHandler);
         setFocusable(true);
@@ -71,8 +72,8 @@ public class GamePanel extends JPanel implements Runnable {
         //assetSetter.setObject();
         assetSetter.setNPC();
         keyHandler.musicOn = true;
-        gameBehavior = playBehavior;
-        playMusic(0);
+        gameBehavior = titleBehavior;
+        // playMusic(0);
     }
 
 
@@ -124,28 +125,33 @@ public class GamePanel extends JPanel implements Runnable {
         if (keyHandler.chkDrawTime) {
             drawStart = System.nanoTime();
         }
-        tileManager.drawing(graphics2D);
-        for (MotherObject object : motherObject) {
-            if (object != null) {
-                object.drawing(graphics2D, this);
+        if (gameBehavior == titleBehavior) {
+            ui.drawing(graphics2D);
+        } else {
+            tileManager.drawing(graphics2D);
+            for (MotherObject object : motherObject) {
+                if (object != null) {
+                    object.drawing(graphics2D, this);
+                }
             }
-        }
-        for (Entity entity : npc) {
-            if (entity != null) {
-                entity.drawing(graphics2D);
+            for (Entity entity : npc) {
+                if (entity != null) {
+                    entity.drawing(graphics2D);
+                }
             }
+
+            player.drawing(graphics2D);
+            ui.drawing(graphics2D);
         }
 
-        player.drawing(graphics2D);
 
-        ui.drawing(graphics2D);
         if (keyHandler.chkDrawTime) {
+
             long drawEnd = System.nanoTime();
             long passTime = drawEnd - drawStart;
-            graphics2D.setFont(ui.Greekpixi);
+            graphics2D.setFont(ui.Pixel.deriveFont(Font.PLAIN, 10F));
             graphics2D.setColor(Color.black);
-            graphics2D.drawString("Draw Time: " + passTime, 20, 400);
-            System.out.println("Draw Time:" + passTime);
+            graphics2D.drawString("Draw Time: " + passTime, 20, 20);
         }
         graphics2D.dispose();
 

@@ -9,7 +9,7 @@ public class Main {
 
         JFrame window = new JFrame();
 
-        window.setTitle("Adventure 2D");
+        window.setTitle("My Hero Adventure");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
 
