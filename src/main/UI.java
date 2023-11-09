@@ -1,13 +1,15 @@
 package main;
 
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class UI {
 
     GamePanel gamePanel;
 
     public boolean msgOn;
-    Font Unispace_Bold, Unispace_Bold2;
+    Font Greekpixi, Purisa, Pixel;
     Graphics2D graphics2D;
     public String msg = "";
     public int counter;
@@ -18,8 +20,18 @@ public class UI {
 
     public UI(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        Unispace_Bold = new Font("Unispace-Bold", Font.PLAIN, 17);
-        Unispace_Bold2 = new Font("Unispace-Bold", Font.BOLD, 50);
+
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/res/fonts/Purisa Bold.ttf");
+            Purisa = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            inputStream = getClass().getResourceAsStream("/res/fonts/Pixel Regular.otf");
+            Pixel = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+
+        } catch (FontFormatException | IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 
     public void showMsg(String text) {
@@ -42,18 +54,19 @@ public class UI {
     public void drawing(Graphics2D graphics2D) {
         this.graphics2D = graphics2D;
 
+        graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         if (gamePanel.gameBehavior == gamePanel.playBehavior) {
 
         }
         if (gamePanel.gameBehavior == gamePanel.pauseBehavior) {
-            graphics2D.setFont(Unispace_Bold2);
+
             drawPauseScreenShadow();
             drawPauseScreenYellow();
 
         }
         if (gamePanel.gameBehavior == gamePanel.dialogBehavior) {
-            graphics2D.setFont(Unispace_Bold);
+
             drawDialogScreen();
         }
 
@@ -92,7 +105,7 @@ public class UI {
 //            graphics2D.setFont(Unispace_Bold);
 //            graphics2D.setColor(new Color(6, 18, 94));
 //            graphics2D.drawImage(key, gamePanel.tileSize / 2, gamePanel.tileSize / 2, gamePanel.tileSize / 2 + 10, gamePanel.tileSize / 2 + 10, null);
-//            graphics2D.drawString("x " + gamePanel.player.keys, 57, gamePanel.tileSize);
+//            graphics2D.drawString("x " + gamePanel.res.player.keys, 57, gamePanel.tileSize);
 //
 //            playTime+=(double) 1/60;
 //            graphics2D.drawString("Time: "+ decimalFormat.format(playTime), gamePanel.screenWidth- gamePanel.tileSize*3, gamePanel.tileSize);
@@ -106,6 +119,7 @@ public class UI {
 
     public void drawPauseScreenYellow() {
         graphics2D.setColor(new Color(229, 152, 9));
+        graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 50F));
         String txt = "PAUSED!";
         int x = getX_Text(txt);
         int y = gamePanel.screenHeight / 2;
@@ -115,6 +129,7 @@ public class UI {
 
     public void drawPauseScreenShadow() {
         graphics2D.setColor(new Color(12, 6, 2, 171));
+        graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 50F));
         String txt = "PAUSED!";
         int x = getX_Text(txt) + 2;
         int y = gamePanel.screenHeight / 2 + 2;
@@ -128,6 +143,7 @@ public class UI {
         int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
         int height = gamePanel.tileSize * 4;
         drawSubWindow(x, y, width, height);
+        graphics2D.setFont(Purisa.deriveFont(Font.PLAIN, 18F));
         for (String line : dialogue.split("\n")) {
             drawDialogText(line, x, y);
             y += 30;

@@ -44,26 +44,26 @@ public class Player extends Entity {
 
     public void getPlayerImg() {
 
-        stay1 = setup("/res/stay1");
-        stay2 = setup("/res/stay2");
-        stay3 = setup("/res/stay3");
-        stay_up1 = setup("/res/stay_up1");
-        stay_up2 = setup("/res/stay_up2");
-        stay_up3 = setup("/res/stay_up3");
-        stay_left1 = setup("/res/stay_left1");
-        stay_left2 = setup("/res/stay_left2");
-        stay_left3 = setup("/res/stay_left3");
-        stay_right1 = setup("/res/stay_right1");
-        stay_right2 = setup("/res/stay_right2");
-        stay_right3 = setup("/res/stay_right3");
-        up1 = setup("/res/me_up1");
-        up2 = setup("/res/me_up2");
-        down1 = setup("/res/me_down1");
-        down2 = setup("/res/me_down2");
-        left1 = setup("/res/me_left1");
-        left2 = setup("/res/me_left2");
-        right1 = setup("/res/me_right1");
-        right2 = setup("/res/me_right2");
+        stay1 = setup("/res/player/stay1");
+        stay2 = setup("/res/player/stay2");
+        stay3 = setup("/res/player/stay3");
+        stay_up1 = setup("/res/player/stay_up1");
+        stay_up2 = setup("/res/player/stay_up2");
+        stay_up3 = setup("/res/player/stay_up3");
+        stay_left1 = setup("/res/player/stay_left1");
+        stay_left2 = setup("/res/player/stay_left2");
+        stay_left3 = setup("/res/player/stay_left3");
+        stay_right1 = setup("/res/player/stay_right1");
+        stay_right2 = setup("/res/player/stay_right2");
+        stay_right3 = setup("/res/player/stay_right3");
+        up1 = setup("/res/player/me_up1");
+        up2 = setup("/res/player/me_up2");
+        down1 = setup("/res/player/me_down1");
+        down2 = setup("/res/player/me_down2");
+        left1 = setup("/res/player/me_left1");
+        left2 = setup("/res/player/me_left2");
+        right1 = setup("/res/player/me_right1");
+        right2 = setup("/res/player/me_right2");
     }
 
 

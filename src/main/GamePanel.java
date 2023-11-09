@@ -7,6 +7,7 @@ import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
     //  screen settings
@@ -56,7 +57,7 @@ public class GamePanel extends JPanel implements Runnable {
     //public boolean musicOn;
 
 
-    public GamePanel() {
+    public GamePanel() throws IOException, FontFormatException {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         setBackground(new Color(38, 37, 37));
         setDoubleBuffered(true);
@@ -141,7 +142,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (keyHandler.chkDrawTime) {
             long drawEnd = System.nanoTime();
             long passTime = drawEnd - drawStart;
-            graphics2D.setFont(ui.Unispace_Bold);
+            graphics2D.setFont(ui.Greekpixi);
             graphics2D.setColor(Color.black);
             graphics2D.drawString("Draw Time: " + passTime, 20, 400);
             System.out.println("Draw Time:" + passTime);
