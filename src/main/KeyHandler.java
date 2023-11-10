@@ -24,24 +24,56 @@ public class KeyHandler implements KeyListener {
         int value = e.getKeyCode();
 
         if (gamePanel.gameBehavior == gamePanel.titleBehavior) {
-            if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-                if (gamePanel.ui.commandNum != 0)
-                    gamePanel.ui.commandNum--;
-            }
-            if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-                if (gamePanel.ui.commandNum != 2)
-                    gamePanel.ui.commandNum++;
-            }
-            if (value == KeyEvent.VK_ENTER) {
-                if (gamePanel.ui.commandNum == 0) {
-                    gamePanel.gameBehavior = gamePanel.playBehavior;
-                    gamePanel.playMusic(0);
+            if (gamePanel.ui.titleScreenBehavior == 0) {
+                if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+                    if (gamePanel.ui.commandNum != 0)
+                        gamePanel.ui.commandNum--;
                 }
-                if (gamePanel.ui.commandNum == 1) {
+                if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+                    if (gamePanel.ui.commandNum != 2)
+                        gamePanel.ui.commandNum++;
+                }
+                if (value == KeyEvent.VK_ENTER) {
+                    if (gamePanel.ui.commandNum == 0) {
+                        gamePanel.ui.titleScreenBehavior = 1;
 
+                    }
+                    if (gamePanel.ui.commandNum == 1) {
+
+                    }
+                    if (gamePanel.ui.commandNum == 2) {
+                        System.exit(0);
+                    }
                 }
-                if (gamePanel.ui.commandNum == 2) {
-                    System.exit(0);
+            } else if (gamePanel.ui.titleScreenBehavior == 1) {
+                if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+                    if (gamePanel.ui.commandNum != 0)
+                        gamePanel.ui.commandNum--;
+                }
+                if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+                    if (gamePanel.ui.commandNum != 3)
+                        gamePanel.ui.commandNum++;
+                }
+                if (value == KeyEvent.VK_ENTER) {
+                    if (gamePanel.ui.commandNum == 0) {
+                        System.out.println("Do some fighter specific stuff!");
+                        gamePanel.gameBehavior = gamePanel.playBehavior;
+                        gamePanel.playMusic(0);
+                    }
+                    if (gamePanel.ui.commandNum == 1) {
+                        System.out.println("Do some thief specific stuff!");
+                        gamePanel.gameBehavior = gamePanel.playBehavior;
+                        gamePanel.playMusic(0);
+                    }
+                    if (gamePanel.ui.commandNum == 2) {
+                        System.out.println("Do some sorcerer specific stuff!");
+                        gamePanel.gameBehavior = gamePanel.playBehavior;
+                        gamePanel.playMusic(0);
+                    }
+                    if (gamePanel.ui.commandNum == 3) {
+                        gamePanel.ui.titleScreenBehavior = 0;
+                        gamePanel.ui.commandNum = 0;
+                    }
                 }
             }
         }
@@ -79,10 +111,7 @@ public class KeyHandler implements KeyListener {
             if (value == KeyEvent.VK_ENTER) {
                 gamePanel.gameBehavior = gamePanel.playBehavior;
             }
-
         }
-
-
     }
 
     private void musTrigger() {

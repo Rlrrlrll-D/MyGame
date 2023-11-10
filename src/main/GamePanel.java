@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
     Sound sound = new Sound();
     Sound SFX = new Sound();
     public UI ui = new UI(this);
+
     public final int pauseBehavior = 2;
     public final int titleBehavior = 0;
     public final int playBehavior = 1;

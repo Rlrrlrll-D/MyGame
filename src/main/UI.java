@@ -10,6 +10,7 @@ public class UI {
 
     public boolean msgOn;
     public int commandNum = 0;
+    public int titleScreenBehavior = 0;
     Graphics2D graphics2D;
     public String msg = "";
     public int counter;
@@ -125,43 +126,89 @@ public class UI {
     }
 
     private void drawTitleScreen() {
-        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 48F));
-        String text = "My Hero Adventure";
-        int x = getX_Text(text);
-        int y = (int) (gamePanel.tileSize * 2.5);
-        graphics2D.setColor(new Color(0, 0, 7));
-        graphics2D.drawString(text, x + 4, y + 4);
-        graphics2D.setColor(new Color(229, 152, 9));
-        graphics2D.drawString(text, x, y);
+        if (titleScreenBehavior == 0) {
 
-        x = gamePanel.screenWidth / 2;
-        y += (int) (gamePanel.tileSize * 1.5);
-        graphics2D.drawImage(gamePanel.player.down1, x - gamePanel.tileSize, y, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
-        graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
+            graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 37F));
+            String text = "MY HERO ADVENTURE";
+            int x = getX_Text(text);
+            int y = (int) (gamePanel.tileSize * 2.5);
+            graphics2D.setColor(new Color(0, 0, 7));
+            graphics2D.drawString(text, x + 4, y + 4);
+            graphics2D.setColor(new Color(229, 152, 9));
+            graphics2D.drawString(text, x, y);
 
-        text = "NEW GAME";
-        x = getX_Text(text);
-        y += gamePanel.tileSize * 4;
-        graphics2D.drawString(text, x, y);
-        if (commandNum == 0) {
-            graphics2D.drawString(">", x - gamePanel.tileSize, y);
-        }
+            x = gamePanel.screenWidth / 2;
+            y += (int) (gamePanel.tileSize * 1.5);
+            graphics2D.drawImage(gamePanel.player.down1, x - gamePanel.tileSize, y, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
+            graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
 
-        text = "LOAD GAME";
-        x = getX_Text(text);
-        y += gamePanel.tileSize;
-        graphics2D.drawString(text, x, y);
-        if (commandNum == 1) {
-            graphics2D.drawString(">", x - gamePanel.tileSize, y);
-        }
+            text = "NEW GAME";
+            x = getX_Text(text);
+            y += gamePanel.tileSize * 4;
+            graphics2D.drawString(text, x, y);
+            if (commandNum == 0) {
+                graphics2D.drawString(">", x - gamePanel.tileSize, y);
+            }
+
+            text = "LOAD GAME";
+            x = getX_Text(text);
+            y += gamePanel.tileSize;
+            graphics2D.drawString(text, x, y);
+            if (commandNum == 1) {
+                graphics2D.drawString(">", x - gamePanel.tileSize, y);
+            }
 
 
-        text = "QUIT";
-        x = getX_Text(text);
-        y += gamePanel.tileSize;
-        graphics2D.drawString(text, x, y);
-        if (commandNum == 2) {
-            graphics2D.drawString(">", x - gamePanel.tileSize, y);
+            text = "QUIT";
+            x = getX_Text(text);
+            y += gamePanel.tileSize;
+            graphics2D.drawString(text, x, y);
+            if (commandNum == 2) {
+                graphics2D.drawString(">", x - gamePanel.tileSize, y);
+            }
+
+        } else if (titleScreenBehavior == 1) {
+            graphics2D.setColor(new Color(229, 152, 9));
+            graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 30F));
+            String text = "SELECT YOUR CLASS:";
+            int x = getX_Text(text);
+            int y = (gamePanel.tileSize * 4);
+            graphics2D.drawString(text, x, y);
+
+            graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
+
+            text = "FIGHTER";
+            x = getX_Text(text);
+            y += (gamePanel.tileSize * 2);
+            graphics2D.drawString(text, x, y);
+            if (commandNum == 0) {
+                graphics2D.drawString(">", x - gamePanel.tileSize, y);
+            }
+
+            text = "THIEF";
+            x = getX_Text(text);
+            y += (gamePanel.tileSize);
+            graphics2D.drawString(text, x, y);
+            if (commandNum == 1) {
+                graphics2D.drawString(">", x - gamePanel.tileSize, y);
+            }
+
+            text = "SORCERER";
+            x = getX_Text(text);
+            y += (gamePanel.tileSize);
+            graphics2D.drawString(text, x, y);
+            if (commandNum == 2) {
+                graphics2D.drawString(">", x - gamePanel.tileSize, y);
+            }
+            text = "BACK";
+            x = getX_Text(text);
+            y += (gamePanel.tileSize * 3);
+            graphics2D.drawString(text, x, y);
+            if (commandNum == 3) {
+                graphics2D.drawString(">", x - gamePanel.tileSize, y);
+
+            }
+
         }
 
     }
