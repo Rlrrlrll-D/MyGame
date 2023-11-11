@@ -1,12 +1,17 @@
 package main;
 
+import objects.Heart;
+import objects.MotherObject;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class UI {
 
     GamePanel gamePanel;
+    BufferedImage heart_f, heart_h, heart_e;
 
     public boolean msgOn;
     public int commandNum = 0;
@@ -34,6 +39,10 @@ public class UI {
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
+        MotherObject heart = new Heart(gamePanel);
+        heart_e = heart.image;
+        heart_h = heart.image1;
+        heart_f = heart.image2;
 
 
     }
@@ -65,16 +74,16 @@ public class UI {
         }
 
         if (gamePanel.gameBehavior == gamePanel.playBehavior) {
-
+            drawPlayerLife();
         }
         if (gamePanel.gameBehavior == gamePanel.pauseBehavior) {
-
+            drawPlayerLife();
             drawPauseScreenShadow();
             drawPauseScreenYellow();
 
         }
         if (gamePanel.gameBehavior == gamePanel.dialogBehavior) {
-
+            drawPlayerLife();
             drawDialogScreen();
         }
 
@@ -123,6 +132,27 @@ public class UI {
 //            }
 //        }
 
+    }
+
+    public void drawPlayerLife() {
+
+        int x = gamePanel.tileSize / 2;
+        int y = gamePanel.tileSize / 2;
+
+        for (int i = 0; i < gamePanel.player.maxLife / 2; i++) {
+            graphics2D.drawImage(heart_e, x, y, null);
+            x += gamePanel.tileSize;
+        }
+        x = gamePanel.tileSize / 2;
+        // gamePanel.player.life = 5;
+        for (int i = 0; i < gamePanel.player.life; i++) {
+            graphics2D.drawImage(heart_h, x, y, null);
+            i++;
+            if (i < gamePanel.player.life) {
+                graphics2D.drawImage(heart_f, x, y, null);
+            }
+            x += gamePanel.tileSize;
+        }
     }
 
     private void drawTitleScreen() {

@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class MotherObject {
 
-    public BufferedImage image;
+    public BufferedImage image, image1, image2;
     public String name;
 
     public boolean collision;

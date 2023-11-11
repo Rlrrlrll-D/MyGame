@@ -20,6 +20,8 @@ public class Entity {
     public String direct, stayDirect;
 
     public int spriteNum = 1, counter = 0;
+    public int maxLife;
+    public int life;
     public int actionCounter;
     public int dialogCount;
     BufferedImage image;
