@@ -36,6 +36,7 @@ public class EventHandler {
     private void damagePit(int gameBehavior) {
 
         gamePanel.gameBehavior = gameBehavior;
+        gamePanel.playSFX(6);
         gamePanel.ui.dialogue = "You fall into a pit! :(";
         gamePanel.player.life--;
     }

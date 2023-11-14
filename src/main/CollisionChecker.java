@@ -106,8 +106,8 @@ public class CollisionChecker {
                             index = getIndex(entity, player, i, index);
                         }
                         break;
-//                    default:
-//                        throw new IllegalStateException("Unexpected value: " + entity.direct);
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + entity.direct);
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;

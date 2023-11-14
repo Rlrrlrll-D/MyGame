@@ -10,50 +10,35 @@ import java.awt.*;
 import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable {
-    //  screen settings
-    final int originalTileSize = 16;
-    final int scale = 3;
-
-    public int tileSize = originalTileSize * scale;
-
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 14;
-    public final int screenWidth = tileSize * maxScreenCol;
-    public final int screenHeight = tileSize * maxScreenRow;
-    public final int dfl_X = screenWidth / 2 - tileSize / 2;
-    public final int dfl_Y = screenHeight / 2 - tileSize / 2;
-
-
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-    final int FPS = 60;
-
-    TileManager tileManager = new TileManager(this);
-
-
-    public CollisionChecker checker = new CollisionChecker(this);
-
-    public AssetSetter assetSetter = new AssetSetter(this);
-
-    Sound sound = new Sound();
-    Sound SFX = new Sound();
-    public EventHandler eventHandler = new EventHandler(this);
-    public UI ui = new UI(this);
-
     public final int pauseBehavior = 2;
     public final int titleBehavior = 0;
     public final int playBehavior = 1;
     public final int dialogBehavior = 3;
+    //  screen settings
+    final int originalTileSize = 16;
+    final int scale = 3;
+    final int FPS = 60;
+    public int tileSize = originalTileSize * scale;
+    public final int screenWidth = tileSize * maxScreenCol;
+    public final int dfl_X = screenWidth / 2 - tileSize / 2;
+    public final int screenHeight = tileSize * maxScreenRow;
+    public final int dfl_Y = screenHeight / 2 - tileSize / 2;
+    public CollisionChecker checker = new CollisionChecker(this);
+    public AssetSetter assetSetter = new AssetSetter(this);
+    public EventHandler eventHandler = new EventHandler(this);
+    public UI ui = new UI(this);
     public int gameBehavior;
-
-
     public KeyHandler keyHandler = new KeyHandler(this);
     public MotherObject[] motherObject = new MotherObject[20];
     public Entity[] npc = new Entity[10];
-
     public Player player = new Player(this, keyHandler);
-
-
+    TileManager tileManager = new TileManager(this);
+    Sound sound = new Sound();
+    Sound SFX = new Sound();
     Thread gameThread;
 
 

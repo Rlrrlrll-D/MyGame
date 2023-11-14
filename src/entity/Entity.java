@@ -46,16 +46,16 @@ public class Entity {
         dialogCount++;
 
         switch (gamePanel.player.direct) {
-            case "up":
+            case "up","stay_up":
                 direct = "down";
                 break;
-            case "down":
+            case "down","stay_down":
                 direct = "up";
                 break;
-            case "left":
+            case "left","stay_left":
                 direct = "right";
                 break;
-            case "right":
+            case "right","stay_right":
                 direct = "left";
                 break;
         }

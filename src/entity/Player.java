@@ -9,12 +9,11 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
 
-    KeyHandler keyHandler;
-    BufferedImage image;
-
     public final int screenX;
     public final int screenY;
     public int /*keys,*/ temp;
+    KeyHandler keyHandler;
+    BufferedImage image;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler) {
         super(gamePanel);
@@ -98,9 +97,6 @@ public class Player extends Entity {
             int npcIndex = gamePanel.checker.checkEntity(this, gamePanel.npc);
             interactNPC(npcIndex);
 
-
-            // gamePanel.keyHandler.enterPressed =false;
-
             if (!collisionOn) {
 
                 switch (direct) {
@@ -121,12 +117,11 @@ public class Player extends Entity {
                         stayDirect = "right";
                         break;
                 }
-
             }
             spriteImageChange(3);
 
-
         } else {
+
             switch (stayDirect) {
                 case "begin", "down":
                     direct = "stay";
@@ -141,13 +136,9 @@ public class Player extends Entity {
                     direct = "stay_right";
                     break;
             }
-
             spriteImageChange(10);
-
-
         }
         gamePanel.eventHandler.checkEvent();
-        System.out.println(direct + " " + stayDirect);
     }
 
     private void interactNPC(int i) {
@@ -157,9 +148,7 @@ public class Player extends Entity {
                 gamePanel.gameBehavior = gamePanel.dialogBehavior;
                 gamePanel.npc[i].speak();
             }
-
         }
-        // gamePanel.keyHandler.enterPressed = false;
     }
 
 
