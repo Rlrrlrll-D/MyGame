@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     Sound sound = new Sound();
     Sound SFX = new Sound();
+    public EventHandler eventHandler = new EventHandler(this);
     public UI ui = new UI(this);
 
     public final int pauseBehavior = 2;
@@ -46,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable {
     public int gameBehavior;
 
 
-    KeyHandler keyHandler = new KeyHandler(this);
+    public KeyHandler keyHandler = new KeyHandler(this);
     public MotherObject[] motherObject = new MotherObject[20];
     public Entity[] npc = new Entity[10];
 

@@ -77,13 +77,16 @@ public class Player extends Entity {
             if (keyHandler.upPressed) {
                 direct = "up";
 
-            } else if (keyHandler.downPressed) {
+            }
+            if (keyHandler.downPressed) {
                 direct = "down";
 
-            } else if (keyHandler.leftPressed) {
+            }
+            if (keyHandler.leftPressed) {
                 direct = "left";
 
-            } else {
+            }
+            if (keyHandler.rightPressed) {
                 direct = "right";
 
             }
@@ -94,6 +97,10 @@ public class Player extends Entity {
             pickUp(objectIndex);
             int npcIndex = gamePanel.checker.checkEntity(this, gamePanel.npc);
             interactNPC(npcIndex);
+
+
+            // gamePanel.keyHandler.enterPressed =false;
+
             if (!collisionOn) {
 
                 switch (direct) {
@@ -139,15 +146,20 @@ public class Player extends Entity {
 
 
         }
-
+        gamePanel.eventHandler.checkEvent();
+        System.out.println(direct + " " + stayDirect);
     }
 
     private void interactNPC(int i) {
 
         if (i != 999) {
-            gamePanel.gameBehavior = gamePanel.dialogBehavior;
-            gamePanel.npc[i].speak();
+            if (gamePanel.keyHandler.enterPressed) {
+                gamePanel.gameBehavior = gamePanel.dialogBehavior;
+                gamePanel.npc[i].speak();
+            }
+
         }
+        // gamePanel.keyHandler.enterPressed = false;
     }
 
 

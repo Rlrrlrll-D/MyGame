@@ -74,19 +74,19 @@ public class Entity {
             switch (direct) {
                 case "up":
                     worldY -= speed;
-                    stayDirect = "up";
+                    //stayDirect = "up";
                     break;
                 case "down":
                     worldY += speed;
-                    stayDirect = "down";
+                    // stayDirect = "down";
                     break;
                 case "left":
                     worldX -= speed;
-                    stayDirect = "left";
+                    //stayDirect = "left";
                     break;
                 case "right":
                     worldX += speed;
-                    stayDirect = "right";
+                    //stayDirect = "right";
                     break;
             }
 
