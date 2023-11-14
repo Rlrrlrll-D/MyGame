@@ -24,9 +24,9 @@ public class Entity {
     public int life;
     public int actionCounter;
     public int dialogCount;
+    public boolean collisionOn;
     BufferedImage image;
     GamePanel gamePanel;
-    public boolean collisionOn;
     String[] dialogues = new String[20];
 
 
@@ -74,20 +74,23 @@ public class Entity {
             switch (direct) {
                 case "up":
                     worldY -= speed;
-                    //stayDirect = "up";
+
                     break;
                 case "down":
                     worldY += speed;
-                    // stayDirect = "down";
+
                     break;
                 case "left":
                     worldX -= speed;
-                    //stayDirect = "left";
+
                     break;
                 case "right":
                     worldX += speed;
-                    //stayDirect = "right";
+
                     break;
+
+                default:
+                    throw new IllegalStateException("Unexpected value: " + direct);
             }
 
         }
