@@ -67,13 +67,11 @@ public class EventHandler {
 
     public void healingPool(int gameBehavior) {
 
-        if (gamePanel.keyHandler.enterPressed) {
+        if (gamePanel.keyHandler.enterPressed && gamePanel.player.life != gamePanel.player.maxLife) {
             gamePanel.gameBehavior = gameBehavior;
             gamePanel.ui.dialogue = "You drink the water. \nYour life has been recovered! :)";
 
             gamePanel.player.life = gamePanel.player.maxLife;
         }
     }
-
-
 }

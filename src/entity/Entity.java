@@ -118,7 +118,6 @@ public class Entity {
             }
             counter = 0;
         }
-
     }
 
     public BufferedImage setup(String imagePath) {
@@ -223,6 +222,9 @@ public class Entity {
 
 
             }
+            Color shadow = new Color(12, 12, 12, 55);
+            graphics2D.setColor(shadow);
+            graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
             graphics2D.drawImage(image, scrX, scrY, gamePanel.tileSize, gamePanel.tileSize, null);
         }
     }
