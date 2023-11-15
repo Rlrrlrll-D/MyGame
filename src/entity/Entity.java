@@ -39,11 +39,6 @@ public class Entity {
     }
 
     public void speak() {
-        if (dialogues[dialogCount] == null) {
-            dialogCount = 0;
-        }
-        gamePanel.ui.dialogue = dialogues[dialogCount];
-        dialogCount++;
 
         switch (gamePanel.player.direct) {
             case "up","stay_up":
@@ -59,6 +54,14 @@ public class Entity {
                 direct = "left";
                 break;
         }
+
+        gamePanel.ui.dialogue = dialogues[dialogCount];
+        dialogCount++;
+        if (dialogues[dialogCount] == null) {
+            dialogCount = 0;
+        }
+
+
 
     }
 

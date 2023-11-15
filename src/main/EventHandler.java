@@ -6,6 +6,9 @@ public class EventHandler {
     GamePanel gamePanel;
     EventRect[][] eventRect;
 
+    int previousEventX, previousEventY;
+    boolean canTouchEvent = true;
+
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         eventRect = new EventRect[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
@@ -28,35 +31,48 @@ public class EventHandler {
     }
 
     public void checkEvent() {
-        if (hit(7, 44, "down")) {
-
-            damagePit(gamePanel.dialogBehavior);
-        }
-//        if (hit(7, 44, "down")) {
-//
-//            teleport(gamePanel.dialogBehavior);
-//        }
-        if (hit(12, 43, "any")) {
-            healingPool(gamePanel.dialogBehavior);
+        int xDistatce = Math.abs(gamePanel.player.worldX - previousEventX);
+        int yDistatce = Math.abs(gamePanel.player.worldY - previousEventY);
+        int distance = Math.max(xDistatce, yDistatce);
+        if (distance > gamePanel.tileSize) {
+            canTouchEvent = true;
         }
 
+        if (canTouchEvent) {
 
+            if (hit(7, 44, "down")) {
+                damagePit(gamePanel.dialogBehavior);
+            }
+            if (hit(9, 44, "down")) {
+                damagePit(gamePanel.dialogBehavior);
+            }
+            if (hit(14, 44, "any")) {
+
+                teleport(43, 43,gamePanel.dialogBehavior);
+            }
+            if (hit(12, 43, "any")) {
+                healingPool(gamePanel.dialogBehavior);
+            }
+        }
     }
 
     private void damagePit(int gameBehavior) {
 
+
         gamePanel.gameBehavior = gameBehavior;
         gamePanel.playSFX(6);
         gamePanel.ui.dialogue = "You fall into a pit! :(";
+        //eventRect[col][row].eventDone = true;
+        canTouchEvent = false;
         gamePanel.player.life--;
     }
 
-    private void teleport(int gameBehavior) {
+    private void teleport(int col, int row, int gameBehavior) {
 
         gamePanel.gameBehavior = gameBehavior;
         gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
-        gamePanel.player.worldX = 48 * gamePanel.tileSize;
-        gamePanel.player.worldY = 48 * gamePanel.tileSize;
+        gamePanel.player.worldX = col * gamePanel.tileSize;
+        gamePanel.player.worldY = row * gamePanel.tileSize;
 
 
     }
@@ -70,9 +86,11 @@ public class EventHandler {
         eventRect[eventCol][eventCol].x = eventCol * gamePanel.tileSize + eventRect[eventCol][eventCol].x;
         eventRect[eventCol][eventCol].y = eventRow * gamePanel.tileSize + eventRect[eventCol][eventCol].y;
 
-        if (gamePanel.player.solidArea.intersects(eventRect[eventCol][eventCol])) {
+        if (gamePanel.player.solidArea.intersects(eventRect[eventCol][eventCol]) && !eventRect[eventCol][eventRow].eventDone) {
             if (gamePanel.player.direct.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
                 hit = true;
+                previousEventX = gamePanel.player.worldX;
+                previousEventY = gamePanel.player.worldY;
             }
         }
         gamePanel.player.solidArea.x = gamePanel.player.solidAreaDefaultX;
