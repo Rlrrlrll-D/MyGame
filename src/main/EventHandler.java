@@ -22,9 +22,13 @@ public class EventHandler {
     }
 
     public void checkEvent() {
+//        if (hit(7, 44, "down")) {
+//
+//            damagePit(gamePanel.dialogBehavior);
+//        }
         if (hit(7, 44, "down")) {
 
-            damagePit(gamePanel.dialogBehavior);
+            teleport(gamePanel.dialogBehavior);
         }
         if (hit(12, 43, "any")) {
             healingPool(gamePanel.dialogBehavior);
@@ -39,6 +43,14 @@ public class EventHandler {
         gamePanel.playSFX(6);
         gamePanel.ui.dialogue = "You fall into a pit! :(";
         gamePanel.player.life--;
+    } private void teleport(int gameBehavior) {
+
+        gamePanel.gameBehavior = gameBehavior;
+        gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
+        gamePanel.player.worldX = 48*gamePanel.tileSize;
+        gamePanel.player.worldY = 48*gamePanel.tileSize;
+
+
     }
 
     public boolean hit(int eventCol, int eventRow, String reqDirection) {
