@@ -1,35 +1,41 @@
 package main;
 
-import java.awt.*;
-
 public class EventHandler {
 
 
     GamePanel gamePanel;
-    Rectangle eventRect;
-    int eventRectDefaultX;
-    int eventRectDefaultY;
+    EventRect[][] eventRect;
 
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        eventRect = new Rectangle();
-        eventRect.x = 23;
-        eventRect.y = 23;
-        eventRect.height = 2;
-        eventRect.width = 2;
-        eventRectDefaultX = eventRect.x;
-        eventRectDefaultY = eventRect.y;
+        eventRect = new EventRect[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
+
+        for (int col = 0; col < gamePanel.maxWorldCol; col++) {
+            for (int row = 0; row < gamePanel.maxWorldRow; row++) {
+
+                eventRect[col][row] = new EventRect();
+                eventRect[col][row].x = 23;
+                eventRect[col][row].y = 23;
+                eventRect[col][row].height = 2;
+                eventRect[col][row].width = 2;
+                eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
+                eventRect[col][row].eventRectDefaultY = eventRect[col][row].y;
+
+            }
+
+        }
+
     }
 
     public void checkEvent() {
-//        if (hit(7, 44, "down")) {
-//
-//            damagePit(gamePanel.dialogBehavior);
-//        }
         if (hit(7, 44, "down")) {
 
-            teleport(gamePanel.dialogBehavior);
+            damagePit(gamePanel.dialogBehavior);
         }
+//        if (hit(7, 44, "down")) {
+//
+//            teleport(gamePanel.dialogBehavior);
+//        }
         if (hit(12, 43, "any")) {
             healingPool(gamePanel.dialogBehavior);
         }
@@ -43,12 +49,14 @@ public class EventHandler {
         gamePanel.playSFX(6);
         gamePanel.ui.dialogue = "You fall into a pit! :(";
         gamePanel.player.life--;
-    } private void teleport(int gameBehavior) {
+    }
+
+    private void teleport(int gameBehavior) {
 
         gamePanel.gameBehavior = gameBehavior;
         gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
-        gamePanel.player.worldX = 48*gamePanel.tileSize;
-        gamePanel.player.worldY = 48*gamePanel.tileSize;
+        gamePanel.player.worldX = 48 * gamePanel.tileSize;
+        gamePanel.player.worldY = 48 * gamePanel.tileSize;
 
 
     }
@@ -59,18 +67,18 @@ public class EventHandler {
         gamePanel.player.solidArea.x = gamePanel.player.worldX + gamePanel.player.solidArea.x;
         gamePanel.player.solidArea.y = gamePanel.player.worldY + gamePanel.player.solidArea.y;
 
-        eventRect.x = eventCol * gamePanel.tileSize + eventRect.x;
-        eventRect.y = eventRow * gamePanel.tileSize + eventRect.y;
+        eventRect[eventCol][eventCol].x = eventCol * gamePanel.tileSize + eventRect[eventCol][eventCol].x;
+        eventRect[eventCol][eventCol].y = eventRow * gamePanel.tileSize + eventRect[eventCol][eventCol].y;
 
-        if (gamePanel.player.solidArea.intersects(eventRect)) {
+        if (gamePanel.player.solidArea.intersects(eventRect[eventCol][eventCol])) {
             if (gamePanel.player.direct.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
                 hit = true;
             }
         }
         gamePanel.player.solidArea.x = gamePanel.player.solidAreaDefaultX;
         gamePanel.player.solidArea.y = gamePanel.player.solidAreaDefaultY;
-        eventRect.x = eventRectDefaultX;
-        eventRect.y = eventRectDefaultY;
+        eventRect[eventCol][eventCol].x = eventRect[eventCol][eventCol].eventRectDefaultX;
+        eventRect[eventCol][eventCol].y = eventRect[eventCol][eventCol].eventRectDefaultY;
 
 
         return hit;
