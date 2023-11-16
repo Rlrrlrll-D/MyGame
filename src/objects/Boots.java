@@ -3,7 +3,10 @@ package objects;
 import entity.Entity;
 import main.GamePanel;
 
-public class Boots extends Entity {
+public class
+
+
+Boots extends Entity {
 
 
     public Boots(GamePanel gamePanel) {
