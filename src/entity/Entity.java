@@ -25,13 +25,11 @@ public class Entity {
     public int actionCounter;
     public int dialogCount;
     public boolean collisionOn;
-
+    public BufferedImage image, image1, image2, temp;
+    public String name;
+    public boolean collision;
     GamePanel gamePanel;
     String[] dialogues = new String[20];
-    public BufferedImage image, image1, image2;
-    public String name;
-
-    public boolean collision;
 
 
     public Entity(GamePanel gamePanel) {
@@ -45,16 +43,16 @@ public class Entity {
     public void speak() {
 
         switch (gamePanel.player.direct) {
-            case "up","stay_up":
+            case "up", "stay_up":
                 direct = "down";
                 break;
-            case "down","stay_down":
+            case "down", "stay_down":
                 direct = "up";
                 break;
-            case "left","stay_left":
+            case "left", "stay_left":
                 direct = "right";
                 break;
-            case "right","stay_right":
+            case "right", "stay_right":
                 direct = "left";
                 break;
         }
@@ -64,7 +62,6 @@ public class Entity {
         if (dialogues[dialogCount] == null) {
             dialogCount = 0;
         }
-
 
 
     }
@@ -129,15 +126,15 @@ public class Entity {
 
     public BufferedImage setup(String imagePath) {
         UtilityTool utilityTool = new UtilityTool();
-        BufferedImage image = null;
+        temp = null;
         try {
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath + ".png")));
-            image = utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
+            temp = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath + ".png")));
+            temp = utilityTool.scaleImage(temp, gamePanel.tileSize, gamePanel.tileSize);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return image;
+        return temp;
     }
 
     public void drawing(Graphics2D graphics2D) {

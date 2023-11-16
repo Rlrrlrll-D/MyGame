@@ -294,10 +294,13 @@ public class Player extends Entity {
         }
 
         graphics2D.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
-        graphics2D.setColor(Color.red);
-        graphics2D.drawRect(screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
-        graphics2D.setColor(Color.white);
-        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+//        graphics2D.setColor(Color.red);
+//        graphics2D.drawRect(screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
+//        graphics2D.setColor(Color.white);
+//        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+        Color shadow = new Color(12, 12, 12, 55);
+        graphics2D.setColor(shadow);
+        graphics2D.fillRoundRect(screenX+solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
 
 
     }
