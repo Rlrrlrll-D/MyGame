@@ -35,9 +35,10 @@ public class GamePanel extends JPanel implements Runnable {
     public int gameBehavior;
     public KeyHandler keyHandler = new KeyHandler(this);
     public Entity[] objects = new Entity[20];
-
-    public Entity[] npc = new Entity[10];
     public Player player = new Player(this, keyHandler);
+    public Entity[] npc = new Entity[10];
+    public Entity[] mon = new Entity[20];
+
     TileManager tileManager = new TileManager(this);
     Sound sound = new Sound();
     Sound SFX = new Sound();
@@ -61,6 +62,7 @@ public class GamePanel extends JPanel implements Runnable {
     public void setupGame() {
         assetSetter.setObject();
         assetSetter.setNPC();
+        assetSetter.setMonster();
         keyHandler.musicOn = true;
         gameBehavior = titleBehavior;
         // playMusic(0);
@@ -94,13 +96,21 @@ public class GamePanel extends JPanel implements Runnable {
 
         if (gameBehavior == playBehavior) {
 
+            player.update();
+
             for (Entity entity : npc) {
 
                 if (entity != null) {
                     entity.update();
                 }
             }
-            player.update();
+            for (Entity entity : mon) {
+
+                if (entity != null) {
+                    entity.update();
+                }
+            }
+
         }
         if (gameBehavior == pauseBehavior) {
 
@@ -128,6 +138,12 @@ public class GamePanel extends JPanel implements Runnable {
 
             }
             for (Entity entity : objects) {
+                if (entity != null) {
+                    entityArrayList.add(entity);
+                }
+
+            }
+            for (Entity entity : mon) {
                 if (entity != null) {
                     entityArrayList.add(entity);
                 }

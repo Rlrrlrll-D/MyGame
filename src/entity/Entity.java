@@ -43,16 +43,16 @@ public class Entity {
     public void speak() {
 
         switch (gamePanel.player.direct) {
-            case "up", "stay_up":
+            case "up":
                 direct = "down";
                 break;
-            case "down", "stay_down":
+            case "down":
                 direct = "up";
                 break;
-            case "left", "stay_left":
+            case "left":
                 direct = "right";
                 break;
-            case "right", "stay_right":
+            case "right":
                 direct = "left";
                 break;
         }
@@ -98,7 +98,7 @@ public class Entity {
             }
 
         }
-        spriteImageChange(3);
+        spriteImageChange(5);
 
 
     }

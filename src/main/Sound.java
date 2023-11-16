@@ -14,19 +14,19 @@ public class Sound {
     public Sound() {
 
 
-        sounds[0] = new File("src/sound/epic.wav");
-        sounds[1] = new File("src/sound/coin.wav");
-        sounds[2] = new File("src/sound/unlock.wav");
-        sounds[3] = new File("src/sound/close.wav");
-        sounds[4] = new File("src/sound/grub.wav");
-        sounds[5] = new File("src/sound/win.wav");
-        sounds[6] = new File("src/sound/ouch.wav");
-//        soundURL[0] = getClass().getResource("/sound/epic .wav");
-//        soundURL[1] = getClass().getResource("/sound/coin.wav");
-//        soundURL[2] = getClass().getResource("/sound/unlock.wav");
-//        soundURL[3] = getClass().getResource("/sound/close.wav");
-//        soundURL[4] = getClass().getResource("/sound/grub.wav");
-//        soundURL[5] = getClass().getResource("/sound/win.wav");
+        sounds[0] = new File("src/res/sound/epic.wav");
+        sounds[1] = new File("src/res/sound/coin.wav");
+        sounds[2] = new File("src/res/sound/unlock.wav");
+        sounds[3] = new File("src/res/sound/close.wav");
+        sounds[4] = new File("src/res/sound/grub.wav");
+        sounds[5] = new File("src/res/sound/win.wav");
+        sounds[6] = new File("src/res/sound/ouch.wav");
+//        soundURL[0] = getClass().getResource("/res.sound/epic .wav");
+//        soundURL[1] = getClass().getResource("/res.sound/coin.wav");
+//        soundURL[2] = getClass().getResource("/res.sound/unlock.wav");
+//        soundURL[3] = getClass().getResource("/res.sound/close.wav");
+//        soundURL[4] = getClass().getResource("/res.sound/grub.wav");
+//        soundURL[5] = getClass().getResource("/res.sound/win.wav");
 
 
     }
