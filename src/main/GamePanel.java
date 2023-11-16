@@ -2,12 +2,13 @@ package main;
 
 import entity.Entity;
 import entity.Player;
-import objects.MotherObject;
 import tile.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
     public final int maxScreenCol = 16;
@@ -33,12 +34,14 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public int gameBehavior;
     public KeyHandler keyHandler = new KeyHandler(this);
-    public MotherObject[] motherObject = new MotherObject[20];
+    public Entity[] objects = new Entity[20];
+
     public Entity[] npc = new Entity[10];
     public Player player = new Player(this, keyHandler);
     TileManager tileManager = new TileManager(this);
     Sound sound = new Sound();
     Sound SFX = new Sound();
+    ArrayList<Entity> entityArrayList = new ArrayList<>();
     Thread gameThread;
 
 
@@ -56,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-        //assetSetter.setObject();
+        assetSetter.setObject();
         assetSetter.setNPC();
         keyHandler.musicOn = true;
         gameBehavior = titleBehavior;
@@ -112,24 +115,43 @@ public class GamePanel extends JPanel implements Runnable {
         if (keyHandler.chkDrawTime) {
             drawStart = System.nanoTime();
         }
-        if (gameBehavior == titleBehavior) {
-            ui.drawing(graphics2D);
-        } else {
+        if (gameBehavior != titleBehavior) {
+
             tileManager.drawing(graphics2D);
-            for (MotherObject object : motherObject) {
-                if (object != null) {
-                    object.drawing(graphics2D, this);
-                }
-            }
+
+
+            entityArrayList.add(player);
             for (Entity entity : npc) {
                 if (entity != null) {
-                    entity.drawing(graphics2D);
+                    entityArrayList.add(entity);
                 }
+
+            }
+            for (Entity entity : objects) {
+                if (entity != null) {
+                    entityArrayList.add(entity);
+                }
+
             }
 
-            player.drawing(graphics2D);
-            ui.drawing(graphics2D);
+            entityArrayList.sort(new Comparator<Entity>() {
+                @Override
+                public int compare(Entity entity1, Entity entity2) {
+                    return Integer.compare(entity1.worldY, entity2.worldY);
+                }
+            });
+
+            for (Entity entity : entityArrayList) {
+                entity.drawing(graphics2D);
+            }
+            for (int i = 0; i < entityArrayList.size(); i++) {
+                entityArrayList.remove(i);
+            }
+
+
         }
+
+        ui.drawing(graphics2D);
 
 
         if (keyHandler.chkDrawTime) {

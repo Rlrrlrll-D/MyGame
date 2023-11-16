@@ -1,23 +1,15 @@
 package objects;
 
+import entity.Entity;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.Objects;
+public class Boots extends Entity {
 
-public class Boots extends MotherObject {
-    GamePanel gamePanel;
 
     public Boots(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+        super(gamePanel);
         name = "Boots";
-        try {
+        down1 = setup("/res/objects/boots");
 
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/objects/boots.png")));
-            utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-        } catch (IOException e) {
-            e.getLocalizedMessage();
-        }
     }
 }

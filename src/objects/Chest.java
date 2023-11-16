@@ -1,24 +1,23 @@
 package objects;
 
+import entity.Entity;
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.util.Objects;
-
-public class Chest extends MotherObject {
-    GamePanel gamePanel;
+public class Chest extends Entity {
 
     public Chest(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+        super(gamePanel);
         name = "Chest";
-        try {
+        solidArea.x = 0;
+        solidArea.y = 16;
+        solidArea.width = 48;
+        solidArea.height = 32;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        collision = true;
+        down1 = setup("/res/objects/chest");
 
-            image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/objects/chest.png")));
-            utilityTool.scaleImage(image, gamePanel.tileSize, gamePanel.tileSize);
-        } catch (IOException e) {
-            e.getLocalizedMessage();
-        }
+
     }
 
 }

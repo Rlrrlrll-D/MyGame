@@ -1,7 +1,7 @@
 package main;
 
+import entity.Entity;
 import objects.Heart;
-import objects.MotherObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -39,7 +39,7 @@ public class UI {
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
-        MotherObject heart = new Heart(gamePanel);
+        Entity heart = new Heart(gamePanel);
         heart_e = heart.image;
         heart_h = heart.image1;
         heart_f = heart.image2;

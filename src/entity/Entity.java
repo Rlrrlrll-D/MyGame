@@ -17,7 +17,7 @@ public class Entity {
 
     public BufferedImage shadow, stay1, stay2, stay3, stay_up1, stay_up2, stay_up3,
             stay_left1, stay_left2, stay_left3, stay_right1, stay_right2, stay_right3, up1, up2, down1, down2, left1, left2, right1, right2;
-    public String direct, stayDirect;
+    public String direct = "down", stayDirect;
 
     public int spriteNum = 1, counter = 0;
     public int maxLife;
@@ -25,9 +25,13 @@ public class Entity {
     public int actionCounter;
     public int dialogCount;
     public boolean collisionOn;
-    BufferedImage image;
+
     GamePanel gamePanel;
     String[] dialogues = new String[20];
+    public BufferedImage image, image1, image2;
+    public String name;
+
+    public boolean collision;
 
 
     public Entity(GamePanel gamePanel) {

@@ -1,6 +1,10 @@
 package main;
 
 import entity.NPC_Oldman;
+import objects.Boots;
+import objects.Chest;
+import objects.Door;
+import objects.Key;
 
 public class AssetSetter {
 
@@ -21,35 +25,49 @@ public class AssetSetter {
 //        gamePanel.motherObject[1].worldX = 40 * gamePanel.tileSize;
 //        gamePanel.motherObject[1].worldY = 30 * gamePanel.tileSize;
 //
-//        gamePanel.motherObject[2] = new Key(gamePanel);
-//        gamePanel.motherObject[2].worldX = 10 * gamePanel.tileSize;
-//        gamePanel.motherObject[2].worldY = 11 * gamePanel.tileSize;
+        gamePanel.objects[0] = new Key(gamePanel);
+        gamePanel.objects[0].worldX = 10 * gamePanel.tileSize;
+        gamePanel.objects[0].worldY = 11 * gamePanel.tileSize;
 //
-//        gamePanel.motherObject[3] = new Door(gamePanel);
-//        gamePanel.motherObject[3].worldX = 47 * gamePanel.tileSize;
-//        gamePanel.motherObject[3].worldY = 10 * gamePanel.tileSize;
+        gamePanel.objects[1] = new Door(gamePanel);
+        gamePanel.objects[1].worldX = 47 * gamePanel.tileSize;
+        gamePanel.objects[1].worldY = 10 * gamePanel.tileSize;
+
+        gamePanel.objects[2] = new Door(gamePanel);
+        gamePanel.objects[2].worldX = 47 * gamePanel.tileSize;
+        gamePanel.objects[2].worldY = 21 * gamePanel.tileSize;
+
+        gamePanel.objects[3] = new Door(gamePanel);
+        gamePanel.objects[3].worldX = 47 * gamePanel.tileSize;
+        gamePanel.objects[3].worldY = 47 * gamePanel.tileSize;
 //
-//        gamePanel.motherObject[4] = new Chest(gamePanel);
-//        gamePanel.motherObject[4].worldX = 10 * gamePanel.tileSize;
-//        gamePanel.motherObject[4].worldY = 46 * gamePanel.tileSize;
+        gamePanel.objects[4] = new Chest(gamePanel);
+        gamePanel.objects[4].worldX = 10 * gamePanel.tileSize;
+        gamePanel.objects[4].worldY = 46 * gamePanel.tileSize;
 //
-//        gamePanel.motherObject[5] = new Door(gamePanel);
-//        gamePanel.motherObject[5].worldX = 47 * gamePanel.tileSize;
-//        gamePanel.motherObject[5].worldY = 21 * gamePanel.tileSize;
+
 //
-//        gamePanel.motherObject[6] = new Door(gamePanel);
-//        gamePanel.motherObject[6].worldX = 47 * gamePanel.tileSize;
-//        gamePanel.motherObject[6].worldY = 47 * gamePanel.tileSize;
+
 //
-//        gamePanel.motherObject[7] = new Boots(gamePanel);
-//        gamePanel.motherObject[7].worldX = 49 * gamePanel.tileSize;
-//        gamePanel.motherObject[7].worldY = 48 * gamePanel.tileSize;
+        gamePanel.objects[7] = new Boots(gamePanel);
+        gamePanel.objects[7].worldX = 49 * gamePanel.tileSize;
+        gamePanel.objects[7].worldY = 48 * gamePanel.tileSize;
     }
 
     public void setNPC() {
         gamePanel.npc[0] = new NPC_Oldman(gamePanel);
         gamePanel.npc[0].worldX = gamePanel.tileSize * 15;
-        gamePanel.npc[0].worldY = gamePanel.tileSize * 15;
+        gamePanel.npc[0].worldY = gamePanel.tileSize * 18;
+
+        gamePanel.npc[1] = new NPC_Oldman(gamePanel);
+        gamePanel.npc[1].worldX = gamePanel.tileSize * 20;
+        gamePanel.npc[1].worldY = gamePanel.tileSize * 18;
+
+
+
+
+
+
     }
 
 }

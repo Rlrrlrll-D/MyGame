@@ -8,6 +8,13 @@ public class NPC_Oldman extends Entity {
 
     public NPC_Oldman(GamePanel gamePanel) {
         super(gamePanel);
+        solidArea.x = 0;
+        solidArea.y = 16;
+        solidArea.width = 48;
+        solidArea.height = 32;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+
         direct = "down";
         speed = 1;
         getImg();
