@@ -62,7 +62,6 @@ public class EventHandler {
         gamePanel.gameBehavior = gameBehavior;
         gamePanel.playSFX(6);
         gamePanel.ui.dialogue = "You fall into a pit! :(";
-        //eventRect[col][row].eventDone = true;
         canTouchEvent = false;
         gamePanel.player.life--;
     }

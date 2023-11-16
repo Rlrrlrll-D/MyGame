@@ -144,7 +144,7 @@ public class UI {
             x += gamePanel.tileSize;
         }
         x = gamePanel.tileSize / 2;
-        // gamePanel.player.life = 5;
+
         for (int i = 0; i < gamePanel.player.life; i++) {
             graphics2D.drawImage(heart_h, x, y, null);
             i++;
