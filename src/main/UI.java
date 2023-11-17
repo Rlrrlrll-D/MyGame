@@ -19,7 +19,7 @@ public class UI {
     Graphics2D graphics2D;
     public String msg = "";
     public int counter;
-    Font Purisa, Pixel;
+    Font Purisa, Pixel, Monica;
 
     public boolean finished;
     public String dialogue;
@@ -35,6 +35,9 @@ public class UI {
             inputStream = getClass().getResourceAsStream("/res/fonts/Pixel Regular.otf");
             assert inputStream != null;
             Pixel = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            inputStream = getClass().getResourceAsStream("/res/fonts/x12y16pxMaruMonica.ttf");
+            assert inputStream != null;
+            Monica = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
@@ -136,14 +139,14 @@ public class UI {
 
     public void drawPlayerLife() {
 
-        int x = gamePanel.tileSize / 2;
-        int y = gamePanel.tileSize / 2;
+        int x = gamePanel.tileSize / 4;
+        int y = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.maxLife / 2; i++) {
             graphics2D.drawImage(heart_e, x, y, null);
             x += gamePanel.tileSize;
         }
-        x = gamePanel.tileSize / 2;
+        x = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.life; i++) {
             graphics2D.drawImage(heart_h, x, y, null);
@@ -159,40 +162,40 @@ public class UI {
         if (titleScreenBehavior == 0) {
 
             graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 37F));
-            String text = "MY HERO ADVENTURE";
-            int x = getX_Text(text);
+            String text = "My hero adventure";
+            int x = getX_Text(text.toUpperCase());
             int y = (int) (gamePanel.tileSize * 2.5);
             graphics2D.setColor(new Color(0, 0, 7));
-            graphics2D.drawString(text, x + 4, y + 4);
+            graphics2D.drawString(text.toUpperCase(), x + 4, y + 4);
             graphics2D.setColor(new Color(229, 152, 9));
-            graphics2D.drawString(text, x, y);
+            graphics2D.drawString(text.toUpperCase(), x, y);
 
             x = gamePanel.screenWidth / 2;
             y += (int) (gamePanel.tileSize * 1.5);
             graphics2D.drawImage(gamePanel.player.down1, x - gamePanel.tileSize, y, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
             graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
 
-            text = "NEW GAME";
+            text = "New game";
             x = getX_Text(text);
             y += gamePanel.tileSize * 4;
-            graphics2D.drawString(text, x, y);
+            graphics2D.drawString(text.toUpperCase(), x, y);
             if (commandNum == 0) {
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
             }
 
-            text = "LOAD GAME";
+            text = "Load game";
             x = getX_Text(text);
             y += gamePanel.tileSize;
-            graphics2D.drawString(text, x, y);
+            graphics2D.drawString(text.toUpperCase(), x, y);
             if (commandNum == 1) {
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
             }
 
 
-            text = "QUIT";
+            text = "Quit";
             x = getX_Text(text);
             y += gamePanel.tileSize;
-            graphics2D.drawString(text, x, y);
+            graphics2D.drawString(text.toUpperCase(), x, y);
             if (commandNum == 2) {
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
             }
@@ -200,40 +203,40 @@ public class UI {
         } else if (titleScreenBehavior == 1) {
             graphics2D.setColor(new Color(229, 152, 9));
             graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 30F));
-            String text = "SELECT YOUR CLASS:";
-            int x = getX_Text(text);
+            String text = "Select your class:";
+            int x = getX_Text(text.toUpperCase());
             int y = (gamePanel.tileSize * 4);
-            graphics2D.drawString(text, x, y);
+            graphics2D.drawString(text.toUpperCase(), x, y);
 
             graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
 
-            text = "FIGHTER";
+            text = "Fighter";
             x = getX_Text(text);
             y += (gamePanel.tileSize * 2);
-            graphics2D.drawString(text, x, y);
+            graphics2D.drawString(text.toUpperCase(), x, y);
             if (commandNum == 0) {
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
             }
 
-            text = "THIEF";
+            text = "Thief";
             x = getX_Text(text);
             y += (gamePanel.tileSize);
-            graphics2D.drawString(text, x, y);
+            graphics2D.drawString(text.toUpperCase(), x, y);
             if (commandNum == 1) {
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
             }
 
-            text = "SORCERER";
+            text = "Sorcerer";
             x = getX_Text(text);
             y += (gamePanel.tileSize);
-            graphics2D.drawString(text, x, y);
+            graphics2D.drawString(text.toUpperCase(), x, y);
             if (commandNum == 2) {
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
             }
-            text = "BACK";
+            text = "Back";
             x = getX_Text(text);
             y += (gamePanel.tileSize * 3);
-            graphics2D.drawString(text, x, y);
+            graphics2D.drawString(text.toUpperCase(), x, y);
             if (commandNum == 3) {
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
 
@@ -246,30 +249,30 @@ public class UI {
     public void drawPauseScreenYellow() {
         graphics2D.setColor(new Color(229, 152, 9));
         graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 50F));
-        String txt = "PAUSED!";
+        String txt = "Paused!";
         int x = getX_Text(txt);
         int y = gamePanel.screenHeight / 2;
-        graphics2D.drawString(txt, x, y);
+        graphics2D.drawString(txt.toUpperCase(), x, y);
 
     }
 
     public void drawPauseScreenShadow() {
-        graphics2D.setColor(new Color(12, 6, 2, 171));
+        graphics2D.setColor(new Color(12, 6, 2, 100));
         graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 50F));
-        String txt = "PAUSED!";
+        String txt = "Paused!";
         int x = getX_Text(txt) + 2;
         int y = gamePanel.screenHeight / 2 + 2;
-        graphics2D.drawString(txt, x, y);
+        graphics2D.drawString(txt.toUpperCase(), x, y);
 
     }
 
     public void drawDialogScreen() {
         int x = gamePanel.tileSize * 2;
-        int y = gamePanel.tileSize;
+        int y = (int) (gamePanel.tileSize*1.5);
         int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
         int height = gamePanel.tileSize * 4;
         drawSubWindow(x, y, width, height);
-        graphics2D.setFont(Purisa.deriveFont(Font.PLAIN, 18F));
+        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
         for (String line : dialogue.split("\n")) {
             drawDialogText(line, x, y);
             y += 30;

@@ -138,7 +138,7 @@ public class Player extends Entity {
                     direct = "stay_right";
                     break;
             }
-            spriteImageChange(10);
+            spriteImageChange(15);
         }
         gamePanel.eventHandler.checkEvent();
     }

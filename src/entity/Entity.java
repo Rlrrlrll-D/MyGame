@@ -98,7 +98,7 @@ public class Entity {
             }
 
         }
-        spriteImageChange(20);
+        spriteImageChange(17);
 
 
     }
