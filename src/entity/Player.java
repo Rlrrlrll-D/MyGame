@@ -19,6 +19,7 @@ public class Player extends Entity {
         super(gamePanel);
 
         this.keyHandler = keyHandler;
+        name = "Player";
         screenX = gamePanel.dfl_X;
         screenY = gamePanel.dfl_Y;
         solidArea = new Rectangle();
@@ -97,6 +98,7 @@ public class Player extends Entity {
             int npcIndex = gamePanel.checker.checkEntity(this, gamePanel.npc);
             interactNPC(npcIndex);
 
+
             if (!collisionOn) {
 
                 switch (direct) {
@@ -162,7 +164,8 @@ public class Player extends Entity {
 
 
     public void pickUp(int counter) {
-        if (counter != 999) {
+
+//        if (counter != 999) {
 //            String objectName = gamePanel.motherObject[counter].name;
 //            switch (objectName) {
 //                case "Key":
@@ -202,8 +205,9 @@ public class Player extends Entity {
 //                    gamePanel.motherObject[counter] = null;
 //                    break;
 //            }
+//        }
 
-        }
+
     }
 
 
@@ -300,7 +304,7 @@ public class Player extends Entity {
 //        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
         Color shadow = new Color(12, 12, 12, 55);
         graphics2D.setColor(shadow);
-        graphics2D.fillRoundRect(screenX+solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
+        graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
 
 
     }

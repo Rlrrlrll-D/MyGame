@@ -37,6 +37,8 @@ public class NPC_Oldman extends Entity {
         stay_right3 = setup("stay_right3");*/
         up1 = setup("/res/npc/oldman_up1");
         up2 = setup("/res/npc/oldman_up2");
+        //up3 = setup("/res/npc/oldman_up2");
+
         down1 = setup("/res/npc/oldman_down1");
         down2 = setup("/res/npc/oldman_down2");
         left1 = setup("/res/npc/oldman_left1");

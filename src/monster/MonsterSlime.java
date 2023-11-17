@@ -8,7 +8,7 @@ import java.util.Random;
 public class MonsterSlime extends Entity {
     public MonsterSlime(GamePanel gamePanel) {
         super(gamePanel);
-
+        direct = "up";
         name = "Slime";
         speed = 1;
         maxLife = 4;
@@ -22,6 +22,7 @@ public class MonsterSlime extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         getImg();
+
 
     }
 
@@ -40,7 +41,7 @@ public class MonsterSlime extends Entity {
     public void setAction() {
         actionCounter++;
 
-        if (actionCounter == 300) {
+        if (actionCounter == 120) {
 
             Random random = new Random();
             int i = random.nextInt(100) + 1;
@@ -59,4 +60,6 @@ public class MonsterSlime extends Entity {
             actionCounter = 0;
         }
     }
+
+    
 }

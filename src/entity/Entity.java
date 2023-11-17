@@ -17,7 +17,7 @@ public class Entity {
 
     public BufferedImage shadow, stay1, stay2, stay3, stay_up1, stay_up2, stay_up3,
             stay_left1, stay_left2, stay_left3, stay_right1, stay_right2, stay_right3, up1, up2, down1, down2, left1, left2, right1, right2;
-    public String direct = "down", stayDirect;
+    public String direct, stayDirect;
 
     public int spriteNum = 1, counter = 0;
     public int maxLife;
@@ -98,7 +98,7 @@ public class Entity {
             }
 
         }
-        spriteImageChange(5);
+        spriteImageChange(20);
 
 
     }
@@ -109,14 +109,17 @@ public class Entity {
             if (spriteNum == 1) {
                 spriteNum = 2;
             } else if (spriteNum == 2) {
-                switch (direct) {
-                    case "left", "right":
-                        spriteNum = 1;
-                        break;
-                    default:
-                        spriteNum = 3;
+                if (!Objects.equals(this.name, "Player")) {
+                    spriteNum = 1;
+                } else {
+                    switch (direct) {
+                        case "left", "right":
+                            spriteNum = 1;
+                            break;
+                        default:
+                            spriteNum = 3;
+                    }
                 }
-
             } else if (spriteNum == 3) {
                 spriteNum = 1;
             }
