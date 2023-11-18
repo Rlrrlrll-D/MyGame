@@ -174,9 +174,10 @@ public class GamePanel extends JPanel implements Runnable {
 
             long drawEnd = System.nanoTime();
             long passTime = drawEnd - drawStart;
-            graphics2D.setFont(ui.Pixel.deriveFont(Font.PLAIN, 10F));
+            graphics2D.setFont(ui.Monica.deriveFont(Font.BOLD, 17F));
             graphics2D.setColor(Color.black);
-            graphics2D.drawString("Draw Time: " + passTime, 20, 20);
+            String str = "Draw Time: " + passTime;
+            graphics2D.drawString(str.toUpperCase(), screenWidth - (int) graphics2D.getFontMetrics().getStringBounds(str + tileSize / 2, graphics2D).getWidth(), (int) (tileSize / 2 * 1.5));
         }
         graphics2D.dispose();
 
