@@ -9,9 +9,9 @@ public class Main {
 
         JFrame window = new JFrame();
 
+        window.setLocationRelativeTo(null);
         window.setTitle("My Hero Adventure");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLocationRelativeTo(null);
 
 
         GamePanel gamePanel = new GamePanel();

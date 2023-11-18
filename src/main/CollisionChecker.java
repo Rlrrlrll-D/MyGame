@@ -62,8 +62,8 @@ public class CollisionChecker {
                 }
                 break;
 
-//            default:
-//                throw new IllegalStateException("Unexpected value: " + entity.direct);
+            default:
+                throw new IllegalStateException("Unexpected value: " + entity.direct);
         }
     }
 
@@ -83,31 +83,21 @@ public class CollisionChecker {
                 switch (entity.direct) {
                     case "up":
                         entity.solidArea.y -= entity.speed;
-                        if (entity.solidArea.intersects(gamePanel.objects[i].solidArea)) {
-                            index = getIndex(entity, player, i, index);
-                        }
                         break;
-
                     case "down":
                         entity.solidArea.y += entity.speed;
-                        if (entity.solidArea.intersects(gamePanel.objects[i].solidArea)) {
-                            index = getIndex(entity, player, i, index);
-                        }
                         break;
                     case "left":
                         entity.solidArea.x -= entity.speed;
-                        if (entity.solidArea.intersects(gamePanel.objects[i].solidArea)) {
-                            index = getIndex(entity, player, i, index);
-                        }
                         break;
                     case "right":
                         entity.solidArea.x += entity.speed;
-                        if (entity.solidArea.intersects(gamePanel.objects[i].solidArea)) {
-                            index = getIndex(entity, player, i, index);
-                        }
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + entity.direct);
+                }
+                if (entity.solidArea.intersects(gamePanel.objects[i].solidArea)) {
+                    index = getIndex(entity, player, i, index);
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
@@ -148,36 +138,24 @@ public class CollisionChecker {
                 switch (entity.direct) {
                     case "up":
                         entity.solidArea.y -= entity.speed;
-                        if (entity.solidArea.intersects(target[i].solidArea)) {
-                            entity.collisionOn = true;
-                            index = i;
-                        }
                         break;
-
                     case "down":
                         entity.solidArea.y += entity.speed;
-                        if (entity.solidArea.intersects(target[i].solidArea)) {
-                            entity.collisionOn = true;
-                            index = i;
-                        }
                         break;
                     case "left":
                         entity.solidArea.x -= entity.speed;
-                        if (entity.solidArea.intersects(target[i].solidArea)) {
-                            entity.collisionOn = true;
-                            index = i;
-                        }
-
                         break;
                     case "right":
                         entity.solidArea.x += entity.speed;
-                        if (entity.solidArea.intersects(target[i].solidArea)) {
-                            entity.collisionOn = true;
-                            index = i;
-                        }
                         break;
-//                    default:
-//                        throw new IllegalStateException("Unexpected value: " + entity.direct);
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + entity.direct);
+                }
+                if (entity.solidArea.intersects(target[i].solidArea)) {
+                    if (target[i] != entity) {
+                        entity.collisionOn = true;
+                        index = i;
+                    }
                 }
                 entity.solidArea.x = entity.solidAreaDefaultX;
                 entity.solidArea.y = entity.solidAreaDefaultY;
@@ -187,10 +165,11 @@ public class CollisionChecker {
             }
         }
         return index;
-
     }
 
-    public void checkPlayer(Entity entity) {
+    public boolean checkPlayer(Entity entity) {
+
+        boolean touchPlayer = false;
 
         entity.solidArea.x = entity.worldX + entity.solidArea.x;
         entity.solidArea.y = entity.worldY + entity.solidArea.y;
@@ -201,42 +180,30 @@ public class CollisionChecker {
         switch (entity.direct) {
             case "up":
                 entity.solidArea.y -= entity.speed;
-                if (entity.solidArea.intersects(gamePanel.player.solidArea)) {
-                    entity.collisionOn = true;
-
-                }
                 break;
-
             case "down":
                 entity.solidArea.y += entity.speed;
-                if (entity.solidArea.intersects(gamePanel.player.solidArea)) {
-                    entity.collisionOn = true;
-
-                }
                 break;
             case "left":
                 entity.solidArea.x -= entity.speed;
-                if (entity.solidArea.intersects(gamePanel.player.solidArea)) {
-                    entity.collisionOn = true;
-
-                }
-
                 break;
             case "right":
                 entity.solidArea.x += entity.speed;
-                if (entity.solidArea.intersects(gamePanel.player.solidArea)) {
-                    entity.collisionOn = true;
-
-                }
                 break;
-//                    default:
-//                        throw new IllegalStateException("Unexpected value: " + entity.direct);
+            default:
+                throw new IllegalStateException("Unexpected value: " + entity.direct);
+        }
+        if (entity.solidArea.intersects(gamePanel.player.solidArea)) {
+            entity.collisionOn = true;
+            touchPlayer = true;
         }
         entity.solidArea.x = entity.solidAreaDefaultX;
         entity.solidArea.y = entity.solidAreaDefaultY;
         assert gamePanel.player != null;
         gamePanel.player.solidArea.x = gamePanel.player.solidAreaDefaultX;
         gamePanel.player.solidArea.y = gamePanel.player.solidAreaDefaultY;
+
+        return touchPlayer;
     }
 
 }

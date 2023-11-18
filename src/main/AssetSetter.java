@@ -53,20 +53,20 @@ public class AssetSetter {
 
     public void setNPC() {
         gamePanel.npc[0] = new NPC_Oldman(gamePanel);
-        gamePanel.npc[0].worldX = gamePanel.tileSize * 15;
-        gamePanel.npc[0].worldY = gamePanel.tileSize * 18;
+        gamePanel.npc[0].worldX = gamePanel.tileSize * 11;
+        gamePanel.npc[0].worldY = gamePanel.tileSize * 15;
 
 
     }
 
     public void setMonster() {
         gamePanel.mon[0] = new MonsterSlime(gamePanel);
-        gamePanel.mon[0].worldX = gamePanel.tileSize * 18;
+        gamePanel.mon[0].worldX = gamePanel.tileSize * 11;
         gamePanel.mon[0].worldY = gamePanel.tileSize * 18;
 
         gamePanel.mon[1] = new MonsterSlime(gamePanel);
-        gamePanel.mon[1].worldX = gamePanel.tileSize * 25;
-        gamePanel.mon[1].worldY = gamePanel.tileSize * 18;
+        gamePanel.mon[1].worldX = gamePanel.tileSize * 11;
+        gamePanel.mon[1].worldY = gamePanel.tileSize * 20;
 
 
     }

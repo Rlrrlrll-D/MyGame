@@ -7,7 +7,7 @@ public class EventHandler {
     EventRect[][] eventRect;
 
     int previousEventX, previousEventY;
-    boolean canTouchEvent = true;
+    boolean canTouchEvent;
 
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -48,7 +48,7 @@ public class EventHandler {
             }
             if (hit(14, 44, "any")) {
 
-                teleport(43, 43,gamePanel.dialogBehavior);
+                teleport(3, 42, gamePanel.dialogBehavior);
             }
             if (hit(12, 43, "any")) {
                 healingPool(gamePanel.dialogBehavior);

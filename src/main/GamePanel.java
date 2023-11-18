@@ -150,12 +150,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             }
 
-            entityArrayList.sort(new Comparator<Entity>() {
-                @Override
-                public int compare(Entity entity1, Entity entity2) {
-                    return Integer.compare(entity1.worldY, entity2.worldY);
-                }
-            });
+            entityArrayList.sort(Comparator.comparingInt(entity -> entity.worldY));
 
             for (Entity entity : entityArrayList) {
                 entity.drawing(graphics2D);
@@ -163,12 +158,9 @@ public class GamePanel extends JPanel implements Runnable {
             for (int i = 0; i < entityArrayList.size(); i++) {
                 entityArrayList.remove(i);
             }
-
-
         }
 
         ui.drawing(graphics2D);
-
 
         if (keyHandler.chkDrawTime) {
 
@@ -180,10 +172,7 @@ public class GamePanel extends JPanel implements Runnable {
             graphics2D.drawString(str.toUpperCase(), screenWidth - (int) graphics2D.getFontMetrics().getStringBounds(str + tileSize / 2, graphics2D).getWidth(), (int) (tileSize / 2 * 1.5));
         }
         graphics2D.dispose();
-
-
     }
-
 
     public void playMusic(int count) {
         sound.setFile(count);
@@ -191,7 +180,6 @@ public class GamePanel extends JPanel implements Runnable {
         sound.loop();
 
     }
-
     public void stopMusic() {
         sound.stop();
     }

@@ -25,9 +25,12 @@ public class Entity {
     public int actionCounter;
     public int dialogCount;
     public boolean collisionOn;
+    public boolean invincible;
+    public int invinCounter;
     public BufferedImage image, image1, image2, temp;
     public String name;
     public boolean collision;
+    public int type; //0 - player, 1=npc, 2=monster
     GamePanel gamePanel;
     String[] dialogues = new String[20];
 
@@ -71,36 +74,38 @@ public class Entity {
         collisionOn = false;
         gamePanel.checker.checkTile(this);
         gamePanel.checker.checkObject(this, false);
-        gamePanel.checker.checkPlayer(this);
-
+        gamePanel.checker.checkEntity(this, gamePanel.npc);
+        gamePanel.checker.checkEntity(this, gamePanel.mon);
+        //gamePanel.checker.checkPlayer(this);
+        boolean touchPlayer = gamePanel.checker.checkPlayer(this);
+        if (this.type == 2 && touchPlayer) {
+            if (!gamePanel.player.invincible) {
+                gamePanel.player.life--;
+                gamePanel.player.invincible = true;
+            }
+        }
         if (!collisionOn) {
 
             switch (direct) {
+
                 case "up":
                     worldY -= speed;
-
                     break;
                 case "down":
                     worldY += speed;
-
                     break;
                 case "left":
                     worldX -= speed;
-
                     break;
                 case "right":
                     worldX += speed;
-
                     break;
-
                 default:
                     throw new IllegalStateException("Unexpected value: " + direct);
             }
 
         }
         spriteImageChange(17);
-
-
     }
 
     protected void spriteImageChange(int delay) {
@@ -109,9 +114,7 @@ public class Entity {
             if (spriteNum == 1) {
                 spriteNum = 2;
             } else if (spriteNum == 2) {
-                if (!Objects.equals(this.name, "Player")) {
-                    spriteNum = 1;
-                } else {
+                if (Objects.equals(this.name, "Player")) {
                     switch (direct) {
                         case "left", "right":
                             spriteNum = 1;
@@ -119,6 +122,9 @@ public class Entity {
                         default:
                             spriteNum = 3;
                     }
+
+                } else {
+                    spriteNum = 1;
                 }
             } else if (spriteNum == 3) {
                 spriteNum = 1;

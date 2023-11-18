@@ -73,6 +73,7 @@ public class TileManager {
     }
 
     public void drawing(Graphics2D graphics2D) {
+
         for (int worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
             for (int worldCol = 0; worldCol < gamePanel.maxWorldCol; worldCol++) {
                 int tNum = mapTileNum[worldCol][worldRow];
@@ -85,12 +86,14 @@ public class TileManager {
                         wrdY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
                         wrdY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
                     graphics2D.drawImage(tiles[tNum].image, scrX, scrY, null);
-//                    graphics2D.setColor(Color.blue);
-//                    graphics2D.drawRect( scrX, scrY, gamePanel.tileSize, gamePanel.tileSize);
+
                 }
+                graphics2D.setColor(new Color(150, 150, 150, 150));
+                //graphics2D.drawRect( scrX, scrY, gamePanel.tileSize, gamePanel.tileSize);
+                graphics2D.drawString(worldCol + "," + worldRow, scrX + gamePanel.tileSize / 8, scrY + gamePanel.tileSize / 2);
+
+
             }
-
         }
-
     }
 }

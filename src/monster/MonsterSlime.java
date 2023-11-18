@@ -8,6 +8,8 @@ import java.util.Random;
 public class MonsterSlime extends Entity {
     public MonsterSlime(GamePanel gamePanel) {
         super(gamePanel);
+
+        type = 2;
         direct = "up";
         name = "Slime";
         speed = 1;
@@ -60,6 +62,4 @@ public class MonsterSlime extends Entity {
             actionCounter = 0;
         }
     }
-
-    
 }

@@ -35,8 +35,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultVal() {
-        worldX = gamePanel.dfl_X + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenWidth / 2;
-        worldY = gamePanel.dfl_Y + gamePanel.tileSize * 24 - gamePanel.tileSize / 2 - gamePanel.screenHeight / 2;
+        worldX = gamePanel.tileSize;
+        worldY = gamePanel.tileSize * 39;
         speed = 4;
         maxLife = 6;
         life = maxLife;
@@ -98,6 +98,8 @@ public class Player extends Entity {
             int npcIndex = gamePanel.checker.checkEntity(this, gamePanel.npc);
             interactNPC(npcIndex);
 
+            int monIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
+            touchMonster(monIndex);
 
             if (!collisionOn) {
 
@@ -140,7 +142,26 @@ public class Player extends Entity {
             }
             spriteImageChange(15);
         }
+        if (invincible) {
+            invinCounter++;
+            if (invinCounter > 60) {
+                invincible = false;
+                invinCounter = 0;
+            }
+        }
         gamePanel.eventHandler.checkEvent();
+
+    }
+
+    public void touchMonster(int i) {
+        if (i != 999) {
+            if (!invincible) {
+                life--;
+                invincible = true;
+
+            }
+
+        }
     }
 
     private void interactNPC(int i) {
@@ -165,47 +186,49 @@ public class Player extends Entity {
 
     public void pickUp(int counter) {
 
-//        if (counter != 999) {
-//            String objectName = gamePanel.motherObject[counter].name;
-//            switch (objectName) {
-//                case "Key":
-//                    gamePanel.playSFX(1);
-//                    keys++;
-//                    gamePanel.motherObject[counter] = null;
-//                    gamePanel.ui.showMsg("You got a key!");
-//                    break;
-//                case "Door":
-//
-//                    if (keys > 0) {
-//                        gamePanel.playSFX(2);
-//                        gamePanel.motherObject[counter] = null;
-//                        keys--;
-//                        gamePanel.ui.showMsg("You opened the door!");
-//                        System.out.println(objectName + " open, Key: " + keys);
-//                    } else {
-//                        sfxDelay(20);
-//
-//                        gamePanel.ui.showMsg("You need a key!");
-//                        System.out.println(objectName + " close, Key: " + keys);
-//                        System.out.println(temp);
-//                    }
-//                    break;
-//
-//                case "Boots":
-//                    gamePanel.playSFX(4);
-//                    speed += 1;
-//                    gamePanel.motherObject[counter] = null;
-//                    gamePanel.ui.showMsg("Speed up!");
-//                    break;
-//
-//                case "Chest":
-//                    gamePanel.ui.finished = true;
-//                    gamePanel.stopMusic();
-//                    gamePanel.playSFX(5);
-//                    gamePanel.motherObject[counter] = null;
-//                    break;
-//            }
-//        }
+        if (counter != 999) {
+/*
+            String objectName = gamePanel.motherObject[counter].name;
+            switch (objectName) {
+                case "Key":
+                    gamePanel.playSFX(1);
+                    keys++;
+                    gamePanel.motherObject[counter] = null;
+                    gamePanel.ui.showMsg("You got a key!");
+                    break;
+                case "Door":
+
+                    if (keys > 0) {
+                        gamePanel.playSFX(2);
+                        gamePanel.motherObject[counter] = null;
+                        keys--;
+                        gamePanel.ui.showMsg("You opened the door!");
+                        System.out.println(objectName + " open, Key: " + keys);
+                    } else {
+                        sfxDelay(20);
+
+                        gamePanel.ui.showMsg("You need a key!");
+                        System.out.println(objectName + " close, Key: " + keys);
+                        System.out.println(temp);
+                    }
+                    break;
+
+                case "Boots":
+                    gamePanel.playSFX(4);
+                    speed += 1;
+                    gamePanel.motherObject[counter] = null;
+                    gamePanel.ui.showMsg("Speed up!");
+                    break;
+
+                case "Chest":
+                    gamePanel.ui.finished = true;
+                    gamePanel.stopMusic();
+                    gamePanel.playSFX(5);
+                    gamePanel.motherObject[counter] = null;
+                    break;
+            }
+*/
+        }
 
 
     }
@@ -293,11 +316,13 @@ public class Player extends Entity {
                     image = stay_right3;
                 }
                 break;
-
-
         }
-
-        graphics2D.drawImage(image, screenX, screenY, gamePanel.tileSize, gamePanel.tileSize, null);
+        if (invincible) {
+            graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f)));
+//            blinkPlayer(6, graphics2D);
+        }
+        graphics2D.drawImage(image, screenX, screenY, null);
+        graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
 //        graphics2D.setColor(Color.red);
 //        graphics2D.drawRect(screenX, screenY, gamePanel.tileSize, gamePanel.tileSize);
 //        graphics2D.setColor(Color.white);
@@ -305,7 +330,22 @@ public class Player extends Entity {
         Color shadow = new Color(12, 12, 12, 55);
         graphics2D.setColor(shadow);
         graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
+        graphics2D.setFont(new Font("Arial", Font.PLAIN, 26));
 
+        graphics2D.drawString("Invincible:" + invinCounter, 10, 400);
 
     }
+//    private void blinkPlayer(int delay, Graphics2D graphics2D) {
+//        counter++;
+//        if (counter < delay) {
+//            graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f)));
+//            graphics2D.drawImage(image, screenX, screenY, null);
+//            counter = 0;
+//            System.out.println(counter);
+//
+//        }
+//
+//
+//    }
+
 }
