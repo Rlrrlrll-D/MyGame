@@ -155,9 +155,7 @@ public class GamePanel extends JPanel implements Runnable {
             for (Entity entity : entityArrayList) {
                 entity.drawing(graphics2D);
             }
-            for (int i = 0; i < entityArrayList.size(); i++) {
-                entityArrayList.remove(i);
-            }
+            entityArrayList.clear();
         }
 
         ui.drawing(graphics2D);
