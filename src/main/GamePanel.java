@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
-    public final int maxScreenCol = 16;
-    public final int maxScreenRow = 14;
-    public final int maxWorldCol = 50;
-    public final int maxWorldRow = 50;
-    public final int pauseBehavior = 2;
-    public final int titleBehavior = 0;
-    public final int playBehavior = 1;
-    public final int dialogBehavior = 3;
+    public static final int maxScreenCol = 16;
+    public static final int maxScreenRow = 14;
+    public static final int maxWorldCol = 50;
+    public static final int maxWorldRow = 50;
+    public static final int pauseBehavior = 2;
+    public static final int titleBehavior = 0;
+    public static final int playBehavior = 1;
+    public static final int dialogBehavior = 3;
     //  screen settings
     final int originalTileSize = 16;
     final int scale = 3;

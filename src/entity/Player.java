@@ -169,7 +169,7 @@ public class Player extends Entity {
 
         if (i != 999) {
             if (gamePanel.keyHandler.enterPressed) {
-                gamePanel.gameBehavior = gamePanel.dialogBehavior;
+                gamePanel.gameBehavior = GamePanel.dialogBehavior;
                 gamePanel.npc[i].speak();
             }
         }
@@ -322,15 +322,16 @@ public class Player extends Entity {
             //graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f)));
             blinkPlayer(graphics2D);
         }
-        graphics2D.drawImage(image, screenX, screenY, null);
 
+        Color shadow = new Color(12, 12, 12, 55);
+        graphics2D.setColor(shadow);
+        graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
+        graphics2D.drawImage(image, screenX, screenY, null);
         graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
 
 //        graphics2D.setColor(Color.white);
 //        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-        Color shadow = new Color(12, 12, 12, 55);
-        graphics2D.setColor(shadow);
-        graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
+
         graphics2D.setFont(new Font("Arial", Font.PLAIN, 26));
         graphics2D.drawString("Invincible:" + invinCounter, 10, 400);
 

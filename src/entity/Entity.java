@@ -111,7 +111,7 @@ public class Entity {
     protected void blinkPlayer(Graphics2D graphics2D) {
 
         if (invinCounter >= 0 && invinCounter < 6 || invinCounter >= 12 && invinCounter < 18 || invinCounter >= 24 && invinCounter < 30 || invinCounter >= 36 && invinCounter < 42 || invinCounter >= 48 && invinCounter < 54)
-            graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f)));
+            graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f)));
 
 
     }
