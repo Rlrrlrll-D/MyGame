@@ -108,13 +108,21 @@ public class Entity {
         spriteImageChange(17);
     }
 
+    protected void blinkPlayer(Graphics2D graphics2D) {
+
+        if (invinCounter >= 0 && invinCounter < 6 || invinCounter >= 12 && invinCounter < 18 || invinCounter >= 24 && invinCounter < 30 || invinCounter >= 36 && invinCounter < 42 || invinCounter >= 48 && invinCounter < 54)
+            graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f)));
+
+
+    }
+
     protected void spriteImageChange(int delay) {
         counter++;
         if (counter > delay) {
             if (spriteNum == 1) {
                 spriteNum = 2;
             } else if (spriteNum == 2) {
-                if (Objects.equals(this.name, "Player")) {
+                if (this instanceof Player) {
                     switch (direct) {
                         case "left", "right":
                             spriteNum = 1;

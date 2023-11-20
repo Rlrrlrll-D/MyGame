@@ -43,7 +43,7 @@ public class GamePanel extends JPanel implements Runnable {
     Sound sound = new Sound();
     Sound SFX = new Sound();
     ArrayList<Entity> entityArrayList = new ArrayList<>();
-    Thread gameThread;
+    public Thread gameThread;
 
 
     //public boolean musicOn;
