@@ -15,9 +15,10 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int maxScreenRow = 14;
     public static final int maxWorldCol = 50;
     public static final int maxWorldRow = 50;
-    public static final int pauseBehavior = 2;
+
     public static final int titleBehavior = 0;
     public static final int playBehavior = 1;
+    public static final int pauseBehavior = 2;
     public static final int dialogBehavior = 3;
     //  screen settings
     final int originalTileSize = 16;
@@ -34,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public int gameBehavior;
     public KeyHandler keyHandler = new KeyHandler(this);
+
     public Entity[] objects = new Entity[20];
     public Player player = new Player(this, keyHandler);
     public Entity[] npc = new Entity[10];
@@ -178,6 +180,7 @@ public class GamePanel extends JPanel implements Runnable {
         sound.loop();
 
     }
+
     public void stopMusic() {
         sound.stop();
     }

@@ -11,7 +11,7 @@ public class CollisionChecker {
 
     }
 
-    public void checkTile(Entity entity) {
+    public void checkTile(Entity entity) throws IllegalStateException {
 
         int entityLeftWorldX = entity.worldX + entity.solidArea.x;
         int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
@@ -27,7 +27,7 @@ public class CollisionChecker {
 
         switch (entity.direct) {
 
-            case "up":
+            case "up", "stay_up":
                 entityTopRow = (entityTopWorldY - entity.speed) / gamePanel.tileSize;
                 tileNum1 = gamePanel.tileManager.mapTileNum[entityLeftCol][entityTopRow];
                 tileNum2 = gamePanel.tileManager.mapTileNum[entityRightCol][entityTopRow];
@@ -35,7 +35,7 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 }
                 break;
-            case "down":
+            case "down", "stay":
                 entityBottomRow = (entityBottomWorldY + entity.speed) / gamePanel.tileSize;
                 tileNum1 = gamePanel.tileManager.mapTileNum[entityLeftCol][entityBottomRow];
                 tileNum2 = gamePanel.tileManager.mapTileNum[entityRightCol][entityBottomRow];
@@ -43,7 +43,7 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 }
                 break;
-            case "left":
+            case "left", "stay_left":
 
                 entityLeftCol = (entityLeftWorldX - entity.speed) / gamePanel.tileSize;
                 tileNum1 = gamePanel.tileManager.mapTileNum[entityLeftCol][entityTopRow];
@@ -52,7 +52,7 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 }
                 break;
-            case "right":
+            case "right", "stay_right":
 
                 entityRightCol = (entityRightWorldX + entity.speed) / gamePanel.tileSize;
                 tileNum1 = gamePanel.tileManager.mapTileNum[entityRightCol][entityTopRow];
@@ -61,9 +61,11 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 }
                 break;
+//            case "stay", "stay_up", "stay_left", "stay_right":
+//                break;
 
             default:
-                throw new IllegalStateException("Unexpected value: " + entity.direct);
+                throw new IllegalStateException("Unexpected value: " + entity.direct + " " + gamePanel.keyHandler.enterPressed);
         }
     }
 
@@ -136,18 +138,20 @@ public class CollisionChecker {
                 target[i].solidArea.y = target[i].worldY + target[i].solidArea.y;
 
                 switch (entity.direct) {
-                    case "up":
+                    case "up", "stay_up":
                         entity.solidArea.y -= entity.speed;
                         break;
-                    case "down":
+                    case "down", "stay":
                         entity.solidArea.y += entity.speed;
                         break;
-                    case "left":
+                    case "left", "stay_left":
                         entity.solidArea.x -= entity.speed;
                         break;
-                    case "right":
+                    case "right", "stay_right":
                         entity.solidArea.x += entity.speed;
                         break;
+//                    case "stay", "stay_up", "stay_left", "stay_right":
+//                        break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + entity.direct);
                 }

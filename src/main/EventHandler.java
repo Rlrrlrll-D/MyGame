@@ -11,10 +11,10 @@ public class EventHandler {
 
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        eventRect = new EventRect[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
+        eventRect = new EventRect[GamePanel.maxWorldCol][GamePanel.maxWorldRow];
 
-        for (int col = 0; col < gamePanel.maxWorldCol; col++) {
-            for (int row = 0; row < gamePanel.maxWorldRow; row++) {
+        for (int col = 0; col < GamePanel.maxWorldCol; col++) {
+            for (int row = 0; row < GamePanel.maxWorldRow; row++) {
 
                 eventRect[col][row] = new EventRect();
                 eventRect[col][row].x = 23;
@@ -31,9 +31,9 @@ public class EventHandler {
     }
 
     public void checkEvent() {
-        int xDistatce = Math.abs(gamePanel.player.worldX - previousEventX);
-        int yDistatce = Math.abs(gamePanel.player.worldY - previousEventY);
-        int distance = Math.max(xDistatce, yDistatce);
+        int xDistance = Math.abs(gamePanel.player.worldX - previousEventX);
+        int yDistance = Math.abs(gamePanel.player.worldY - previousEventY);
+        int distance = Math.max(xDistance, yDistance);
         if (distance > gamePanel.tileSize) {
             canTouchEvent = true;
         }
@@ -41,37 +41,38 @@ public class EventHandler {
         if (canTouchEvent) {
 
             if (hit(7, 44, "down")) {
-                damagePit(gamePanel.dialogBehavior);
+                damagePit();
             }
             if (hit(9, 44, "down")) {
-                damagePit(gamePanel.dialogBehavior);
+                damagePit();
             }
             if (hit(14, 44, "any")) {
 
-                teleport(3, 42, gamePanel.dialogBehavior);
+                teleport();
             }
             if (hit(12, 43, "any")) {
-                healingPool(gamePanel.dialogBehavior);
+                healingPool(GamePanel.dialogBehavior);
             }
         }
     }
 
-    private void damagePit(int gameBehavior) {
+    private void damagePit() {
 
 
-        gamePanel.gameBehavior = gameBehavior;
+        gamePanel.gameBehavior = GamePanel.dialogBehavior;
         gamePanel.playSFX(6);
         gamePanel.ui.dialogue = "You fall into a pit! :(";
         canTouchEvent = false;
         gamePanel.player.life--;
     }
 
-    private void teleport(int col, int row, int gameBehavior) {
+    private void teleport() {
 
-        gamePanel.gameBehavior = gameBehavior;
+        gamePanel.gameBehavior = GamePanel.dialogBehavior;
         gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
-        gamePanel.player.worldX = col * gamePanel.tileSize;
-        gamePanel.player.worldY = row * gamePanel.tileSize;
+        gamePanel.player.worldX = 3 * gamePanel.tileSize;
+        gamePanel.player.worldY = 42 * gamePanel.tileSize;
+        gamePanel.player.direct = "stay";
 
 
     }

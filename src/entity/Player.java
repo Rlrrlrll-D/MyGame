@@ -72,76 +72,51 @@ public class Player extends Entity {
 
     public void update() {
 
-        if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed) {
+        if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.enterPressed) {
 
             if (keyHandler.upPressed) {
                 direct = "up";
-
             }
             if (keyHandler.downPressed) {
                 direct = "down";
-
             }
             if (keyHandler.leftPressed) {
                 direct = "left";
-
             }
             if (keyHandler.rightPressed) {
                 direct = "right";
-
             }
-            collisionOn = false;
-            gamePanel.checker.checkTile(this);
-            int objectIndex = gamePanel.checker.checkObject(this, true);
 
+            collisionOn = false;
+            System.out.println(keyHandler.upPressed + " " + keyHandler.downPressed + " " + keyHandler.rightPressed + " " + keyHandler.leftPressed + " " + keyHandler.enterPressed);
+
+            gamePanel.checker.checkTile(this);
+
+            int objectIndex = gamePanel.checker.checkObject(this, true);
             pickUp(objectIndex);
+
             int npcIndex = gamePanel.checker.checkEntity(this, gamePanel.npc);
             interactNPC(npcIndex);
 
             int monIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
             touchMonster(monIndex);
 
-            if (!collisionOn) {
+            gamePanel.eventHandler.checkEvent();
 
-                switch (direct) {
-                    case "up":
-                        worldY -= speed;
-                        stayDirect = "up";
-                        break;
-                    case "down":
-                        worldY += speed;
-                        stayDirect = "down";
-                        break;
-                    case "left":
-                        worldX -= speed;
-                        stayDirect = "left";
-                        break;
-                    case "right":
-                        worldX += speed;
-                        stayDirect = "right";
-                        break;
-                }
+            if (!collisionOn && !keyHandler.enterPressed) {
+
+                checkDirect();
             }
+
+            gamePanel.keyHandler.enterPressed = false;
+
             spriteImageChange(3);
 
         } else {
-
-            switch (stayDirect) {
-                case "begin", "down":
-                    direct = "stay";
-                    break;
-                case "up":
-                    direct = "stay_up";
-                    break;
-                case "left":
-                    direct = "stay_left";
-                    break;
-                case "right":
-                    direct = "stay_right";
-                    break;
-            }
+            checkStayDirect();
             spriteImageChange(15);
         }
+
         if (invincible) {
             invinCounter++;
             if (invinCounter > 60) {
@@ -149,19 +124,53 @@ public class Player extends Entity {
                 invinCounter = 0;
             }
         }
-        gamePanel.eventHandler.checkEvent();
-
     }
+
+    private void checkDirect() {
+        switch (direct) {
+            case "up":
+                worldY -= speed;
+                stayDirect = "up";
+                break;
+            case "down":
+                worldY += speed;
+                stayDirect = "down";
+                break;
+            case "left":
+                worldX -= speed;
+                stayDirect = "left";
+                break;
+            case "right":
+                worldX += speed;
+                stayDirect = "right";
+                break;
+        }
+    }
+
+    private void checkStayDirect() {
+        switch (stayDirect) {
+            case "begin", "down":
+                direct = "stay";
+                break;
+            case "up":
+                direct = "stay_up";
+                break;
+            case "left":
+                direct = "stay_left";
+                break;
+            case "right":
+                direct = "stay_right";
+                break;
+        }
+    }
+
 
     public void touchMonster(int i) {
         if (i != 999) {
             if (!invincible) {
                 life--;
                 invincible = true;
-
-
             }
-
         }
     }
 
@@ -332,8 +341,8 @@ public class Player extends Entity {
 //        graphics2D.setColor(Color.white);
 //        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
 
-        graphics2D.setFont(new Font("Arial", Font.PLAIN, 26));
-        graphics2D.drawString("Invincible:" + invinCounter, 10, 400);
+//        graphics2D.setFont(new Font("Arial", Font.PLAIN, 26));
+//        graphics2D.drawString("Invincible:" + invinCounter, 10, 400);
 
     }
 

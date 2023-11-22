@@ -46,16 +46,16 @@ public class Entity {
     public void speak() {
 
         switch (gamePanel.player.direct) {
-            case "up":
+            case "up", "stay_up":
                 direct = "down";
                 break;
-            case "down":
+            case "down", "stay":
                 direct = "up";
                 break;
-            case "left":
+            case "left", "stay_left":
                 direct = "right";
                 break;
-            case "right":
+            case "right", "stay_right":
                 direct = "left";
                 break;
         }
@@ -110,7 +110,11 @@ public class Entity {
 
     protected void blinkPlayer(Graphics2D graphics2D) {
 
-        if (invinCounter >= 0 && invinCounter < 6 || invinCounter >= 12 && invinCounter < 18 || invinCounter >= 24 && invinCounter < 30 || invinCounter >= 36 && invinCounter < 42 || invinCounter >= 48 && invinCounter < 54)
+        if (invinCounter >= 0 && invinCounter < 6
+                || invinCounter >= 12 && invinCounter < 18
+                || invinCounter >= 24 && invinCounter < 30
+                || invinCounter >= 36 && invinCounter < 42
+                || invinCounter >= 48 && invinCounter < 54)
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f)));
 
 
@@ -130,7 +134,6 @@ public class Entity {
                         default:
                             spriteNum = 3;
                     }
-
                 } else {
                     spriteNum = 1;
                 }

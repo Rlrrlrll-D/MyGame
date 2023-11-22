@@ -42,9 +42,7 @@ public class MonsterSlime extends Entity {
 
     public void setAction() {
         actionCounter++;
-
         if (actionCounter == 120) {
-
             Random random = new Random();
             int i = random.nextInt(100) + 1;
             if (i <= 25) {
