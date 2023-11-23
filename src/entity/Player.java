@@ -280,7 +280,6 @@ public class Player extends Entity {
 
     public void drawing(Graphics2D graphics2D) {
 
-
         switch (direct) {
             case "up":
                 if (isAttack) {

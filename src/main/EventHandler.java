@@ -55,27 +55,6 @@ public class EventHandler {
         }
     }
 
-    private void damagePit() {
-
-
-        gamePanel.gameBehavior = GamePanel.dialogBehavior;
-        gamePanel.playSFX(6);
-        gamePanel.ui.dialogue = "You fall into a pit! :(";
-        canTouchEvent = false;
-        gamePanel.player.life--;
-    }
-
-    private void teleport() {
-
-        gamePanel.gameBehavior = GamePanel.dialogBehavior;
-        gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
-        gamePanel.player.worldX = 3 * gamePanel.tileSize;
-        gamePanel.player.worldY = 42 * gamePanel.tileSize;
-        gamePanel.player.direct = "stay";
-
-
-    }
-
     public boolean hit(int eventCol, int eventRow, String reqDirection) {
 
         boolean hit = false;
@@ -102,13 +81,32 @@ public class EventHandler {
 
     }
 
+    private void damagePit() {
+
+        gamePanel.gameBehavior = GamePanel.dialogBehavior;
+        gamePanel.playSFX(6);
+        gamePanel.ui.dialogue = "You fall into a pit! :(";
+        canTouchEvent = false;
+        gamePanel.player.life--;
+    }
+
     public void healingPool(int gameBehavior) {
 
         if (gamePanel.keyHandler.enterPressed && gamePanel.player.life != gamePanel.player.maxLife) {
+            gamePanel.player.isAttack = false;
             gamePanel.gameBehavior = gameBehavior;
             gamePanel.ui.dialogue = "You drink the water. \nYour life has been recovered! :)";
-
             gamePanel.player.life = gamePanel.player.maxLife;
         }
+    }
+
+    private void teleport() {
+
+        gamePanel.gameBehavior = GamePanel.dialogBehavior;
+        gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
+        gamePanel.player.worldX = 3 * gamePanel.tileSize;
+        gamePanel.player.worldY = 42 * gamePanel.tileSize;
+        gamePanel.player.direct = "stay";
+
     }
 }
