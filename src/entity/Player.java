@@ -456,7 +456,6 @@ public class Player extends Entity {
                 throw new IllegalStateException("Unexpected value: " + direct);
         }
         if (invincible) {
-            //graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f)));
             blinkPlayer(graphics2D);
         }
 
