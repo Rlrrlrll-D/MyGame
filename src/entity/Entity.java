@@ -61,14 +61,11 @@ public class Entity {
                 direct = "left";
                 break;
         }
-
         gamePanel.ui.dialogue = dialogues[dialogCount];
         dialogCount++;
         if (dialogues[dialogCount] == null) {
             dialogCount = 0;
         }
-
-
     }
 
     public void update() {

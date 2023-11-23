@@ -29,6 +29,7 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
+
         setDefaultVal();
         getPlayerImg();
         getPlayerAttackImage();
@@ -129,7 +130,10 @@ public class Player extends Entity {
             checkStayDirect();
             spriteImageChange(15);
         }
+        invincible();
+    }
 
+    private void invincible() {
         if (invincible) {
             invinCounter++;
             if (invinCounter > 60) {
