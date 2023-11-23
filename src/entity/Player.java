@@ -361,7 +361,7 @@ public class Player extends Entity {
                         image = attackDown1;
                     }
                     if (spriteNum == 2) {
-                        image = attackDown1;
+                        image = attackDown2;
                     }
                     if (spriteNum == 3) {
                         image = attackDown2;
@@ -386,7 +386,7 @@ public class Player extends Entity {
                         image = attackUp1;
                     }
                     if (spriteNum == 2) {
-                        image = attackUp1;
+                        image = attackUp2;
                     }
                     if (spriteNum == 3) {
                         image = attackUp2;
@@ -410,7 +410,7 @@ public class Player extends Entity {
                         image = attackLeft1;
                     }
                     if (spriteNum == 2) {
-                        image = attackLeft1;
+                        image = attackLeft2;
                     }
                     if (spriteNum == 3) {
                         image = attackLeft2;
@@ -434,7 +434,7 @@ public class Player extends Entity {
                         image = attackRight1;
                     }
                     if (spriteNum == 2) {
-                        image = attackRight1;
+                        image = attackRight2;
                     }
                     if (spriteNum == 3) {
                         image = attackRight2;

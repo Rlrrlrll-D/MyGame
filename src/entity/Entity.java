@@ -78,7 +78,6 @@ public class Entity {
         gamePanel.checker.checkObject(this, false);
         gamePanel.checker.checkEntity(this, gamePanel.npc);
         gamePanel.checker.checkEntity(this, gamePanel.mon);
-        //gamePanel.checker.checkPlayer(this);
         boolean touchPlayer = gamePanel.checker.checkPlayer(this);
         if (this.type == 2 && touchPlayer) {
             if (!gamePanel.player.invincible) {
