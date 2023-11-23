@@ -12,7 +12,7 @@ Boots extends Entity {
     public Boots(GamePanel gamePanel) {
         super(gamePanel);
         name = "Boots";
-        down1 = setup("/res/objects/boots");
+        down1 = setup("/res/objects/boots", gamePanel.tileSize, gamePanel.tileSize);
 
     }
 }

@@ -10,7 +10,7 @@ public class Key extends Entity {
         super(gamePanel);
 
         name = "Key";
-        down1 = setup("/res/objects/key");
+        down1 = setup("/res/objects/key", gamePanel.tileSize, gamePanel.tileSize);
         collision=true;
         solidArea.x = 0;
         solidArea.y = 16;

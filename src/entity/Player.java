@@ -31,6 +31,7 @@ public class Player extends Entity {
         solidArea.height = 32;
         setDefaultVal();
         getPlayerImg();
+        getPlayerAttackImage();
 
     }
 
@@ -47,32 +48,44 @@ public class Player extends Entity {
 
     public void getPlayerImg() {
 
-        stay1 = setup("/res/player/stay1");
-        stay2 = setup("/res/player/stay2");
-        stay3 = setup("/res/player/stay3");
-        stay_up1 = setup("/res/player/stay_up1");
-        stay_up2 = setup("/res/player/stay_up2");
-        stay_up3 = setup("/res/player/stay_up3");
-        stay_left1 = setup("/res/player/stay_left1");
-        stay_left2 = setup("/res/player/stay_left2");
-        stay_left3 = setup("/res/player/stay_left3");
-        stay_right1 = setup("/res/player/stay_right1");
-        stay_right2 = setup("/res/player/stay_right2");
-        stay_right3 = setup("/res/player/stay_right3");
-        up1 = setup("/res/player/me_up1");
-        up2 = setup("/res/player/me_up2");
-        down1 = setup("/res/player/me_down1");
-        down2 = setup("/res/player/me_down2");
-        left1 = setup("/res/player/me_left1");
-        left2 = setup("/res/player/me_left2");
-        right1 = setup("/res/player/me_right1");
-        right2 = setup("/res/player/me_right2");
+        stay1 = setup("/res/player/stay1", gamePanel.tileSize, gamePanel.tileSize);
+        stay2 = setup("/res/player/stay2", gamePanel.tileSize, gamePanel.tileSize);
+        stay3 = setup("/res/player/stay3", gamePanel.tileSize, gamePanel.tileSize);
+        stay_up1 = setup("/res/player/stay_up1", gamePanel.tileSize, gamePanel.tileSize);
+        stay_up2 = setup("/res/player/stay_up2", gamePanel.tileSize, gamePanel.tileSize);
+        stay_up3 = setup("/res/player/stay_up3", gamePanel.tileSize, gamePanel.tileSize);
+        stay_left1 = setup("/res/player/stay_left1", gamePanel.tileSize, gamePanel.tileSize);
+        stay_left2 = setup("/res/player/stay_left2", gamePanel.tileSize, gamePanel.tileSize);
+        stay_left3 = setup("/res/player/stay_left3", gamePanel.tileSize, gamePanel.tileSize);
+        stay_right1 = setup("/res/player/stay_right1", gamePanel.tileSize, gamePanel.tileSize);
+        stay_right2 = setup("/res/player/stay_right2", gamePanel.tileSize, gamePanel.tileSize);
+        stay_right3 = setup("/res/player/stay_right3", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("/res/player/me_up1", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/res/player/me_up2", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/res/player/me_down1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/res/player/me_down2", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/res/player/me_left1", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/res/player/me_left2", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/res/player/me_right1", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/res/player/me_right2", gamePanel.tileSize, gamePanel.tileSize);
+    }
+
+    public void getPlayerAttackImage() {
+        attackUp1 = setup("/res/player/attack_up1", gamePanel.tileSize, gamePanel.tileSize * 2);
+        attackUp2 = setup("/res/player/attack_up2", gamePanel.tileSize, gamePanel.tileSize * 2);
+        attackDown1 = setup("/res/player/attack_down1", gamePanel.tileSize, gamePanel.tileSize * 2);
+        attackDown2 = setup("/res/player/attack_down2", gamePanel.tileSize, gamePanel.tileSize * 2);
+        attackLeft1 = setup("/res/player/attack_left1", gamePanel.tileSize * 2, gamePanel.tileSize);
+        attackLeft2 = setup("/res/player/attack_left2", gamePanel.tileSize * 2, gamePanel.tileSize);
+        attackRight1 = setup("/res/player/attack_right1", gamePanel.tileSize * 2, gamePanel.tileSize);
+        attackRight2 = setup("/res/player/attack_right2", gamePanel.tileSize * 2, gamePanel.tileSize);
     }
 
 
     public void update() {
-
-        if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.enterPressed) {
+        if (isAttack) {
+            attack();
+        } else if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.enterPressed) {
 
             if (keyHandler.upPressed) {
                 direct = "up";
@@ -126,6 +139,24 @@ public class Player extends Entity {
         }
     }
 
+    public void attack() {
+        counter++;
+        if (counter <= 5) {
+            spriteNum = 1;
+        }
+        if (counter > 5 && counter <= 15) {
+            spriteNum = 2;
+        }
+        if (counter > 5 && counter <= 25) {
+            spriteNum = 3;
+        }
+        if (counter > 25) {
+            spriteNum = 1;
+            counter = 0;
+            isAttack = false;
+        }
+    }
+
     private void checkDirect() {
         switch (direct) {
             case "up":
@@ -175,13 +206,16 @@ public class Player extends Entity {
     }
 
     private void interactNPC(int i) {
-
-        if (i != 999) {
-            if (gamePanel.keyHandler.enterPressed) {
+        if (gamePanel.keyHandler.enterPressed) {
+            if (i != 999) {
                 gamePanel.gameBehavior = GamePanel.dialogBehavior;
                 gamePanel.npc[i].speak();
+
+            } else {
+                isAttack = true;
             }
         }
+
     }
 
 
@@ -249,83 +283,178 @@ public class Player extends Entity {
 
         switch (direct) {
             case "up":
-                if (spriteNum == 1) {
-                    image = up1;
+                if (isAttack) {
+                    if (spriteNum == 1) {
+                        image = attackUp1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackUp2;
+                    }
                 }
-                if (spriteNum == 2) {
-                    image = up2;
+                if (!isAttack) {
+                    if (spriteNum == 1) {
+                        image = up1;
+                    }
+                    if (spriteNum == 2) {
+                        image = up2;
+                    }
                 }
+
                 break;
             case "down":
-                if (spriteNum == 1) {
-                    image = down1;
+                if (isAttack) {
+                    if (spriteNum == 1) {
+                        image = attackDown1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackDown2;
+                    }
                 }
-                if (spriteNum == 2) {
-                    image = down2;
+                if (!isAttack) {
+                    if (spriteNum == 1) {
+                        image = down1;
+                    }
+                    if (spriteNum == 2) {
+                        image = down2;
+                    }
                 }
                 break;
             case "left":
-                if (spriteNum == 1) {
-                    image = left1;
+                if (isAttack) {
+                    if (spriteNum == 1) {
+                        image = attackLeft1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackLeft2;
+                    }
                 }
-                if (spriteNum == 2) {
-                    image = left2;
+                if (!isAttack) {
+                    if (spriteNum == 1) {
+                        image = left1;
+                    }
+                    if (spriteNum == 2) {
+                        image = left2;
+                    }
                 }
                 break;
             case "right":
-                if (spriteNum == 1) {
-                    image = right1;
+                if (isAttack) {
+                    if (spriteNum == 1) {
+                        image = attackRight1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackRight2;
+                    }
                 }
-                if (spriteNum == 2) {
-                    image = right2;
+                if (!isAttack) {
+                    if (spriteNum == 1) {
+                        image = right1;
+                    }
+                    if (spriteNum == 2) {
+                        image = right2;
+                    }
                 }
                 break;
 
             case "stay":
-                if (spriteNum == 1) {
-                    image = stay1;
+                if (isAttack) {
+                    if (spriteNum == 1) {
+                        image = attackDown1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackDown1;
+                    }
+                    if (spriteNum == 3) {
+                        image = attackDown2;
+                    }
                 }
-                if (spriteNum == 2) {
-                    image = stay2;
-                }
-                if (spriteNum == 3) {
-                    image = stay3;
+                if (!isAttack) {
+                    if (spriteNum == 1) {
+                        image = stay1;
+                    }
+                    if (spriteNum == 2) {
+                        image = stay2;
+                    }
+                    if (spriteNum == 3) {
+                        image = stay3;
+                    }
                 }
                 break;
 
             case "stay_up":
-                if (spriteNum == 1) {
-                    image = stay_up1;
+                if (isAttack) {
+                    if (spriteNum == 1) {
+                        image = attackUp1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackUp1;
+                    }
+                    if (spriteNum == 3) {
+                        image = attackUp2;
+                    }
                 }
-                if (spriteNum == 2) {
-                    image = stay_up2;
-                }
-                if (spriteNum == 3) {
-                    image = stay_up3;
+                if (!isAttack) {
+                    if (spriteNum == 1) {
+                        image = stay_up1;
+                    }
+                    if (spriteNum == 2) {
+                        image = stay_up2;
+                    }
+                    if (spriteNum == 3) {
+                        image = stay_up3;
+                    }
                 }
                 break;
             case "stay_left":
-                if (spriteNum == 1) {
-                    image = stay_left1;
+                if (isAttack) {
+                    if (spriteNum == 1) {
+                        image = attackLeft1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackLeft1;
+                    }
+                    if (spriteNum == 3) {
+                        image = attackLeft2;
+                    }
                 }
-                if (spriteNum == 2) {
-                    image = stay_left2;
-                }
-                if (spriteNum == 3) {
-                    image = stay_left3;
+                if (!isAttack) {
+                    if (spriteNum == 1) {
+                        image = stay_left1;
+                    }
+                    if (spriteNum == 2) {
+                        image = stay_left2;
+                    }
+                    if (spriteNum == 3) {
+                        image = stay_left3;
+                    }
                 }
                 break;
             case "stay_right":
-                if (spriteNum == 1) {
-                    image = stay_right1;
+                if (isAttack) {
+                    if (spriteNum == 1) {
+                        image = attackRight1;
+                    }
+                    if (spriteNum == 2) {
+                        image = attackRight1;
+                    }
+                    if (spriteNum == 3) {
+                        image = attackRight2;
+                    }
                 }
-                if (spriteNum == 2) {
-                    image = stay_right2;
-                }
-                if (spriteNum == 3) {
-                    image = stay_right3;
+                if (!isAttack) {
+                    if (spriteNum == 1) {
+                        image = stay_right1;
+                    }
+                    if (spriteNum == 2) {
+                        image = stay_right2;
+                    }
+                    if (spriteNum == 3) {
+                        image = stay_right3;
+                    }
                 }
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + direct);
         }
         if (invincible) {
             //graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f)));

@@ -26,8 +26,10 @@ public class Entity {
     public int dialogCount;
     public boolean collisionOn;
     public boolean invincible;
+    public boolean isAttack;
     public int invinCounter;
     public BufferedImage image, image1, image2, temp;
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String name;
     public boolean collision;
     public int type; //0 - player, 1=npc, 2=monster
@@ -144,12 +146,12 @@ public class Entity {
         }
     }
 
-    public BufferedImage setup(String imagePath) {
+    public BufferedImage setup(String imagePath, int width, int height) {
         UtilityTool utilityTool = new UtilityTool();
         temp = null;
         try {
             temp = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath + ".png")));
-            temp = utilityTool.scaleImage(temp, gamePanel.tileSize, gamePanel.tileSize);
+            temp = utilityTool.scaleImage(temp, width, height);
 
         } catch (IOException e) {
             e.printStackTrace();

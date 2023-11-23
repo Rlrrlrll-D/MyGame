@@ -15,7 +15,7 @@ public class Chest extends Entity {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         collision = true;
-        down1 = setup("/res/objects/chest");
+        down1 = setup("/res/objects/chest", gamePanel.tileSize, gamePanel.tileSize);
 
 
     }

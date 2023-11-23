@@ -47,7 +47,6 @@ public class EventHandler {
                 damagePit();
             }
             if (hit(14, 44, "any")) {
-
                 teleport();
             }
             if (hit(12, 43, "any")) {

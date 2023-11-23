@@ -6,8 +6,11 @@ import main.GamePanel;
 import java.util.Random;
 
 public class MonsterSlime extends Entity {
+
+    GamePanel gamePanel;
     public MonsterSlime(GamePanel gamePanel) {
         super(gamePanel);
+        this.gamePanel = gamePanel;
 
         type = 2;
         direct = "up";
@@ -29,14 +32,14 @@ public class MonsterSlime extends Entity {
     }
 
     public void getImg() {
-        up1 = setup("/res/monster/slime-down1");
-        up2 = setup("/res/monster/slime-down2");
-        down1 = setup("/res/monster/slime-down1");
-        down2 = setup("/res/monster/slime-down2");
-        left1 = setup("/res/monster/slime-down1");
-        left2 = setup("/res/monster/slime-down2");
-        right1 = setup("/res/monster/slime-down1");
-        right2 = setup("/res/monster/slime-down2");
+        up1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
 
     }
 

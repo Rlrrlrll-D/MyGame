@@ -35,16 +35,16 @@ public class NPC_Oldman extends Entity {
         stay_right1 = setup("stay_right1");
         stay_right2 = setup("stay_right2");
         stay_right3 = setup("stay_right3");*/
-        up1 = setup("/res/npc/oldman_up1");
-        up2 = setup("/res/npc/oldman_up2");
+        up1 = setup("/res/npc/oldman_up1", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/res/npc/oldman_up2", gamePanel.tileSize, gamePanel.tileSize);
         //up3 = setup("/res/npc/oldman_up2");
 
-        down1 = setup("/res/npc/oldman_down1");
-        down2 = setup("/res/npc/oldman_down2");
-        left1 = setup("/res/npc/oldman_left1");
-        left2 = setup("/res/npc/oldman_left2");
-        right1 = setup("/res/npc/oldman_right1");
-        right2 = setup("/res/npc/oldman_right2");
+        down1 = setup("/res/npc/oldman_down1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/res/npc/oldman_down2", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/res/npc/oldman_left1", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/res/npc/oldman_left2", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/res/npc/oldman_right1", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/res/npc/oldman_right2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public void setDialog() {
