@@ -11,6 +11,7 @@ import java.util.Objects;
 
 public class Entity {
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
+    public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public int worldX, worldY;
     public int speed;
@@ -104,16 +105,27 @@ public class Entity {
 
         }
         spriteImageChange(17);
+        invincible(40);
     }
 
-    protected void blinkPlayer(Graphics2D graphics2D) {
+    protected void invincible(int delay) {
+        if (invincible) {
+            invinCounter++;
+            if (invinCounter > delay) {
+                invincible = false;
+                invinCounter = 0;
+            }
+        }
+    }
+
+    protected void blinkEntity(Graphics2D graphics2D, float i) {
 
         if (invinCounter >= 0 && invinCounter < 6
                 || invinCounter >= 12 && invinCounter < 18
                 || invinCounter >= 24 && invinCounter < 30
                 || invinCounter >= 36 && invinCounter < 42
                 || invinCounter >= 48 && invinCounter < 54)
-            graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.05f)));
+            graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, i)));
 
 
     }
@@ -244,10 +256,14 @@ public class Entity {
                 default:
                     throw new IllegalStateException("Unexpected value: " + direct);
             }
+            if (invincible) {
+                blinkEntity(graphics2D, 0.03f);
+            }
             Color shadow = new Color(12, 12, 12, 55);
             graphics2D.setColor(shadow);
             graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
             graphics2D.drawImage(image, scrX, scrY, gamePanel.tileSize, gamePanel.tileSize, null);
+            graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }
     }
 }

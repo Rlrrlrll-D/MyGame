@@ -29,6 +29,8 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
+        attackArea.width = 36;
+        attackArea.height = 36;
 
         setDefaultVal();
         getPlayerImg();
@@ -102,7 +104,6 @@ public class Player extends Entity {
             }
 
             collisionOn = false;
-            System.out.println(keyHandler.upPressed + " " + keyHandler.downPressed + " " + keyHandler.rightPressed + " " + keyHandler.leftPressed + " " + keyHandler.enterPressed);
 
             gamePanel.checker.checkTile(this);
 
@@ -118,43 +119,59 @@ public class Player extends Entity {
             gamePanel.eventHandler.checkEvent();
 
             if (!collisionOn && !keyHandler.enterPressed) {
-
                 checkDirect();
             }
 
             gamePanel.keyHandler.enterPressed = false;
 
-            spriteImageChange(3);
+            spriteImageChange(5);
 
         } else {
             checkStayDirect();
             spriteImageChange(15);
         }
-        invincible();
+        invincible(60);
     }
 
-    private void invincible() {
-        if (invincible) {
-            invinCounter++;
-            if (invinCounter > 60) {
-                invincible = false;
-                invinCounter = 0;
-            }
-        }
-    }
 
     public void attack() {
         counter++;
-        if (counter <= 5) {
+        if (counter <= 3) {
             spriteNum = 1;
         }
-        if (counter > 5 && counter <= 15) {
+        if (counter > 3 && counter <= 6) {
             spriteNum = 2;
         }
-        if (counter > 5 && counter <= 25) {
+        if (counter > 6 && counter <= 12) {
             spriteNum = 3;
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int solidAreaWidth = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+
+            switch (direct) {
+                case "up", "stay_up":
+                    worldY -= attackArea.height;
+                    break;
+                case "down", "stay":
+                    worldY += attackArea.height;
+                    break;
+                case "left", "stay_left":
+                    worldX -= attackArea.width;
+                case "right", "stay_right":
+                    worldX += attackArea.width;
+            }
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+
+            int monsterIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
+            damageMonster(monsterIndex);
+            worldX = currentWorldX;
+            worldY = currentWorldY;
+            solidArea.width = solidAreaWidth;
+            solidArea.height = solidAreaHeight;
         }
-        if (counter > 25) {
+        if (counter > 12) {
             spriteNum = 1;
             counter = 0;
             isAttack = false;
@@ -205,6 +222,19 @@ public class Player extends Entity {
             if (!invincible) {
                 life--;
                 invincible = true;
+            }
+        }
+    }
+
+    public void damageMonster(int i) {
+        if (i != 999) {
+            if (!gamePanel.mon[i].invincible) {
+                gamePanel.mon[i].life--;
+                gamePanel.mon[i].invincible = true;
+
+                if (gamePanel.mon[i].life <= 0) {
+                    gamePanel.mon[i] = null;
+                }
             }
         }
     }
@@ -283,10 +313,13 @@ public class Player extends Entity {
 
 
     public void drawing(Graphics2D graphics2D) {
+        int tempScreenX = screenX;
+        int tempScreenY = screenY;
 
         switch (direct) {
             case "up":
                 if (isAttack) {
+                    tempScreenY = screenY - gamePanel.tileSize;
                     if (spriteNum == 1) {
                         image = attackUp1;
                     }
@@ -324,6 +357,7 @@ public class Player extends Entity {
                 break;
             case "left":
                 if (isAttack) {
+                    tempScreenX = screenX - gamePanel.tileSize;
                     if (spriteNum == 1) {
                         image = attackLeft1;
                     }
@@ -386,6 +420,7 @@ public class Player extends Entity {
 
             case "stay_up":
                 if (isAttack) {
+                    tempScreenY = screenY - gamePanel.tileSize;
                     if (spriteNum == 1) {
                         image = attackUp1;
                     }
@@ -410,6 +445,7 @@ public class Player extends Entity {
                 break;
             case "stay_left":
                 if (isAttack) {
+                    tempScreenX = screenX - gamePanel.tileSize;
                     if (spriteNum == 1) {
                         image = attackLeft1;
                     }
@@ -460,13 +496,13 @@ public class Player extends Entity {
                 throw new IllegalStateException("Unexpected value: " + direct);
         }
         if (invincible) {
-            blinkPlayer(graphics2D);
+            blinkEntity(graphics2D, 0.01f);
         }
 
         Color shadow = new Color(12, 12, 12, 55);
         graphics2D.setColor(shadow);
         graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
-        graphics2D.drawImage(image, screenX, screenY, null);
+        graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
         graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
 
 //        graphics2D.setColor(Color.white);
