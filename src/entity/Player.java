@@ -236,16 +236,17 @@ public class Player extends Entity {
     }
 
     public void damageMonster(int i) {
+        counter++;
         if (i != 999) {
             if (!gamePanel.mon[i].invincible) {
                 gamePanel.mon[i].life--;
                 gamePanel.mon[i].invincible = true;
-
                 if (gamePanel.mon[i].life <= 0) {
                     gamePanel.mon[i] = null;
                 }
-            }
 
+
+            }
         }
     }
 

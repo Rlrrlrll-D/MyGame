@@ -80,7 +80,6 @@ public class Entity {
         if (this.type == 2 && touchPlayer) {
             if (!gamePanel.player.invincible) {
                 gamePanel.player.life--;
-
                 gamePanel.player.invincible = true;
             }
         }
