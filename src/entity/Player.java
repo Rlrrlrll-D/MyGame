@@ -150,22 +150,25 @@ public class Player extends Entity {
             int solidAreaHeight = solidArea.height;
 
             switch (direct) {
-                case "up", "stay_up":
+                case "stay_up":
                     worldY -= attackArea.height;
                     break;
-                case "down", "stay":
-                    worldY += attackArea.height;
+                case "stay":
+                    worldY += gamePanel.tileSize;
                     break;
-                case "left", "stay_left":
+                case "stay_left":
                     worldX -= attackArea.width;
-                case "right", "stay_right":
-                    worldX += attackArea.width;
+                    break;
+                case "stay_right":
+                    worldX += gamePanel.tileSize;
+                    break;
             }
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
 
             int monsterIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
             damageMonster(monsterIndex);
+
             worldX = currentWorldX;
             worldY = currentWorldY;
             solidArea.width = solidAreaWidth;
@@ -174,8 +177,10 @@ public class Player extends Entity {
         if (counter > 12) {
             spriteNum = 1;
             counter = 0;
+
             isAttack = false;
         }
+
     }
 
     private void checkDirect() {
@@ -196,6 +201,8 @@ public class Player extends Entity {
                 worldX += speed;
                 stayDirect = "right";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + direct);
         }
     }
 
@@ -213,6 +220,8 @@ public class Player extends Entity {
             case "right":
                 direct = "stay_right";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + stayDirect);
         }
     }
 
@@ -236,6 +245,7 @@ public class Player extends Entity {
                     gamePanel.mon[i] = null;
                 }
             }
+
         }
     }
 
@@ -504,6 +514,27 @@ public class Player extends Entity {
         graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
         graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
         graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
+
+        // AttackArea
+        tempScreenX = screenX + solidArea.x;
+        tempScreenY = screenY + solidArea.y;
+        switch (direct) {
+            case "up", "stay_up":
+                tempScreenY = screenY - attackArea.height;
+                break;
+            case "down", "stay":
+                tempScreenY = screenY + gamePanel.tileSize;
+                break;
+            case "left", "stay_left":
+                tempScreenX = screenX - attackArea.width;
+                break;
+            case "right", "stay_right":
+                tempScreenX = screenX + gamePanel.tileSize;
+                break;
+        }
+        graphics2D.setColor(Color.red);
+        graphics2D.setStroke(new BasicStroke(1));
+        graphics2D.drawRect(tempScreenX, tempScreenY, attackArea.width, attackArea.height);
 
 //        graphics2D.setColor(Color.white);
 //        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);

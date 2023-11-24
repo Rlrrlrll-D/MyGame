@@ -80,6 +80,7 @@ public class Entity {
         if (this.type == 2 && touchPlayer) {
             if (!gamePanel.player.invincible) {
                 gamePanel.player.life--;
+
                 gamePanel.player.invincible = true;
             }
         }
@@ -259,9 +260,9 @@ public class Entity {
             if (invincible) {
                 blinkEntity(graphics2D, 0.03f);
             }
-            Color shadow = new Color(12, 12, 12, 55);
-            graphics2D.setColor(shadow);
-            graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
+//            Color shadow = new Color(12, 12, 12, 55);
+//            graphics2D.setColor(shadow);
+//            graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
             graphics2D.drawImage(image, scrX, scrY, gamePanel.tileSize, gamePanel.tileSize, null);
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }

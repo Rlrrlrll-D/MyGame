@@ -68,6 +68,13 @@ public class AssetSetter {
         gamePanel.mon[1].worldX = gamePanel.tileSize * 11;
         gamePanel.mon[1].worldY = gamePanel.tileSize * 20;
 
+        gamePanel.mon[2] = new MonsterSlime(gamePanel);
+        gamePanel.mon[2].worldX = gamePanel.tileSize * 12;
+        gamePanel.mon[2].worldY = gamePanel.tileSize * 22;
+
+        gamePanel.mon[2] = new MonsterSlime(gamePanel);
+        gamePanel.mon[2].worldX = gamePanel.tileSize * 13;
+        gamePanel.mon[2].worldY = gamePanel.tileSize * 22;
 
     }
 
