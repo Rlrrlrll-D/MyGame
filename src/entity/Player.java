@@ -225,7 +225,6 @@ public class Player extends Entity {
         }
     }
 
-
     public void touchMonster(int i) {
         if (i != 999) {
             if (!invincible) {
@@ -236,16 +235,13 @@ public class Player extends Entity {
     }
 
     public void damageMonster(int i) {
-        counter++;
         if (i != 999) {
             if (!gamePanel.mon[i].invincible) {
                 gamePanel.mon[i].life--;
                 gamePanel.mon[i].invincible = true;
                 if (gamePanel.mon[i].life <= 0) {
-                    gamePanel.mon[i] = null;
+                    gamePanel.mon[i].isDying = true;
                 }
-
-
             }
         }
     }
@@ -507,7 +503,7 @@ public class Player extends Entity {
                 throw new IllegalStateException("Unexpected value: " + direct);
         }
         if (invincible) {
-            blinkEntity(graphics2D, 0.01f);
+            blinkEntity(graphics2D, 0.05f, 3);
         }
 
         Color shadow = new Color(12, 12, 12, 55);

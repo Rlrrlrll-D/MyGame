@@ -28,7 +28,10 @@ public class Entity {
     public boolean collisionOn;
     public boolean invincible;
     public boolean isAttack;
+    public boolean isAlive = true;
+    public boolean isDying;
     public int invinCounter;
+    int dyingCounter = 0;
     public BufferedImage image, image1, image2, temp;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String name;
@@ -40,7 +43,6 @@ public class Entity {
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-
     }
 
     public void setAction() {
@@ -118,16 +120,14 @@ public class Entity {
         }
     }
 
-    protected void blinkEntity(Graphics2D graphics2D, float i) {
+    protected void blinkEntity(Graphics2D graphics2D, float i, int interval) {
 
-        if (invinCounter >= 0 && invinCounter < 6
-                || invinCounter >= 12 && invinCounter < 18
-                || invinCounter >= 24 && invinCounter < 30
-                || invinCounter >= 36 && invinCounter < 42
-                || invinCounter >= 48 && invinCounter < 54)
+        if (invinCounter >= interval && invinCounter < interval * 2
+                || invinCounter >= interval * 3 && invinCounter < interval * 4
+                || invinCounter >= interval * 5 && invinCounter < interval * 6
+                || invinCounter >= interval * 7 && invinCounter < interval * 8
+                || invinCounter >= interval * 9 && invinCounter < interval * 10)
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, i)));
-
-
     }
 
     protected void spriteImageChange(int delay) {
@@ -167,6 +167,19 @@ public class Entity {
         return temp;
     }
 
+    public void dyingAnim(Graphics2D graphics2D, float i, int interval) {
+        dyingCounter++;
+        if (dyingCounter >= interval && dyingCounter < interval * 2
+                || dyingCounter >= interval * 3 && dyingCounter < interval * 4
+                || dyingCounter >= interval * 5 && dyingCounter < interval * 6
+                || dyingCounter >= interval * 7 && dyingCounter < interval * 8
+                || dyingCounter >= interval * 9 && dyingCounter < interval * 10)
+            graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, i)));
+        if (dyingCounter > interval * 10) {
+            isDying = false;
+            isAlive = false;
+        }
+    }
     public void drawing(Graphics2D graphics2D) {
         int scrX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
         int scrY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
@@ -257,7 +270,10 @@ public class Entity {
                     throw new IllegalStateException("Unexpected value: " + direct);
             }
             if (invincible) {
-                blinkEntity(graphics2D, 0.03f);
+                blinkEntity(graphics2D, 0.3f, 5);
+            }
+            if (isDying) {
+                dyingAnim(graphics2D, 0.01f, 4);
             }
 //            Color shadow = new Color(12, 12, 12, 55);
 //            graphics2D.setColor(shadow);

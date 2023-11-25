@@ -72,20 +72,20 @@ public class UI {
 
         graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        if (gamePanel.gameBehavior == gamePanel.titleBehavior) {
+        if (gamePanel.gameBehavior == GamePanel.titleBehavior) {
             drawTitleScreen();
         }
 
-        if (gamePanel.gameBehavior == gamePanel.playBehavior) {
+        if (gamePanel.gameBehavior == GamePanel.playBehavior) {
             drawPlayerLife();
         }
-        if (gamePanel.gameBehavior == gamePanel.pauseBehavior) {
+        if (gamePanel.gameBehavior == GamePanel.pauseBehavior) {
             drawPlayerLife();
             drawPauseScreenShadow();
             drawPauseScreenYellow();
 
         }
-        if (gamePanel.gameBehavior == gamePanel.dialogBehavior) {
+        if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
             drawPlayerLife();
             drawDialogScreen();
         }
@@ -257,11 +257,11 @@ public class UI {
     }
 
     public void drawPauseScreenShadow() {
-        graphics2D.setColor(new Color(12, 6, 2, 100));
+        graphics2D.setColor(new Color(16, 7, 1));
         graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 50F));
         String txt = "Paused!";
-        int x = getX_Text(txt) + 2;
-        int y = gamePanel.screenHeight / 2 + 2;
+        int x = getX_Text(txt) + 4;
+        int y = gamePanel.screenHeight / 2 + 4;
         graphics2D.drawString(txt.toUpperCase(), x, y);
 
     }
