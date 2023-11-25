@@ -151,16 +151,16 @@ public class Player extends Entity {
 
             switch (direct) {
                 case "stay_up":
-                    worldY -= attackArea.height;
+                    worldY -= gamePanel.tileSize - gamePanel.tileSize / 4;
                     break;
                 case "stay":
-                    worldY += gamePanel.tileSize;
+                    worldY += gamePanel.tileSize - gamePanel.tileSize / 4;
                     break;
                 case "stay_left":
-                    worldX -= attackArea.width;
+                    worldX -= gamePanel.tileSize - gamePanel.tileSize / 4;
                     break;
                 case "stay_right":
-                    worldX += gamePanel.tileSize;
+                    worldX += gamePanel.tileSize - gamePanel.tileSize / 4;
                     break;
             }
             solidArea.width = attackArea.width;
@@ -503,7 +503,7 @@ public class Player extends Entity {
                 throw new IllegalStateException("Unexpected value: " + direct);
         }
         if (invincible) {
-            blinkEntity(graphics2D, 0.05f, 3);
+            blinkEntity(graphics2D, 0.05f, 5);
         }
 
         Color shadow = new Color(12, 12, 12, 55);
@@ -512,6 +512,7 @@ public class Player extends Entity {
         graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
         graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
 
+/*
         // AttackArea
         tempScreenX = screenX + solidArea.x;
         tempScreenY = screenY + solidArea.y;
@@ -532,12 +533,11 @@ public class Player extends Entity {
         graphics2D.setColor(Color.red);
         graphics2D.setStroke(new BasicStroke(1));
         graphics2D.drawRect(tempScreenX, tempScreenY, attackArea.width, attackArea.height);
-
-//        graphics2D.setColor(Color.white);
-//        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-
-//        graphics2D.setFont(new Font("Arial", Font.PLAIN, 26));
-//        graphics2D.drawString("Invincible:" + invinCounter, 10, 400);
+        graphics2D.setColor(Color.white);
+        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
+        graphics2D.setFont(new Font("Arial", Font.PLAIN, 26));
+        graphics2D.drawString("Invincible:" + invinCounter, 10, 400);
+*/
 
     }
 

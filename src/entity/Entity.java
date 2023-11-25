@@ -270,7 +270,7 @@ public class Entity {
                     throw new IllegalStateException("Unexpected value: " + direct);
             }
             if (invincible) {
-                blinkEntity(graphics2D, 0.3f, 5);
+                blinkEntity(graphics2D, 0.3f, 4);
             }
             if (isDying) {
                 dyingAnim(graphics2D, 0.01f, 4);
