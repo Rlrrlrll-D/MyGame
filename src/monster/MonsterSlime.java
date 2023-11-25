@@ -16,7 +16,7 @@ public class MonsterSlime extends Entity {
         direct = "up";
         name = "Slime";
         speed = 1;
-        maxLife = 4;
+        maxLife = 20;
         life = maxLife;
 
         solidArea.x = 3;

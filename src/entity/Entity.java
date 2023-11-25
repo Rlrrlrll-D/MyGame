@@ -30,8 +30,10 @@ public class Entity {
     public boolean isAttack;
     public boolean isAlive = true;
     public boolean isDying;
+    public boolean hpBarOn;
     public int invinCounter;
-    int dyingCounter = 0;
+    public int dyingCounter = 0;
+    public int hpBarCounter = 0;
     public BufferedImage image, image1, image2, temp;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String name;
@@ -181,6 +183,7 @@ public class Entity {
             isAlive = false;
         }
     }
+
     public void drawing(Graphics2D graphics2D) {
         int scrX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
         int scrY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
@@ -271,25 +274,34 @@ public class Entity {
                     throw new IllegalStateException("Unexpected value: " + direct);
             }
 
-            if (type == 2) {
+            if (type == 2 && hpBarOn) {
                 double oneScale = (double) gamePanel.tileSize / maxLife;
                 double hpBarValue = oneScale * life;
 
                 graphics2D.setColor(new Color(0x090202));
                 graphics2D.fillRect(scrX - 1, scrY - 11, gamePanel.tileSize + 2, 12);
+
                 graphics2D.setColor(new Color(0x861515));
                 graphics2D.fillRect(scrX, scrY - 10, (int) hpBarValue, 10);
+                hpBarCounter++;
+
+                if (hpBarCounter > 600) {
+                    hpBarCounter = 0;
+                    hpBarOn = false;
+                }
             }
 
             if (invincible) {
+                hpBarOn = true;
+                hpBarCounter = 0;
                 blinkEntity(graphics2D, 0.3f, 4);
             }
             if (isDying) {
                 dyingAnim(graphics2D, 0.01f, 4);
             }
-//            Color shadow = new Color(12, 12, 12, 55);
-//            graphics2D.setColor(shadow);
-//            graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
+            Color shadow = new Color(12, 12, 12, 55);
+            graphics2D.setColor(shadow);
+            graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
             graphics2D.drawImage(image, scrX, scrY, gamePanel.tileSize, gamePanel.tileSize, null);
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }
