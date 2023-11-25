@@ -272,10 +272,13 @@ public class Entity {
             }
 
             if (type == 2) {
+                double oneScale = (double) gamePanel.tileSize / maxLife;
+                double hpBarValue = oneScale * life;
+
                 graphics2D.setColor(new Color(0x090202));
                 graphics2D.fillRect(scrX - 1, scrY - 11, gamePanel.tileSize + 2, 12);
                 graphics2D.setColor(new Color(0x861515));
-                graphics2D.fillRect(scrX, scrY - 10, gamePanel.tileSize, 10);
+                graphics2D.fillRect(scrX, scrY - 10, (int) hpBarValue, 10);
             }
 
             if (invincible) {
