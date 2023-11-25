@@ -228,6 +228,7 @@ public class Player extends Entity {
     public void touchMonster(int i) {
         if (i != 999) {
             if (!invincible) {
+                gamePanel.playSFX(8);
                 life--;
                 invincible = true;
             }
@@ -237,6 +238,7 @@ public class Player extends Entity {
     public void damageMonster(int i) {
         if (i != 999) {
             if (!gamePanel.mon[i].invincible) {
+                gamePanel.playSFX(7);
                 gamePanel.mon[i].life--;
                 gamePanel.mon[i].invincible = true;
                 if (gamePanel.mon[i].life <= 0) {
@@ -253,6 +255,7 @@ public class Player extends Entity {
                 gamePanel.npc[i].speak();
 
             } else {
+                gamePanel.playSFX(9);
                 isAttack = true;
             }
         }

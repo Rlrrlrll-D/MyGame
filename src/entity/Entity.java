@@ -81,6 +81,7 @@ public class Entity {
         boolean touchPlayer = gamePanel.checker.checkPlayer(this);
         if (this.type == 2 && touchPlayer) {
             if (!gamePanel.player.invincible) {
+                gamePanel.playSFX(6);
                 gamePanel.player.life--;
                 gamePanel.player.invincible = true;
             }
