@@ -270,6 +270,14 @@ public class Entity {
                 default:
                     throw new IllegalStateException("Unexpected value: " + direct);
             }
+
+            if (type == 2) {
+                graphics2D.setColor(new Color(0x090202));
+                graphics2D.fillRect(scrX - 1, scrY - 11, gamePanel.tileSize + 2, 12);
+                graphics2D.setColor(new Color(0x861515));
+                graphics2D.fillRect(scrX, scrY - 10, gamePanel.tileSize, 10);
+            }
+
             if (invincible) {
                 blinkEntity(graphics2D, 0.3f, 4);
             }
