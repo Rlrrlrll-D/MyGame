@@ -5,10 +5,11 @@ import main.GamePanel;
 
 import java.util.Random;
 
-public class MonsterSlime extends Entity {
+public class Slime extends Entity {
 
     GamePanel gamePanel;
-    public MonsterSlime(GamePanel gamePanel) {
+
+    public Slime(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
@@ -61,6 +62,24 @@ public class MonsterSlime extends Entity {
                 direct = "right";
             }
             actionCounter = 0;
+        }
+    }
+
+    public void damageReaction() {
+        actionCounter = 0;
+        switch (gamePanel.player.direct) {
+            case "up", "stay_up":
+                direct = "up";
+                break;
+            case "down", "stay":
+                direct = "down";
+                break;
+            case "left", "stay_left":
+                direct = "left";
+                break;
+            case "right", "stay_right":
+                direct = "right";
+                break;
         }
     }
 }

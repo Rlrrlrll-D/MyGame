@@ -1,7 +1,7 @@
 package main;
 
 import entity.NPC_Oldman;
-import monster.MonsterSlime;
+import monster.Slime;
 
 public class AssetSetter {
 
@@ -60,19 +60,19 @@ public class AssetSetter {
     }
 
     public void setMonster() {
-        gamePanel.mon[0] = new MonsterSlime(gamePanel);
+        gamePanel.mon[0] = new Slime(gamePanel);
         gamePanel.mon[0].worldX = gamePanel.tileSize * 11;
         gamePanel.mon[0].worldY = gamePanel.tileSize * 18;
 
-        gamePanel.mon[1] = new MonsterSlime(gamePanel);
+        gamePanel.mon[1] = new Slime(gamePanel);
         gamePanel.mon[1].worldX = gamePanel.tileSize * 11;
         gamePanel.mon[1].worldY = gamePanel.tileSize * 20;
 
-        gamePanel.mon[2] = new MonsterSlime(gamePanel);
+        gamePanel.mon[2] = new Slime(gamePanel);
         gamePanel.mon[2].worldX = gamePanel.tileSize * 12;
         gamePanel.mon[2].worldY = gamePanel.tileSize * 22;
 
-        gamePanel.mon[2] = new MonsterSlime(gamePanel);
+        gamePanel.mon[2] = new Slime(gamePanel);
         gamePanel.mon[2].worldX = gamePanel.tileSize * 13;
         gamePanel.mon[2].worldY = gamePanel.tileSize * 22;
 

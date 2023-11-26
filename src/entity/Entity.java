@@ -50,6 +50,10 @@ public class Entity {
     public void setAction() {
     }
 
+    public void damageReaction() {
+
+    }
+
     public void speak() {
 
         switch (gamePanel.player.direct) {
