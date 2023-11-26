@@ -106,7 +106,7 @@ public class EventHandler {
         gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
         gamePanel.player.worldX = 3 * gamePanel.tileSize;
         gamePanel.player.worldY = 42 * gamePanel.tileSize;
-        gamePanel.player.direct = "stay";
+        // gamePanel.player.direct = "stay";
 
     }
 }
