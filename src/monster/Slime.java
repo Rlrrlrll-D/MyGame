@@ -81,5 +81,8 @@ public class Slime extends Entity {
                 direct = "right";
                 break;
         }
+        escape = true;
+
+
     }
 }

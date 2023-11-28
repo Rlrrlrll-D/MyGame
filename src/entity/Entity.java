@@ -28,6 +28,7 @@ public class Entity {
     public int dialogCount;
     public boolean collisionOn;
     public boolean invincible;
+    public boolean escape;
     public boolean isAttack;
     public boolean isAlive = true;
     public boolean isDying;
@@ -35,6 +36,7 @@ public class Entity {
     public int invinCounter;
     public int dyingCounter = 0;
     public int hpBarCounter = 0;
+    public int escapeCounter = 0;
     public BufferedImage image, image1, image2, temp;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String name;
@@ -79,6 +81,7 @@ public class Entity {
     }
 
     public void update() {
+
         setAction();
         collisionOn = false;
         gamePanel.checker.checkTile(this);
@@ -116,6 +119,7 @@ public class Entity {
         }
         spriteImageChange(17);
         invincible(40);
+        escaping(50, this);
     }
 
     protected void invincible(int delay) {
@@ -124,6 +128,18 @@ public class Entity {
             if (invinCounter > delay) {
                 invincible = false;
                 invinCounter = 0;
+            }
+        }
+    }
+
+    protected void escaping(int delay, Entity entity) {
+        if (escape) {
+            escapeCounter++;
+            entity.speed = 3;
+            if (escapeCounter > delay) {
+                escape = false;
+                entity.speed = 1;
+                escapeCounter = 0;
             }
         }
     }
