@@ -13,7 +13,7 @@ public class Slime extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        type = 2;
+        //type = 2;
         direct = "up";
         name = "Slime";
         speed = 1;

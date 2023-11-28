@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.UtilityTool;
+import monster.Slime;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -38,7 +39,7 @@ public class Entity {
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String name;
     public boolean collision;
-    public int type; //0 - player, 1=npc, 2=monster
+    // public int type; //0 - player, 1=npc, 2=monster
     GamePanel gamePanel;
     String[] dialogues = new String[20];
 
@@ -85,7 +86,7 @@ public class Entity {
         gamePanel.checker.checkEntity(this, gamePanel.npc);
         gamePanel.checker.checkEntity(this, gamePanel.mon);
         boolean touchPlayer = gamePanel.checker.checkPlayer(this);
-        if (this.type == 2 && touchPlayer) {
+        if (this instanceof Slime && touchPlayer) {
             if (!gamePanel.player.invincible) {
                 gamePanel.playSFX(6);
                 gamePanel.player.life--;
@@ -278,7 +279,7 @@ public class Entity {
                     throw new IllegalStateException("Unexpected value: " + direct);
             }
 
-            if (type == 2 && hpBarOn) {
+            if (this instanceof Slime && hpBarOn) {
                 double oneScale = (double) gamePanel.tileSize / maxLife;
                 double hpBarValue = oneScale * life;
 
