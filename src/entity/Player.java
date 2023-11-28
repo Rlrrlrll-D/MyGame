@@ -12,6 +12,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public int /*keys,*/ temp;
+    public boolean notAttacked;
     KeyHandler keyHandler;
     BufferedImage image;
 
@@ -121,6 +122,12 @@ public class Player extends Entity {
             if (!collisionOn && !keyHandler.enterPressed) {
                 checkDirect();
             }
+            if (keyHandler.enterPressed && !notAttacked) {
+                gamePanel.playSFX(9);
+                isAttack = true;
+                counter = 0;
+            }
+            notAttacked = false;
 
             gamePanel.keyHandler.enterPressed = false;
 
@@ -255,12 +262,10 @@ public class Player extends Entity {
     private void interactNPC(int i) {
         if (gamePanel.keyHandler.enterPressed) {
             if (i != 999) {
+                notAttacked = true;
                 gamePanel.gameBehavior = GamePanel.dialogBehavior;
                 gamePanel.npc[i].speak();
 
-            } else {
-                gamePanel.playSFX(9);
-                isAttack = true;
             }
         }
 
