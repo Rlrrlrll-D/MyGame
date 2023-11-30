@@ -26,103 +26,131 @@ public class KeyHandler implements KeyListener {
         int value = e.getKeyCode();
 
         if (gamePanel.gameBehavior == GamePanel.titleBehavior) {
-            if (gamePanel.ui.titleScreenBehavior == 0) {
-                if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-                    if (gamePanel.ui.commandNum != 0)
-                        gamePanel.ui.commandNum--;
-                }
-                if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-                    if (gamePanel.ui.commandNum != 2)
-                        gamePanel.ui.commandNum++;
-                }
-                if (value == KeyEvent.VK_ENTER) {
-                    if (gamePanel.ui.commandNum == 0) {
-                        gamePanel.ui.titleScreenBehavior = 1;
-
-                    }
-                    if (gamePanel.ui.commandNum == 1) {
-
-                    }
-                    if (gamePanel.ui.commandNum == 2) {
-                        System.exit(0);
-                    }
-                }
-            } else if (gamePanel.ui.titleScreenBehavior == 1) {
-                if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-
-                    if (gamePanel.ui.commandNum != 0)
-                        gamePanel.ui.commandNum--;
-                }
-                if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-                    if (gamePanel.ui.commandNum != 3)
-                        gamePanel.ui.commandNum++;
-                }
-                if (value == KeyEvent.VK_ENTER) {
-                    if (gamePanel.ui.commandNum == 0) {
-                        System.out.println("Do some fighter specific stuff!");
-                        gamePanel.gameBehavior = GamePanel.playBehavior;
-                        gamePanel.playMusic(0);
-                        enterPressed = false;
-
-                    }
-                    if (gamePanel.ui.commandNum == 1) {
-                        System.out.println("Do some thief specific stuff!");
-                        gamePanel.gameBehavior = GamePanel.playBehavior;
-                        gamePanel.playMusic(0);
-                    }
-                    if (gamePanel.ui.commandNum == 2) {
-                        System.out.println("Do some sorcerer specific stuff!");
-                        gamePanel.gameBehavior = GamePanel.playBehavior;
-                        gamePanel.playMusic(0);
-                    }
-                    if (gamePanel.ui.commandNum == 3) {
-                        gamePanel.ui.titleScreenBehavior = 0;
-                        gamePanel.ui.commandNum = 0;
-                    }
-                }
-            }
+            titleBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.playBehavior) {
-            if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-                upPressed = true;
-            }
-            if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-                downPressed = true;
-            }
-            if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
-                leftPressed = true;
-            }
-            if (value == KeyEvent.VK_D || value == KeyEvent.VK_RIGHT) {
-                rightPressed = true;
-            }
-            if (value == KeyEvent.VK_ENTER) {
-                enterPressed = true;
-            }
-            if (value == KeyEvent.VK_P) {
-                gamePanel.gameBehavior = GamePanel.pauseBehavior;
-            }
-            if (value == KeyEvent.VK_T) {
-
-                chkDrawTime = !chkDrawTime;
-            }
-            if (value == KeyEvent.VK_M) {
-                musTrigger();
-                System.out.println(musicOn);
-            }
-            if (value == KeyEvent.VK_C) {
-                gamePanel.gameBehavior = GamePanel.characterBehavior;
-            }
+            playBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.pauseBehavior) {
-            if (value == KeyEvent.VK_P) {
-                gamePanel.gameBehavior = GamePanel.playBehavior;
-            }
+            pauseBehavior(value);
 
         } else if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
-            if (value == KeyEvent.VK_ENTER) {
-                gamePanel.gameBehavior = GamePanel.playBehavior;
-            }
+            dialogBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
-            if (value == KeyEvent.VK_C) {
+            characterBehavior(value);
+        }
+    }
+
+    private void characterBehavior(int value) {
+        if (value == KeyEvent.VK_C) {
+            gamePanel.gameBehavior = GamePanel.playBehavior;
+        }
+    }
+
+    private void dialogBehavior(int value) {
+        if (value == KeyEvent.VK_ENTER) {
+            gamePanel.gameBehavior = GamePanel.playBehavior;
+        }
+    }
+
+    private void pauseBehavior(int value) {
+        if (value == KeyEvent.VK_P) {
+            gamePanel.gameBehavior = GamePanel.playBehavior;
+        }
+    }
+
+    private void playBehavior(int value) {
+        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+            upPressed = true;
+        }
+        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+            downPressed = true;
+        }
+        if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
+            leftPressed = true;
+        }
+        if (value == KeyEvent.VK_D || value == KeyEvent.VK_RIGHT) {
+            rightPressed = true;
+        }
+        if (value == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }
+        if (value == KeyEvent.VK_P) {
+            gamePanel.gameBehavior = GamePanel.pauseBehavior;
+        }
+        if (value == KeyEvent.VK_T) {
+
+            chkDrawTime = !chkDrawTime;
+        }
+        if (value == KeyEvent.VK_M) {
+            musTrigger();
+            System.out.println(musicOn);
+        }
+        if (value == KeyEvent.VK_C) {
+            gamePanel.gameBehavior = GamePanel.characterBehavior;
+        }
+    }
+
+    private void titleBehavior(int value) {
+        if (gamePanel.ui.titleScreenBehavior == 0) {
+            titleBehavior_0(value);
+        } else if (gamePanel.ui.titleScreenBehavior == 1) {
+            titleBehavior_1(value);
+        }
+    }
+
+    private void titleBehavior_1(int value) {
+        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+
+            if (gamePanel.ui.commandNum != 0)
+                gamePanel.ui.commandNum--;
+        }
+        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+            if (gamePanel.ui.commandNum != 3)
+                gamePanel.ui.commandNum++;
+        }
+        if (value == KeyEvent.VK_ENTER) {
+            if (gamePanel.ui.commandNum == 0) {
+                System.out.println("Do some fighter specific stuff!");
                 gamePanel.gameBehavior = GamePanel.playBehavior;
+                gamePanel.playMusic(0);
+                enterPressed = false;
+
+            }
+            if (gamePanel.ui.commandNum == 1) {
+                System.out.println("Do some thief specific stuff!");
+                gamePanel.gameBehavior = GamePanel.playBehavior;
+                gamePanel.playMusic(0);
+            }
+            if (gamePanel.ui.commandNum == 2) {
+                System.out.println("Do some sorcerer specific stuff!");
+                gamePanel.gameBehavior = GamePanel.playBehavior;
+                gamePanel.playMusic(0);
+            }
+            if (gamePanel.ui.commandNum == 3) {
+                gamePanel.ui.titleScreenBehavior = 0;
+                gamePanel.ui.commandNum = 0;
+            }
+        }
+    }
+
+    private void titleBehavior_0(int value) {
+        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+            if (gamePanel.ui.commandNum != 0)
+                gamePanel.ui.commandNum--;
+        }
+        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+            if (gamePanel.ui.commandNum != 2)
+                gamePanel.ui.commandNum++;
+        }
+        if (value == KeyEvent.VK_ENTER) {
+            if (gamePanel.ui.commandNum == 0) {
+                gamePanel.ui.titleScreenBehavior = 1;
+
+            }
+            if (gamePanel.ui.commandNum == 1) {
+
+            }
+            if (gamePanel.ui.commandNum == 2) {
+                System.exit(0);
             }
         }
     }

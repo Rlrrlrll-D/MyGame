@@ -89,6 +89,9 @@ public class UI {
             drawPlayerLife();
             drawDialogScreen();
         }
+        if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
+            drawCharacterScreen();
+        }
 
 //        if (finished){
 //
@@ -137,25 +140,13 @@ public class UI {
 
     }
 
-    public void drawPlayerLife() {
+    private void drawCharacterScreen() {
+        final int frameX = gamePanel.tileSize;
+        final int frameY = gamePanel.tileSize;
+        final int frameWidth = gamePanel.tileSize * 5;
+        final int frameHeight = gamePanel.tileSize * 10;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
-        int x = gamePanel.tileSize / 4;
-        int y = gamePanel.tileSize / 4;
-
-        for (int i = 0; i < gamePanel.player.maxLife / 2; i++) {
-            graphics2D.drawImage(heart_e, x, y, null);
-            x += gamePanel.tileSize;
-        }
-        x = gamePanel.tileSize / 4;
-
-        for (int i = 0; i < gamePanel.player.life; i++) {
-            graphics2D.drawImage(heart_h, x, y, null);
-            i++;
-            if (i < gamePanel.player.life) {
-                graphics2D.drawImage(heart_f, x, y, null);
-            }
-            x += gamePanel.tileSize;
-        }
     }
 
     private void drawTitleScreen() {
@@ -246,6 +237,27 @@ public class UI {
 
     }
 
+    public void drawPlayerLife() {
+
+        int x = gamePanel.tileSize / 4;
+        int y = gamePanel.tileSize / 4;
+
+        for (int i = 0; i < gamePanel.player.maxLife / 2; i++) {
+            graphics2D.drawImage(heart_e, x, y, null);
+            x += gamePanel.tileSize;
+        }
+        x = gamePanel.tileSize / 4;
+
+        for (int i = 0; i < gamePanel.player.life; i++) {
+            graphics2D.drawImage(heart_h, x, y, null);
+            i++;
+            if (i < gamePanel.player.life) {
+                graphics2D.drawImage(heart_f, x, y, null);
+            }
+            x += gamePanel.tileSize;
+        }
+    }
+
     public void drawPauseScreenYellow() {
         graphics2D.setColor(new Color(229, 152, 9));
         graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 50F));
@@ -268,7 +280,7 @@ public class UI {
 
     public void drawDialogScreen() {
         int x = gamePanel.tileSize * 2;
-        int y = (int) (gamePanel.tileSize*1.5);
+        int y = (int) (gamePanel.tileSize * 1.5);
         int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
         int height = gamePanel.tileSize * 4;
         drawSubWindow(x, y, width, height);
