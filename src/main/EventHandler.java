@@ -94,6 +94,7 @@ public class EventHandler {
 
         if (gamePanel.keyHandler.enterPressed && gamePanel.player.life != gamePanel.player.maxLife) {
             gamePanel.player.isAttack = false;
+            gamePanel.playSFX(10);
             gamePanel.gameBehavior = gameBehavior;
             gamePanel.player.notAttacked = true;
             gamePanel.ui.dialogue = "You drink the water. \nYour life has been recovered! :)";

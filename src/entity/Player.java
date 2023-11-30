@@ -2,6 +2,8 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import objects.ShieldWood;
+import objects.Sword;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -42,12 +44,31 @@ public class Player extends Entity {
     public void setDefaultVal() {
         worldX = gamePanel.tileSize;
         worldY = gamePanel.tileSize * 39;
-        speed = 4;
-        maxLife = 6;
-        life = maxLife;
         stayDirect = "begin";
         direct = "stay";
+        speed = 4;
+        level = 1;
+        maxLife = 6;
+        life = maxLife;
+        strength = 1;
+        dexterity = 1;
+        exp = 0;
+        nextLevelExp = 5;
+        coin = 0;
+        currentWeapon = new Sword(gamePanel);
+        currentShield = new ShieldWood(gamePanel);
+        attack = getAttack();
+        defence = getDefence();
 
+
+    }
+
+    public int getAttack() {
+        return attack = strength * currentWeapon.attackValue;
+    }
+
+    public int getDefence() {
+        return defence = dexterity * currentShield.defenceValue;
     }
 
     public void getPlayerImg() {
@@ -157,16 +178,16 @@ public class Player extends Entity {
             int solidAreaHeight = solidArea.height;
 
             switch (direct) {
-                case "stay_up":
+                case "stay_up", "up":
                     worldY -= gamePanel.tileSize - gamePanel.tileSize / 4;
                     break;
-                case "stay":
+                case "stay", "down":
                     worldY += gamePanel.tileSize - gamePanel.tileSize / 4;
                     break;
-                case "stay_left":
+                case "stay_left", "left":
                     worldX -= gamePanel.tileSize - gamePanel.tileSize / 4;
                     break;
-                case "stay_right":
+                case "stay_right", "right":
                     worldX += gamePanel.tileSize - gamePanel.tileSize / 4;
                     break;
             }

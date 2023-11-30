@@ -108,6 +108,9 @@ public class KeyHandler implements KeyListener {
                 musTrigger();
                 System.out.println(musicOn);
             }
+            if (value == KeyEvent.VK_C) {
+                gamePanel.gameBehavior = GamePanel.characterBehavior;
+            }
         } else if (gamePanel.gameBehavior == GamePanel.pauseBehavior) {
             if (value == KeyEvent.VK_P) {
                 gamePanel.gameBehavior = GamePanel.playBehavior;
@@ -115,6 +118,10 @@ public class KeyHandler implements KeyListener {
 
         } else if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
             if (value == KeyEvent.VK_ENTER) {
+                gamePanel.gameBehavior = GamePanel.playBehavior;
+            }
+        } else if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
+            if (value == KeyEvent.VK_C) {
                 gamePanel.gameBehavior = GamePanel.playBehavior;
             }
         }
