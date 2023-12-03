@@ -105,7 +105,11 @@ public class Entity {
         if (this instanceof Slime && touchPlayer) {
             if (!gamePanel.player.invincible) {
                 gamePanel.playSFX(6);
-                gamePanel.player.life--;
+                int damage = attack - gamePanel.player.defence;
+                if (damage < 0) {
+                    damage = 0;
+                }
+                gamePanel.player.life -= damage;
                 gamePanel.player.invincible = true;
             }
         }
@@ -192,11 +196,10 @@ public class Entity {
     }
 
     public BufferedImage setup(String imagePath, int width, int height) {
-        UtilityTool utilityTool = new UtilityTool();
         temp = null;
         try {
             temp = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath + ".png")));
-            temp = utilityTool.scaleImage(temp, width, height);
+            temp = UtilityTool.scaleImage(temp, width, height);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -341,3 +344,51 @@ public class Entity {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
