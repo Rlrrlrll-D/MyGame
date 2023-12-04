@@ -17,13 +17,15 @@ public class UI {
     BufferedImage heart_f, heart_h, heart_e;
 
     public boolean msgOn;
-    //    public String msg = "";
+
     public int count;
     Graphics2D graphics2D;
     Font Purisa, Pixel, Monica;
     ArrayList<String> message = new ArrayList<>();
+    public int slotCol = 0;
     public int commandNum = 0;
     public int titleScreenBehavior = 0;
+    public int slotRow = 0;
     ArrayList<Integer> counter = new ArrayList<>();
 
 
@@ -71,7 +73,6 @@ public class UI {
         }
     }
 
-
     public void drawing(Graphics2D graphics2D) {
         this.graphics2D = graphics2D;
 
@@ -97,6 +98,7 @@ public class UI {
         }
         if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
             drawCharacterScreen();
+            drawInventory();
         }
 
 //        if (finished){
@@ -144,6 +146,58 @@ public class UI {
 //            }
 //        }
 
+    }
+
+    private void drawInventory() {
+        int x = gamePanel.tileSize * 9;
+        int y = gamePanel.tileSize;
+        int height = gamePanel.tileSize * 5;
+        int width = gamePanel.tileSize * 6;
+
+        drawSubWindow(x, y, width, height);
+        final int slotXstart = x + gamePanel.tileSize / 2;
+        final int slotYstart = y + gamePanel.tileSize / 2;
+        int slotX = slotXstart;
+        int slotY = slotYstart;
+
+        for (int i = 0; i < gamePanel.player.inventory.size(); i++) {
+            graphics2D.drawImage(gamePanel.player.inventory.get(i).down1, slotX, slotY, null);
+            slotX += gamePanel.tileSize;
+            if (i == 4 || i == 9 || i == 14) {
+                slotX = slotXstart;
+                slotY += gamePanel.tileSize;
+            }
+
+        }
+
+        int curX = slotXstart + (gamePanel.tileSize * slotCol);
+        int curY = slotYstart + (gamePanel.tileSize * slotRow);
+        int curWidth = gamePanel.tileSize;
+        int curHeight = gamePanel.tileSize;
+        graphics2D.setColor(new Color(229, 152, 9));
+        graphics2D.setStroke(new BasicStroke(3));
+        graphics2D.drawRoundRect(curX, curY, curWidth, curHeight, 10, 10);
+
+        int descriptionFrameY = y + height;
+        int descriptionFrameHeight = gamePanel.tileSize * 3;
+
+        drawSubWindow(x, descriptionFrameY, width, descriptionFrameHeight);
+
+        int txtX = x + 20;
+        int txtY = descriptionFrameY + gamePanel.tileSize;
+        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 25F));
+        int itemIndex = getItemIndex();
+        if (itemIndex < gamePanel.player.inventory.size()) {
+
+            for (String line : gamePanel.player.inventory.get(itemIndex).description.split("\n")) {
+                graphics2D.drawString(line, txtX, txtY);
+                txtY += 32;
+            }
+        }
+    }
+
+    private int getItemIndex() {
+        return slotCol + (slotRow * 5);
     }
 
     private void drawCharacterScreen() {

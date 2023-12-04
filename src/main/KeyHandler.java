@@ -43,6 +43,33 @@ public class KeyHandler implements KeyListener {
         if (value == KeyEvent.VK_C) {
             gamePanel.gameBehavior = GamePanel.playBehavior;
         }
+        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+            if (gamePanel.ui.slotRow > 0) {
+                gamePanel.ui.slotRow--;
+                gamePanel.playSFX(12);
+            }
+        }
+        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+            if (gamePanel.ui.slotRow < 3) {
+                gamePanel.ui.slotRow++;
+                gamePanel.playSFX(12);
+            }
+        }
+
+        if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
+            if (gamePanel.ui.slotCol > 0) {
+                gamePanel.ui.slotCol--;
+                gamePanel.playSFX(12);
+            }
+        }
+
+        if (value == KeyEvent.VK_D || value == KeyEvent.VK_RIGHT) {
+            if (gamePanel.ui.slotCol < 4) {
+                gamePanel.ui.slotCol++;
+                gamePanel.playSFX(12);
+            }
+
+        }
     }
 
     private void dialogBehavior(int value) {
@@ -137,7 +164,7 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.ui.commandNum != 0)
                 gamePanel.ui.commandNum--;
         }
-        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+        if (value == KeyEvent.VK_S || value == KeyEvent.VK_UP) {
             if (gamePanel.ui.commandNum != 2)
                 gamePanel.ui.commandNum++;
         }

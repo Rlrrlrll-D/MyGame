@@ -11,14 +11,14 @@ public class Key extends Entity {
 
         name = "Key";
         down1 = setup("/res/objects/key", gamePanel.tileSize, gamePanel.tileSize);
-        collision=true;
+        collision = true;
         solidArea.x = 0;
         solidArea.y = 16;
         solidArea.width = 48;
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-
+        description = "[" + name + "]\nIt opens a door.";
     }
 
 }
