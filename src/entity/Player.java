@@ -278,13 +278,35 @@ public class Player extends Entity {
                     damage = 0;
                 }
                 gamePanel.mon[i].life -= damage;
+                gamePanel.ui.addMsg(damage + " damage!");
                 gamePanel.mon[i].invincible = true;
                 gamePanel.mon[i].damageReaction();
 
                 if (gamePanel.mon[i].life <= 0) {
                     gamePanel.mon[i].isDying = true;
+                    gamePanel.ui.addMsg("Killed the " + gamePanel.mon[i].name + "!");
+                    gamePanel.ui.addMsg("Exp +" + gamePanel.mon[i].exp);
+                    exp += gamePanel.mon[i].exp;
+                    checkLevelUp();
+
                 }
             }
+        }
+    }
+
+    private void checkLevelUp() {
+        if (exp >= nextLevelExp) {
+            level++;
+            nextLevelExp *= 2;
+            maxLife += 2;
+            strength++;
+            dexterity++;
+            attack = getAttack();
+            defence = getDefence();
+            gamePanel.playSFX(11);
+            gamePanel.gameBehavior = GamePanel.dialogBehavior;
+            gamePanel.ui.dialogue = "You are level " + level + " now!\n" + "You feel stronger!";
+
         }
     }
 

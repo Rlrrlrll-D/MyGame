@@ -7,22 +7,24 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class UI {
 
     GamePanel gamePanel;
+    public boolean finished;
+    public String dialogue;
     BufferedImage heart_f, heart_h, heart_e;
 
     public boolean msgOn;
+    //    public String msg = "";
+    public int count;
+    Graphics2D graphics2D;
+    Font Purisa, Pixel, Monica;
+    ArrayList<String> message = new ArrayList<>();
     public int commandNum = 0;
     public int titleScreenBehavior = 0;
-    Graphics2D graphics2D;
-    public String msg = "";
-    public int counter;
-    Font Purisa, Pixel, Monica;
-
-    public boolean finished;
-    public String dialogue;
+    ArrayList<Integer> counter = new ArrayList<>();
 
 
     public UI(GamePanel gamePanel) {
@@ -50,16 +52,19 @@ public class UI {
 
     }
 
-    public void showMsg(String text) {
-        msg = text;
-        msgOn = true;
+    public void addMsg(String text) {
+//        msg = text;
+//        msgOn = true;
+
+        message.add(text);
+        counter.add(0);
     }
 
     public void msgDelay(int delay) {
-        counter++;
+        count++;
 
-        if (counter >= delay) {
-            counter = 0;
+        if (count >= delay) {
+            count = 0;
             msgOn = false;
 
 
@@ -78,6 +83,7 @@ public class UI {
 
         if (gamePanel.gameBehavior == GamePanel.playBehavior) {
             drawPlayerLife();
+            drawMessage();
         }
         if (gamePanel.gameBehavior == GamePanel.pauseBehavior) {
             drawPlayerLife();
@@ -342,6 +348,35 @@ public class UI {
             }
             x += gamePanel.tileSize;
         }
+    }
+
+    public void drawMessage() {
+        int msgX = gamePanel.tileSize;
+        int msgY = gamePanel.tileSize * 3;
+
+
+        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 30F));
+
+        for (int i = 0; i < message.size(); i++) {
+            if (message.get(i) != null) {
+
+                graphics2D.setColor(new Color(12, 5, 1, 224));
+                graphics2D.drawString(message.get(i), msgX + 2, msgY + 2);
+                graphics2D.setColor(new Color(213, 195, 194));
+                graphics2D.drawString(message.get(i), msgX, msgY);
+
+
+                int count = counter.get(i) + 1;
+                counter.set(i, count);
+                msgY += 30;
+                if (counter.get(i) > 180) {
+                    message.remove(i);
+                    counter.remove(i);
+
+                }
+            }
+        }
+
     }
 
     public void drawPauseScreenYellow() {

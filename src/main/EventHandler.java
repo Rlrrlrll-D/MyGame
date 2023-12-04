@@ -99,6 +99,7 @@ public class EventHandler {
             gamePanel.player.notAttacked = true;
             gamePanel.ui.dialogue = "You drink the water. \nYour life has been recovered! :)";
             gamePanel.player.life = gamePanel.player.maxLife;
+            gamePanel.assetSetter.setMonster();
         }
     }
 
