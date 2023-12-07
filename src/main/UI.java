@@ -181,13 +181,14 @@ public class UI {
         int descriptionFrameY = y + height;
         int descriptionFrameHeight = gamePanel.tileSize * 3;
 
-        drawSubWindow(x, descriptionFrameY, width, descriptionFrameHeight);
+
 
         int txtX = x + 20;
         int txtY = descriptionFrameY + gamePanel.tileSize;
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 25F));
         int itemIndex = getItemIndex();
         if (itemIndex < gamePanel.player.inventory.size()) {
+            drawSubWindow(x, descriptionFrameY, width, descriptionFrameHeight);
 
             for (String line : gamePanel.player.inventory.get(itemIndex).description.split("\n")) {
                 graphics2D.drawString(line, txtX, txtY);
