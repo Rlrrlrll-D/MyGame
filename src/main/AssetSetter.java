@@ -2,6 +2,7 @@ package main;
 
 import entity.NPC_Oldman;
 import monster.Slime;
+import objects.Key;
 
 public class AssetSetter {
 
@@ -22,9 +23,13 @@ public class AssetSetter {
 //        gamePanel.motherObject[1].worldX = 40 * gamePanel.tileSize;
 //        gamePanel.motherObject[1].worldY = 30 * gamePanel.tileSize;
 //
-//        gamePanel.objects[0] = new Key(gamePanel);
-//        gamePanel.objects[0].worldX = 10 * gamePanel.tileSize;
-//        gamePanel.objects[0].worldY = 11 * gamePanel.tileSize;
+        gamePanel.objects[0] = new Key(gamePanel);
+        gamePanel.objects[0].worldX = 10 * gamePanel.tileSize;
+        gamePanel.objects[0].worldY = 11 * gamePanel.tileSize;
+
+        gamePanel.objects[1] = new Key(gamePanel);
+        gamePanel.objects[1].worldX = 11 * gamePanel.tileSize;
+        gamePanel.objects[1].worldY = 13 * gamePanel.tileSize;
 ////
 //        gamePanel.objects[1] = new Door(gamePanel);
 //        gamePanel.objects[1].worldX = 47 * gamePanel.tileSize;

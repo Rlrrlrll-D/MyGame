@@ -8,6 +8,7 @@ public class Door extends Entity {
     public Door(GamePanel gamePanel) {
         super(gamePanel);
         name = "Door";
+        direct = "down";
         down1 = setup("/res/objects/door", gamePanel.tileSize, gamePanel.tileSize);
         collision = true;
 

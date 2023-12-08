@@ -83,16 +83,16 @@ public class CollisionChecker {
                 gamePanel.objects[i].solidArea.y = gamePanel.objects[i].worldY + gamePanel.objects[i].solidArea.y;
 
                 switch (entity.direct) {
-                    case "up":
+                    case "up", "stay_up":
                         entity.solidArea.y -= entity.speed;
                         break;
-                    case "down":
+                    case "down", "stay":
                         entity.solidArea.y += entity.speed;
                         break;
-                    case "left":
+                    case "left", "stay_left":
                         entity.solidArea.x -= entity.speed;
                         break;
-                    case "right":
+                    case "right", "stay_right":
                         entity.solidArea.x += entity.speed;
                         break;
                     default:
