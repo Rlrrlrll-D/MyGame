@@ -164,7 +164,7 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.ui.commandNum != 0)
                 gamePanel.ui.commandNum--;
         }
-        if (value == KeyEvent.VK_S || value == KeyEvent.VK_UP) {
+        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
             if (gamePanel.ui.commandNum != 2)
                 gamePanel.ui.commandNum++;
         }
