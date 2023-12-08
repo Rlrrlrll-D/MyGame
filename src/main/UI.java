@@ -161,6 +161,12 @@ public class UI {
         int slotY = slotYstart;
 
         for (int i = 0; i < gamePanel.player.inventory.size(); i++) {
+
+            if (gamePanel.player.inventory.get(i) == gamePanel.player.currentWeapon ||
+                    gamePanel.player.inventory.get(i) == gamePanel.player.currentShield) {
+                graphics2D.setColor(new Color(240, 190, 90));
+                graphics2D.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
+            }
             graphics2D.drawImage(gamePanel.player.inventory.get(i).down1, slotX, slotY, null);
             slotX += gamePanel.tileSize;
             if (i == 4 || i == 9 || i == 14) {
@@ -197,7 +203,7 @@ public class UI {
         }
     }
 
-    private int getItemIndex() {
+    public int getItemIndex() {
         return slotCol + (slotRow * 5);
     }
 

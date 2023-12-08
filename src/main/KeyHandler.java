@@ -70,6 +70,9 @@ public class KeyHandler implements KeyListener {
             }
 
         }
+        if (value == KeyEvent.VK_ENTER) {
+            gamePanel.player.selectItem();
+        }
     }
 
     private void dialogBehavior(int value) {
