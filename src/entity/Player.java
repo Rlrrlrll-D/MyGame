@@ -348,6 +348,18 @@ public class Player extends Entity {
     public void pickUp(int counter) {
 
         if (counter != 999) {
+            String txt;
+
+            if (inventory.size() != maxInventorySize) {
+                inventory.add(gamePanel.objects[counter]);
+                gamePanel.playSFX(1);
+                txt = "Got a " + gamePanel.objects[counter].name + "!";
+            } else {
+                txt = "You cannot carry any more!";
+            }
+
+            gamePanel.ui.addMsg(txt);
+            gamePanel.objects[counter] = null;
 /*
             String objectName = gamePanel.motherObject[counter].name;
             switch (objectName) {
