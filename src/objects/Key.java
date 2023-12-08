@@ -8,7 +8,6 @@ public class Key extends Entity {
 
     public Key(GamePanel gamePanel) {
         super(gamePanel);
-
         name = "Key";
         direct = "down";
         collision = true;

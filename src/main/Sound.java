@@ -8,7 +8,7 @@ import java.io.File;
 public class Sound {
 
     Clip clip;
-    File[] sounds = new File[13];
+    File[] sounds = new File[14];
     // URL[] soundURL =new URL[30];
 
     public Sound() {
@@ -27,6 +27,7 @@ public class Sound {
         sounds[10] = new File("src/res/sound/health.wav");
         sounds[11] = new File("src/res/sound/leve-lup.wav");
         sounds[12] = new File("src/res/sound/cursor.wav");
+        sounds[13] = new File("src/res/sound/yahoo.wav");
 //        soundURL[0] = getClass().getResource("/res.sound/epic .wav");
 //        soundURL[1] = getClass().getResource("/res.sound/coin.wav");
 //        soundURL[2] = getClass().getResource("/res.sound/unlock.wav");

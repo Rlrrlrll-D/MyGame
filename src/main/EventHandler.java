@@ -104,7 +104,7 @@ public class EventHandler {
     }
 
     private void teleport() {
-
+        gamePanel.playSFX(13);
         gamePanel.gameBehavior = GamePanel.dialogBehavior;
         gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
         gamePanel.player.worldX = 3 * gamePanel.tileSize;

@@ -30,6 +30,10 @@ public class AssetSetter {
         gamePanel.objects[1] = new Key(gamePanel);
         gamePanel.objects[1].worldX = 11 * gamePanel.tileSize;
         gamePanel.objects[1].worldY = 13 * gamePanel.tileSize;
+
+        gamePanel.objects[2] = new Key(gamePanel);
+        gamePanel.objects[2].worldX = 14 * gamePanel.tileSize;
+        gamePanel.objects[2].worldY = 15 * gamePanel.tileSize;
 ////
 //        gamePanel.objects[1] = new Door(gamePanel);
 //        gamePanel.objects[1].worldX = 47 * gamePanel.tileSize;

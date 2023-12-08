@@ -61,9 +61,6 @@ public class CollisionChecker {
                     entity.collisionOn = true;
                 }
                 break;
-//            case "stay", "stay_up", "stay_left", "stay_right":
-//                break;
-
             default:
                 throw new IllegalStateException("Unexpected value: " + entity.direct + " " + gamePanel.keyHandler.enterPressed);
         }
@@ -150,8 +147,6 @@ public class CollisionChecker {
                     case "right", "stay_right":
                         entity.solidArea.x += entity.speed;
                         break;
-//                    case "stay", "stay_up", "stay_left", "stay_right":
-//                        break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + entity.direct);
                 }
