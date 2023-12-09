@@ -8,7 +8,6 @@ public class Axe extends Entity {
         super(gamePanel);
 
         name = "Woodcutter's Axe";
-        direct = "down";
         down1 = setup("/res/objects/axe", gamePanel.tileSize, gamePanel.tileSize);
         attackValue = 2;
         attackArea.width = 30;
