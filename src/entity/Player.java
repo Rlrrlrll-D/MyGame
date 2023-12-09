@@ -122,15 +122,15 @@ public class Player extends Entity {
             attackRight2 = setup("/res/player/attack_right2", gamePanel.tileSize * 2, gamePanel.tileSize);
         }
         if (currentWeapon instanceof Axe) {
-//            attackUp1 = setup("/res/player/attack_up1", gamePanel.tileSize, gamePanel.tileSize * 2);
-//            attackUp2 = setup("/res/player/attack_up2", gamePanel.tileSize, gamePanel.tileSize * 2);
-//            attackDown1 = setup("/res/player/attack_down1", gamePanel.tileSize, gamePanel.tileSize * 2);
-//            attackDown2 = setup("/res/player/attack_down2", gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackUp1 = setup("/res/player/axe_up1", gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackUp2 = setup("/res/player/axe_up2", gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackDown1 = setup("/res/player/axe_down1", gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackDown2 = setup("/res/player/axe_down2", gamePanel.tileSize, gamePanel.tileSize * 2);
 //            attackLeft1 = setup("/res/player/attack_left1", gamePanel.tileSize * 2, gamePanel.tileSize);
 //            attackLeft2 = setup("/res/player/attack_left2", gamePanel.tileSize * 2, gamePanel.tileSize);
 //            attackRight1 = setup("/res/player/attack_right1", gamePanel.tileSize * 2, gamePanel.tileSize);
 //            attackRight2 = setup("/res/player/attack_right2", gamePanel.tileSize * 2, gamePanel.tileSize);
-            System.out.println("ХУЯРИМ!");
+
         }
     }
 
