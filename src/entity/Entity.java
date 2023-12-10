@@ -63,6 +63,7 @@ public class Entity {
         this.gamePanel = gamePanel;
     }
 
+
     public void setAction() {
     }
 
@@ -92,6 +93,11 @@ public class Entity {
             dialogCount = 0;
         }
     }
+
+    public void use(Entity entity) {
+    }
+
+    ;
 
     public void update() {
 

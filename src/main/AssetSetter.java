@@ -4,6 +4,7 @@ import entity.NPC_Oldman;
 import monster.Slime;
 import objects.Axe;
 import objects.Key;
+import objects.PotionRed;
 import objects.ShieldBlue;
 
 public class AssetSetter {
@@ -38,10 +39,10 @@ public class AssetSetter {
         gamePanel.objects[4] = new ShieldBlue(gamePanel);
         gamePanel.objects[4].worldX = 18 * gamePanel.tileSize;
         gamePanel.objects[4].worldY = 19 * gamePanel.tileSize;
-////
-//        gamePanel.objects[5] = new Door(gamePanel);
-//        gamePanel.objects[5].worldX = 47 * gamePanel.tileSize;
-//        gamePanel.objects[5].worldY = 10 * gamePanel.tileSize;
+//
+        gamePanel.objects[5] = new PotionRed(gamePanel);
+        gamePanel.objects[5].worldX = 47 * gamePanel.tileSize;
+        gamePanel.objects[5].worldY = 10 * gamePanel.tileSize;
 //
 //        gamePanel.objects[2] = new Door(gamePanel);
 //        gamePanel.objects[2].worldX = 47 * gamePanel.tileSize;

@@ -38,7 +38,6 @@ public class Player extends Entity {
 //        attackArea.height = 36;
 
 
-
         setDefaultVal();
         getPlayerImg();
         getPlayerAttackImage();
@@ -435,7 +434,8 @@ public class Player extends Entity {
                 defence = getDefence();
             }
             if (selectedItem instanceof Consumable) {
-                //.....
+                selectedItem.use(this);
+                inventory.remove(itemIndex);
             }
         }
     }

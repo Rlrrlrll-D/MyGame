@@ -20,7 +20,7 @@ public class TileManager {
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tiles = new Tile[10];
-        mapTileNum = new int[gamePanel.maxWorldCol][gamePanel.maxWorldRow];
+        mapTileNum = new int[GamePanel.maxWorldCol][GamePanel.maxWorldRow];
         getTileImage();
         try {
             loadMap("/maps/world01.txt");
@@ -43,12 +43,12 @@ public class TileManager {
     }
 
     public void setup(int index, String name, boolean collision) {
-        UtilityTool utilityTool = new UtilityTool();
+        //UtilityTool utilityTool = new UtilityTool();
 
         try {
             tiles[index] = new Tile();
             tiles[index].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/" + name + ".png")));
-            tiles[index].image = utilityTool.scaleImage(tiles[index].image, gamePanel.tileSize, gamePanel.tileSize);
+            tiles[index].image = UtilityTool.scaleImage(tiles[index].image, gamePanel.tileSize, gamePanel.tileSize);
             tiles[index].collision = collision;
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,9 +60,9 @@ public class TileManager {
         InputStream inputStream = getClass().getResourceAsStream(filePath);
         assert inputStream != null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        for (int row = 0; row < gamePanel.maxWorldRow; row++) {
+        for (int row = 0; row < GamePanel.maxWorldRow; row++) {
             String string = bufferedReader.readLine();
-            for (int col = 0; col < gamePanel.maxWorldCol; col++) {
+            for (int col = 0; col < GamePanel.maxWorldCol; col++) {
 
                 String[] numbers = string.split(" ");
                 int num = Integer.parseInt(numbers[col]);
@@ -74,8 +74,8 @@ public class TileManager {
 
     public void drawing(Graphics2D graphics2D) {
 
-        for (int worldRow = 0; worldRow < gamePanel.maxWorldRow; worldRow++) {
-            for (int worldCol = 0; worldCol < gamePanel.maxWorldCol; worldCol++) {
+        for (int worldRow = 0; worldRow < GamePanel.maxWorldRow; worldRow++) {
+            for (int worldCol = 0; worldCol < GamePanel.maxWorldCol; worldCol++) {
                 int tNum = mapTileNum[worldCol][worldRow];
                 int wrdX = worldCol * gamePanel.tileSize;
                 int wrdY = worldRow * gamePanel.tileSize;
@@ -88,9 +88,9 @@ public class TileManager {
                     graphics2D.drawImage(tiles[tNum].image, scrX, scrY, null);
 
                 }
-                graphics2D.setColor(new Color(150, 150, 150, 150));
-                //graphics2D.drawRect( scrX, scrY, gamePanel.tileSize, gamePanel.tileSize);
-                graphics2D.drawString(worldCol + "," + worldRow, scrX + gamePanel.tileSize / 8, scrY + gamePanel.tileSize / 2);
+//                graphics2D.setColor(new Color(150, 150, 150, 150));
+//                //graphics2D.drawRect( scrX, scrY, gamePanel.tileSize, gamePanel.tileSize);
+//                graphics2D.drawString(worldCol + "," + worldRow, scrX + gamePanel.tileSize / 8, scrY + gamePanel.tileSize / 2);
 
 
             }
