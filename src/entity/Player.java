@@ -126,10 +126,10 @@ public class Player extends Entity {
             attackUp2 = setup("/res/player/axe_up2", gamePanel.tileSize, gamePanel.tileSize * 2);
             attackDown1 = setup("/res/player/axe_down1", gamePanel.tileSize, gamePanel.tileSize * 2);
             attackDown2 = setup("/res/player/axe_down2", gamePanel.tileSize, gamePanel.tileSize * 2);
-//            attackLeft1 = setup("/res/player/attack_left1", gamePanel.tileSize * 2, gamePanel.tileSize);
-//            attackLeft2 = setup("/res/player/attack_left2", gamePanel.tileSize * 2, gamePanel.tileSize);
-//            attackRight1 = setup("/res/player/attack_right1", gamePanel.tileSize * 2, gamePanel.tileSize);
-//            attackRight2 = setup("/res/player/attack_right2", gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackLeft1 = setup("/res/player/axe_left1", gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackLeft2 = setup("/res/player/axe_left2", gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackRight1 = setup("/res/player/axe_right1", gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackRight2 = setup("/res/player/axe_right2", gamePanel.tileSize * 2, gamePanel.tileSize);
 
         }
     }
