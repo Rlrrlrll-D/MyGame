@@ -222,7 +222,7 @@ public class Entity {
                 || dyingCounter >= interval * 9 && dyingCounter < interval * 10)
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, i)));
         if (dyingCounter > interval * 10) {
-            isDying = false;
+            //  isDying = false;
             isAlive = false;
         }
     }
