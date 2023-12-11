@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
     public boolean musicOn;
-    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed;
+    public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
     public boolean chkDrawTime = false;
 
     GamePanel gamePanel;
@@ -102,6 +102,9 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_ENTER) {
             enterPressed = true;
+        }
+        if (value == KeyEvent.VK_F) {
+            shotKeyPressed = true;
         }
         if (value == KeyEvent.VK_P) {
             gamePanel.gameBehavior = GamePanel.pauseBehavior;
@@ -213,6 +216,9 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_ENTER) {
             enterPressed = false;
+        }
+        if (value == KeyEvent.VK_F) {
+            shotKeyPressed = false;
         }
     }
 }

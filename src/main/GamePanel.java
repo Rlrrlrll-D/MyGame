@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public int gameBehavior;
     public KeyHandler keyHandler = new KeyHandler(this);
-    public Entity[] objects = new Entity[20];
+    public Entity[] objects = new Entity[10];
     public Player player = new Player(this, keyHandler);
     public Entity[] npc = new Entity[10];
     public Entity[] mon = new Entity[20];
@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable {
     Sound sound = new Sound();
     Sound SFX = new Sound();
     ArrayList<Entity> entityArrayList = new ArrayList<>();
+    public ArrayList<Entity> projectileArrayList = new ArrayList<>();
     public Thread gameThread;
 
 
@@ -113,6 +114,15 @@ public class GamePanel extends JPanel implements Runnable {
                         mon[i] = null;
                     }
                 }
+            for (int i = 0; i < projectileArrayList.size(); i++)
+                if (projectileArrayList.get(i) != null) {
+                    if (projectileArrayList.get(i).isAlive) {
+                        projectileArrayList.get(i).update();
+                    }
+                    if (!projectileArrayList.get(i).isAlive) {
+                        projectileArrayList.remove(i);
+                    }
+                }
         }
 
         if (gameBehavior == pauseBehavior) {
@@ -132,8 +142,8 @@ public class GamePanel extends JPanel implements Runnable {
 
             tileManager.drawing(graphics2D);
 
-
             entityArrayList.add(player);
+
             for (Entity entity : npc) {
                 if (entity != null) {
                     entityArrayList.add(entity);
@@ -151,6 +161,11 @@ public class GamePanel extends JPanel implements Runnable {
                     entityArrayList.add(entity);
                 }
 
+            }
+            for (Entity entity : projectileArrayList) {
+                if (entity != null) {
+                    entityArrayList.add(entity);
+                }
             }
 
             entityArrayList.sort(Comparator.comparingInt(entity -> entity.worldY));

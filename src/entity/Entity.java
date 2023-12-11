@@ -26,10 +26,12 @@ public class Entity {
     public int coin;
     public Entity currentWeapon;
     public Entity currentShield;
+    public Projectile projectile;
 
     public int attackValue;
     public int defenceValue;
     public String description;
+    public int useCost;
     public BufferedImage shadow, stay1, stay2, stay3, stay_up1, stay_up2, stay_up3,
             stay_left1, stay_left2, stay_left3, stay_right1, stay_right2, stay_right3, up1, up2, down1, down2, left1, left2, right1, right2;
     public String direct = "down", stayDirect = "begin";
@@ -37,8 +39,11 @@ public class Entity {
     public int spriteNum = 1, counter = 0;
     public int maxLife;
     public int life;
+    public int maxMana;
+    public int mana;
     public int actionCounter;
     public int dialogCount;
+    public int shotAvailableCounter;
     public boolean collisionOn;
     public boolean invincible;
     public boolean escape;
@@ -97,7 +102,7 @@ public class Entity {
     public void use(Entity entity) {
     }
 
-    ;
+
 
     public void update() {
 
@@ -111,7 +116,7 @@ public class Entity {
         if (this instanceof Slime && touchPlayer) {
             if (!gamePanel.player.invincible) {
                 gamePanel.playSFX(6);
-                int damage = attack - gamePanel.player.defence;
+                int damage = this.attack - gamePanel.player.defence;
                 if (damage < 0) {
                     damage = 0;
                 }
@@ -222,7 +227,7 @@ public class Entity {
                 || dyingCounter >= interval * 9 && dyingCounter < interval * 10)
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, i)));
         if (dyingCounter > interval * 10) {
-            //  isDying = false;
+
             isAlive = false;
         }
     }

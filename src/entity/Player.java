@@ -61,6 +61,7 @@ public class Player extends Entity {
         coin = 0;
         currentWeapon = new Sword(gamePanel);
         currentShield = new ShieldWood(gamePanel);
+        projectile = new Fireball(gamePanel);
         attack = getAttack();
         defence = getDefence();
 
@@ -185,7 +186,16 @@ public class Player extends Entity {
             checkStayDirect();
             spriteImageChange(15);
         }
+        if (gamePanel.keyHandler.shotKeyPressed && !projectile.isAlive && shotAvailableCounter == 30) {
+            projectile.set(worldX, worldY, direct, true, this);
+            gamePanel.projectileArrayList.add(projectile);
+            shotAvailableCounter = 0;
+            gamePanel.playSFX(14);
+        }
         invincible(60);
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter++;
+        }
     }
 
 
@@ -222,7 +232,7 @@ public class Player extends Entity {
             solidArea.height = attackArea.height;
 
             int monsterIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
-            damageMonster(monsterIndex);
+            damageMonster(monsterIndex, attack);
 
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -294,18 +304,18 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int i) {
+    public void damageMonster(int i, int attack) {
         if (i != 999) {
 
             if (!gamePanel.mon[i].invincible) {
 
                 gamePanel.playSFX(7);
-                int damage = attack - gamePanel.mon[i].defence;
-                if (damage < 0) {
-                    damage = 0;
+                int dmg = attack - gamePanel.mon[i].defence;
+                if (dmg < 0) {
+                    dmg = 0;
                 }
-                gamePanel.mon[i].life -= damage;
-                gamePanel.ui.addMsg(damage + " damage!");
+                gamePanel.mon[i].life -= dmg;
+                gamePanel.ui.addMsg(dmg + " damage!");
                 gamePanel.mon[i].invincible = true;
                 gamePanel.mon[i].damageReaction();
 

@@ -14,7 +14,7 @@ public class Slime extends Entity {
         this.gamePanel = gamePanel;
 
         //type = 2;
-        direct = "up";
+        //direct = "up";
         name = "Slime";
         speed = 1;
         maxLife = 4;
