@@ -114,15 +114,7 @@ public class Entity {
         gamePanel.checker.checkEntity(this, gamePanel.mon);
         boolean touchPlayer = gamePanel.checker.checkPlayer(this);
         if (this instanceof Slime && touchPlayer) {
-            if (!gamePanel.player.invincible) {
-                gamePanel.playSFX(6);
-                int damage = this.attack - gamePanel.player.defence;
-                if (damage < 0) {
-                    damage = 0;
-                }
-                gamePanel.player.life -= damage;
-                gamePanel.player.invincible = true;
-            }
+            damagePlayer(attack);
         }
         if (!collisionOn) {
 
@@ -148,6 +140,25 @@ public class Entity {
         spriteImageChange(17);
         invincible(40);
         escaping(50, this);
+        shotCount();
+    }
+
+    protected void shotCount() {
+        if (shotAvailableCounter < 30) {
+            shotAvailableCounter++;
+        }
+    }
+
+    public void damagePlayer(int attack) {
+        if (!gamePanel.player.invincible) {
+            gamePanel.playSFX(6);
+            int damage = attack - gamePanel.player.defence;
+            if (damage < 0) {
+                damage = 0;
+            }
+            gamePanel.player.life -= damage;
+            gamePanel.player.invincible = true;
+        }
     }
 
     protected void invincible(int delay) {

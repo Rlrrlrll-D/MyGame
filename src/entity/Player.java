@@ -193,9 +193,7 @@ public class Player extends Entity {
             gamePanel.playSFX(14);
         }
         invincible(60);
-        if (shotAvailableCounter < 30) {
-            shotAvailableCounter++;
-        }
+        shotCount();
     }
 
 
