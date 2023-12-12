@@ -55,6 +55,7 @@ public class Entity {
     public int dyingCounter = 0;
     public int hpBarCounter = 0;
     public int escapeCounter = 0;
+    public int shotDelay;
     public BufferedImage image, image1, image2, temp;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String name;
@@ -140,12 +141,13 @@ public class Entity {
         spriteImageChange(17);
         invincible(40);
         escaping(50, this);
-        shotCount();
     }
 
-    protected void shotCount() {
-        if (shotAvailableCounter < 30) {
+    protected void shotCount(int delay) {
+        this.shotDelay = delay;
+        if (shotAvailableCounter < delay) {
             shotAvailableCounter++;
+            System.out.println(shotAvailableCounter);
         }
     }
 

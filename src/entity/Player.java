@@ -53,6 +53,8 @@ public class Player extends Entity {
         speed = 4;
         level = 1;
         maxLife = 6;
+        maxMana = 4;
+        mana = maxMana;
         life = maxLife;
         strength = 1;
         dexterity = 1;
@@ -186,14 +188,14 @@ public class Player extends Entity {
             checkStayDirect();
             spriteImageChange(15);
         }
-        if (gamePanel.keyHandler.shotKeyPressed && !projectile.isAlive && shotAvailableCounter == 30) {
+        if (gamePanel.keyHandler.shotKeyPressed && !projectile.isAlive && shotAvailableCounter == shotDelay) {
             projectile.set(worldX, worldY, direct, true, this);
             gamePanel.projectileArrayList.add(projectile);
             shotAvailableCounter = 0;
             gamePanel.playSFX(14);
         }
         invincible(60);
-        shotCount();
+        shotCount(30);
     }
 
 
