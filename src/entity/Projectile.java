@@ -58,4 +58,13 @@ public class Projectile extends Entity {
         }
         spriteImageChange(7);
     }
+
+    public boolean haveRes(Entity user) {
+
+        return false;
+    }
+
+    public void subtractRes(Entity user) {
+
+    }
 }

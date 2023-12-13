@@ -24,6 +24,7 @@ public class Entity {
     public int exp;
     public int nextLevelExp;
     public int coin;
+    public int ammo;
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;

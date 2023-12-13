@@ -97,8 +97,9 @@ public class EventHandler {
             gamePanel.playSFX(10);
             gamePanel.gameBehavior = gameBehavior;
             gamePanel.player.notAttacked = true;
-            gamePanel.ui.dialogue = "You drink the water. \nYour life has been recovered! :)";
+            gamePanel.ui.dialogue = "You drink the water. \nYour life and mana have been recovered! :)";
             gamePanel.player.life = gamePanel.player.maxLife;
+            gamePanel.player.mana = gamePanel.player.maxMana;
             gamePanel.assetSetter.setMonster();
         }
     }

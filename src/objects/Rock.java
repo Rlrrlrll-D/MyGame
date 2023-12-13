@@ -1,5 +1,6 @@
 package objects;
 
+import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -42,5 +43,13 @@ public class Rock extends Projectile {
         left2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
         right2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
+    }
+
+    public boolean haveRes(Entity user) {
+        return user.ammo >= useCost;
+    }
+
+    public void subtractRes(Entity user) {
+        user.ammo -= useCost;
     }
 }

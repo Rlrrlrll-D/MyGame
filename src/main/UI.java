@@ -425,7 +425,7 @@ public class UI {
         }
         x = gamePanel.tileSize / 4;
 
-        for (int i = 0; i < gamePanel.player.maxMana; i++) {
+        for (int i = 0; i < gamePanel.player.mana; i++) {
             graphics2D.drawImage(crystal_f, x, y, null);
             x += (int) (gamePanel.tileSize / 1.3);
         }

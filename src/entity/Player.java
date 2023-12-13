@@ -56,6 +56,7 @@ public class Player extends Entity {
         maxMana = 4;
         mana = maxMana;
         life = maxLife;
+        ammo = 10;
         strength = 1;
         dexterity = 1;
         exp = 0;
@@ -64,6 +65,7 @@ public class Player extends Entity {
         currentWeapon = new Sword(gamePanel);
         currentShield = new ShieldWood(gamePanel);
         projectile = new Fireball(gamePanel);
+        // projectile = new Rock(gamePanel);
         attack = getAttack();
         defence = getDefence();
 
@@ -188,8 +190,9 @@ public class Player extends Entity {
             checkStayDirect();
             spriteImageChange(15);
         }
-        if (gamePanel.keyHandler.shotKeyPressed && !projectile.isAlive && shotAvailableCounter == shotDelay) {
+        if (gamePanel.keyHandler.shotKeyPressed && !projectile.isAlive && shotAvailableCounter == shotDelay && projectile.haveRes(this)) {
             projectile.set(worldX, worldY, direct, true, this);
+            projectile.subtractRes(this);
             gamePanel.projectileArrayList.add(projectile);
             shotAvailableCounter = 0;
             gamePanel.playSFX(14);
@@ -250,19 +253,19 @@ public class Player extends Entity {
 
     private void checkDirect() {
         switch (direct) {
-            case "up":
+            case "up", "stay_up":
                 worldY -= speed;
                 stayDirect = "up";
                 break;
-            case "down":
+            case "down", "stay":
                 worldY += speed;
                 stayDirect = "down";
                 break;
-            case "left":
+            case "left", "stay_left":
                 worldX -= speed;
                 stayDirect = "left";
                 break;
-            case "right":
+            case "right", "stay_right":
                 worldX += speed;
                 stayDirect = "right";
                 break;

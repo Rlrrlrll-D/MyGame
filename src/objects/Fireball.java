@@ -1,5 +1,6 @@
 package objects;
 
+import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
@@ -43,5 +44,13 @@ public class Fireball extends Projectile {
         left2 = setup("/res/projectile/fireball_left2", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("/res/projectile/fireball_right1", gamePanel.tileSize, gamePanel.tileSize);
         right2 = setup("/res/projectile/fireball_right2", gamePanel.tileSize, gamePanel.tileSize);
+    }
+
+    public boolean haveRes(Entity user) {
+        return user.mana >= useCost;
+    }
+
+    public void subtractRes(Entity user) {
+        user.mana -= useCost;
     }
 }
