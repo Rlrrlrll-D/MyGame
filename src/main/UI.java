@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import objects.Heart;
+import objects.ManaCrystal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -14,7 +15,7 @@ public class UI {
     GamePanel gamePanel;
     public boolean finished;
     public String dialogue;
-    BufferedImage heart_f, heart_h, heart_e;
+    BufferedImage heart_f, heart_h, heart_e, crystal_f, crystal_e;
 
     public boolean msgOn;
 
@@ -50,6 +51,9 @@ public class UI {
         heart_e = heart.image;
         heart_h = heart.image1;
         heart_f = heart.image2;
+        Entity crystal = new ManaCrystal(gamePanel);
+        crystal_f = crystal.image;
+        crystal_e = crystal.image1;
 
 
     }
@@ -145,7 +149,6 @@ public class UI {
 //                msgDelay(180);
 //            }
 //        }
-
     }
 
     private void drawInventory() {
@@ -162,8 +165,7 @@ public class UI {
 
         for (int i = 0; i < gamePanel.player.inventory.size(); i++) {
 
-            if (gamePanel.player.inventory.get(i) == gamePanel.player.currentWeapon ||
-                    gamePanel.player.inventory.get(i) == gamePanel.player.currentShield) {
+            if (gamePanel.player.inventory.get(i) == gamePanel.player.currentWeapon || gamePanel.player.inventory.get(i) == gamePanel.player.currentShield) {
                 graphics2D.setColor(new Color(240, 190, 90));
                 graphics2D.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
@@ -186,7 +188,6 @@ public class UI {
 
         int descriptionFrameY = y + height;
         int descriptionFrameHeight = gamePanel.tileSize * 3;
-
 
 
         int txtX = x + 20;
@@ -226,6 +227,8 @@ public class UI {
         textY += lineHeight;
         graphics2D.drawString("Life", textX, textY);
         textY += lineHeight;
+        graphics2D.drawString("Mana", textX, textY);
+        textY += lineHeight;
         graphics2D.drawString("Strength ", textX, textY);
         textY += lineHeight;
         graphics2D.drawString("Dexterity", textX, textY);
@@ -255,6 +258,11 @@ public class UI {
         textY += lineHeight;
 
         value = gamePanel.player.life + "/" + gamePanel.player.maxLife;
+        textX = getX_Value(value, tailX);
+        graphics2D.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        value = gamePanel.player.mana + "/" + gamePanel.player.maxMana;
         textX = getX_Value(value, tailX);
         graphics2D.drawString(value, textX, textY);
         textY += lineHeight;
@@ -409,6 +417,19 @@ public class UI {
             }
             x += gamePanel.tileSize;
         }
+        x = gamePanel.tileSize / 4;
+        y += gamePanel.tileSize + 5;
+        for (int i = 0; i < gamePanel.player.maxMana; i++) {
+            graphics2D.drawImage(crystal_e, x, y, null);
+            x += (int) (gamePanel.tileSize / 1.3);
+        }
+        x = gamePanel.tileSize / 4;
+
+        for (int i = 0; i < gamePanel.player.maxMana; i++) {
+            graphics2D.drawImage(crystal_f, x, y, null);
+            x += (int) (gamePanel.tileSize / 1.3);
+        }
+
     }
 
     public void drawMessage() {
