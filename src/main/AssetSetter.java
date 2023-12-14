@@ -2,10 +2,7 @@ package main;
 
 import entity.NPC_Oldman;
 import monster.Slime;
-import objects.Axe;
-import objects.Key;
-import objects.PotionRed;
-import objects.ShieldBlue;
+import objects.*;
 
 public class AssetSetter {
 
@@ -19,15 +16,15 @@ public class AssetSetter {
 
     public void setObject() {
 
-        gamePanel.objects[0] = new Key(gamePanel);
+        gamePanel.objects[0] = new CoinBronze(gamePanel);
         gamePanel.objects[0].worldX = 10 * gamePanel.tileSize;
         gamePanel.objects[0].worldY = 11 * gamePanel.tileSize;
 
-        gamePanel.objects[1] = new Key(gamePanel);
+        gamePanel.objects[1] = new CoinBronze(gamePanel);
         gamePanel.objects[1].worldX = 11 * gamePanel.tileSize;
         gamePanel.objects[1].worldY = 13 * gamePanel.tileSize;
 
-        gamePanel.objects[2] = new Key(gamePanel);
+        gamePanel.objects[2] = new CoinBronze(gamePanel);
         gamePanel.objects[2].worldX = 14 * gamePanel.tileSize;
         gamePanel.objects[2].worldY = 15 * gamePanel.tileSize;
 
@@ -44,6 +41,14 @@ public class AssetSetter {
         gamePanel.objects[5].worldX = 47 * gamePanel.tileSize;
         gamePanel.objects[5].worldY = 10 * gamePanel.tileSize;
 //
+        gamePanel.objects[6] = new ManaCrystal(gamePanel);
+        gamePanel.objects[6].worldX = 47 * gamePanel.tileSize;
+        gamePanel.objects[6].worldY = 46 * gamePanel.tileSize;
+
+
+        gamePanel.objects[7] = new Heart(gamePanel);
+        gamePanel.objects[7].worldX = 41 * gamePanel.tileSize;
+        gamePanel.objects[7].worldY = 43 * gamePanel.tileSize;
 //        gamePanel.objects[2] = new Door(gamePanel);
 //        gamePanel.objects[2].worldX = 47 * gamePanel.tileSize;
 //        gamePanel.objects[2].worldY = 21 * gamePanel.tileSize;

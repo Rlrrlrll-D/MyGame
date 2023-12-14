@@ -29,6 +29,8 @@ public class Entity {
     public Entity currentShield;
     public Projectile projectile;
 
+    public int value;
+
     public int attackValue;
     public int defenceValue;
     public String description;

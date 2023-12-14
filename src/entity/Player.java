@@ -199,8 +199,21 @@ public class Player extends Entity {
         }
         invincible(60);
         shotCount(30);
+        checkLife();
+        checkMana();
     }
 
+    protected void checkLife() {
+        if (life > maxLife) {
+            life = maxLife;
+        }
+    }
+
+    protected void checkMana() {
+        if (mana > maxMana) {
+            mana = maxMana;
+        }
+    }
 
     public void attack() {
         counter++;
@@ -375,18 +388,26 @@ public class Player extends Entity {
     public void pickUp(int counter) {
 
         if (counter != 999) {
-            String txt;
+            if (gamePanel.objects[counter] instanceof PickUpOnlyItems) {
 
-            if (inventory.size() != maxInventorySize) {
-                inventory.add(gamePanel.objects[counter]);
-                gamePanel.playSFX(1);
-                txt = "Got a " + gamePanel.objects[counter].name + "!";
+                gamePanel.objects[counter].use(this);
+                gamePanel.objects[counter] = null;
             } else {
-                txt = "You cannot carry any more!";
+                String txt;
+
+                if (inventory.size() != maxInventorySize) {
+                    inventory.add(gamePanel.objects[counter]);
+                    gamePanel.playSFX(1);
+                    txt = "Got a " + gamePanel.objects[counter].name + "!";
+                } else {
+                    txt = "You cannot carry any more!";
+                }
+
+                gamePanel.ui.addMsg(txt);
+                gamePanel.objects[counter] = null;
             }
 
-            gamePanel.ui.addMsg(txt);
-            gamePanel.objects[counter] = null;
+
 /*
             String objectName = gamePanel.motherObject[counter].name;
             switch (objectName) {
