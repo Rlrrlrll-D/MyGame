@@ -23,26 +23,26 @@ public class Rock extends Projectile {
     }
 
     public void getImg() {
-        stay1 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay3 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_up1 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_up2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_up3 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_left1 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_left2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_left3 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_right1 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_right2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_right3 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        down2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        up1 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        up2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        left2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
-        right2 = setup("/res/projectile/rock_down1", gamePanel.tileSize, gamePanel.tileSize);
+        stay1 = setup("/res/projectile/rock_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay2 = setup("/res/projectile/rock_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay3 = setup("/res/projectile/rock_down3", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_up1 = setup("/res/projectile/rock_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_up2 = setup("/res/projectile/rock_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_up3 = setup("/res/projectile/rock_down3", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_left1 = setup("/res/projectile/rock_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_left2 = setup("/res/projectile/rock_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_left3 = setup("/res/projectile/rock_down3", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_right1 = setup("/res/projectile/rock_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_right2 = setup("/res/projectile/rock_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_right3 = setup("/res/projectile/rock_down3", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        down1 = setup("/res/projectile/rock_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        down2 = setup("/res/projectile/rock_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        up1 = setup("/res/projectile/rock_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        up2 = setup("/res/projectile/rock_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        left1 = setup("/res/projectile/rock_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        left2 = setup("/res/projectile/rock_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        right1 = setup("/res/projectile/rock_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        right2 = setup("/res/projectile/rock_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
     }
 
     public boolean haveRes(Entity user) {

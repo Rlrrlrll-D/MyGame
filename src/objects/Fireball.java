@@ -24,26 +24,26 @@ public class Fireball extends Projectile {
     }
 
     public void getImg() {
-        stay1 = setup("/res/projectile/fireball_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay2 = setup("/res/projectile/fireball_down2", gamePanel.tileSize, gamePanel.tileSize);
-        stay3 = setup("/res/projectile/fireball_down1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_up1 = setup("/res/projectile/fireball_up1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_up2 = setup("/res/projectile/fireball_up2", gamePanel.tileSize, gamePanel.tileSize);
-        stay_up3 = setup("/res/projectile/fireball_up1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_left1 = setup("/res/projectile/fireball_left1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_left2 = setup("/res/projectile/fireball_left2", gamePanel.tileSize, gamePanel.tileSize);
-        stay_left3 = setup("/res/projectile/fireball_left1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_right1 = setup("/res/projectile/fireball_right1", gamePanel.tileSize, gamePanel.tileSize);
-        stay_right2 = setup("/res/projectile/fireball_right2", gamePanel.tileSize, gamePanel.tileSize);
-        stay_right3 = setup("/res/projectile/fireball_right1", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("/res/projectile/fireball_down1", gamePanel.tileSize, gamePanel.tileSize);
-        down2 = setup("/res/projectile/fireball_down2", gamePanel.tileSize, gamePanel.tileSize);
-        up1 = setup("/res/projectile/fireball_up1", gamePanel.tileSize, gamePanel.tileSize);
-        up2 = setup("/res/projectile/fireball_up2", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("/res/projectile/fireball_left1", gamePanel.tileSize, gamePanel.tileSize);
-        left2 = setup("/res/projectile/fireball_left2", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("/res/projectile/fireball_right1", gamePanel.tileSize, gamePanel.tileSize);
-        right2 = setup("/res/projectile/fireball_right2", gamePanel.tileSize, gamePanel.tileSize);
+        stay1 = setup("/res/projectile/fireball_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay2 = setup("/res/projectile/fireball_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay3 = setup("/res/projectile/fireball_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_up1 = setup("/res/projectile/fireball_up1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_up2 = setup("/res/projectile/fireball_up2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_up3 = setup("/res/projectile/fireball_up1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_left1 = setup("/res/projectile/fireball_left1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_left2 = setup("/res/projectile/fireball_left2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_left3 = setup("/res/projectile/fireball_left1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_right1 = setup("/res/projectile/fireball_right1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_right2 = setup("/res/projectile/fireball_right2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        stay_right3 = setup("/res/projectile/fireball_right1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        down1 = setup("/res/projectile/fireball_down1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        down2 = setup("/res/projectile/fireball_down2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        up1 = setup("/res/projectile/fireball_up1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        up2 = setup("/res/projectile/fireball_up2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        left1 = setup("/res/projectile/fireball_left1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        left2 = setup("/res/projectile/fireball_left2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        right1 = setup("/res/projectile/fireball_right1", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
+        right2 = setup("/res/projectile/fireball_right2", (int) (gamePanel.tileSize / 1.5), (int) (gamePanel.tileSize / 1.5));
     }
 
     public boolean haveRes(Entity user) {

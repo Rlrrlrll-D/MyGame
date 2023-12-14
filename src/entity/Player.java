@@ -191,7 +191,7 @@ public class Player extends Entity {
             spriteImageChange(15);
         }
         if (gamePanel.keyHandler.shotKeyPressed && !projectile.isAlive && shotAvailableCounter == shotDelay && projectile.haveRes(this)) {
-            projectile.set(worldX, worldY, direct, true, this);
+            projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
             projectile.subtractRes(this);
             gamePanel.projectileArrayList.add(projectile);
             shotAvailableCounter = 0;

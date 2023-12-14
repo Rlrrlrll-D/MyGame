@@ -13,9 +13,6 @@ public class Slime extends Entity {
     public Slime(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
-
-        //type = 2;
-        //direct = "up";
         name = "Slime";
         speed = 1;
         maxLife = 4;
@@ -33,6 +30,7 @@ public class Slime extends Entity {
         solidAreaDefaultY = solidArea.y;
 
         getImg();
+
 
 
     }
@@ -72,7 +70,7 @@ public class Slime extends Entity {
         }
         int i = new Random().nextInt(100) + 1;
         if (i > 99 && !projectile.isAlive && shotAvailableCounter == shotDelay) {
-            projectile.set(worldX, worldY, direct, true, this);
+            projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
             gamePanel.projectileArrayList.add(projectile);
             shotAvailableCounter = 0;
         }
@@ -96,7 +94,6 @@ public class Slime extends Entity {
                 break;
         }
         escape = true;
-
 
     }
 }
