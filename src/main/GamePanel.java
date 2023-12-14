@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public int gameBehavior;
     public KeyHandler keyHandler = new KeyHandler(this);
-    public Entity[] objects = new Entity[10];
+    public Entity[] objects = new Entity[20];
     public Player player = new Player(this, keyHandler);
     public Entity[] npc = new Entity[10];
     public Entity[] mon = new Entity[20];
@@ -111,6 +111,7 @@ public class GamePanel extends JPanel implements Runnable {
                         mon[i].update();
                     }
                     if (!mon[i].isAlive) {
+                        mon[i].checkDrop();
                         mon[i] = null;
                     }
                 }

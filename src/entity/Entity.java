@@ -63,7 +63,6 @@ public class Entity {
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String name;
     public boolean collision;
-    // public int type; //0 - player, 1=npc, 2=monster
     GamePanel gamePanel;
     String[] dialogues = new String[20];
 
@@ -106,7 +105,21 @@ public class Entity {
     public void use(Entity entity) {
     }
 
+    public void checkDrop() {
 
+    }
+
+    public void dropItem(Entity dropped) {
+        for (int i = 0; i < gamePanel.objects.length; i++) {
+            if (gamePanel.objects[i] == null) {
+                gamePanel.objects[i] = dropped;
+                gamePanel.objects[i].worldX = worldX;
+                gamePanel.objects[i].worldY = worldY;
+                break;
+
+            }
+        }
+    }
 
     public void update() {
 
