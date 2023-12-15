@@ -4,6 +4,7 @@ import main.GamePanel;
 import main.UtilityTool;
 import monster.Slime;
 import tile.interactive.DryTree;
+import tile.interactive.Trunk;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -379,7 +380,7 @@ public class Entity {
             Color shadow = new Color(12, 12, 12, 55);
             graphics2D.setColor(shadow);
 
-            if (!(this instanceof DryTree)) {
+            if (!(this instanceof DryTree) && !(this instanceof Trunk)) {
                 graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
             }
             graphics2D.drawImage(image, scrX, scrY, null);

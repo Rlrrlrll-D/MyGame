@@ -29,6 +29,7 @@ public class Sound {
         sounds[12] = new File("src/res/sound/cursor.wav");
         sounds[13] = new File("src/res/sound/yahoo.wav");
         sounds[14] = new File("src/res/sound/burning.wav");
+        sounds[15] = new File("src/res/sound/cut-tree.wav");
 //        soundURL[0] = getClass().getResource("/res.sound/epic .wav");
 //        soundURL[1] = getClass().getResource("/res.sound/coin.wav");
 //        soundURL[2] = getClass().getResource("/res.sound/unlock.wav");

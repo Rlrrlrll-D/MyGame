@@ -269,7 +269,8 @@ public class Player extends Entity {
 
     private void damageInterTile(int interTileIndex) {
         if (interTileIndex != 999 && gamePanel.interactiveTile[interTileIndex].destructible && gamePanel.interactiveTile[interTileIndex].isCorrectItem(this)) {
-            gamePanel.interactiveTile[interTileIndex] = null;
+            gamePanel.interactiveTile[interTileIndex].playSnd();
+            gamePanel.interactiveTile[interTileIndex] = gamePanel.interactiveTile[interTileIndex].getDestroyForm();
         }
     }
 

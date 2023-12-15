@@ -14,7 +14,7 @@ public class DryTree extends InteractiveTile {
         this.worldX = gamePanel.tileSize * col;
         this.worldY = gamePanel.tileSize * row;
 
-        down1 = setup("/res/tiles_interactive/dry_tree", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/res/tiles/dry_tree", gamePanel.tileSize, gamePanel.tileSize);
         destructible = true;
 
     }
@@ -26,5 +26,14 @@ public class DryTree extends InteractiveTile {
         }
 
         return isCorrectItem;
+    }
+
+    public void playSnd() {
+        gamePanel.playSFX(15);
+    }
+
+    public InteractiveTile getDestroyForm() {
+        InteractiveTile tile = new Trunk(gamePanel, worldX / gamePanel.tileSize, worldY / gamePanel.tileSize);
+        return tile;
     }
 }
