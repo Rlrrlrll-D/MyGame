@@ -170,6 +170,8 @@ public class Player extends Entity {
             int monIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
             touchMonster(monIndex);
 
+            gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
+
             gamePanel.eventHandler.checkEvent();
 
             if (!collisionOn && !keyHandler.enterPressed) {
@@ -249,7 +251,8 @@ public class Player extends Entity {
 
             int monsterIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
             damageMonster(monsterIndex, attack);
-
+            int interTileIndex = gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
+            damageInterTile(interTileIndex);
             worldX = currentWorldX;
             worldY = currentWorldY;
             solidArea.width = solidAreaWidth;
@@ -262,6 +265,12 @@ public class Player extends Entity {
             isAttack = false;
         }
 
+    }
+
+    private void damageInterTile(int interTileIndex) {
+        if (interTileIndex != 999 && gamePanel.interactiveTile[interTileIndex].destructible) {
+            gamePanel.interactiveTile[interTileIndex] = null;
+        }
     }
 
     private void checkDirect() {
