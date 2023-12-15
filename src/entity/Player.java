@@ -268,7 +268,7 @@ public class Player extends Entity {
     }
 
     private void damageInterTile(int interTileIndex) {
-        if (interTileIndex != 999 && gamePanel.interactiveTile[interTileIndex].destructible) {
+        if (interTileIndex != 999 && gamePanel.interactiveTile[interTileIndex].destructible && gamePanel.interactiveTile[interTileIndex].isCorrectItem(this)) {
             gamePanel.interactiveTile[interTileIndex] = null;
         }
     }
