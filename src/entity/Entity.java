@@ -131,6 +131,7 @@ public class Entity {
         gamePanel.checker.checkObject(this, false);
         gamePanel.checker.checkEntity(this, gamePanel.npc);
         gamePanel.checker.checkEntity(this, gamePanel.mon);
+        gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
         boolean touchPlayer = gamePanel.checker.checkPlayer(this);
         if (this instanceof Slime && touchPlayer) {
             damagePlayer(attack);

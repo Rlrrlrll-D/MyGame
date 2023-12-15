@@ -28,6 +28,6 @@ public class InteractiveTile extends Entity {
     }
 
     public void update() {
-
+        invincible(20);
     }
 }

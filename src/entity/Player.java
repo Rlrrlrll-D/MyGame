@@ -268,9 +268,14 @@ public class Player extends Entity {
     }
 
     private void damageInterTile(int interTileIndex) {
-        if (interTileIndex != 999 && gamePanel.interactiveTile[interTileIndex].destructible && gamePanel.interactiveTile[interTileIndex].isCorrectItem(this)) {
+        if (interTileIndex != 999 && gamePanel.interactiveTile[interTileIndex].destructible
+                && gamePanel.interactiveTile[interTileIndex].isCorrectItem(this) && !gamePanel.interactiveTile[interTileIndex].invincible) {
             gamePanel.interactiveTile[interTileIndex].playSnd();
-            gamePanel.interactiveTile[interTileIndex] = gamePanel.interactiveTile[interTileIndex].getDestroyForm();
+            gamePanel.interactiveTile[interTileIndex].life--;
+            gamePanel.interactiveTile[interTileIndex].invincible = true;
+            if (gamePanel.interactiveTile[interTileIndex].life == 0) {
+                gamePanel.interactiveTile[interTileIndex] = gamePanel.interactiveTile[interTileIndex].getDestroyForm();
+            }
         }
     }
 

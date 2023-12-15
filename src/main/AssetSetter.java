@@ -91,8 +91,8 @@ public class AssetSetter {
     }
 
     public void setInteractiveTile() {
-        for (int i = 0; i < 4; i++) {
-            gamePanel.interactiveTile[i] = new DryTree(gamePanel, 47, 26 + i);
+        for (int i = 0; i < 6; i++) {
+            gamePanel.interactiveTile[i] = new DryTree(gamePanel, 25, 13 + i);
         }
     }
 
