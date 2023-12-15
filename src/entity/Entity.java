@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 import main.UtilityTool;
 import monster.Slime;
+import tile.interactive.DryTree;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -163,7 +164,6 @@ public class Entity {
         this.shotDelay = delay;
         if (shotAvailableCounter < delay) {
             shotAvailableCounter++;
-            System.out.println(shotAvailableCounter);
         }
     }
 
@@ -378,7 +378,10 @@ public class Entity {
             }
             Color shadow = new Color(12, 12, 12, 55);
             graphics2D.setColor(shadow);
-            graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
+
+            if (!(this instanceof DryTree)) {
+                graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
+            }
             graphics2D.drawImage(image, scrX, scrY, null);
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }

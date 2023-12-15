@@ -4,6 +4,7 @@ package main;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
+import tile.interactive.InteractiveTile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,9 +38,11 @@ public class GamePanel extends JPanel implements Runnable {
     public UI ui = new UI(this);
     public int gameBehavior;
     public KeyHandler keyHandler = new KeyHandler(this);
-    public Entity[] objects = new Entity[20];
+
     public Player player = new Player(this, keyHandler);
     public Entity[] npc = new Entity[10];
+    public Entity[] objects = new Entity[20];
+    public InteractiveTile[] interactiveTile = new InteractiveTile[50];
     public Entity[] mon = new Entity[20];
 
     TileManager tileManager = new TileManager(this);
@@ -67,6 +70,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setObject();
         assetSetter.setNPC();
         assetSetter.setMonster();
+        assetSetter.setInteractiveTile();
         keyHandler.musicOn = true;
         gameBehavior = titleBehavior;
     }
@@ -124,6 +128,11 @@ public class GamePanel extends JPanel implements Runnable {
                         projectileArrayList.remove(i);
                     }
                 }
+            for (InteractiveTile tile : interactiveTile) {
+                if (tile != null) {
+                    tile.update();
+                }
+            }
         }
 
         if (gameBehavior == pauseBehavior) {
@@ -142,6 +151,12 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameBehavior != titleBehavior) {
 
             tileManager.drawing(graphics2D);
+
+            for (InteractiveTile tile : interactiveTile) {
+                if (tile != null) {
+                    tile.drawing(graphics2D);
+                }
+            }
 
             entityArrayList.add(player);
 

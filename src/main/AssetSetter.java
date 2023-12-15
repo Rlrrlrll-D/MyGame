@@ -3,6 +3,7 @@ package main;
 import entity.NPC_Oldman;
 import monster.Slime;
 import objects.*;
+import tile.interactive.DryTree;
 
 public class AssetSetter {
 
@@ -86,6 +87,12 @@ public class AssetSetter {
             gamePanel.mon[i].worldY = gamePanel.tileSize * 18;
             value++;
 
+        }
+    }
+
+    public void setInteractiveTile() {
+        for (int i = 0; i < 4; i++) {
+            gamePanel.interactiveTile[i] = new DryTree(gamePanel, 47, 26 + i);
         }
     }
 
