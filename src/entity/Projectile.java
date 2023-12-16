@@ -26,6 +26,7 @@ public class Projectile extends Entity {
             int monIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
             if (monIndex != 999) {
                 gamePanel.player.damageMonster(monIndex, attack);
+                generateParticle(user.projectile);
                 isAlive = false;
             }
         }
@@ -33,6 +34,7 @@ public class Projectile extends Entity {
             boolean contactPlayer = gamePanel.checker.checkPlayer(this);
             if (!gamePanel.player.invincible && contactPlayer) {
                 damagePlayer(attack);
+                generateParticle(user.projectile);
                 isAlive = false;
             }
 

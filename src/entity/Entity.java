@@ -191,6 +191,38 @@ public class Entity {
         }
     }
 
+    public Color getParticleColor() {
+        return null;
+    }
+
+    public int getParticleSize() {
+        return 0;
+    }
+
+    public int getParticleSpeed() {
+        return 0;
+    }
+
+    public int getParticleMaxLife() {
+        return 0;
+    }
+
+    public void generateParticle(Entity generator) {
+        Color color = generator.getParticleColor();
+        int size = generator.getParticleSize();
+        int speed = generator.getParticleSpeed();
+        int maxLife = generator.getParticleMaxLife();
+
+        Particle p1 = new Particle(gamePanel, generator, color, size, speed, maxLife, -2, -1);
+        Particle p2 = new Particle(gamePanel, generator, color, size, speed, maxLife, -2, 1);
+        Particle p3 = new Particle(gamePanel, generator, color, size, speed, maxLife, 2, -1);
+        Particle p4 = new Particle(gamePanel, generator, color, size, speed, maxLife, 2, 1);
+        gamePanel.particleArrayList.add(p1);
+        gamePanel.particleArrayList.add(p2);
+        gamePanel.particleArrayList.add(p3);
+        gamePanel.particleArrayList.add(p4);
+    }
+
     protected void escaping(int delay, Entity entity) {
         if (escape) {
             escapeCounter++;

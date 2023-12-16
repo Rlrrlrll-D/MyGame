@@ -14,13 +14,11 @@ public class InteractiveTile extends Entity {
     }
 
     public boolean isCorrectItem(Entity entity) {
-        boolean isCorrectItem = false;
-        return isCorrectItem;
+        return false;
     }
 
     public InteractiveTile getDestroyForm() {
-        InteractiveTile tile = null;
-        return tile;
+        return null;
     }
 
     public void playSnd() {

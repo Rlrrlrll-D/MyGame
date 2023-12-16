@@ -4,6 +4,8 @@ import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
+import java.awt.*;
+
 public class Fireball extends Projectile {
 
     GamePanel gamePanel;
@@ -52,5 +54,21 @@ public class Fireball extends Projectile {
 
     public void subtractRes(Entity user) {
         user.mana -= useCost;
+    }
+
+    public Color getParticleColor() {
+        return new Color(128, 4, 4);
+    }
+
+    public int getParticleSize() {
+        return 20;
+    }
+
+    public int getParticleSpeed() {
+        return 1;
+    }
+
+    public int getParticleMaxLife() {
+        return 20;
     }
 }

@@ -4,6 +4,8 @@ import entity.Entity;
 import main.GamePanel;
 import objects.Axe;
 
+import java.awt.*;
+
 public class DryTree extends InteractiveTile {
     GamePanel gamePanel;
 
@@ -14,14 +16,14 @@ public class DryTree extends InteractiveTile {
         this.worldX = gamePanel.tileSize * col;
         this.worldY = gamePanel.tileSize * row;
 
+
         down1 = setup("/res/tiles/dry_tree", gamePanel.tileSize, gamePanel.tileSize);
         destructible = true;
         life = 3;
     }
 
     public boolean isCorrectItem(Entity entity) {
-        boolean isCorrectItem = entity.currentWeapon instanceof Axe;
-        return isCorrectItem;
+        return entity.currentWeapon instanceof Axe;
     }
 
     public void playSnd() {
@@ -29,7 +31,22 @@ public class DryTree extends InteractiveTile {
     }
 
     public InteractiveTile getDestroyForm() {
-        InteractiveTile tile = new Trunk(gamePanel, worldX / gamePanel.tileSize, worldY / gamePanel.tileSize);
-        return tile;
+        return new Trunk(gamePanel, worldX / gamePanel.tileSize, worldY / gamePanel.tileSize);
+    }
+
+    public Color getParticleColor() {
+        return new Color(65, 35, 30);
+    }
+
+    public int getParticleSize() {
+        return 8;
+    }
+
+    public int getParticleSpeed() {
+        return 1;
+    }
+
+    public int getParticleMaxLife() {
+        return 20;
     }
 }

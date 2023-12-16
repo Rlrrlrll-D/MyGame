@@ -62,7 +62,8 @@ public class Player extends Entity {
         exp = 0;
         nextLevelExp = 5;
         coin = 0;
-        currentWeapon = new Sword(gamePanel);
+        //currentWeapon = new Sword(gamePanel);
+        currentWeapon = new Axe(gamePanel);
         currentShield = new ShieldWood(gamePanel);
         projectile = new Fireball(gamePanel);
         // projectile = new Rock(gamePanel);
@@ -273,6 +274,8 @@ public class Player extends Entity {
             gamePanel.interactiveTile[interTileIndex].playSnd();
             gamePanel.interactiveTile[interTileIndex].life--;
             gamePanel.interactiveTile[interTileIndex].invincible = true;
+
+            generateParticle(gamePanel.interactiveTile[interTileIndex]);
             if (gamePanel.interactiveTile[interTileIndex].life == 0) {
                 gamePanel.interactiveTile[interTileIndex] = gamePanel.interactiveTile[interTileIndex].getDestroyForm();
             }

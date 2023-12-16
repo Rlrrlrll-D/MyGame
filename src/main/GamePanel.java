@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
+    public int gameBehavior;
     public static final int maxScreenCol = 16;
     public static final int maxScreenRow = 14;
     public static final int maxWorldCol = 50;
@@ -35,8 +36,9 @@ public class GamePanel extends JPanel implements Runnable {
     public CollisionChecker checker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
     public EventHandler eventHandler = new EventHandler(this);
+    public Thread gameThread;
     public UI ui = new UI(this);
-    public int gameBehavior;
+    public ArrayList<Entity> particleArrayList = new ArrayList<>();
     public KeyHandler keyHandler = new KeyHandler(this);
 
     public Player player = new Player(this, keyHandler);
@@ -45,12 +47,13 @@ public class GamePanel extends JPanel implements Runnable {
     public InteractiveTile[] interactiveTile = new InteractiveTile[50];
     public Entity[] mon = new Entity[20];
 
-    TileManager tileManager = new TileManager(this);
+
     Sound sound = new Sound();
     Sound SFX = new Sound();
     ArrayList<Entity> entityArrayList = new ArrayList<>();
     public ArrayList<Entity> projectileArrayList = new ArrayList<>();
-    public Thread gameThread;
+    TileManager tileManager = new TileManager(this);
+
 
 
     //public boolean musicOn;
@@ -128,6 +131,15 @@ public class GamePanel extends JPanel implements Runnable {
                         projectileArrayList.remove(i);
                     }
                 }
+            for (int i = 0; i < particleArrayList.size(); i++)
+                if (particleArrayList.get(i) != null) {
+                    if (particleArrayList.get(i).isAlive) {
+                        particleArrayList.get(i).update();
+                    }
+                    if (!particleArrayList.get(i).isAlive) {
+                        particleArrayList.remove(i);
+                    }
+                }
             for (InteractiveTile tile : interactiveTile) {
                 if (tile != null) {
                     tile.update();
@@ -182,8 +194,13 @@ public class GamePanel extends JPanel implements Runnable {
                 if (entity != null) {
                     entityArrayList.add(entity);
                 }
-            }
 
+            }
+            for (Entity entity : particleArrayList) {
+                if (entity != null) {
+                    entityArrayList.add(entity);
+                }
+            }
             entityArrayList.sort(Comparator.comparingInt(entity -> entity.worldY));
 
             for (Entity entity : entityArrayList) {
