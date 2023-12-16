@@ -370,7 +370,7 @@ public class Entity {
                 }
             }
 
-            if (invincible) {
+            if (invincible && !(this instanceof DryTree)) {
                 hpBarOn = true;
                 hpBarCounter = 0;
                 blinkEntity(graphics2D, 0.3f, 4);

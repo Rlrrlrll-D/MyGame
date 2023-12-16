@@ -20,11 +20,7 @@ public class DryTree extends InteractiveTile {
     }
 
     public boolean isCorrectItem(Entity entity) {
-        boolean isCorrectItem = false;
-        if (entity.currentWeapon instanceof Axe) {
-            isCorrectItem = true;
-        }
-
+        boolean isCorrectItem = entity.currentWeapon instanceof Axe;
         return isCorrectItem;
     }
 
