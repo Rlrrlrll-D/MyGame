@@ -5,6 +5,7 @@ import entity.Projectile;
 import main.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Fireball extends Projectile {
 
@@ -57,11 +58,11 @@ public class Fireball extends Projectile {
     }
 
     public Color getParticleColor() {
-        return new Color(128, 4, 4);
+        return new Color(157, 15, 15);
     }
 
     public int getParticleSize() {
-        return 20;
+        return 15;
     }
 
     public int getParticleSpeed() {
@@ -70,5 +71,9 @@ public class Fireball extends Projectile {
 
     public int getParticleMaxLife() {
         return 20;
+    }
+
+    public BufferedImage getParticleImg() {
+        return this.stay_left1;
     }
 }

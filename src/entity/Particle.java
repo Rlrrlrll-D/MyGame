@@ -3,9 +3,11 @@ package entity;
 import main.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Particle extends Entity {
 
+    BufferedImage image;
     Entity generator;
     Color color;
 
@@ -13,8 +15,9 @@ public class Particle extends Entity {
     int xd;
     int yd;
 
-    public Particle(GamePanel gamePanel, Entity generator, Color color, int size, int speed, int maxLife, int xd, int yd) {
+    public Particle(GamePanel gamePanel, Entity generator, BufferedImage image, Color color, int size, int speed, int maxLife, int xd, int yd) {
         super(gamePanel);
+        this.image = image;
         this.generator = generator;
         this.color = color;
         this.size = size;
@@ -47,7 +50,7 @@ public class Particle extends Entity {
 
         graphics2D.setColor(color);
 
-        graphics2D.drawImage(generator.down1, screenX, screenY, size, size, null);
+        graphics2D.drawImage(image, screenX, screenY, size, size, null);
         //graphics2D.fillRect(screenX, screenY, size, size);
     }
 }

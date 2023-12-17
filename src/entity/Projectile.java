@@ -17,7 +17,6 @@ public class Projectile extends Entity {
         this.isAlive = isAlive;
         this.life = this.maxLife;
 
-
     }
 
     public void update() {
@@ -26,7 +25,7 @@ public class Projectile extends Entity {
             int monIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
             if (monIndex != 999) {
                 gamePanel.player.damageMonster(monIndex, attack);
-                generateParticle(user.projectile);
+                generateParticle(user.projectile, gamePanel.mon[monIndex]);
                 isAlive = false;
             }
         }
@@ -34,7 +33,7 @@ public class Projectile extends Entity {
             boolean contactPlayer = gamePanel.checker.checkPlayer(this);
             if (!gamePanel.player.invincible && contactPlayer) {
                 damagePlayer(attack);
-                generateParticle(user.projectile);
+                generateParticle(user.projectile, gamePanel.player);
                 isAlive = false;
             }
 
@@ -62,7 +61,6 @@ public class Projectile extends Entity {
     }
 
     public boolean haveRes(Entity user) {
-
         return false;
     }
 

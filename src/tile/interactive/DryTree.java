@@ -5,6 +5,7 @@ import main.GamePanel;
 import objects.Axe;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class DryTree extends InteractiveTile {
     GamePanel gamePanel;
@@ -39,7 +40,7 @@ public class DryTree extends InteractiveTile {
     }
 
     public int getParticleSize() {
-        return 8;
+        return 15;
     }
 
     public int getParticleSpeed() {
@@ -48,5 +49,9 @@ public class DryTree extends InteractiveTile {
 
     public int getParticleMaxLife() {
         return 20;
+    }
+
+    public BufferedImage getParticleImg() {
+        return this.down1;
     }
 }

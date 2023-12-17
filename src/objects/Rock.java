@@ -5,6 +5,7 @@ import entity.Projectile;
 import main.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Rock extends Projectile {
     GamePanel gamePanel;
@@ -69,5 +70,9 @@ public class Rock extends Projectile {
 
     public int getParticleMaxLife() {
         return 20;
+    }
+
+    public BufferedImage getParticleImg() {
+        return this.down1;
     }
 }

@@ -207,16 +207,20 @@ public class Entity {
         return 0;
     }
 
-    public void generateParticle(Entity generator) {
+    public BufferedImage getParticleImg() {
+        return null;
+    }
+
+    public void generateParticle(Entity generator, Entity target) {
         Color color = generator.getParticleColor();
         int size = generator.getParticleSize();
         int speed = generator.getParticleSpeed();
         int maxLife = generator.getParticleMaxLife();
-
-        Particle p1 = new Particle(gamePanel, generator, color, size, speed, maxLife, -2, -1);
-        Particle p2 = new Particle(gamePanel, generator, color, size, speed, maxLife, -2, 1);
-        Particle p3 = new Particle(gamePanel, generator, color, size, speed, maxLife, 2, -1);
-        Particle p4 = new Particle(gamePanel, generator, color, size, speed, maxLife, 2, 1);
+        BufferedImage image = generator.getParticleImg();
+        Particle p1 = new Particle(gamePanel, target, image, color, size, speed, maxLife, -2, -1);
+        Particle p2 = new Particle(gamePanel, target, image, color, size, speed, maxLife, -2, 1);
+        Particle p3 = new Particle(gamePanel, target, image, color, size, speed, maxLife, 2, -1);
+        Particle p4 = new Particle(gamePanel, target, image, color, size, speed, maxLife, 2, 1);
         gamePanel.particleArrayList.add(p1);
         gamePanel.particleArrayList.add(p2);
         gamePanel.particleArrayList.add(p3);
