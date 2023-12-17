@@ -47,6 +47,5 @@ public class Particle extends Entity {
         int screenY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
 
         graphics2D.drawImage(image, screenX, screenY, size, size, null);
-        //graphics2D.fillRect(screenX, screenY, size, size);
     }
 }
