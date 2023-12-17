@@ -4,7 +4,6 @@ import entity.Entity;
 import main.GamePanel;
 import objects.Axe;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class DryTree extends InteractiveTile {
@@ -33,10 +32,6 @@ public class DryTree extends InteractiveTile {
 
     public InteractiveTile getDestroyForm() {
         return new Trunk(gamePanel, worldX / gamePanel.tileSize, worldY / gamePanel.tileSize);
-    }
-
-    public Color getParticleColor() {
-        return new Color(65, 35, 30);
     }
 
     public int getParticleSize() {

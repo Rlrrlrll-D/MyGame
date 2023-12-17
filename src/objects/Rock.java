@@ -4,7 +4,6 @@ import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Rock extends Projectile {
@@ -56,9 +55,6 @@ public class Rock extends Projectile {
         user.ammo -= useCost;
     }
 
-    public Color getParticleColor() {
-        return new Color(63, 57, 57);
-    }
 
     public int getParticleSize() {
         return 10;
