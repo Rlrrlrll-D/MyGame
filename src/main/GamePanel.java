@@ -14,8 +14,8 @@ import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
     public int gameBehavior;
-    public static final int maxScreenCol = 16;
-    public static final int maxScreenRow = 14;
+    public static final int maxScreenCol = 20;
+    public static final int maxScreenRow = 12;
     public static final int maxWorldCol = 50;
     public static final int maxWorldRow = 50;
 
