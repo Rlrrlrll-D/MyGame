@@ -357,7 +357,7 @@ public class UI {
             graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 30F));
             String text = "Select your class:";
             int x = getX_Text(text.toUpperCase());
-            int y = (gamePanel.tileSize * 4);
+            int y = (int) (gamePanel.tileSize * 2.5);
             graphics2D.drawString(text.toUpperCase(), x, y);
 
             graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));

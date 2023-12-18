@@ -54,11 +54,7 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<Entity> projectileArrayList = new ArrayList<>();
     TileManager tileManager = new TileManager(this);
 
-
-
-    //public boolean musicOn;
-
-
+    
     public GamePanel() throws IOException, FontFormatException {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         setBackground(new Color(12, 23, 30));
