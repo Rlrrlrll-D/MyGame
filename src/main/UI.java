@@ -169,9 +169,10 @@ public class UI {
 
         switch (subBehavior) {
             case 0:
-                option_top(x, y);
+                top(x, y);
                 break;
             case 1:
+                fullScreenNotification(x, y);
                 break;
             case 2:
                 break;
@@ -180,7 +181,7 @@ public class UI {
 
     }
 
-    public void option_top(int x, int y) {
+    public void top(int x, int y) {
         int textX;
         int textY;
 
@@ -197,6 +198,7 @@ public class UI {
             graphics2D.drawString(">", textX - 25, textY);
             if (gamePanel.keyHandler.enterPressed) {
                 gamePanel.fullScreenOn = !gamePanel.fullScreenOn;
+                subBehavior = 1;
             }
         }
 
@@ -245,9 +247,35 @@ public class UI {
 
         textY += gamePanel.tileSize;
         graphics2D.drawRect(textX, textY, gamePanel.tileSize * 2, gamePanel.tileSize / 2);
+        int volumeWidth = gamePanel.tileSize / 2 * gamePanel.sound.volumeScale;
+        graphics2D.fillRect(textX, textY, volumeWidth, gamePanel.tileSize / 2);
 
         textY += gamePanel.tileSize;
         graphics2D.drawRect(textX, textY, gamePanel.tileSize * 2, gamePanel.tileSize / 2);
+        volumeWidth = gamePanel.tileSize / 2 * gamePanel.SFX.volumeScale;
+        graphics2D.fillRect(textX, textY, volumeWidth, gamePanel.tileSize / 2);
+
+    }
+
+    public void fullScreenNotification(int x, int y) {
+        int textX = x + gamePanel.tileSize;
+        int textY = y + gamePanel.tileSize * 3;
+
+        dialogue = "The change will take \neffect after restarting \nthe game";
+        for (String line : dialogue.split("\n")) {
+            graphics2D.drawString(line, textX, textY);
+
+            textY += 40;
+        }
+        textY = y + gamePanel.tileSize * 9;
+        graphics2D.drawString("Back", textX, textY);
+        if (commandNum == 0) {
+            graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                subBehavior = 0;
+            }
+        }
+
     }
 
     private void drawInventory() {

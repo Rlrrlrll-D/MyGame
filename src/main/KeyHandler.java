@@ -50,9 +50,7 @@ public class KeyHandler implements KeyListener {
         if (value == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }
-        if (value == KeyEvent.VK_ENTER) {
-            enterPressed = true;
-        }
+
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
             if (gamePanel.ui.commandNum != 0)
                 gamePanel.ui.commandNum--;
@@ -63,8 +61,35 @@ public class KeyHandler implements KeyListener {
                 gamePanel.ui.commandNum++;
             gamePanel.playSFX(12);
         }
+        if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
+            if (gamePanel.ui.subBehavior == 0) {
+                if (gamePanel.ui.commandNum == 1 && gamePanel.sound.volumeScale > 0) {
+                    gamePanel.sound.volumeScale--;
+                    gamePanel.sound.chkVolume();
+                    gamePanel.playSFX(12);
+                }
+                if (gamePanel.ui.commandNum == 2 && gamePanel.SFX.volumeScale > 0) {
+                    gamePanel.SFX.volumeScale--;
+                    //   gamePanel.SFX.chkVolume();
+                    gamePanel.playSFX(12);
+                }
+            }
+        }
+        if (value == KeyEvent.VK_D || value == KeyEvent.VK_RIGHT) {
+            if (gamePanel.ui.subBehavior == 0) {
+                if (gamePanel.ui.commandNum == 1 && gamePanel.sound.volumeScale < 5) {
+                    gamePanel.sound.volumeScale++;
+                    gamePanel.sound.chkVolume();
+                    gamePanel.playSFX(12);
+                }
+                if (gamePanel.ui.commandNum == 2 && gamePanel.SFX.volumeScale < 5) {
+                    gamePanel.SFX.volumeScale++;
+                    // gamePanel.SFX.chkVolume();
+                    gamePanel.playSFX(12);
+                }
 
-
+            }
+        }
     }
 
     private void characterBehavior(int value) {

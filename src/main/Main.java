@@ -13,7 +13,7 @@ public class Main {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("My Hero Adventure");
-        window.setUndecorated(true);
+        // window.setUndecorated(true);
 
 
         GamePanel gamePanel = new GamePanel();

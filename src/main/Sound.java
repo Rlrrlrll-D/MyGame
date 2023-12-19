@@ -3,12 +3,16 @@ package main;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import java.io.File;
 
 public class Sound {
 
     Clip clip;
     File[] sounds = new File[20];
+    FloatControl floatControl;
+    int volumeScale = 3;
+    float volume;
     // URL[] soundURL =new URL[30];
 
     public Sound() {
@@ -45,6 +49,8 @@ public class Sound {
             AudioInputStream audio = AudioSystem.getAudioInputStream(sounds[count]);
             clip = AudioSystem.getClip();
             clip.open(audio);
+            floatControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            chkVolume();
         } catch (Exception ignored) {
 
         }
@@ -63,5 +69,29 @@ public class Sound {
     public void stop() {
         clip.stop();
 
+    }
+
+    public void chkVolume() {
+        switch (volumeScale) {
+            case 0:
+                volume = -80f;
+                break;
+            case 1:
+                volume = -20f;
+                break;
+            case 2:
+                volume = -12f;
+                break;
+            case 3:
+                volume = -5f;
+                break;
+            case 4:
+                volume = 1f;
+                break;
+            case 5:
+                volume = 6f;
+                break;
+        }
+        floatControl.setValue(volume);
     }
 }
