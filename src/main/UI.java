@@ -27,6 +27,7 @@ public class UI {
     public int commandNum = 0;
     public int titleScreenBehavior = 0;
     public int slotRow = 0;
+    int subBehavior;
     ArrayList<Integer> counter = new ArrayList<>();
 
 
@@ -104,6 +105,11 @@ public class UI {
             drawCharacterScreen();
             drawInventory();
         }
+        if (gamePanel.gameBehavior == GamePanel.optionsBehavior) {
+            drawOptionScreen();
+
+        }
+
 
 //        if (finished){
 //
@@ -149,6 +155,65 @@ public class UI {
 //                msgDelay(180);
 //            }
 //        }
+    }
+
+    private void drawOptionScreen() {
+        graphics2D.setColor(new Color(229, 152, 9));
+        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 25F));
+
+        int x = gamePanel.tileSize * 6;
+        int y = gamePanel.tileSize;
+        int width = gamePanel.tileSize * 8;
+        int height = gamePanel.tileSize * 10;
+        drawSubWindow(x, y, width, height);
+
+        switch (subBehavior) {
+            case 0:
+                option_top(x, y);
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
+
+    }
+
+    public void option_top(int x, int y) {
+        int textX;
+        int textY;
+
+        String txt = "Options";
+        textX = getX_Text(txt);
+        textY = y + gamePanel.tileSize;
+        graphics2D.drawString(txt, textX, textY);
+
+        txt = "Full Screen";
+        textX = x + gamePanel.tileSize;
+        textY += gamePanel.tileSize;
+        graphics2D.drawString(txt, textX, textY);
+
+        txt = "Music";
+        textY += gamePanel.tileSize;
+        graphics2D.drawString(txt, textX, textY);
+
+        txt = "SE";
+        textY += gamePanel.tileSize;
+        graphics2D.drawString(txt, textX, textY);
+
+        txt = "Control";
+        textY += gamePanel.tileSize;
+        graphics2D.drawString(txt, textX, textY);
+
+        txt = "End Game";
+        textY += gamePanel.tileSize;
+        graphics2D.drawString(txt, textX, textY);
+
+        txt = "Back";
+        textX = getX_Text(txt);
+        textY += gamePanel.tileSize * 2;
+        graphics2D.drawString(txt, textX, textY);
+
     }
 
     private void drawInventory() {

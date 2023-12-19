@@ -36,7 +36,21 @@ public class KeyHandler implements KeyListener {
             dialogBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
             characterBehavior(value);
+        } else if (gamePanel.gameBehavior == GamePanel.optionsBehavior) {
+            optionsBehavior(value);
         }
+
+    }
+
+    private void optionsBehavior(int value) {
+
+        if (value == KeyEvent.VK_ESCAPE) {
+            gamePanel.gameBehavior = GamePanel.playBehavior;
+        }
+        if (value == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }
+
     }
 
     private void characterBehavior(int value) {
@@ -119,6 +133,9 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_C) {
             gamePanel.gameBehavior = GamePanel.characterBehavior;
+        }
+        if (value == KeyEvent.VK_ESCAPE) {
+            gamePanel.gameBehavior = GamePanel.optionsBehavior;
         }
     }
 
