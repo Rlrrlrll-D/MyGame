@@ -37,12 +37,13 @@ public class GamePanel extends JPanel implements Runnable {
     public final int dfl_Y = screenHeight / 2 - tileSize / 2;
     int screenWidth2 = screenWidth;
     int screenHeight2 = screenHeight;
+    public boolean fullScreenOn;
     BufferedImage imgTempScreen;
     Graphics2D graphics2D;
     public CollisionChecker checker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
     public EventHandler eventHandler = new EventHandler(this);
-    public Thread gameThread;
+
     public UI ui = new UI(this);
     public ArrayList<Entity> particleArrayList = new ArrayList<>();
     public KeyHandler keyHandler = new KeyHandler(this);
@@ -53,12 +54,12 @@ public class GamePanel extends JPanel implements Runnable {
     public InteractiveTile[] interactiveTile = new InteractiveTile[50];
     public Entity[] mon = new Entity[20];
 
-
     Sound sound = new Sound();
     Sound SFX = new Sound();
     ArrayList<Entity> entityArrayList = new ArrayList<>();
     public ArrayList<Entity> projectileArrayList = new ArrayList<>();
     TileManager tileManager = new TileManager(this);
+    public Thread gameThread;
 
 
     public GamePanel() throws IOException, FontFormatException {

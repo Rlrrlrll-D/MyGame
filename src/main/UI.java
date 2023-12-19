@@ -176,6 +176,7 @@ public class UI {
             case 2:
                 break;
         }
+        gamePanel.keyHandler.enterPressed = false;
 
     }
 
@@ -194,6 +195,9 @@ public class UI {
         graphics2D.drawString(txt, textX, textY);
         if (commandNum == 0) {
             graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                gamePanel.fullScreenOn = !gamePanel.fullScreenOn;
+            }
         }
 
         txt = "Music";
@@ -231,9 +235,19 @@ public class UI {
         if (commandNum == 5) {
             graphics2D.drawString(">", textX - 25, textY);
         }
-        textX = x + gamePanel.tileSize * 6;
+        textX = x + gamePanel.tileSize * 5;
         textY = gamePanel.tileSize * 2 + gamePanel.tileSize / 2;
+        graphics2D.setStroke(new BasicStroke(2));
         graphics2D.drawRect(textX, textY, gamePanel.tileSize / 2, gamePanel.tileSize / 2);
+        if (gamePanel.fullScreenOn) {
+            graphics2D.fillRect(textX, textY, gamePanel.tileSize / 2, gamePanel.tileSize / 2);
+        }
+
+        textY += gamePanel.tileSize;
+        graphics2D.drawRect(textX, textY, gamePanel.tileSize * 2, gamePanel.tileSize / 2);
+
+        textY += gamePanel.tileSize;
+        graphics2D.drawRect(textX, textY, gamePanel.tileSize * 2, gamePanel.tileSize / 2);
     }
 
     private void drawInventory() {
