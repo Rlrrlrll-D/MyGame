@@ -192,28 +192,48 @@ public class UI {
         textX = x + gamePanel.tileSize;
         textY += gamePanel.tileSize;
         graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 0) {
+            graphics2D.drawString(">", textX - 25, textY);
+        }
 
         txt = "Music";
         textY += gamePanel.tileSize;
         graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 1) {
+            graphics2D.drawString(">", textX - 25, textY);
+        }
 
         txt = "SE";
         textY += gamePanel.tileSize;
         graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 2) {
+            graphics2D.drawString(">", textX - 25, textY);
+        }
 
         txt = "Control";
         textY += gamePanel.tileSize;
         graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 3) {
+            graphics2D.drawString(">", textX - 25, textY);
+        }
 
         txt = "End Game";
         textY += gamePanel.tileSize;
         graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 4) {
+            graphics2D.drawString(">", textX - 25, textY);
+        }
 
         txt = "Back";
         textX = getX_Text(txt);
         textY += gamePanel.tileSize * 2;
         graphics2D.drawString(txt, textX, textY);
-
+        if (commandNum == 5) {
+            graphics2D.drawString(">", textX - 25, textY);
+        }
+        textX = x + gamePanel.tileSize * 6;
+        textY = gamePanel.tileSize * 2 + gamePanel.tileSize / 2;
+        graphics2D.drawRect(textX, textY, gamePanel.tileSize / 2, gamePanel.tileSize / 2);
     }
 
     private void drawInventory() {

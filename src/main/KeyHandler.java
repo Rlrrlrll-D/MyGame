@@ -50,6 +50,20 @@ public class KeyHandler implements KeyListener {
         if (value == KeyEvent.VK_ENTER) {
             enterPressed = true;
         }
+        if (value == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }
+        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+            if (gamePanel.ui.commandNum != 0)
+                gamePanel.ui.commandNum--;
+            gamePanel.playSFX(12);
+        }
+        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+            if (gamePanel.ui.commandNum != 5)
+                gamePanel.ui.commandNum++;
+            gamePanel.playSFX(12);
+        }
+
 
     }
 
