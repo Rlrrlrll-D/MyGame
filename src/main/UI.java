@@ -237,7 +237,7 @@ public class UI {
         if (commandNum == 5) {
             graphics2D.drawString(">", textX - 25, textY);
         }
-        textX = x + gamePanel.tileSize * 5;
+        textX = (int) (x + gamePanel.tileSize * 4.5);
         textY = gamePanel.tileSize * 2 + gamePanel.tileSize / 2;
         graphics2D.setStroke(new BasicStroke(2));
         graphics2D.drawRect(textX, textY, gamePanel.tileSize / 2, gamePanel.tileSize / 2);
