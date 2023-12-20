@@ -204,6 +204,13 @@ public class Player extends Entity {
         shotCount(30);
         checkLife();
         checkMana();
+        checkGameOver();
+    }
+
+    private void checkGameOver() {
+        if (life <= 0) {
+            gamePanel.gameBehavior = GamePanel.gameOverBehavior;
+        }
     }
 
     protected void checkLife() {

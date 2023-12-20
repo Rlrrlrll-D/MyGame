@@ -107,7 +107,9 @@ public class UI {
         }
         if (gamePanel.gameBehavior == GamePanel.optionsBehavior) {
             drawOptionScreen();
-
+        }
+        if (gamePanel.gameBehavior == GamePanel.gameOverBehavior) {
+            drawGameOverScreen();
         }
 
 
@@ -155,6 +157,13 @@ public class UI {
 //                msgDelay(180);
 //            }
 //        }
+    }
+
+    private void drawGameOverScreen() {
+
+        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 37F));
+        graphics2D.setColor(new Color(1, 4, 14, 220));
+        graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
     }
 
     private void drawOptionScreen() throws IOException {
@@ -629,9 +638,7 @@ public class UI {
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
 
             }
-
         }
-
     }
 
     public void drawPlayerLife() {
