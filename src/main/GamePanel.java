@@ -75,12 +75,12 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setNPC();
         assetSetter.setMonster();
         assetSetter.setInteractiveTile();
-        keyHandler.musicOn = true;
+
         gameBehavior = titleBehavior;
         imgTempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         graphics2D = (Graphics2D) imgTempScreen.getGraphics();
 
-        setFullScreen();
+        // setFullScreen();
     }
 
     public void setFullScreen() {

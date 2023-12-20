@@ -4,7 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-    public boolean musicOn;
+
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed;
     public boolean chkDrawTime = false;
 
@@ -168,7 +168,6 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_M) {
             musTrigger();
-            System.out.println(musicOn);
         }
         if (value == KeyEvent.VK_C) {
             gamePanel.gameBehavior = GamePanel.characterBehavior;
@@ -245,13 +244,15 @@ public class KeyHandler implements KeyListener {
     }
 
     private void musTrigger() {
-        if (musicOn) {
-            gamePanel.stopMusic();
-            musicOn = false;
+        if (gamePanel.sound.volumeScale > 0) {
+            gamePanel.sound.volumeScale = 0;
+
         } else {
-            gamePanel.playMusic(0);
-            musicOn = true;
+            gamePanel.sound.volumeScale = 1;
+
         }
+        gamePanel.sound.chkVolume();
+        System.out.println(gamePanel.sound.volumeScale);
     }
 
 

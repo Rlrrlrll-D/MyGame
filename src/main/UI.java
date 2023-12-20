@@ -246,12 +246,12 @@ public class UI {
         }
 
         textY += gamePanel.tileSize;
-        graphics2D.drawRect(textX, textY, gamePanel.tileSize * 2, gamePanel.tileSize / 2);
+        graphics2D.drawRect(textX, textY, (gamePanel.tileSize / 2) * 5, gamePanel.tileSize / 2);
         int volumeWidth = gamePanel.tileSize / 2 * gamePanel.sound.volumeScale;
         graphics2D.fillRect(textX, textY, volumeWidth, gamePanel.tileSize / 2);
 
         textY += gamePanel.tileSize;
-        graphics2D.drawRect(textX, textY, gamePanel.tileSize * 2, gamePanel.tileSize / 2);
+        graphics2D.drawRect(textX, textY, (gamePanel.tileSize / 2) * 5, gamePanel.tileSize / 2);
         volumeWidth = gamePanel.tileSize / 2 * gamePanel.SFX.volumeScale;
         graphics2D.fillRect(textX, textY, volumeWidth, gamePanel.tileSize / 2);
 
