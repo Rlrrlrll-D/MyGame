@@ -38,6 +38,7 @@ public class GamePanel extends JPanel implements Runnable {
     int screenWidth2 = screenWidth;
     int screenHeight2 = screenHeight;
     public boolean fullScreenOn;
+    public boolean musicOn;
     BufferedImage imgTempScreen;
     Graphics2D graphics2D;
     public CollisionChecker checker = new CollisionChecker(this);
@@ -75,7 +76,6 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setNPC();
         assetSetter.setMonster();
         assetSetter.setInteractiveTile();
-
         gameBehavior = titleBehavior;
         imgTempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         graphics2D = (Graphics2D) imgTempScreen.getGraphics();

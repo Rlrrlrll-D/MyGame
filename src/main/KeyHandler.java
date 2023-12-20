@@ -70,7 +70,6 @@ public class KeyHandler implements KeyListener {
                 }
                 if (gamePanel.ui.commandNum == 2 && gamePanel.SFX.volumeScale > 0) {
                     gamePanel.SFX.volumeScale--;
-                    //   gamePanel.SFX.chkVolume();
                     gamePanel.playSFX(12);
                 }
             }
@@ -84,7 +83,6 @@ public class KeyHandler implements KeyListener {
                 }
                 if (gamePanel.ui.commandNum == 2 && gamePanel.SFX.volumeScale < 5) {
                     gamePanel.SFX.volumeScale++;
-                    // gamePanel.SFX.chkVolume();
                     gamePanel.playSFX(12);
                 }
 
@@ -190,34 +188,43 @@ public class KeyHandler implements KeyListener {
 
             if (gamePanel.ui.commandNum != 0)
                 gamePanel.ui.commandNum--;
+            gamePanel.playSFX(12);
         }
         if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
             if (gamePanel.ui.commandNum != 3)
                 gamePanel.ui.commandNum++;
+            gamePanel.playSFX(12);
         }
         if (value == KeyEvent.VK_ENTER) {
             if (gamePanel.ui.commandNum == 0) {
                 System.out.println("Do some fighter specific stuff!");
                 gamePanel.gameBehavior = GamePanel.playBehavior;
-                gamePanel.playMusic(0);
+                musicCheck();
                 enterPressed = false;
-
             }
             if (gamePanel.ui.commandNum == 1) {
                 System.out.println("Do some thief specific stuff!");
                 gamePanel.gameBehavior = GamePanel.playBehavior;
-                gamePanel.playMusic(0);
+                musicCheck();
             }
             if (gamePanel.ui.commandNum == 2) {
                 System.out.println("Do some sorcerer specific stuff!");
                 gamePanel.gameBehavior = GamePanel.playBehavior;
-                gamePanel.playMusic(0);
+                musicCheck();
             }
             if (gamePanel.ui.commandNum == 3) {
                 gamePanel.ui.titleScreenBehavior = 0;
                 gamePanel.ui.commandNum = 0;
             }
         }
+    }
+
+    private void musicCheck() {
+        if (!gamePanel.musicOn) {
+            gamePanel.playMusic(0);
+            gamePanel.musicOn = true;
+        }
+        System.out.println(gamePanel.musicOn);
     }
 
     private void titleBehavior_0(int value) {
@@ -244,15 +251,14 @@ public class KeyHandler implements KeyListener {
     }
 
     private void musTrigger() {
-        if (gamePanel.sound.volumeScale > 0) {
-            gamePanel.sound.volumeScale = 0;
-
-        } else {
-            gamePanel.sound.volumeScale = 1;
-
+        if (gamePanel.musicOn) {
+            if (gamePanel.sound.volumeScale > 0) {
+                gamePanel.sound.volumeScale = 0;
+            } else {
+                gamePanel.sound.volumeScale = 1;
+            }
+            gamePanel.sound.chkVolume();
         }
-        gamePanel.sound.chkVolume();
-        System.out.println(gamePanel.sound.volumeScale);
     }
 
 

@@ -275,7 +275,6 @@ public class UI {
                 subBehavior = 0;
             }
         }
-
     }
 
     private void drawInventory() {
