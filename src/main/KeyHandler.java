@@ -39,7 +39,6 @@ public class KeyHandler implements KeyListener {
         } else if (gamePanel.gameBehavior == GamePanel.optionsBehavior) {
             optionsBehavior(value);
         }
-
     }
 
     private void optionsBehavior(int value) {
@@ -52,14 +51,25 @@ public class KeyHandler implements KeyListener {
         }
 
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-            if (gamePanel.ui.commandNum != 0)
-                gamePanel.ui.commandNum--;
-            gamePanel.playSFX(12);
+            if (gamePanel.ui.subBehavior == 0 || gamePanel.ui.subBehavior == 3) {
+                if (gamePanel.ui.commandNum != 0) {
+                    gamePanel.ui.commandNum--;
+                    gamePanel.playSFX(12);
+                }
+            }
         }
         if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-            if (gamePanel.ui.commandNum != 5)
-                gamePanel.ui.commandNum++;
-            gamePanel.playSFX(12);
+            if (gamePanel.ui.subBehavior == 0) {
+                if (gamePanel.ui.commandNum != 5) {
+                    gamePanel.ui.commandNum++;
+                    gamePanel.playSFX(12);
+                }
+            } else if (gamePanel.ui.subBehavior == 3) {
+                if (gamePanel.ui.commandNum != 1) {
+                    gamePanel.ui.commandNum++;
+                    gamePanel.playSFX(12);
+                }
+            }
         }
         if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
             if (gamePanel.ui.subBehavior == 0) {
@@ -85,7 +95,6 @@ public class KeyHandler implements KeyListener {
                     gamePanel.SFX.volumeScale++;
                     gamePanel.playSFX(12);
                 }
-
             }
         }
     }

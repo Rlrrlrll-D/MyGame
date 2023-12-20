@@ -177,12 +177,51 @@ public class UI {
             case 2:
                 control(x, y);
                 break;
+            case 3:
+                endGame(x, y);
+                break;
         }
         gamePanel.keyHandler.enterPressed = false;
 
     }
 
-    public void top(int x, int y) {
+    private void endGame(int x, int y) {
+        int textX = x + gamePanel.tileSize;
+        int textY = y + gamePanel.tileSize * 3;
+
+        dialogue = "Quit the game and \nreturn to the title screen?";
+
+        for (String line : dialogue.split("\n")) {
+            graphics2D.drawString(line, textX, textY);
+
+            textY += 40;
+        }
+        String txt = "Yes";
+        textX = getX_Text(txt);
+        textY += gamePanel.tileSize * 3;
+        graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 0) {
+            graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                subBehavior = 0;
+                gamePanel.gameBehavior = GamePanel.titleBehavior;
+            }
+        }
+        txt = "No";
+        textX = getX_Text(txt);
+        textY += gamePanel.tileSize;
+        graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 1) {
+            graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                subBehavior = 0;
+                commandNum = 4;
+            }
+        }
+
+    }
+
+    private void top(int x, int y) {
         int textX;
         int textY;
 
@@ -233,6 +272,10 @@ public class UI {
         graphics2D.drawString(txt, textX, textY);
         if (commandNum == 4) {
             graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                subBehavior = 3;
+                commandNum = 0;
+            }
         }
 
         txt = "Back";
@@ -262,7 +305,7 @@ public class UI {
 
     }
 
-    public void control(int x, int y) {
+    private void control(int x, int y) {
         int textX;
         int textY;
 
@@ -313,13 +356,14 @@ public class UI {
             graphics2D.drawString(">", textX - 25, textY);
             if (gamePanel.keyHandler.enterPressed) {
                 subBehavior = 0;
+                commandNum = 3;
             }
         }
 
 
     }
 
-    public void fullScreenNotification(int x, int y) {
+    private void fullScreenNotification(int x, int y) {
         int textX = x + gamePanel.tileSize;
         int textY = y + gamePanel.tileSize * 3;
 
