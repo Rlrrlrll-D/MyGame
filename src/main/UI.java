@@ -193,7 +193,6 @@ public class UI {
 
         for (String line : dialogue.split("\n")) {
             graphics2D.drawString(line, textX, textY);
-
             textY += 40;
         }
         String txt = "Yes";
@@ -284,6 +283,10 @@ public class UI {
         graphics2D.drawString(txt, textX, textY);
         if (commandNum == 5) {
             graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                gamePanel.gameBehavior = GamePanel.playBehavior;
+                commandNum = 0;
+            }
         }
         textX = (int) (x + gamePanel.tileSize * 4.5);
         textY = gamePanel.tileSize * 2 + gamePanel.tileSize / 2;
