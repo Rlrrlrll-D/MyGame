@@ -318,6 +318,7 @@ public class UI {
 
 
     }
+
     public void fullScreenNotification(int x, int y) {
         int textX = x + gamePanel.tileSize;
         int textY = y + gamePanel.tileSize * 3;
@@ -408,7 +409,7 @@ public class UI {
 
         int textX = frameX + 20;
         int textY = frameY + gamePanel.tileSize;
-        final int lineHeight = 27;
+        final int lineHeight = (int) (gamePanel.tileSize * 0.65);
 
         graphics2D.drawString("Level", textX, textY);
         textY += lineHeight;
@@ -487,13 +488,13 @@ public class UI {
         value = String.valueOf(gamePanel.player.coin);
         textX = getX_Value(value, tailX);
         graphics2D.drawString(value, textX, textY);
-        textY += lineHeight;
+        textY += lineHeight + 7;
 
         BufferedImage img = UtilityTool.scaleImage(gamePanel.player.currentWeapon.down1, 30, 30);
         BufferedImage img2 = UtilityTool.scaleImage(gamePanel.player.currentShield.down1, 30, 30);
 
         graphics2D.drawImage(img, tailX - 32, textY, null);
-        textY += lineHeight + 5;
+        textY += lineHeight + 7;
         graphics2D.drawImage(img2, tailX - 32, textY, null);
     }
 
