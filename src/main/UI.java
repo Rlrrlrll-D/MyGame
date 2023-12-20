@@ -175,6 +175,7 @@ public class UI {
                 fullScreenNotification(x, y);
                 break;
             case 2:
+                control(x, y);
                 break;
         }
         gamePanel.keyHandler.enterPressed = false;
@@ -221,6 +222,10 @@ public class UI {
         graphics2D.drawString(txt, textX, textY);
         if (commandNum == 3) {
             graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                subBehavior = 2;
+                commandNum = 0;
+            }
         }
 
         txt = "End Game";
@@ -257,6 +262,62 @@ public class UI {
 
     }
 
+    public void control(int x, int y) {
+        int textX;
+        int textY;
+
+        String txt = "Control";
+        textX = getX_Text(txt);
+        textY = y + gamePanel.tileSize;
+        graphics2D.drawString(txt, textX, textY);
+
+        textX = x + gamePanel.tileSize;
+        textY += gamePanel.tileSize;
+        graphics2D.drawString("Move", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("Confirm/Attack", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("Shoot/Cast", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("Character Screen", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("Pause", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("Mute", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("Options", textX, textY);
+
+
+        textX = x + gamePanel.tileSize * 6;
+        textY = y + gamePanel.tileSize * 2;
+        graphics2D.drawString("WASD", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("Enter", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("F", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("C", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("P", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("M", textX, textY);
+        textY += (int) (gamePanel.tileSize * 0.85);
+        graphics2D.drawString("Esc", textX, textY);
+
+
+        txt = "Back";
+        textX = getX_Text(txt);
+        textY = y + gamePanel.tileSize * 9;
+        graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 0) {
+            graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                subBehavior = 0;
+            }
+        }
+
+
+    }
     public void fullScreenNotification(int x, int y) {
         int textX = x + gamePanel.tileSize;
         int textY = y + gamePanel.tileSize * 3;
