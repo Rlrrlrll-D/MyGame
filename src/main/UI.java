@@ -78,7 +78,7 @@ public class UI {
         }
     }
 
-    public void drawing(Graphics2D graphics2D) {
+    public void drawing(Graphics2D graphics2D) throws IOException {
         this.graphics2D = graphics2D;
 
         graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
@@ -157,7 +157,7 @@ public class UI {
 //        }
     }
 
-    private void drawOptionScreen() {
+    private void drawOptionScreen() throws IOException {
         graphics2D.setColor(new Color(229, 152, 9));
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 25F));
 
@@ -220,7 +220,7 @@ public class UI {
 
     }
 
-    private void top(int x, int y) {
+    private void top(int x, int y) throws IOException {
         int textX;
         int textY;
 
@@ -305,6 +305,7 @@ public class UI {
         graphics2D.drawRect(textX, textY, (gamePanel.tileSize / 2) * 5, gamePanel.tileSize / 2);
         volumeWidth = gamePanel.tileSize / 2 * gamePanel.SFX.volumeScale;
         graphics2D.fillRect(textX, textY, volumeWidth, gamePanel.tileSize / 2);
+        gamePanel.config.saveConfig();
 
     }
 

@@ -45,6 +45,8 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter assetSetter = new AssetSetter(this);
     public EventHandler eventHandler = new EventHandler(this);
 
+    Config config = new Config(this);
+
     public UI ui = new UI(this);
     public ArrayList<Entity> particleArrayList = new ArrayList<>();
     public KeyHandler keyHandler = new KeyHandler(this);
@@ -80,7 +82,9 @@ public class GamePanel extends JPanel implements Runnable {
         imgTempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         graphics2D = (Graphics2D) imgTempScreen.getGraphics();
 
-        //setFullScreen();
+        if (fullScreenOn) {
+            setFullScreen();
+        }
     }
 
     public void setFullScreen() {
@@ -112,7 +116,11 @@ public class GamePanel extends JPanel implements Runnable {
             lastTime = currentTime;
             while (accumulate > 1) {
                 update();
-                toBufferImage();
+                try {
+                    toBufferImage();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 drawToScreen();
                 // repaint();
                 accumulate--;
@@ -168,7 +176,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    public void toBufferImage() {
+    public void toBufferImage() throws IOException {
         super.paintComponent(graphics2D);
         long drawStart = 0;
         if (keyHandler.chkDrawTime) {
