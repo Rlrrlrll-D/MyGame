@@ -38,6 +38,24 @@ public class KeyHandler implements KeyListener {
             characterBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.optionsBehavior) {
             optionsBehavior(value);
+        } else if (gamePanel.gameBehavior == GamePanel.gameOverBehavior) {
+            gameOverBehavior(value);
+        }
+
+    }
+
+    private void gameOverBehavior(int value) {
+        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+            if (gamePanel.ui.commandNum != 0) {
+                gamePanel.ui.commandNum--;
+                gamePanel.playSFX(12);
+            }
+        }
+        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+            if (gamePanel.ui.commandNum != 1) {
+                gamePanel.ui.commandNum++;
+                gamePanel.playSFX(12);
+            }
         }
     }
 

@@ -161,9 +161,50 @@ public class UI {
 
     private void drawGameOverScreen() {
 
-        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 37F));
-        graphics2D.setColor(new Color(1, 4, 14, 220));
+        graphics2D.setFont(Monica.deriveFont(Font.BOLD, 70F));
+
+        graphics2D.setColor(new Color(24, 27, 35, 220));
         graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        int textX;
+        int textY;
+
+        graphics2D.setColor(new Color(6, 6, 17));
+        String txt = "Game Over";
+        textX = getX_Text(txt);
+        textY = gamePanel.tileSize * 3;
+        graphics2D.drawString(txt, textX, textY);
+
+        graphics2D.setColor(new Color(229, 152, 9));
+        textX = getX_Text(txt) - 4;
+        textY = (gamePanel.tileSize * 3) - 4;
+        graphics2D.drawString(txt, textX, textY);
+
+        graphics2D.setFont(Monica.deriveFont(Font.BOLD, 45F));
+        txt = "Retry";
+        textX = getX_Text(txt);
+        textY = gamePanel.tileSize * 7;
+        graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 0) {
+            graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                subBehavior = 0;
+                gamePanel.gameBehavior = GamePanel.titleBehavior;
+            }
+        }
+
+        txt = "Quit";
+        textX = getX_Text(txt);
+        textY = (int) (gamePanel.tileSize * 8.25);
+        graphics2D.drawString(txt, textX, textY);
+        if (commandNum == 1) {
+            graphics2D.drawString(">", textX - 25, textY);
+            if (gamePanel.keyHandler.enterPressed) {
+                subBehavior = 0;
+                gamePanel.gameBehavior = GamePanel.titleBehavior;
+            }
+        }
+
     }
 
     private void drawOptionScreen() throws IOException {
