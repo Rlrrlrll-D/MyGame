@@ -11,12 +11,10 @@ public class Sound {
     Clip clip;
     File[] sounds = new File[20];
     FloatControl floatControl;
-    public int volumeScale = 1;
+    public int volumeScale = 2;
     float volume;
-    // URL[] soundURL =new URL[30];
 
     public Sound() {
-
 
         sounds[0] = new File("src/res/sound/epic.wav");
         sounds[1] = new File("src/res/sound/coin.wav");
@@ -35,13 +33,6 @@ public class Sound {
         sounds[14] = new File("src/res/sound/burning.wav");
         sounds[15] = new File("src/res/sound/cut-tree.wav");
         sounds[16] = new File("src/res/sound/game-over.wav");
-//        soundURL[0] = getClass().getResource("/res.sound/epic .wav");
-//        soundURL[1] = getClass().getResource("/res.sound/coin.wav");
-//        soundURL[2] = getClass().getResource("/res.sound/unlock.wav");
-//        soundURL[3] = getClass().getResource("/res.sound/close.wav");
-//        soundURL[4] = getClass().getResource("/res.sound/grub.wav");
-//        soundURL[5] = getClass().getResource("/res.sound/win.wav");
-
 
     }
 
@@ -59,19 +50,14 @@ public class Sound {
 
     public void play() {
         clip.start();
-
     }
 
     public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
-
     }
-
     public void stop() {
         clip.stop();
-
     }
-
     public void chkVolume() {
         switch (volumeScale) {
             case 0:

@@ -60,8 +60,6 @@ public class UI {
     }
 
     public void addMsg(String text) {
-//        msg = text;
-//        msgOn = true;
 
         message.add(text);
         counter.add(0);
@@ -69,12 +67,9 @@ public class UI {
 
     public void msgDelay(int delay) {
         count++;
-
         if (count >= delay) {
             count = 0;
             msgOn = false;
-
-
         }
     }
 
@@ -163,7 +158,7 @@ public class UI {
 
         graphics2D.setFont(Monica.deriveFont(Font.BOLD, 70F));
 
-        graphics2D.setColor(new Color(24, 27, 35, 220));
+        graphics2D.setColor(new Color(12, 23, 30));
         graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
 
         int textX;
@@ -716,7 +711,7 @@ public class UI {
 
     }
 
-    public void drawMessage() {
+    private void drawMessage() {
         int msgX = gamePanel.tileSize;
         int msgY = gamePanel.tileSize * 3;
 
@@ -745,7 +740,7 @@ public class UI {
 
     }
 
-    public void drawPauseScreenYellow() {
+    private void drawPauseScreenYellow() {
         graphics2D.setColor(new Color(229, 152, 9));
         graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 50F));
         String txt = "Paused!";
@@ -755,7 +750,7 @@ public class UI {
 
     }
 
-    public void drawPauseScreenShadow() {
+    private void drawPauseScreenShadow() {
         graphics2D.setColor(new Color(16, 7, 1));
         graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 50F));
         String txt = "Paused!";
@@ -765,7 +760,7 @@ public class UI {
 
     }
 
-    public void drawDialogScreen() {
+    private void drawDialogScreen() {
         int x = gamePanel.tileSize * 2;
         int y = (int) (gamePanel.tileSize * 1.5);
         int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
@@ -784,7 +779,7 @@ public class UI {
         graphics2D.drawString(str, x, y);
     }
 
-    public void drawSubWindow(int x, int y, int width, int height) {
+    private void drawSubWindow(int x, int y, int width, int height) {
         graphics2D.setColor(new Color(1, 4, 14, 220));
         graphics2D.fillRoundRect(x, y, width, height, 35, 35);
 
@@ -794,12 +789,12 @@ public class UI {
     }
 
 
-    public int getX_Text(String txt) {
+    private int getX_Text(String txt) {
         int txtLength = (int) graphics2D.getFontMetrics().getStringBounds(txt, graphics2D).getWidth();
         return gamePanel.screenWidth / 2 - txtLength / 2;
     }
 
-    public int getX_Value(String txt, int tailX) {
+    private int getX_Value(String txt, int tailX) {
         int txtLength = (int) graphics2D.getFontMetrics().getStringBounds(txt, graphics2D).getWidth();
         return tailX - txtLength;
     }
