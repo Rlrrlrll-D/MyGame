@@ -222,6 +222,9 @@ public class Player extends Entity {
         if (life <= 0) {
             gamePanel.gameBehavior = GamePanel.gameOverBehavior;
             gamePanel.stopMusic();
+            if (gamePanel.sound.volumeScale < 1) {
+                gamePanel.sound.volumeScale = 2;
+            }
             gamePanel.playGameOver();
         }
     }

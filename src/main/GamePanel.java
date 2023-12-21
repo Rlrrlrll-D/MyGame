@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable {
     public InteractiveTile[] interactiveTile = new InteractiveTile[50];
     public Entity[] mon = new Entity[20];
 
-    Sound sound = new Sound();
+    public Sound sound = new Sound();
     Sound SFX = new Sound();
     ArrayList<Entity> entityArrayList = new ArrayList<>();
     public ArrayList<Entity> projectileArrayList = new ArrayList<>();
@@ -94,7 +94,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.restoreLifeMana();
         assetSetter.setNPC();
         assetSetter.setMonster();
-        //musicOn =false;
+        musicOn = false;
 
     }
 

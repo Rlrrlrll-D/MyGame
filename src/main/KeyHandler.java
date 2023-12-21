@@ -61,9 +61,11 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.ui.commandNum == 0) {
                 gamePanel.gameBehavior = GamePanel.playBehavior;
                 gamePanel.retry();
+                musicCheck();
             } else if (gamePanel.ui.commandNum == 1) {
                 gamePanel.gameBehavior = GamePanel.titleBehavior;
                 gamePanel.restart();
+                musicCheck();
             }
         }
     }
