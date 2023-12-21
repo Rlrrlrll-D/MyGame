@@ -262,7 +262,6 @@ public class UI {
                 commandNum = 4;
             }
         }
-
     }
 
     private void top(int x, int y) throws IOException {
@@ -708,7 +707,6 @@ public class UI {
             graphics2D.drawImage(crystal_f, x, y, null);
             x += (int) (gamePanel.tileSize / 1.3);
         }
-
     }
 
     private void drawMessage() {
@@ -733,11 +731,9 @@ public class UI {
                 if (counter.get(i) > 180) {
                     message.remove(i);
                     counter.remove(i);
-
                 }
             }
         }
-
     }
 
     private void drawPauseScreenYellow() {
