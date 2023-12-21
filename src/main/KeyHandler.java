@@ -57,6 +57,15 @@ public class KeyHandler implements KeyListener {
                 gamePanel.playSFX(12);
             }
         }
+        if (value == KeyEvent.VK_ENTER) {
+            if (gamePanel.ui.commandNum == 0) {
+                gamePanel.gameBehavior = GamePanel.playBehavior;
+                gamePanel.retry();
+            } else if (gamePanel.ui.commandNum == 1) {
+                gamePanel.gameBehavior = GamePanel.titleBehavior;
+                gamePanel.restart();
+            }
+        }
     }
 
     private void optionsBehavior(int value) {

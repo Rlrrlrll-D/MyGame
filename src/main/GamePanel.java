@@ -89,6 +89,27 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    public void retry() {
+        player.setDefaultPos();
+        player.restoreLifeMana();
+        assetSetter.setNPC();
+        assetSetter.setMonster();
+        //musicOn =false;
+
+    }
+
+    public void restart() {
+        player.setDefaultPos();
+        player.setDefaultVal();
+        player.restoreLifeMana();
+        player.setInventory();
+        assetSetter.setObject();
+        assetSetter.setNPC();
+        assetSetter.setMonster();
+        assetSetter.setInteractiveTile();
+        musicOn = false;
+    }
+
     public void setFullScreen() {
 
         GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -338,5 +359,11 @@ public class GamePanel extends JPanel implements Runnable {
     public void playSFX(int count) {
         SFX.setFile(count);
         SFX.play();
+    }
+
+    public void playGameOver() {
+        sound.setFile(16);
+        sound.play();
+
     }
 }
