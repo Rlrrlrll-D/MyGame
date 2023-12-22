@@ -39,6 +39,8 @@ public class TileManager {
         setup(4, "tree", true);
         setup(5, "sand", false);
         setup(6, "trunk", false);
+        setup(7, "hut", false);
+        setup(8, "hut2", false);
 
 
     }
@@ -72,7 +74,6 @@ public class TileManager {
         }
         bufferedReader.close();
     }
-
     public void drawing(Graphics2D graphics2D) {
 
         for (int worldRow = 0; worldRow < GamePanel.maxWorldRow; worldRow++) {
