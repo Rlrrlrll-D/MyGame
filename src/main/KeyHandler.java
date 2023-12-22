@@ -27,7 +27,11 @@ public class KeyHandler implements KeyListener {
         if (gamePanel.gameBehavior == GamePanel.titleBehavior) {
             titleBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.playBehavior) {
-            playBehavior(value);
+            try {
+                playBehavior(value);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (gamePanel.gameBehavior == GamePanel.pauseBehavior) {
             pauseBehavior(value);
 
@@ -178,7 +182,7 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    private void playBehavior(int value) {
+    private void playBehavior(int value) throws Exception {
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
             upPressed = true;
         }
@@ -206,6 +210,16 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_M) {
             musTrigger();
+        }
+        if (value == KeyEvent.VK_R) {
+            switch (gamePanel.currentMap) {
+                case 0:
+                    gamePanel.tileManager.loadMap("/maps/world01.txt", 0);
+                    break;
+                case 1:
+                    gamePanel.tileManager.loadMap("/maps/world02.txt", 1);
+                    break;
+            }
         }
         if (value == KeyEvent.VK_C) {
             gamePanel.gameBehavior = GamePanel.characterBehavior;

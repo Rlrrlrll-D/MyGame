@@ -19,6 +19,8 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int maxScreenRow = 12;
     public static final int maxWorldCol = 50;
     public static final int maxWorldRow = 50;
+    public final static int maxMap = 10;
+    public int currentMap = 0;
 
     public static final int titleBehavior = 0;
     public static final int playBehavior = 1;
@@ -54,16 +56,16 @@ public class GamePanel extends JPanel implements Runnable {
     public KeyHandler keyHandler = new KeyHandler(this);
 
     public Player player = new Player(this, keyHandler);
-    public Entity[] npc = new Entity[10];
-    public Entity[] objects = new Entity[20];
-    public InteractiveTile[] interactiveTile = new InteractiveTile[50];
-    public Entity[] mon = new Entity[20];
+    public Entity[][] npc = new Entity[maxMap][10];
+    public Entity[][] objects = new Entity[maxMap][20];
+    public InteractiveTile[][] interactiveTile = new InteractiveTile[maxMap][50];
+    public Entity[][] mon = new Entity[maxMap][20];
 
     public Sound sound = new Sound();
     Sound SFX = new Sound();
     ArrayList<Entity> entityArrayList = new ArrayList<>();
     public ArrayList<Entity> projectileArrayList = new ArrayList<>();
-    TileManager tileManager = new TileManager(this);
+    public TileManager tileManager = new TileManager(this);
     public Thread gameThread;
 
 
@@ -83,7 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
         gameBehavior = titleBehavior;
         imgTempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB_PRE);
         graphics2D = (Graphics2D) imgTempScreen.getGraphics();
-            setFullScreen();
+        setFullScreen();
     }
 
     public void retry() {
@@ -117,10 +119,12 @@ public class GamePanel extends JPanel implements Runnable {
             screenHeight2 = Main.window.getHeight();
         }
     }
+
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
     }
+
     @Override
     public void run() {
         double interval = (double) 1000000000 / FPS;
@@ -151,18 +155,19 @@ public class GamePanel extends JPanel implements Runnable {
 
             player.update();
 
-            for (Entity entity : npc)
-                if (entity != null) {
-                    entity.update();
+            for (int i = 0; i < npc[1].length; i++) {
+                if (npc[currentMap][i] != null) {
+                    npc[currentMap][i].update();
                 }
-            for (int i = 0; i < mon.length; i++)
-                if (mon[i] != null) {
-                    if (mon[i].isAlive) {
-                        mon[i].update();
+            }
+            for (int i = 0; i < mon[1].length; i++)
+                if (mon[currentMap][i] != null) {
+                    if (mon[currentMap][i].isAlive && !mon[currentMap][i].isDying) {
+                        mon[currentMap][i].update();
                     }
-                    if (!mon[i].isAlive) {
-                        mon[i].checkDrop();
-                        mon[i] = null;
+                    if (!mon[currentMap][i].isAlive) {
+                        mon[currentMap][i].checkDrop();
+                        mon[currentMap][i] = null;
                     }
                 }
             for (int i = 0; i < projectileArrayList.size(); i++)
@@ -183,9 +188,9 @@ public class GamePanel extends JPanel implements Runnable {
                         particleArrayList.remove(i);
                     }
                 }
-            for (InteractiveTile tile : interactiveTile) {
-                if (tile != null) {
-                    tile.update();
+            for (int i = 0; i < interactiveTile[1].length; i++) {
+                if (interactiveTile[currentMap][i] != null) {
+                    interactiveTile[currentMap][i].update();
                 }
             }
         }
@@ -206,31 +211,28 @@ public class GamePanel extends JPanel implements Runnable {
 
             tileManager.drawing(graphics2D);
 
-            for (InteractiveTile tile : interactiveTile) {
-                if (tile != null) {
-                    tile.drawing(graphics2D);
+            for (int i = 0; i < interactiveTile[1].length; i++) {
+                if (interactiveTile[currentMap][i] != null) {
+                    interactiveTile[currentMap][i].drawing(graphics2D);
                 }
             }
 
             entityArrayList.add(player);
 
-            for (Entity entity : npc) {
-                if (entity != null) {
-                    entityArrayList.add(entity);
+            for (int i = 0; i < npc[1].length; i++) {
+                if (npc[currentMap][i] != null) {
+                    entityArrayList.add(npc[currentMap][i]);
                 }
-
             }
-            for (Entity entity : objects) {
-                if (entity != null) {
-                    entityArrayList.add(entity);
+            for (int i = 0; i < objects[1].length; i++) {
+                if (objects[currentMap][i] != null) {
+                    entityArrayList.add(objects[currentMap][i]);
                 }
-
             }
-            for (Entity entity : mon) {
-                if (entity != null) {
-                    entityArrayList.add(entity);
+            for (int i = 0; i < mon[1].length; i++) {
+                if (mon[currentMap][i] != null) {
+                    entityArrayList.add(mon[currentMap][i]);
                 }
-
             }
             for (Entity entity : projectileArrayList) {
                 if (entity != null) {
@@ -267,18 +269,22 @@ public class GamePanel extends JPanel implements Runnable {
         graphics.drawImage(imgTempScreen, 0, 0, screenWidth2, screenHeight2, null);
         graphics.dispose();
     }
+
     public void playMusic(int count) {
         sound.setFile(count);
         sound.play();
         sound.loop();
     }
+
     public void stopMusic() {
         sound.stop();
     }
+
     public void playSFX(int count) {
         SFX.setFile(count);
         SFX.play();
     }
+
     public void playGameOver() {
         sound.setFile(16);
         sound.play();

@@ -15,22 +15,23 @@ public class TileManager {
 
     GamePanel gamePanel;
     public Tile[] tiles;
-    public int[][] mapTileNum;
+    public int[][][] mapTileNum;
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tiles = new Tile[10];
-        mapTileNum = new int[GamePanel.maxWorldCol][GamePanel.maxWorldRow];
+        mapTileNum = new int[GamePanel.maxMap][GamePanel.maxWorldCol][GamePanel.maxWorldRow];
         getTileImage();
         try {
-            loadMap("/maps/world01.txt");
+            loadMap("/maps/world01.txt", 0);
+            loadMap("/maps/world02.txt", 1);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     public void getTileImage() {
-
 
         setup(0, "grass", false);
         setup(1, "water", true);
@@ -42,9 +43,7 @@ public class TileManager {
         setup(7, "hut", false);
         setup(8, "hut2", false);
 
-
     }
-
     public void setup(int index, String name, boolean collision) {
         //UtilityTool utilityTool = new UtilityTool();
 
@@ -59,7 +58,7 @@ public class TileManager {
 
     }
 
-    public void loadMap(String filePath) throws Exception {
+    public void loadMap(String filePath, int map) throws Exception {
         InputStream inputStream = getClass().getResourceAsStream(filePath);
         assert inputStream != null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -69,7 +68,7 @@ public class TileManager {
 
                 String[] numbers = string.split(" ");
                 int num = Integer.parseInt(numbers[col]);
-                mapTileNum[col][row] = num;
+                mapTileNum[map][col][row] = num;
             }
         }
         bufferedReader.close();
@@ -78,7 +77,7 @@ public class TileManager {
 
         for (int worldRow = 0; worldRow < GamePanel.maxWorldRow; worldRow++) {
             for (int worldCol = 0; worldCol < GamePanel.maxWorldCol; worldCol++) {
-                int tNum = mapTileNum[worldCol][worldRow];
+                int tNum = mapTileNum[gamePanel.currentMap][worldCol][worldRow];
                 int wrdX = worldCol * gamePanel.tileSize;
                 int wrdY = worldRow * gamePanel.tileSize;
                 int scrX = wrdX - gamePanel.player.worldX + gamePanel.player.screenX;
