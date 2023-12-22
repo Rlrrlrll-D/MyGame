@@ -180,7 +180,7 @@ public class UI {
         textX = getX_Text(txt);
         textY = gamePanel.tileSize * 7;
         graphics2D.drawString(txt, textX, textY);
-        if (commandNum == 0) {
+        if (commandNum == 0 || commandNum == -1) {
             graphics2D.drawString(">", textX - 25, textY);
             if (gamePanel.keyHandler.enterPressed) {
                 subBehavior = 0;

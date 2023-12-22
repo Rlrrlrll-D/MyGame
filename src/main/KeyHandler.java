@@ -13,10 +13,12 @@ public class KeyHandler implements KeyListener {
     public KeyHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
+
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -40,16 +42,20 @@ public class KeyHandler implements KeyListener {
         }
 
     }
+
     private void gameOverBehavior(int value) {
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-            if (gamePanel.ui.commandNum != 0) {
+            if (gamePanel.ui.commandNum != 0 && gamePanel.ui.commandNum != -1) {
                 gamePanel.ui.commandNum--;
                 gamePanel.playSFX(12);
             }
         }
         if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-            if (gamePanel.ui.commandNum != 1) {
+            if (gamePanel.ui.commandNum != 1 && gamePanel.ui.commandNum != -1) {
                 gamePanel.ui.commandNum++;
+                gamePanel.playSFX(12);
+            } else if (gamePanel.ui.commandNum == -1) {
+                gamePanel.ui.commandNum += 2;
                 gamePanel.playSFX(12);
             }
         }
@@ -65,6 +71,7 @@ public class KeyHandler implements KeyListener {
             }
         }
     }
+
     private void optionsBehavior(int value) {
 
         if (value == KeyEvent.VK_ESCAPE) {
@@ -122,6 +129,7 @@ public class KeyHandler implements KeyListener {
             }
         }
     }
+
     private void characterBehavior(int value) {
         if (value == KeyEvent.VK_C) {
             gamePanel.gameBehavior = GamePanel.playBehavior;
@@ -157,16 +165,19 @@ public class KeyHandler implements KeyListener {
             gamePanel.player.selectItem();
         }
     }
+
     private void dialogBehavior(int value) {
         if (value == KeyEvent.VK_ENTER) {
             gamePanel.gameBehavior = GamePanel.playBehavior;
         }
     }
+
     private void pauseBehavior(int value) {
         if (value == KeyEvent.VK_P) {
             gamePanel.gameBehavior = GamePanel.playBehavior;
         }
     }
+
     private void playBehavior(int value) {
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
             upPressed = true;
@@ -203,6 +214,7 @@ public class KeyHandler implements KeyListener {
             gamePanel.gameBehavior = GamePanel.optionsBehavior;
         }
     }
+
     private void titleBehavior(int value) {
         if (gamePanel.ui.titleScreenBehavior == 0) {
             titleBehavior_0(value);
@@ -210,6 +222,7 @@ public class KeyHandler implements KeyListener {
             titleBehavior_1(value);
         }
     }
+
     private void titleBehavior_1(int value) {
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
 
@@ -249,12 +262,14 @@ public class KeyHandler implements KeyListener {
             }
         }
     }
+
     private void musicCheck() {
         if (!gamePanel.musicOn) {
             gamePanel.playMusic(0);
             gamePanel.musicOn = true;
         }
     }
+
     private void titleBehavior_0(int value) {
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
             if (gamePanel.ui.commandNum != 0) {
@@ -280,6 +295,7 @@ public class KeyHandler implements KeyListener {
             }
         }
     }
+
     private void musTrigger() {
         if (gamePanel.musicOn) {
             if (gamePanel.sound.volumeScale > 0) {
@@ -290,6 +306,7 @@ public class KeyHandler implements KeyListener {
             gamePanel.sound.chkVolume();
         }
     }
+
     @Override
     public void keyReleased(KeyEvent e) {
         int value = e.getKeyCode();

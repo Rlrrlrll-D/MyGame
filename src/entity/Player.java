@@ -212,7 +212,7 @@ public class Player extends Entity {
             System.out.println(gamePanel.sound.volumeScale);
             gamePanel.playGameOver();
             gamePanel.sound.volumeScale = 2;
-            gamePanel.ui.commandNum = 0;
+            gamePanel.ui.commandNum = -1;
         }
     }
     private void checkLife() {
