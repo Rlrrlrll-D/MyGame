@@ -209,7 +209,6 @@ public class Player extends Entity {
             if (gamePanel.sound.volumeScale < 5) {
                 gamePanel.sound.volumeScale = 5;
             }
-            System.out.println(gamePanel.sound.volumeScale);
             gamePanel.playGameOver();
             gamePanel.sound.volumeScale = 2;
             gamePanel.ui.commandNum = -1;
