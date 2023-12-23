@@ -6,6 +6,7 @@ public class EventHandler {
 
     int previousEventX, previousEventY;
     boolean canTouchEvent;
+    int tmpMap, tmpCol, tmpRow;
 
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -76,14 +77,10 @@ public class EventHandler {
             eventRect[map][eventCol][eventCol].x = eventRect[map][eventCol][eventCol].eventRectDefaultX;
             eventRect[map][eventCol][eventCol].y = eventRect[map][eventCol][eventCol].eventRectDefaultY;
         }
-
-
         return hit;
-
     }
 
     private void damagePit() {
-
         gamePanel.gameBehavior = GamePanel.dialogBehavior;
         gamePanel.playSFX(6);
         gamePanel.ui.dialogue = "You fall into a pit! :(";
@@ -106,14 +103,13 @@ public class EventHandler {
     }
 
     private void teleport(int map, int col, int row) {
+
+        gamePanel.gameBehavior = GamePanel.transitionBehavior;
+
+        tmpMap = map;
+        tmpCol = col;
+        tmpRow = row;
         gamePanel.playSFX(13);
-        gamePanel.gameBehavior = GamePanel.dialogBehavior;
-        gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
-        gamePanel.currentMap = map;
-        gamePanel.player.worldX = col * gamePanel.tileSize;
-        gamePanel.player.worldY = row * gamePanel.tileSize;
-        previousEventX = gamePanel.player.worldX;
-        previousEventY = gamePanel.player.worldY;
         canTouchEvent = false;
 
 

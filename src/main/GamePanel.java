@@ -29,6 +29,7 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int characterBehavior = 4;
     public static final int optionsBehavior = 5;
     public static final int gameOverBehavior = 6;
+    public static final int transitionBehavior = 7;
 
     //  screen settings
     private static final int originalTileSize = 16;

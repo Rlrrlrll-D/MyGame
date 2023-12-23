@@ -28,6 +28,7 @@ public class UI {
     public int titleScreenBehavior = 0;
     public int slotRow = 0;
     int subBehavior;
+    int temp;
     ArrayList<Integer> counter = new ArrayList<>();
 
 
@@ -106,6 +107,9 @@ public class UI {
         if (gamePanel.gameBehavior == GamePanel.gameOverBehavior) {
             drawGameOverScreen();
         }
+        if (gamePanel.gameBehavior == GamePanel.transitionBehavior) {
+            drawTransition();
+        }
 
 
 //        if (finished){
@@ -152,6 +156,21 @@ public class UI {
 //                msgDelay(180);
 //            }
 //        }
+    }
+
+    private void drawTransition() {
+        temp++;
+        graphics2D.setColor(new Color(0, 0, 0, temp * 5));
+        graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+        if (temp == 50) {
+            temp = 0;
+            gamePanel.gameBehavior = GamePanel.playBehavior;
+            gamePanel.currentMap = gamePanel.eventHandler.tmpMap;
+            gamePanel.player.worldX = gamePanel.tileSize * gamePanel.eventHandler.tmpCol;
+            gamePanel.player.worldY = gamePanel.tileSize * gamePanel.eventHandler.tmpRow;
+            gamePanel.eventHandler.previousEventX = gamePanel.player.worldX;
+            gamePanel.eventHandler.previousEventY = gamePanel.player.worldY;
+        }
     }
 
     private void drawGameOverScreen() {
