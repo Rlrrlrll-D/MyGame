@@ -143,7 +143,6 @@ public class GamePanel extends JPanel implements Runnable {
                     throw new RuntimeException(e);
                 }
                 drawToScreen();
-                // repaint();
                 accumulate--;
             }
         }
@@ -208,9 +207,7 @@ public class GamePanel extends JPanel implements Runnable {
             ui.drawing(graphics2D);
 
         } else {
-
             tileManager.drawing(graphics2D);
-
             for (int i = 0; i < interactiveTile[1].length; i++) {
                 if (interactiveTile[currentMap][i] != null) {
                     interactiveTile[currentMap][i].drawing(graphics2D);
@@ -238,7 +235,6 @@ public class GamePanel extends JPanel implements Runnable {
                 if (entity != null) {
                     entityArrayList.add(entity);
                 }
-
             }
             for (Entity entity : particleArrayList) {
                 if (entity != null) {
@@ -254,7 +250,6 @@ public class GamePanel extends JPanel implements Runnable {
             ui.drawing(graphics2D);
         }
         if (keyHandler.chkDrawTime) {
-
             long drawEnd = System.nanoTime();
             long passTime = drawEnd - drawStart;
             graphics2D.setFont(ui.Monica.deriveFont(Font.BOLD, 17F));

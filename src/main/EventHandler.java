@@ -1,31 +1,31 @@
 package main;
 
 public class EventHandler {
-
-
     GamePanel gamePanel;
-    EventRect[][] eventRect;
+    EventRect[][][] eventRect;
 
     int previousEventX, previousEventY;
     boolean canTouchEvent;
 
     public EventHandler(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-        eventRect = new EventRect[GamePanel.maxWorldCol][GamePanel.maxWorldRow];
+        eventRect = new EventRect[GamePanel.maxMap][GamePanel.maxWorldCol][GamePanel.maxWorldRow];
 
-        for (int col = 0; col < GamePanel.maxWorldCol; col++) {
-            for (int row = 0; row < GamePanel.maxWorldRow; row++) {
+        for (int map = 0; map < GamePanel.maxMap; map++) {
+            for (int col = 0; col < GamePanel.maxWorldCol; col++) {
+                for (int row = 0; row < GamePanel.maxWorldRow; row++) {
 
-                eventRect[col][row] = new EventRect();
-                eventRect[col][row].x = 23;
-                eventRect[col][row].y = 23;
-                eventRect[col][row].height = 2;
-                eventRect[col][row].width = 2;
-                eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
-                eventRect[col][row].eventRectDefaultY = eventRect[col][row].y;
+                    eventRect[map][col][row] = new EventRect();
+                    eventRect[map][col][row].x = 23;
+                    eventRect[map][col][row].y = 23;
+                    eventRect[map][col][row].height = 2;
+                    eventRect[map][col][row].width = 2;
+                    eventRect[map][col][row].eventRectDefaultX = eventRect[map][col][row].x;
+                    eventRect[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
+
+                }
 
             }
-
         }
 
     }
@@ -40,41 +40,42 @@ public class EventHandler {
 
         if (canTouchEvent) {
 
-            if (hit(7, 44, "down")) {
+            if (hit(0, 7, 44, "down")) {
                 damagePit();
-            }
-            if (hit(9, 44, "down")) {
+            } else if (hit(0, 9, 44, "down")) {
                 damagePit();
-            }
-            if (hit(14, 44, "any")) {
-                teleport();
-            }
-            if (hit(12, 43, "any")) {
+            } else if (hit(0, 14, 44, "any")) {
+                teleport(1, 14, 44);
+            } else if (hit(1, 14, 44, "any")) {
+                teleport(0, 14, 44);
+            } else if (hit(0, 12, 43, "any")) {
                 healingPool(GamePanel.dialogBehavior);
             }
         }
     }
 
-    public boolean hit(int eventCol, int eventRow, String reqDirection) {
+    public boolean hit(int map, int eventCol, int eventRow, String reqDirection) {
 
         boolean hit = false;
-        gamePanel.player.solidArea.x = gamePanel.player.worldX + gamePanel.player.solidArea.x;
-        gamePanel.player.solidArea.y = gamePanel.player.worldY + gamePanel.player.solidArea.y;
+        if (map == gamePanel.currentMap) {
+            gamePanel.player.solidArea.x = gamePanel.player.worldX + gamePanel.player.solidArea.x;
+            gamePanel.player.solidArea.y = gamePanel.player.worldY + gamePanel.player.solidArea.y;
 
-        eventRect[eventCol][eventCol].x = eventCol * gamePanel.tileSize + eventRect[eventCol][eventCol].x;
-        eventRect[eventCol][eventCol].y = eventRow * gamePanel.tileSize + eventRect[eventCol][eventCol].y;
+            eventRect[map][eventCol][eventCol].x = eventCol * gamePanel.tileSize + eventRect[map][eventCol][eventCol].x;
+            eventRect[map][eventCol][eventCol].y = eventRow * gamePanel.tileSize + eventRect[map][eventCol][eventCol].y;
 
-        if (gamePanel.player.solidArea.intersects(eventRect[eventCol][eventCol]) && !eventRect[eventCol][eventRow].eventDone) {
-            if (gamePanel.player.direct.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
-                hit = true;
-                previousEventX = gamePanel.player.worldX;
-                previousEventY = gamePanel.player.worldY;
+            if (gamePanel.player.solidArea.intersects(eventRect[map][eventCol][eventCol]) && !eventRect[map][eventCol][eventRow].eventDone) {
+                if (gamePanel.player.direct.contentEquals(reqDirection) || reqDirection.contentEquals("any")) {
+                    hit = true;
+                    previousEventX = gamePanel.player.worldX;
+                    previousEventY = gamePanel.player.worldY;
+                }
             }
+            gamePanel.player.solidArea.x = gamePanel.player.solidAreaDefaultX;
+            gamePanel.player.solidArea.y = gamePanel.player.solidAreaDefaultY;
+            eventRect[map][eventCol][eventCol].x = eventRect[map][eventCol][eventCol].eventRectDefaultX;
+            eventRect[map][eventCol][eventCol].y = eventRect[map][eventCol][eventCol].eventRectDefaultY;
         }
-        gamePanel.player.solidArea.x = gamePanel.player.solidAreaDefaultX;
-        gamePanel.player.solidArea.y = gamePanel.player.solidAreaDefaultY;
-        eventRect[eventCol][eventCol].x = eventRect[eventCol][eventCol].eventRectDefaultX;
-        eventRect[eventCol][eventCol].y = eventRect[eventCol][eventCol].eventRectDefaultY;
 
 
         return hit;
@@ -104,12 +105,16 @@ public class EventHandler {
         }
     }
 
-    private void teleport() {
+    private void teleport(int map, int col, int row) {
         gamePanel.playSFX(13);
         gamePanel.gameBehavior = GamePanel.dialogBehavior;
         gamePanel.ui.dialogue = "Yahoo!.. Teleport!.. ;)";
-        gamePanel.player.worldX = 3 * gamePanel.tileSize;
-        gamePanel.player.worldY = 42 * gamePanel.tileSize;
+        gamePanel.currentMap = map;
+        gamePanel.player.worldX = col * gamePanel.tileSize;
+        gamePanel.player.worldY = row * gamePanel.tileSize;
+        previousEventX = gamePanel.player.worldX;
+        previousEventY = gamePanel.player.worldY;
+        canTouchEvent = false;
 
 
     }

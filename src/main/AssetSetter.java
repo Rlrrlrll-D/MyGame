@@ -24,14 +24,6 @@ public class AssetSetter {
         gamePanel.objects[numMap][0].worldX = 10 * gamePanel.tileSize;
         gamePanel.objects[numMap][0].worldY = 11 * gamePanel.tileSize;
 
-//        gamePanel.objects[1] = new CoinBronze(gamePanel);
-//        gamePanel.objects[1].worldX = 11 * gamePanel.tileSize;
-//        gamePanel.objects[1].worldY = 13 * gamePanel.tileSize;
-//
-//        gamePanel.objects[2] = new CoinBronze(gamePanel);
-//        gamePanel.objects[2].worldX = 14 * gamePanel.tileSize;
-//        gamePanel.objects[2].worldY = 15 * gamePanel.tileSize;
-
 
         gamePanel.objects[numMap][3] = new Axe(gamePanel);
         gamePanel.objects[numMap][3].worldX = 16 * gamePanel.tileSize;
