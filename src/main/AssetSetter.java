@@ -17,7 +17,6 @@ public class AssetSetter {
         this.gamePanel = gamePanel;
 
     }
-
     public void setObject() {
         int numMap = 0;
         gamePanel.objects[numMap][0] = new CoinBronze(gamePanel);
@@ -65,16 +64,13 @@ public class AssetSetter {
 //        gamePanel.objects[7].worldX = 49 * gamePanel.tileSize;
 //        gamePanel.objects[7].worldY = 48 * gamePanel.tileSize;
     }
-
     public void setNPC() {
         int numMap = 0;
         gamePanel.npc[numMap][0] = new NPC_Oldman(gamePanel);
         gamePanel.npc[numMap][0].worldX = gamePanel.tileSize * 11;
         gamePanel.npc[numMap][0].worldY = gamePanel.tileSize * 15;
 
-
     }
-
     public void setMonster() {
         int numMap = 0;
         int value = 1;
@@ -94,12 +90,10 @@ public class AssetSetter {
 
         }
     }
-
     public void setInteractiveTile() {
         int numMap = 0;
         for (int i = 0; i < 6; i++) {
             gamePanel.interactiveTile[numMap][i] = new DryTree(gamePanel, 25, 13 + i);
         }
     }
-
 }

@@ -14,8 +14,6 @@ public class Main {
         window.setResizable(false);
         window.setTitle("My Hero Adventure");
 
-
-
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
         gamePanel.config.loadConfig();
@@ -29,7 +27,5 @@ public class Main {
 
         gamePanel.setupGame();
         gamePanel.startGameThread();
-
-
     }
 }

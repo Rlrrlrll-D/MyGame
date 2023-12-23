@@ -71,6 +71,7 @@ public class KeyHandler implements KeyListener {
             } else if (gamePanel.ui.commandNum == 1) {
                 gamePanel.ui.commandNum = 0;
                 gamePanel.gameBehavior = GamePanel.titleBehavior;
+                gamePanel.ui.titleScreenBehavior = 0;
                 gamePanel.restart();
             }
         }
@@ -277,12 +278,6 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    private void musicCheck() {
-        if (!gamePanel.musicOn) {
-            gamePanel.playMusic(0);
-            gamePanel.musicOn = true;
-        }
-    }
 
     private void titleBehavior_0(int value) {
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
@@ -307,6 +302,13 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.ui.commandNum == 2) {
                 System.exit(0);
             }
+        }
+    }
+
+    private void musicCheck() {
+        if (!gamePanel.musicOn) {
+            gamePanel.playMusic(0);
+            gamePanel.musicOn = true;
         }
     }
 

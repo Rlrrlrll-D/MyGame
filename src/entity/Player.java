@@ -40,6 +40,7 @@ public class Player extends Entity {
         getPlayerAttackImage();
         setInventory();
     }
+
     public void setDefaultVal() {
         worldX = gamePanel.tileSize;
         worldY = gamePanel.tileSize * 39;
@@ -57,39 +58,45 @@ public class Player extends Entity {
         exp = 0;
         nextLevelExp = 5;
         coin = 0;
-        //currentWeapon = new Sword(gamePanel);
-        currentWeapon = new Axe(gamePanel);
+        currentWeapon = new Sword(gamePanel);
+        //currentWeapon = new Axe(gamePanel);
         currentShield = new ShieldWood(gamePanel);
-        projectile = new Fireball(gamePanel);
-        // projectile = new Rock(gamePanel);
+        //projectile = new Fireball(gamePanel);
+        projectile = new Rock(gamePanel);
         attack = getAttack();
         defence = getDefence();
     }
+
     public void setDefaultPos() {
         worldX = gamePanel.tileSize;
         worldY = gamePanel.tileSize * 39;
         stayDirect = "begin";
         direct = "stay";
     }
+
     public void restoreLifeMana() {
         mana = maxMana;
         life = maxLife;
         invincible = false;
     }
+
     public void setInventory() {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new Key(gamePanel));
     }
+
     private int getAttack() {
 
         attackArea = currentWeapon.attackArea;
         return attack = strength * currentWeapon.attackValue;
     }
+
     private int getDefence() {
         return defence = dexterity * currentShield.defenceValue;
     }
+
     private void getPlayerImg() {
 
         stay1 = setup("/res/player/stay1", gamePanel.tileSize, gamePanel.tileSize);
@@ -113,6 +120,7 @@ public class Player extends Entity {
         right1 = setup("/res/player/me_right1", gamePanel.tileSize, gamePanel.tileSize);
         right2 = setup("/res/player/me_right2", gamePanel.tileSize, gamePanel.tileSize);
     }
+
     private void getPlayerAttackImage() {
         if (currentWeapon instanceof Sword) {
             attackUp1 = setup("/res/player/attack_up1", gamePanel.tileSize, gamePanel.tileSize * 2);
@@ -136,6 +144,7 @@ public class Player extends Entity {
 
         }
     }
+
     public void update() {
         if (isAttack) {
             attack();
@@ -202,6 +211,7 @@ public class Player extends Entity {
         checkMana();
         checkGameOver();
     }
+
     private void checkGameOver() {
         if (life <= 0) {
             gamePanel.gameBehavior = GamePanel.gameOverBehavior;
@@ -214,16 +224,19 @@ public class Player extends Entity {
             gamePanel.ui.commandNum = -1;
         }
     }
+
     private void checkLife() {
         if (life > maxLife) {
             life = maxLife;
         }
     }
+
     private void checkMana() {
         if (mana > maxMana) {
             mana = maxMana;
         }
     }
+
     private void attack() {
         counter++;
         if (counter <= 3) {
@@ -271,6 +284,7 @@ public class Player extends Entity {
             isAttack = false;
         }
     }
+
     private void damageInterTile(int interTileIndex) {
         if (interTileIndex != 999 && gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].destructible
                 && gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].isCorrectItem(this) && !gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].invincible) {
@@ -285,6 +299,7 @@ public class Player extends Entity {
             }
         }
     }
+
     private void checkDirect() {
         switch (direct) {
             case "up", "stay_up":
@@ -307,6 +322,7 @@ public class Player extends Entity {
                 throw new IllegalStateException("Unexpected value: " + direct);
         }
     }
+
     private void checkStayDirect() {
         switch (stayDirect) {
             case "begin", "down":
@@ -325,6 +341,7 @@ public class Player extends Entity {
                 throw new IllegalStateException("Unexpected value: " + stayDirect);
         }
     }
+
     private void touchMonster(int i) {
         if (i != 999) {
             if (!invincible && !gamePanel.mon[gamePanel.currentMap][i].isDying) {
@@ -338,6 +355,7 @@ public class Player extends Entity {
             }
         }
     }
+
     public void damageMonster(int i, int attack) {
         if (i != 999) {
 
@@ -364,6 +382,7 @@ public class Player extends Entity {
             }
         }
     }
+
     private void checkLevelUp() {
         if (exp >= nextLevelExp) {
             level++;
@@ -379,6 +398,7 @@ public class Player extends Entity {
 
         }
     }
+
     private void interactNPC(int i) {
         if (gamePanel.keyHandler.enterPressed) {
             if (i != 999) {
@@ -390,6 +410,7 @@ public class Player extends Entity {
         }
 
     }
+
     public void sfxDelay(int delay) {
         temp++;
         if (temp > delay) {
@@ -397,6 +418,7 @@ public class Player extends Entity {
             temp = 0;
         }
     }
+
     private void pickUp(int counter) {
 
         if (counter != 999) {
@@ -462,6 +484,7 @@ public class Player extends Entity {
 
 
     }
+
     public void selectItem() {
         int itemIndex = gamePanel.ui.getItemIndex();
         if (itemIndex < inventory.size()) {
@@ -481,6 +504,7 @@ public class Player extends Entity {
             }
         }
     }
+
     public void drawing(Graphics2D graphics2D) {
         int tempScreenX = screenX;
         int tempScreenY = screenY;
