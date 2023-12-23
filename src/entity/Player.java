@@ -401,9 +401,7 @@ public class Player extends Entity {
 
         if (counter != 999) {
             if (gamePanel.objects[gamePanel.currentMap][counter] instanceof PickUpOnlyItems) {
-
                 gamePanel.objects[gamePanel.currentMap][counter].use(this);
-                gamePanel.objects[gamePanel.currentMap][counter] = null;
             } else {
                 String txt;
 
@@ -415,8 +413,8 @@ public class Player extends Entity {
                     txt = "You cannot carry any more!";
                 }
                 gamePanel.ui.addMsg(txt);
-                gamePanel.objects[gamePanel.currentMap][counter] = null;
             }
+            gamePanel.objects[gamePanel.currentMap][counter] = null;
 
 
 /*
