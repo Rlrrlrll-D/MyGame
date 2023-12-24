@@ -109,7 +109,7 @@ public class EventHandler {
         tmpMap = map;
         tmpCol = col;
         tmpRow = row;
-        gamePanel.playSFX(13);
+
         canTouchEvent = false;
 
 

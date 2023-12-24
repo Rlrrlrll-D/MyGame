@@ -12,21 +12,19 @@ import java.util.ArrayList;
 
 public class UI {
 
-    GamePanel gamePanel;
     public boolean finished;
     public String dialogue;
-    BufferedImage heart_f, heart_h, heart_e, crystal_f, crystal_e;
-
     public boolean msgOn;
-
     public int count;
-    Graphics2D graphics2D;
-    Font Purisa, Pixel, Monica;
-    ArrayList<String> message = new ArrayList<>();
     public int slotCol = 0;
     public int commandNum = 0;
     public int titleScreenBehavior = 0;
     public int slotRow = 0;
+    GamePanel gamePanel;
+    BufferedImage heart_f, heart_h, heart_e, crystal_f, crystal_e;
+    Graphics2D graphics2D;
+    Font Purisa, Pixel, Monica;
+    ArrayList<String> message = new ArrayList<>();
     int subBehavior;
     int temp;
     ArrayList<Integer> counter = new ArrayList<>();
@@ -160,18 +158,28 @@ public class UI {
 
     private void drawTransition() {
         temp++;
-        graphics2D.setColor(new Color(0, 0, 0, temp * 5));
-        graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
-        if (temp == 50) {
-            temp = 0;
-            gamePanel.gameBehavior = GamePanel.playBehavior;
+        if (temp >= 0 && temp < 50) {
+            System.out.println(temp);
+            graphics2D.setColor(new Color(0, 0, 0, temp * 5));
+            graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+        } else if (temp == 50) {
             gamePanel.currentMap = gamePanel.eventHandler.tmpMap;
             gamePanel.player.worldX = gamePanel.tileSize * gamePanel.eventHandler.tmpCol;
             gamePanel.player.worldY = gamePanel.tileSize * gamePanel.eventHandler.tmpRow;
             gamePanel.eventHandler.previousEventX = gamePanel.player.worldX;
             gamePanel.eventHandler.previousEventY = gamePanel.player.worldY;
+            graphics2D.setColor(new Color(0, 0, 0, temp * 5));
+            graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
 
+        } else if (temp > 50 && temp < 100) {
+            graphics2D.setColor(new Color(0, 0, 0, 250 - (temp - 50) * 5));
+            graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
+        } else if (temp == 100) {
+            gamePanel.gameBehavior = GamePanel.playBehavior;
+            temp = 0;
         }
+
     }
 
     private void drawGameOverScreen() {
