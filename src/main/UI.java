@@ -167,7 +167,6 @@ public class UI {
             graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
 
         } else if (temp == 50) {
-
             gamePanel.currentMap = gamePanel.eventHandler.tmpMap;
             gamePanel.player.worldX = gamePanel.tileSize * gamePanel.eventHandler.tmpCol;
             gamePanel.player.worldY = gamePanel.tileSize * gamePanel.eventHandler.tmpRow;
