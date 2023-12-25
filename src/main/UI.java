@@ -158,11 +158,16 @@ public class UI {
 
     private void drawTransition() {
         temp++;
+
         if (temp >= 0 && temp < 50) {
-            System.out.println(temp);
+            if (temp == 1) {
+                gamePanel.playSFX(13);
+            }
             graphics2D.setColor(new Color(0, 0, 0, temp * 5));
             graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+
         } else if (temp == 50) {
+
             gamePanel.currentMap = gamePanel.eventHandler.tmpMap;
             gamePanel.player.worldX = gamePanel.tileSize * gamePanel.eventHandler.tmpCol;
             gamePanel.player.worldY = gamePanel.tileSize * gamePanel.eventHandler.tmpRow;
@@ -172,6 +177,7 @@ public class UI {
             graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
 
         } else if (temp > 50 && temp < 100) {
+
             graphics2D.setColor(new Color(0, 0, 0, 250 - (temp - 50) * 5));
             graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
 
