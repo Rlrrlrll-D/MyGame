@@ -1,6 +1,7 @@
 package main;
 
-import entity.NPC_Oldman;
+import entity.Merchant;
+import entity.Oldman;
 import monster.Slime;
 import objects.Axe;
 import objects.CoinBronze;
@@ -17,6 +18,7 @@ public class AssetSetter {
         this.gamePanel = gamePanel;
 
     }
+
     public void setObject() {
         int numMap = 0;
         gamePanel.objects[numMap][0] = new CoinBronze(gamePanel);
@@ -64,13 +66,22 @@ public class AssetSetter {
 //        gamePanel.objects[7].worldX = 49 * gamePanel.tileSize;
 //        gamePanel.objects[7].worldY = 48 * gamePanel.tileSize;
     }
+
     public void setNPC() {
         int numMap = 0;
-        gamePanel.npc[numMap][0] = new NPC_Oldman(gamePanel);
-        gamePanel.npc[numMap][0].worldX = gamePanel.tileSize * 11;
-        gamePanel.npc[numMap][0].worldY = gamePanel.tileSize * 15;
+        int i = 0;
+        gamePanel.npc[numMap][i] = new Oldman(gamePanel);
+        gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 11;
+        gamePanel.npc[numMap][i].worldY = gamePanel.tileSize * 15;
+        i++;
+        numMap = 1;
+        i = 0;
+        gamePanel.npc[numMap][i] = new Merchant(gamePanel);
+        gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 14;
+        gamePanel.npc[numMap][i].worldY = gamePanel.tileSize * 47;
 
     }
+
     public void setMonster() {
         int numMap = 0;
         int value = 1;
@@ -90,6 +101,7 @@ public class AssetSetter {
 
         }
     }
+
     public void setInteractiveTile() {
         int numMap = 0;
         for (int i = 0; i < 6; i++) {

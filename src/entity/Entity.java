@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
@@ -30,6 +31,8 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
+    public final int maxInventorySize = 20;
+    public ArrayList<Entity> inventory = new ArrayList<>();
 
     public int value;
 
@@ -118,7 +121,6 @@ public class Entity {
                 gamePanel.objects[gamePanel.currentMap][i].worldX = worldX;
                 gamePanel.objects[gamePanel.currentMap][i].worldY = worldY;
                 break;
-
             }
         }
     }

@@ -184,7 +184,6 @@ public class UI {
             gamePanel.gameBehavior = GamePanel.playBehavior;
             temp = 0;
         }
-
     }
 
     private void drawGameOverScreen() {

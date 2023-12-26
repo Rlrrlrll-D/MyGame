@@ -6,7 +6,6 @@ import objects.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 
 public class Player extends Entity {
@@ -15,8 +14,7 @@ public class Player extends Entity {
     public final int screenY;
     public int /*keys,*/ temp;
     public boolean notAttacked;
-    public final int maxInventorySize = 20;
-    public ArrayList<Entity> inventory = new ArrayList<>();
+
     KeyHandler keyHandler;
     BufferedImage image;
 

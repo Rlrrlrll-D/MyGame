@@ -4,9 +4,9 @@ import main.GamePanel;
 
 import java.util.Random;
 
-public class NPC_Oldman extends Entity {
+public class Oldman extends Entity {
 
-    public NPC_Oldman(GamePanel gamePanel) {
+    public Oldman(GamePanel gamePanel) {
         super(gamePanel);
         solidArea.x = 0;
         solidArea.y = 16;
