@@ -49,6 +49,12 @@ public class Merchant extends Entity {
         inventory.add(new Axe(gamePanel));
     }
 
+    public void speak() {
+        super.speak();
+        gamePanel.gameBehavior = GamePanel.tradeBehavior;
+        gamePanel.ui.npc = this;
+    }
+
 //    public void update() {
 //        collisionOn = false;
 //        gamePanel.checker.checkTile(this);

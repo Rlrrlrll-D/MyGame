@@ -1,5 +1,7 @@
 package main;
 
+import entity.Entity;
+
 public class EventHandler {
     GamePanel gamePanel;
     EventRect[][][] eventRect;
@@ -51,7 +53,17 @@ public class EventHandler {
                 teleport(0, 14, 44);
             } else if (hit(0, 12, 43, "any")) {
                 healingPool(GamePanel.dialogBehavior);
+            } else if (hit(1, 20, 45, "stay")) {
+                speak(gamePanel.npc[1][0]);
             }
+        }
+    }
+
+    private void speak(Entity entity) {
+        if (gamePanel.keyHandler.enterPressed) {
+            gamePanel.gameBehavior = GamePanel.dialogBehavior;
+            gamePanel.player.notAttacked = true;
+            entity.speak();
         }
     }
 

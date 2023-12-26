@@ -77,7 +77,7 @@ public class AssetSetter {
         numMap = 1;
         i = 0;
         gamePanel.npc[numMap][i] = new Merchant(gamePanel);
-        gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 14;
+        gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 20;
         gamePanel.npc[numMap][i].worldY = gamePanel.tileSize * 47;
 
     }

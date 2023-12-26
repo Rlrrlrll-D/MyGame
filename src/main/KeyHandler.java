@@ -43,7 +43,13 @@ public class KeyHandler implements KeyListener {
             optionsBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.gameOverBehavior) {
             gameOverBehavior(value);
+        } else if (gamePanel.gameBehavior == GamePanel.tradeBehavior) {
+            tradeBehavior(value);
         }
+
+    }
+
+    private void tradeBehavior(int value) {
 
     }
 

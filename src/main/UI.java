@@ -28,6 +28,7 @@ public class UI {
     int subBehavior;
     int temp;
     ArrayList<Integer> counter = new ArrayList<>();
+    public Entity npc;
 
 
     public UI(GamePanel gamePanel) {
@@ -108,6 +109,9 @@ public class UI {
         if (gamePanel.gameBehavior == GamePanel.transitionBehavior) {
             drawTransition();
         }
+        if (gamePanel.gameBehavior == GamePanel.tradeBehavior) {
+            drawTradeScreen();
+        }
 
 
 //        if (finished){
@@ -154,6 +158,65 @@ public class UI {
 //                msgDelay(180);
 //            }
 //        }
+    }
+
+    private void drawTradeScreen() {
+        switch (subBehavior) {
+            case 0:
+                trade_select();
+                break;
+            case 1:
+                trade_buy();
+                break;
+            case 2:
+                trade_sell();
+                break;
+        }
+        gamePanel.keyHandler.enterPressed = false;
+    }
+
+    public void trade_select() {
+        drawDialogScreen();
+
+        int x = gamePanel.tileSize * 15;
+        int y = (int) (gamePanel.tileSize * 4.5);
+        int width = gamePanel.tileSize * 3;
+        int height = (int) (gamePanel.tileSize * 3.5);
+        drawSubWindow(x, y, width, height);
+
+        x += gamePanel.tileSize;
+        y += gamePanel.tileSize;
+        graphics2D.drawString("Buy", x, y);
+        if (commandNum == 0) {
+            graphics2D.drawString(">", x - 25, y);
+            if (gamePanel.keyHandler.enterPressed) {
+
+            }
+        }
+        y += gamePanel.tileSize;
+        graphics2D.drawString("Sell", x, y);
+        if (commandNum == 1) {
+            graphics2D.drawString(">", x - 25, y);
+            if (gamePanel.keyHandler.enterPressed) {
+
+            }
+        }
+        y += gamePanel.tileSize;
+        graphics2D.drawString("Leave", x, y);
+        if (commandNum == 2) {
+            graphics2D.drawString(">", x - 25, y);
+            if (gamePanel.keyHandler.enterPressed) {
+
+            }
+        }
+
+    }
+
+    public void trade_buy() {
+    }
+
+    public void trade_sell() {
+
     }
 
     private void drawTransition() {
@@ -790,9 +853,9 @@ public class UI {
     }
 
     private void drawDialogScreen() {
-        int x = gamePanel.tileSize * 2;
+        int x = gamePanel.tileSize * 3;
         int y = (int) (gamePanel.tileSize * 1.5);
-        int width = gamePanel.screenWidth - (gamePanel.tileSize * 4);
+        int width = gamePanel.screenWidth - (gamePanel.tileSize * 6);
         int height = gamePanel.tileSize * 4;
         drawSubWindow(x, y, width, height);
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
