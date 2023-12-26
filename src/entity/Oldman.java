@@ -2,21 +2,25 @@ package entity;
 
 import main.GamePanel;
 
+import java.awt.*;
 import java.util.Random;
 
 public class Oldman extends Entity {
 
     public Oldman(GamePanel gamePanel) {
         super(gamePanel);
-        solidArea.x = 0;
-        solidArea.y = 16;
-        solidArea.width = 48;
-        solidArea.height = 32;
-        solidAreaDefaultX = solidArea.x;
-        solidAreaDefaultY = solidArea.y;
 
         direct = "down";
         speed = 1;
+
+        solidArea = new Rectangle();
+        solidArea.x = 8;
+        solidArea.y = 16;
+        solidAreaDefaultX = solidArea.x;
+        solidAreaDefaultY = solidArea.y;
+        solidArea.width = 32;
+        solidArea.height = 32;
+
         getImg();
         setDialog();
     }
@@ -56,9 +60,7 @@ public class Oldman extends Entity {
     }
 
     public void setAction() {
-
         actionCounter++;
-
         if (actionCounter == 120) {
 
             Random random = new Random();
@@ -78,7 +80,6 @@ public class Oldman extends Entity {
             actionCounter = 0;
         }
     }
-
     public void speak() {
         super.speak();
 

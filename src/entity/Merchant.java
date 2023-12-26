@@ -3,18 +3,23 @@ package entity;
 import main.GamePanel;
 import objects.*;
 
+import java.awt.*;
+
 public class Merchant extends Entity {
     public Merchant(GamePanel gamePanel) {
         super(gamePanel);
-        solidArea.x = 0;
+        direct = "down";
+        speed = 1;
+
+        solidArea = new Rectangle();
+        solidArea.x = 8;
         solidArea.y = 16;
-        solidArea.width = 48;
+        solidArea.width = 32;
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
 
-        direct = "down";
-        speed = 0;
+
         getImg();
         setDialog();
         setItem();
@@ -33,7 +38,7 @@ public class Merchant extends Entity {
     }
 
     public void setDialog() {
-        dialogues[0] = "He he, so you found me. \nI have somegood stuff. \nDo you want to trade?";
+        dialogues[0] = "He he, so you found me. \nI have some good stuff. \nDo you want to trade?";
     }
 
     public void setItem() {
@@ -44,28 +49,26 @@ public class Merchant extends Entity {
         inventory.add(new Axe(gamePanel));
     }
 
-    public void update() {
-        collisionOn = false;
-        gamePanel.checker.checkTile(this);
-        gamePanel.checker.checkObject(this, false);
-        gamePanel.checker.checkEntity(this, gamePanel.npc);
-        gamePanel.checker.checkEntity(this, gamePanel.mon);
-        gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
-
-
-        if (!collisionOn) {
-
-            switch (direct) {
-
-                case "up", "right", "down", "left":
-                    speed = 0;
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + direct);
-            }
-
-        }
-        spriteImageChange(17);
-        //invincible(40);
-    }
+//    public void update() {
+//        collisionOn = false;
+//        gamePanel.checker.checkTile(this);
+//        gamePanel.checker.checkObject(this, false);
+//        gamePanel.checker.checkEntity(this, gamePanel.npc);
+//        gamePanel.checker.checkEntity(this, gamePanel.mon);
+//        gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
+//
+//
+//        if (!collisionOn) {
+//
+//            switch (direct) {
+//                case "up", "right", "down", "left":
+//                    speed = 0;
+//                    break;
+//                default:
+//                    throw new IllegalStateException("Unexpected value: " + direct);
+//            }
+//        }
+//        spriteImageChange(17);
+//        //invincible(40);
+//    }
 }

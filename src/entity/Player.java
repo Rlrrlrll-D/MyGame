@@ -59,8 +59,8 @@ public class Player extends Entity {
         currentWeapon = new Sword(gamePanel);
         //currentWeapon = new Axe(gamePanel);
         currentShield = new ShieldWood(gamePanel);
-        //projectile = new Fireball(gamePanel);
-        projectile = new Rock(gamePanel);
+        projectile = new Fireball(gamePanel);
+        //projectile = new Rock(gamePanel);
         attack = getAttack();
         defence = getDefence();
     }
