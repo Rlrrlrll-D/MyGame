@@ -190,7 +190,7 @@ public class UI {
         if (commandNum == 0) {
             graphics2D.drawString(">", x - 25, y);
             if (gamePanel.keyHandler.enterPressed) {
-
+                subBehavior = 1;
             }
         }
         y += gamePanel.tileSize;
@@ -199,6 +199,8 @@ public class UI {
             graphics2D.drawString(">", x - 25, y);
             if (gamePanel.keyHandler.enterPressed) {
 
+                subBehavior = 2;
+
             }
         }
         y += gamePanel.tileSize;
@@ -206,6 +208,10 @@ public class UI {
         if (commandNum == 2) {
             graphics2D.drawString(">", x - 25, y);
             if (gamePanel.keyHandler.enterPressed) {
+
+                commandNum = 0;
+                gamePanel.gameBehavior = GamePanel.dialogBehavior;
+                dialogue = "Come again, motherfucker!";
 
             }
         }

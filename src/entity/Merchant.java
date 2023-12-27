@@ -9,7 +9,7 @@ public class Merchant extends Entity {
     public Merchant(GamePanel gamePanel) {
         super(gamePanel);
         direct = "down";
-        speed = 1;
+        speed = 0;
 
         solidArea = new Rectangle();
         solidArea.x = 8;

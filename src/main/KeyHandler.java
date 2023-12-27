@@ -54,13 +54,13 @@ public class KeyHandler implements KeyListener {
             enterPressed = true;
         }
         if (gamePanel.ui.subBehavior == 0) {
-            if (value == KeyEvent.VK_W) {
+            if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
                 if (gamePanel.ui.commandNum > 0) {
                     gamePanel.ui.commandNum--;
                     gamePanel.playSFX(12);
                 }
             }
-            if (value == KeyEvent.VK_S) {
+            if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
                 if (gamePanel.ui.commandNum < 2) {
                     gamePanel.ui.commandNum++;
                     gamePanel.playSFX(12);

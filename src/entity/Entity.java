@@ -138,7 +138,7 @@ public class Entity {
         if (this instanceof Slime && touchPlayer) {
             damagePlayer(attack);
         }
-        if (!collisionOn && !(this instanceof Merchant)) {
+        if (!collisionOn) {
 
             switch (direct) {
 
