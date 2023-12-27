@@ -221,6 +221,8 @@ public class UI {
     public void trade_buy() {
         drawInventory(gamePanel.player, false);
         drawInventory(npc, true);
+
+
     }
 
     public void trade_sell() {
