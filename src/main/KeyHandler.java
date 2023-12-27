@@ -50,7 +50,23 @@ public class KeyHandler implements KeyListener {
     }
 
     private void tradeBehavior(int value) {
-
+        if (value == KeyEvent.VK_ENTER) {
+            enterPressed = true;
+        }
+        if (gamePanel.ui.subBehavior == 0) {
+            if (value == KeyEvent.VK_W) {
+                if (gamePanel.ui.commandNum > 0) {
+                    gamePanel.ui.commandNum--;
+                    gamePanel.playSFX(12);
+                }
+            }
+            if (value == KeyEvent.VK_S) {
+                if (gamePanel.ui.commandNum < 2) {
+                    gamePanel.ui.commandNum++;
+                    gamePanel.playSFX(12);
+                }
+            }
+        }
     }
 
     private void gameOverBehavior(int value) {
