@@ -10,6 +10,7 @@ public class ManaCrystal extends PickUpOnlyItems {
         super(gamePanel);
         this.gamePanel = gamePanel;
         name = "Mana Crystal";
+        price = 275;
         value = 1;
         down1 = setup("/res/objects/mana_full", (int) (gamePanel.tileSize / 1.25), (int) (gamePanel.tileSize / 1.25));
         image = setup("/res/objects/mana_full", (int) (gamePanel.tileSize / 1.25), (int) (gamePanel.tileSize / 1.25));

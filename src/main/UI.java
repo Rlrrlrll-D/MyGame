@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.Player;
+import objects.CoinBronze;
 import objects.Heart;
 import objects.ManaCrystal;
 
@@ -25,7 +26,7 @@ public class UI {
     public int titleScreenBehavior = 0;
 
     GamePanel gamePanel;
-    BufferedImage heart_f, heart_h, heart_e, crystal_f, crystal_e;
+    BufferedImage heart_f, heart_h, heart_e, crystal_f, crystal_e, coin;
     Graphics2D graphics2D;
     Font Purisa, Pixel, Monica;
     ArrayList<String> message = new ArrayList<>();
@@ -59,7 +60,8 @@ public class UI {
         Entity crystal = new ManaCrystal(gamePanel);
         crystal_f = crystal.image;
         crystal_e = crystal.image1;
-
+        Entity coinBronze = new CoinBronze(gamePanel);
+        coin = coinBronze.down1;
 
     }
 
@@ -97,7 +99,7 @@ public class UI {
 
         }
         if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
-            drawPlayerLife();
+            // drawPlayerLife();
             drawDialogScreen();
         }
         if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
@@ -222,11 +224,97 @@ public class UI {
         drawInventory(gamePanel.player, false);
         drawInventory(npc, true);
 
+        int x = gamePanel.tileSize * 2;
+        int y = gamePanel.tileSize * 9;
+        int height = gamePanel.tileSize * 2;
+        int width = gamePanel.tileSize * 6;
+        drawSubWindow(x, y, width, height);
+        graphics2D.drawString("[ESC] Back", x + 24, y + 60);
 
+        x = gamePanel.tileSize * 12;
+        y = gamePanel.tileSize * 9;
+        height = gamePanel.tileSize * 2;
+        width = gamePanel.tileSize * 6;
+        drawSubWindow(x, y, width, height);
+        graphics2D.drawString("Your coin: " + gamePanel.player.coin, x + 24, y + 60);
+
+        int itemIndex = getItemIndex(npcSlotCol, npcSlotRow);
+        if (itemIndex < npc.inventory.size()) {
+            x = (int) (gamePanel.tileSize * 5.5);
+            y = (int) (gamePanel.tileSize * 5.5);
+            height = gamePanel.tileSize;
+            width = (int) (gamePanel.tileSize * 2.5);
+            drawSubWindow(x, y, width, height);
+            graphics2D.drawImage(coin, x + 10, y + 8, 32, 32, null);
+
+            int price = npc.inventory.get(itemIndex).price;
+            String txt = " " + price;
+            x = getX_Value(txt, gamePanel.tileSize * 8 - 15);
+            graphics2D.drawString(txt, x, y + 32);
+
+            if (gamePanel.keyHandler.enterPressed) {
+                if (npc.inventory.get(itemIndex).price > gamePanel.player.coin) {
+                    subBehavior = 0;
+                    gamePanel.gameBehavior = GamePanel.dialogBehavior;
+                    dialogue = "You need more coin to buy that!";
+                    drawDialogScreen();
+                } else if (gamePanel.player.inventory.size() == gamePanel.player.maxInventorySize) {
+                    subBehavior = 0;
+                    gamePanel.gameBehavior = GamePanel.dialogBehavior;
+                    dialogue = "You cannot carry anymore!";
+
+                } else {
+                    gamePanel.playSFX(1);
+                    gamePanel.player.coin -= npc.inventory.get(itemIndex).price;
+                    gamePanel.player.inventory.add(npc.inventory.get(itemIndex));
+                }
+            }
+        }
     }
 
     public void trade_sell() {
+        drawInventory(gamePanel.player, true);
+        int x = gamePanel.tileSize * 2;
+        int y = gamePanel.tileSize * 9;
+        int height = gamePanel.tileSize * 2;
+        int width = gamePanel.tileSize * 6;
+        drawSubWindow(x, y, width, height);
+        graphics2D.drawString("[ESC] Back", x + 24, y + 60);
 
+        x = gamePanel.tileSize * 12;
+        y = gamePanel.tileSize * 9;
+        height = gamePanel.tileSize * 2;
+        width = gamePanel.tileSize * 6;
+        drawSubWindow(x, y, width, height);
+        graphics2D.drawString("Your coin: " + gamePanel.player.coin, x + 24, y + 60);
+
+        int itemIndex = getItemIndex(playerSlotCol, playerSlotRow);
+        if (itemIndex < gamePanel.player.inventory.size()) {
+            x = (int) (gamePanel.tileSize * 15.5);
+            y = (int) (gamePanel.tileSize * 5.5);
+            height = gamePanel.tileSize;
+            width = (int) (gamePanel.tileSize * 2.5);
+            drawSubWindow(x, y, width, height);
+            graphics2D.drawImage(coin, x + 10, y + 8, 32, 32, null);
+
+            int price = gamePanel.player.inventory.get(itemIndex).price / 2;
+            String txt = " " + price;
+            x = getX_Value(txt, gamePanel.tileSize * 18 - 15);
+            graphics2D.drawString(txt, x, y + 32);
+
+            if (gamePanel.keyHandler.enterPressed) {
+                if (gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentWeapon ||
+                        gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentShield) {
+                    commandNum = 0;
+                    subBehavior = 0;
+                    gamePanel.gameBehavior = GamePanel.dialogBehavior;
+                    dialogue = "You cannot sell an equipped item!";
+                } else {
+                    gamePanel.player.inventory.remove(itemIndex);
+                    gamePanel.player.coin += price;
+                }
+            }
+        }
     }
 
     private void drawTransition() {

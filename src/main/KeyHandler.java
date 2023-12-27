@@ -73,6 +73,12 @@ public class KeyHandler implements KeyListener {
                 gamePanel.ui.subBehavior = 0;
             }
         }
+        if (gamePanel.ui.subBehavior == 2) {
+            playerInventory(value);
+            if (value == KeyEvent.VK_ESCAPE) {
+                gamePanel.ui.subBehavior = 0;
+            }
+        }
     }
 
     private void gameOverBehavior(int value) {

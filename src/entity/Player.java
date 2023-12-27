@@ -55,7 +55,7 @@ public class Player extends Entity {
         dexterity = 1;
         exp = 0;
         nextLevelExp = 5;
-        coin = 0;
+        coin = 10000;
         currentWeapon = new Sword(gamePanel);
         //currentWeapon = new Axe(gamePanel);
         currentShield = new ShieldWood(gamePanel);
@@ -83,6 +83,7 @@ public class Player extends Entity {
         inventory.add(currentWeapon);
         inventory.add(currentShield);
         inventory.add(new Key(gamePanel));
+        inventory.add(new Axe(gamePanel));
     }
 
     private int getAttack() {

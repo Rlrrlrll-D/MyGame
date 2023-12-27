@@ -11,6 +11,7 @@ public class PotionRed extends Consumable {
         super(gamePanel);
         this.gamePanel = gamePanel;
         name = "Red Potion";
+        price = 300;
         value = 5;
         down1 = setup("/res/objects/potion_red", gamePanel.tileSize, gamePanel.tileSize);
         description = "[Red Potion]\nHeals your life by  " + value;
