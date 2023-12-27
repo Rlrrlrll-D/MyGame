@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import entity.Player;
 import objects.Heart;
 import objects.ManaCrystal;
 
@@ -16,10 +17,13 @@ public class UI {
     public String dialogue;
     public boolean msgOn;
     public int count;
-    public int slotCol = 0;
+    public int playerSlotCol = 0;
+    public int playerSlotRow = 0;
+    public int npcSlotCol = 0;
+    public int npcSlotRow = 0;
     public int commandNum = 0;
     public int titleScreenBehavior = 0;
-    public int slotRow = 0;
+
     GamePanel gamePanel;
     BufferedImage heart_f, heart_h, heart_e, crystal_f, crystal_e;
     Graphics2D graphics2D;
@@ -98,7 +102,7 @@ public class UI {
         }
         if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
             drawCharacterScreen();
-            drawInventory();
+            drawInventory(gamePanel.player, true);
         }
         if (gamePanel.gameBehavior == GamePanel.optionsBehavior) {
             drawOptionScreen();
@@ -198,9 +202,7 @@ public class UI {
         if (commandNum == 1) {
             graphics2D.drawString(">", x - 25, y);
             if (gamePanel.keyHandler.enterPressed) {
-
                 subBehavior = 2;
-
             }
         }
         y += gamePanel.tileSize;
@@ -208,17 +210,17 @@ public class UI {
         if (commandNum == 2) {
             graphics2D.drawString(">", x - 25, y);
             if (gamePanel.keyHandler.enterPressed) {
-
                 commandNum = 0;
                 gamePanel.gameBehavior = GamePanel.dialogBehavior;
                 dialogue = "Come again, motherfucker!";
-
             }
         }
 
     }
 
     public void trade_buy() {
+        drawInventory(gamePanel.player, false);
+        drawInventory(npc, true);
     }
 
     public void trade_sell() {
@@ -533,11 +535,28 @@ public class UI {
         }
     }
 
-    private void drawInventory() {
-        int x = gamePanel.tileSize * 12;
-        int y = gamePanel.tileSize;
-        int height = gamePanel.tileSize * 5;
-        int width = gamePanel.tileSize * 6;
+    private void drawInventory(Entity entity, boolean cursor) {
+        int x;
+        int y;
+        int height;
+        int width;
+        int slotCol;
+        int slotRow;
+        if (entity instanceof Player) {
+            x = gamePanel.tileSize * 12;
+            y = gamePanel.tileSize;
+            height = gamePanel.tileSize * 5;
+            width = gamePanel.tileSize * 6;
+            slotCol = playerSlotCol;
+            slotRow = playerSlotRow;
+        } else {
+            x = gamePanel.tileSize * 2;
+            y = gamePanel.tileSize;
+            height = gamePanel.tileSize * 5;
+            width = gamePanel.tileSize * 6;
+            slotCol = npcSlotCol;
+            slotRow = npcSlotRow;
+        }
 
         drawSubWindow(x, y, width, height);
         final int slotXstart = x + gamePanel.tileSize / 2;
@@ -545,48 +564,49 @@ public class UI {
         int slotX = slotXstart;
         int slotY = slotYstart;
 
-        for (int i = 0; i < gamePanel.player.inventory.size(); i++) {
+        for (int i = 0; i < entity.inventory.size(); i++) {
 
-            if (gamePanel.player.inventory.get(i) == gamePanel.player.currentWeapon || gamePanel.player.inventory.get(i) == gamePanel.player.currentShield) {
+            if (entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield) {
                 graphics2D.setColor(new Color(240, 190, 90));
                 graphics2D.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
-            graphics2D.drawImage(gamePanel.player.inventory.get(i).down1, slotX, slotY, null);
+            graphics2D.drawImage(entity.inventory.get(i).down1, slotX, slotY, null);
             slotX += gamePanel.tileSize;
             if (i == 4 || i == 9 || i == 14) {
                 slotX = slotXstart;
                 slotY += gamePanel.tileSize;
             }
-
         }
 
-        int curX = slotXstart + (gamePanel.tileSize * slotCol);
-        int curY = slotYstart + (gamePanel.tileSize * slotRow);
-        int curWidth = gamePanel.tileSize;
-        int curHeight = gamePanel.tileSize;
-        graphics2D.setColor(new Color(229, 152, 9));
-        graphics2D.setStroke(new BasicStroke(3));
-        graphics2D.drawRoundRect(curX, curY, curWidth, curHeight, 10, 10);
+        if (cursor) {
+            int curX = slotXstart + (gamePanel.tileSize * slotCol);
+            int curY = slotYstart + (gamePanel.tileSize * slotRow);
+            int curWidth = gamePanel.tileSize;
+            int curHeight = gamePanel.tileSize;
+            graphics2D.setColor(new Color(229, 152, 9));
+            graphics2D.setStroke(new BasicStroke(3));
+            graphics2D.drawRoundRect(curX, curY, curWidth, curHeight, 10, 10);
 
-        int descriptionFrameY = y + height;
-        int descriptionFrameHeight = gamePanel.tileSize * 3;
+            int descriptionFrameY = y + height;
+            int descriptionFrameHeight = gamePanel.tileSize * 3;
 
 
-        int txtX = x + 20;
-        int txtY = descriptionFrameY + gamePanel.tileSize;
-        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 25F));
-        int itemIndex = getItemIndex();
-        if (itemIndex < gamePanel.player.inventory.size()) {
-            drawSubWindow(x, descriptionFrameY, width, descriptionFrameHeight);
+            int txtX = x + 20;
+            int txtY = descriptionFrameY + gamePanel.tileSize;
+            graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 25F));
+            int itemIndex = getItemIndex(slotCol, slotRow);
+            if (itemIndex < entity.inventory.size()) {
+                drawSubWindow(x, descriptionFrameY, width, descriptionFrameHeight);
 
-            for (String line : gamePanel.player.inventory.get(itemIndex).description.split("\n")) {
-                graphics2D.drawString(line, txtX, txtY);
-                txtY += 32;
+                for (String line : entity.inventory.get(itemIndex).description.split("\n")) {
+                    graphics2D.drawString(line, txtX, txtY);
+                    txtY += 32;
+                }
             }
         }
     }
 
-    public int getItemIndex() {
+    public int getItemIndex(int slotCol, int slotRow) {
         return slotCol + (slotRow * 5);
     }
 

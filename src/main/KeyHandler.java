@@ -67,6 +67,12 @@ public class KeyHandler implements KeyListener {
                 }
             }
         }
+        if (gamePanel.ui.subBehavior == 1) {
+            npcInventory(value);
+            if (value == KeyEvent.VK_ESCAPE) {
+                gamePanel.ui.subBehavior = 0;
+            }
+        }
     }
 
     private void gameOverBehavior(int value) {
@@ -161,35 +167,68 @@ public class KeyHandler implements KeyListener {
         if (value == KeyEvent.VK_C) {
             gamePanel.gameBehavior = GamePanel.playBehavior;
         }
+        if (value == KeyEvent.VK_ENTER) {
+            gamePanel.player.selectItem();
+        }
+        playerInventory(value);
+
+    }
+
+    private void playerInventory(int value) {
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-            if (gamePanel.ui.slotRow > 0) {
-                gamePanel.ui.slotRow--;
+            if (gamePanel.ui.playerSlotRow > 0) {
+                gamePanel.ui.playerSlotRow--;
                 gamePanel.playSFX(12);
             }
         }
         if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-            if (gamePanel.ui.slotRow < 3) {
-                gamePanel.ui.slotRow++;
+            if (gamePanel.ui.playerSlotRow < 3) {
+                gamePanel.ui.playerSlotRow++;
                 gamePanel.playSFX(12);
             }
         }
 
         if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
-            if (gamePanel.ui.slotCol > 0) {
-                gamePanel.ui.slotCol--;
+            if (gamePanel.ui.playerSlotCol > 0) {
+                gamePanel.ui.playerSlotCol--;
                 gamePanel.playSFX(12);
             }
         }
 
         if (value == KeyEvent.VK_D || value == KeyEvent.VK_RIGHT) {
-            if (gamePanel.ui.slotCol < 4) {
-                gamePanel.ui.slotCol++;
+            if (gamePanel.ui.playerSlotCol < 4) {
+                gamePanel.ui.playerSlotCol++;
                 gamePanel.playSFX(12);
             }
-
         }
-        if (value == KeyEvent.VK_ENTER) {
-            gamePanel.player.selectItem();
+    }
+
+    private void npcInventory(int value) {
+        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+            if (gamePanel.ui.npcSlotRow > 0) {
+                gamePanel.ui.npcSlotRow--;
+                gamePanel.playSFX(12);
+            }
+        }
+        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+            if (gamePanel.ui.npcSlotRow < 3) {
+                gamePanel.ui.npcSlotRow++;
+                gamePanel.playSFX(12);
+            }
+        }
+
+        if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
+            if (gamePanel.ui.npcSlotCol > 0) {
+                gamePanel.ui.npcSlotCol--;
+                gamePanel.playSFX(12);
+            }
+        }
+
+        if (value == KeyEvent.VK_D || value == KeyEvent.VK_RIGHT) {
+            if (gamePanel.ui.npcSlotCol < 4) {
+                gamePanel.ui.npcSlotCol++;
+                gamePanel.playSFX(12);
+            }
         }
     }
 
