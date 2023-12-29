@@ -60,6 +60,7 @@ public class Entity {
     public boolean isAlive = true;
     public boolean isDying;
     public boolean hpBarOn;
+    public boolean onPath;
     public int invinCounter;
     public int dyingCounter = 0;
     public int hpBarCounter = 0;
@@ -115,6 +116,86 @@ public class Entity {
 
     }
 
+    public void searchPath(int goalCol, int goalRow) {
+
+        int startCol = (worldX + solidArea.x) / gamePanel.tileSize;
+        int startRow = (worldY + solidArea.y) / gamePanel.tileSize;
+
+        gamePanel.pathFinder.setNodes(startCol, startRow, goalCol, goalRow);
+
+        if (gamePanel.pathFinder.search()) {
+            int nextX = gamePanel.pathFinder.pathList.get(0).col * gamePanel.tileSize;
+            int nextY = gamePanel.pathFinder.pathList.get(0).row * gamePanel.tileSize;
+
+            int entLeftX = worldX + solidArea.x;
+            int entRightX = worldX + solidArea.x + solidArea.width;
+            int entTopY = worldY + solidArea.y;
+            int entBottomY = worldY + solidArea.y + solidArea.height;
+
+            if (entTopY > nextY && entLeftX >= nextX && entRightX < nextX + gamePanel.tileSize) {
+
+                direct = "up";
+
+            } else if (entTopY < nextY && entLeftX >= nextX && entRightX < nextX + gamePanel.tileSize) {
+                direct = "down";
+
+
+            } else if (entTopY >= nextY && entBottomY < nextY + gamePanel.tileSize) {
+
+                if (entLeftX > nextX) {
+                    direct = "left";
+                }
+                if (entLeftX < nextX) {
+                    direct = "right";
+                }
+            } else if (entTopY > nextY && entLeftX > nextX) {
+
+                direct = "up";
+                checkCollision();
+                if (collisionOn) {
+                    direct = "left";
+                }
+            } else if (entTopY > nextY && entLeftX < nextX) {
+                direct = "up";
+                checkCollision();
+                if (collisionOn) {
+                    direct = "right";
+                }
+            } else if (entTopY < nextY && entLeftX > nextX) {
+                direct = "down";
+                checkCollision();
+                if (collisionOn) {
+                    direct = "left";
+                }
+            } else if (entTopY < nextY && entLeftX < nextX) {
+                direct = "down";
+                checkCollision();
+                if (collisionOn) {
+                    direct = "right";
+                }
+            }
+            int nextCol = gamePanel.pathFinder.pathList.get(0).col;
+            int nextRow = gamePanel.pathFinder.pathList.get(0).row;
+
+            if (nextCol == goalCol && nextRow == goalRow) {
+                onPath = false;
+            }
+        }
+    }
+
+    public void checkCollision() {
+        collisionOn = false;
+        gamePanel.checker.checkTile(this);
+        gamePanel.checker.checkObject(this, false);
+        gamePanel.checker.checkEntity(this, gamePanel.npc);
+        gamePanel.checker.checkEntity(this, gamePanel.mon);
+        gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
+        boolean touchPlayer = gamePanel.checker.checkPlayer(this);
+        if (this instanceof Slime && touchPlayer) {
+            damagePlayer(attack);
+        }
+    }
+
     public void dropItem(Entity dropped) {
         for (int i = 0; i < gamePanel.objects[1].length; i++) {
             if (gamePanel.objects[gamePanel.currentMap][i] == null) {
@@ -129,16 +210,8 @@ public class Entity {
     public void update() {
 
         setAction();
-        collisionOn = false;
-        gamePanel.checker.checkTile(this);
-        gamePanel.checker.checkObject(this, false);
-        gamePanel.checker.checkEntity(this, gamePanel.npc);
-        gamePanel.checker.checkEntity(this, gamePanel.mon);
-        gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
-        boolean touchPlayer = gamePanel.checker.checkPlayer(this);
-        if (this instanceof Slime && touchPlayer) {
-            damagePlayer(attack);
-        }
+        checkCollision();
+
         if (!collisionOn) {
 
             switch (direct) {

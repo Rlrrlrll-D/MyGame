@@ -60,28 +60,38 @@ public class Oldman extends Entity {
     }
 
     public void setAction() {
-        actionCounter++;
-        if (actionCounter == 120) {
+        if (onPath) {
 
-            Random random = new Random();
-            int i = random.nextInt(100) + 1;
-            if (i <= 25) {
-                direct = "up";
+            int goalCol = 4;
+            int goalRow = 4;
+            searchPath(goalCol, goalRow);
+
+        } else {
+
+            actionCounter++;
+            if (actionCounter == 120) {
+
+                Random random = new Random();
+                int i = random.nextInt(100) + 1;
+                if (i <= 25) {
+                    direct = "up";
+                }
+                if (i > 25 && i <= 50) {
+                    direct = "down";
+                }
+                if (i > 50 && i <= 75) {
+                    direct = "left";
+                }
+                if (i > 75) {
+                    direct = "right";
+                }
+                actionCounter = 0;
             }
-            if (i > 25 && i <= 50) {
-                direct = "down";
-            }
-            if (i > 50 && i <= 75) {
-                direct = "left";
-            }
-            if (i > 75) {
-                direct = "right";
-            }
-            actionCounter = 0;
         }
     }
+
     public void speak() {
         super.speak();
-
+        onPath = true;
     }
 }

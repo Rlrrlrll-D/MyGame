@@ -1,6 +1,7 @@
 package main;
 
 
+import ai.PathFinder;
 import entity.Entity;
 import entity.Player;
 import tile.TileManager;
@@ -52,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
     public EventHandler eventHandler = new EventHandler(this);
 
     Config config = new Config(this);
+    public PathFinder pathFinder = new PathFinder(this);
 
     public UI ui = new UI(this);
     public ArrayList<Entity> particleArrayList = new ArrayList<>();
@@ -85,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setMonster();
         assetSetter.setInteractiveTile();
         gameBehavior = titleBehavior;
-        imgTempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB_PRE);
+        imgTempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
         graphics2D = (Graphics2D) imgTempScreen.getGraphics();
         setFullScreen();
     }
