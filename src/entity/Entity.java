@@ -174,12 +174,12 @@ public class Entity {
                     direct = "right";
                 }
             }
-            int nextCol = gamePanel.pathFinder.pathList.get(0).col;
-            int nextRow = gamePanel.pathFinder.pathList.get(0).row;
-
-            if (nextCol == goalCol && nextRow == goalRow) {
-                onPath = false;
-            }
+//            int nextCol = gamePanel.pathFinder.pathList.get(0).col;
+//            int nextRow = gamePanel.pathFinder.pathList.get(0).row;
+//
+//            if (nextCol == goalCol && nextRow == goalRow) {
+//                onPath = false;
+//            }
         }
     }
 

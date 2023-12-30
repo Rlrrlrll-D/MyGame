@@ -62,8 +62,10 @@ public class Oldman extends Entity {
     public void setAction() {
         if (onPath) {
 
-            int goalCol = 4;
-            int goalRow = 4;
+//            int goalCol = 4;
+//            int goalRow = 4;
+            int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.x) / gamePanel.tileSize;
+            int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.y) / gamePanel.tileSize;
             searchPath(goalCol, goalRow);
 
         } else {

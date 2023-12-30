@@ -16,6 +16,7 @@ public class TileManager {
     GamePanel gamePanel;
     public Tile[] tiles;
     public int[][][] mapTileNum;
+    boolean drawPath = true;
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -31,7 +32,7 @@ public class TileManager {
         }
     }
 
-    public void getTileImage() {
+    private void getTileImage() {
 
         setup(0, "grass", false);
         setup(1, "water", true);
@@ -45,7 +46,6 @@ public class TileManager {
 
     }
     public void setup(int index, String name, boolean collision) {
-        //UtilityTool utilityTool = new UtilityTool();
 
         try {
             tiles[index] = new Tile();
@@ -55,7 +55,6 @@ public class TileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void loadMap(String filePath, int map) throws Exception {
@@ -92,6 +91,18 @@ public class TileManager {
                 // graphics2D.setColor(new Color(150, 150, 150, 150));
                 //graphics2D.drawRect( scrX, scrY, gamePanel.tileSize, gamePanel.tileSize);
                 // graphics2D.drawString(worldCol + "," + worldRow, scrX + gamePanel.tileSize / 8, scrY + gamePanel.tileSize / 2);
+            }
+        }
+        if (drawPath) {
+            graphics2D.setColor(new Color(255, 0, 0, 70));
+            for (int i = 0; i < gamePanel.pathFinder.pathList.size(); i++) {
+                int wrdX = gamePanel.pathFinder.pathList.get(i).col * gamePanel.tileSize;
+                int wrdY = gamePanel.pathFinder.pathList.get(i).row * gamePanel.tileSize;
+                int scrX = wrdX - gamePanel.player.worldX + gamePanel.player.screenX;
+                int scrY = wrdY - gamePanel.player.worldY + gamePanel.player.screenY;
+
+                graphics2D.fillRect(scrX, scrY, gamePanel.tileSize, gamePanel.tileSize);
+
             }
         }
     }
