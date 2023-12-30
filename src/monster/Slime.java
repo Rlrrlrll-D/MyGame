@@ -50,33 +50,44 @@ public class Slime extends Entity {
     }
 
     public void setAction() {
-        actionCounter++;
-        if (actionCounter == 120) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1;
-            if (i <= 25) {
-                direct = "up";
-            }
-            if (i > 25 && i <= 50) {
-                direct = "down";
-            }
-            if (i > 50 && i <= 75) {
-                direct = "left";
-            }
-            if (i > 75) {
-                direct = "right";
-            }
-            actionCounter = 0;
+        if (onPath) {
 
+//            int goalCol = 4;
+//            int goalRow = 4;
+            int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.x) / gamePanel.tileSize;
+            int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.y) / gamePanel.tileSize;
+            searchPath(goalCol, goalRow);
 
+            int i = new Random().nextInt(100) + 1;
+            if (i > 99 && !projectile.isAlive && shotAvailableCounter == shotDelay) {
+                projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
+                gamePanel.projectileArrayList.add(projectile);
+                shotAvailableCounter = 0;
+            }
+            shotCount(50);
+
+        } else {
+
+            actionCounter++;
+            if (actionCounter == 120) {
+
+                Random random = new Random();
+                int i = random.nextInt(100) + 1;
+                if (i <= 25) {
+                    direct = "up";
+                }
+                if (i > 25 && i <= 50) {
+                    direct = "down";
+                }
+                if (i > 50 && i <= 75) {
+                    direct = "left";
+                }
+                if (i > 75) {
+                    direct = "right";
+                }
+                actionCounter = 0;
+            }
         }
-        int i = new Random().nextInt(100) + 1;
-        if (i > 99 && !projectile.isAlive && shotAvailableCounter == shotDelay) {
-            projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
-            gamePanel.projectileArrayList.add(projectile);
-            shotAvailableCounter = 0;
-        }
-        shotCount(50);
     }
 
     public void damageReaction() {
@@ -95,6 +106,7 @@ public class Slime extends Entity {
                 direct = "right";
                 break;
         }
+        onPath = true;
         escape = true;
     }
 
