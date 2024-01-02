@@ -15,14 +15,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable {
-    public int gameBehavior;
     public static final int maxScreenCol = 20;
     public static final int maxScreenRow = 12;
     public static final int maxWorldCol = 50;
     public static final int maxWorldRow = 50;
     public final static int maxMap = 10;
-    public int currentMap = 0;
-
     public static final int titleBehavior = 0;
     public static final int playBehavior = 1;
     public static final int pauseBehavior = 2;
@@ -32,45 +29,43 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int gameOverBehavior = 6;
     public static final int transitionBehavior = 7;
     public static final int tradeBehavior = 8;
-
     //  screen settings
     private static final int originalTileSize = 16;
     private static final int scale = 3;
     private static final int FPS = 60;
+    public int gameBehavior;
+    public int currentMap = 0;
     public int tileSize = originalTileSize * scale;
     public int screenWidth = tileSize * maxScreenCol;
     public final int dfl_X = screenWidth / 2 - tileSize / 2;
+    int screenWidth2 = screenWidth;
     public int screenHeight = tileSize * maxScreenRow;
     public final int dfl_Y = screenHeight / 2 - tileSize / 2;
-    int screenWidth2 = screenWidth;
     int screenHeight2 = screenHeight;
     public boolean fullScreenOn;
     public boolean musicOn;
-    BufferedImage imgTempScreen;
-    Graphics2D graphics2D;
     public CollisionChecker checker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
     public EventHandler eventHandler = new EventHandler(this);
-
-    Config config = new Config(this);
     public PathFinder pathFinder = new PathFinder(this);
-
     public UI ui = new UI(this);
     public ArrayList<Entity> particleArrayList = new ArrayList<>();
     public KeyHandler keyHandler = new KeyHandler(this);
-
     public Player player = new Player(this, keyHandler);
     public Entity[][] npc = new Entity[maxMap][10];
     public Entity[][] objects = new Entity[maxMap][20];
     public InteractiveTile[][] interactiveTile = new InteractiveTile[maxMap][50];
     public Entity[][] mon = new Entity[maxMap][20];
-
+    public Entity[][] projectile = new Entity[maxMap][20];
     public Sound sound = new Sound();
-    Sound SFX = new Sound();
-    ArrayList<Entity> entityArrayList = new ArrayList<>();
-    public ArrayList<Entity> projectileArrayList = new ArrayList<>();
+    //    public ArrayList<Entity> projectileArrayList = new ArrayList<>();
     public TileManager tileManager = new TileManager(this);
     public Thread gameThread;
+    BufferedImage imgTempScreen;
+    Graphics2D graphics2D;
+    Config config = new Config(this);
+    Sound SFX = new Sound();
+    ArrayList<Entity> entityArrayList = new ArrayList<>();
 
 
     public GamePanel() throws IOException, FontFormatException {
@@ -175,13 +170,13 @@ public class GamePanel extends JPanel implements Runnable {
                         mon[currentMap][i] = null;
                     }
                 }
-            for (int i = 0; i < projectileArrayList.size(); i++)
-                if (projectileArrayList.get(i) != null) {
-                    if (projectileArrayList.get(i).isAlive) {
-                        projectileArrayList.get(i).update();
+            for (int i = 0; i < projectile[1].length; i++)
+                if (projectile[currentMap][i] != null) {
+                    if (projectile[currentMap][i].isAlive) {
+                        projectile[currentMap][i].update();
                     }
-                    if (!projectileArrayList.get(i).isAlive) {
-                        projectileArrayList.remove(i);
+                    if (!projectile[currentMap][i].isAlive) {
+                        projectile[currentMap][i] = null;
                     }
                 }
             for (int i = 0; i < particleArrayList.size(); i++)
@@ -237,9 +232,9 @@ public class GamePanel extends JPanel implements Runnable {
                     entityArrayList.add(mon[currentMap][i]);
                 }
             }
-            for (Entity entity : projectileArrayList) {
-                if (entity != null) {
-                    entityArrayList.add(entity);
+            for (int i=0; i<projectile[1].length; i++ ) {
+                if (projectile[currentMap][i] != null) {
+                    entityArrayList.add(projectile[currentMap][i]);
                 }
             }
             for (Entity entity : particleArrayList) {

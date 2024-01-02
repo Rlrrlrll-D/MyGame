@@ -200,7 +200,13 @@ public class Player extends Entity {
         if (gamePanel.keyHandler.shotKeyPressed && !projectile.isAlive && shotAvailableCounter == shotDelay && projectile.haveRes(this)) {
             projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
             projectile.subtractRes(this);
-            gamePanel.projectileArrayList.add(projectile);
+
+            for (int i = 0; i < gamePanel.projectile[1].length; i++) {
+                if (gamePanel.projectile[gamePanel.currentMap][i]==null){
+                    gamePanel.projectile[gamePanel.currentMap][i]=projectile;
+                    break;
+                }
+            }
             shotAvailableCounter = 0;
             gamePanel.playSFX(14);
         }
@@ -272,6 +278,8 @@ public class Player extends Entity {
             damageMonster(monsterIndex, attack);
             int interTileIndex = gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
             damageInterTile(interTileIndex);
+            int projectileIndex = gamePanel.checker.checkEntity(this,gamePanel.projectile);
+            damageProjectile(projectileIndex);
             worldX = currentWorldX;
             worldY = currentWorldY;
             solidArea.width = solidAreaWidth;
@@ -281,6 +289,14 @@ public class Player extends Entity {
             spriteNum = 1;
             counter = 0;
             isAttack = false;
+        }
+    }
+
+    private void damageProjectile(int projectileIndex) {
+        if (projectileIndex!=999){
+            Entity projectile = gamePanel.projectile[gamePanel.currentMap][projectileIndex];
+            projectile.isAlive = false;
+            generateParticle(projectile,projectile);
         }
     }
 

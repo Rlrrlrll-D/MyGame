@@ -235,7 +235,7 @@ public class Entity {
         }
         spriteImageChange(17);
         invincible(40);
-        escaping(50, this);
+        //escaping(50, this);
     }
 
     protected void shotCount(int delay) {
@@ -301,17 +301,17 @@ public class Entity {
         gamePanel.particleArrayList.add(p4);
     }
 
-    protected void escaping(int delay, Entity entity) {
-        if (escape) {
-            escapeCounter++;
-            entity.speed = 3;
-            if (escapeCounter > delay) {
-                escape = false;
-                entity.speed = 1;
-                escapeCounter = 0;
-            }
-        }
-    }
+//    protected void escaping(int delay, Entity entity) {
+//        if (escape) {
+//            escapeCounter++
+//            entity.speed = 3;
+//            if (escapeCounter > delay) {
+//                escape = false;
+//                entity.speed = 1;
+//                escapeCounter = 0;
+//            }
+//        }
+//    }
 
     protected void blinkEntity(Graphics2D graphics2D, float i, int interval) {
 

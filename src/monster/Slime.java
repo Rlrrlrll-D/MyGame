@@ -37,7 +37,7 @@ public class Slime extends Entity {
 
     }
 
-    public void getImg() {
+    private void getImg() {
         up1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
         up2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
         down1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
@@ -48,14 +48,15 @@ public class Slime extends Entity {
         right2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
 
     }
-    public void update(){
+
+    public void update() {
         super.update();
-        int xDistance =Math.abs(worldX-gamePanel.player.worldX);
-        int yDistance =Math.abs(worldY-gamePanel.player.worldY);
-        int tileDistance = (xDistance+yDistance)/gamePanel.tileSize;
-        if (!onPath&&tileDistance<5){
-            int i = new Random().nextInt(100)+1;
-            if (i>50){
+        int xDistance = Math.abs(worldX - gamePanel.player.worldX);
+        int yDistance = Math.abs(worldY - gamePanel.player.worldY);
+        int tileDistance = (xDistance + yDistance) / gamePanel.tileSize;
+        if (!onPath && tileDistance < 5) {
+            int i = new Random().nextInt(100) + 1;
+            if (i > 50) {
                 onPath = true;
             }
 //            if (onPath&& tileDistance>20){
@@ -72,9 +73,15 @@ public class Slime extends Entity {
             searchPath(goalCol, goalRow);
 
             int i = new Random().nextInt(200) + 1;
-            if (i > 197&& !projectile.isAlive && shotAvailableCounter == shotDelay) {
+            if (i > 197 && !projectile.isAlive && shotAvailableCounter == shotDelay) {
                 projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
-                gamePanel.projectileArrayList.add(projectile);
+                // gamePanel.projectileArrayList.add(projectile);
+                for (int j = 0; j < gamePanel.projectile[1].length; j++) {
+                    if (gamePanel.projectile[gamePanel.currentMap][j] == null) {
+                        gamePanel.projectile[gamePanel.currentMap][j] = projectile;
+                        break;
+                    }
+                }
                 shotAvailableCounter = 0;
             }
             shotCount(50);
