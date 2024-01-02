@@ -10,6 +10,7 @@ public class Axe extends Entity {
         name = "Woodcutter's Axe";
         down1 = setup("/res/objects/axe", gamePanel.tileSize, gamePanel.tileSize);
         attackValue = 2;
+        knockPower=10;
         attackArea.width = 30;
         attackArea.height = 30;
         price = 75;

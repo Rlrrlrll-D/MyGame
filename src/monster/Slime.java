@@ -17,7 +17,8 @@ public class Slime extends Entity {
         super(gamePanel);
         this.gamePanel = gamePanel;
         name = "Slime";
-        speed = 1;
+        defaultSpeed = 1;
+        speed = defaultSpeed;
         maxLife = 4;
         life = maxLife;
         attack = 5;
@@ -127,7 +128,6 @@ public class Slime extends Entity {
                 break;
         }
         onPath = true;
-        escape = true;
     }
 
     public void checkDrop() {

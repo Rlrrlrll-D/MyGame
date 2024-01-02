@@ -926,7 +926,7 @@ public class UI {
         int msgY = gamePanel.tileSize * 3;
 
 
-        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 30F));
+        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
 
         for (int i = 0; i < message.size(); i++) {
             if (message.get(i) != null) {

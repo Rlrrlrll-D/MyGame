@@ -48,6 +48,7 @@ public class Entity {
     public int spriteNum = 1, counter = 0;
     public int maxLife;
     public int life;
+    public int defaultSpeed;
     public int maxMana;
     public int mana;
     public int actionCounter;
@@ -55,16 +56,17 @@ public class Entity {
     public int shotAvailableCounter;
     public boolean collisionOn;
     public boolean invincible;
-    public boolean escape;
+    public boolean escapeKnock;
     public boolean isAttack;
     public boolean isAlive = true;
     public boolean isDying;
     public boolean hpBarOn;
     public boolean onPath;
     public int invinCounter;
-    public int dyingCounter = 0;
-    public int hpBarCounter = 0;
-    public int escapeCounter = 0;
+    public int dyingCounter ;
+    public int hpBarCounter ;
+    public int knockCounter ;
+    public int knockPower;
     public int shotDelay;
     public BufferedImage image, image1, image2, temp;
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
@@ -208,30 +210,60 @@ public class Entity {
     }
 
     public void update() {
-
-        setAction();
-        checkCollision();
-
-        if (!collisionOn) {
-
-            switch (direct) {
-
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + direct);
+        if (escapeKnock){
+            checkCollision();
+            if (collisionOn){
+                knockCounter=0;
+                escapeKnock=false;
+                speed=defaultSpeed;
+            }else {
+                switch (gamePanel.player.direct){
+                    case "up", "stay_up":
+                        worldY -= speed;
+                        break;
+                    case "down", "stay":
+                        worldY += speed;
+                        break;
+                    case "left", "stay_left":
+                        worldX -= speed;
+                        break;
+                    case "right", "stay_right":
+                        worldX += speed;
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + direct);
+                }
+            }
+            knockCounter++;
+            if (knockCounter==10){
+                knockCounter=0;
+                escapeKnock = false;
+                speed = defaultSpeed;
             }
 
+        }else {
+            setAction();
+            checkCollision();
+            if (!collisionOn) {
+
+                switch (direct) {
+
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + direct);
+                }
+            }
         }
         spriteImageChange(17);
         invincible(40);

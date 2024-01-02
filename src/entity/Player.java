@@ -44,7 +44,8 @@ public class Player extends Entity {
         worldY = gamePanel.tileSize * 39;
         stayDirect = "begin";
         direct = "stay";
-        speed = 4;
+        defaultSpeed = 4;
+        speed = defaultSpeed;
         level = 1;
         maxLife = 6;
         maxMana = 4;
@@ -142,6 +143,11 @@ public class Player extends Entity {
             attackRight2 = setup("/res/player/axe_right2", gamePanel.tileSize * 2, gamePanel.tileSize);
 
         }
+    }
+    public void knockEscape(Entity entity,int knockPower){
+        entity.direct = direct;
+        entity.speed +=knockPower;
+        entity.escapeKnock=true;
     }
 
     public void update() {
@@ -275,7 +281,7 @@ public class Player extends Entity {
             solidArea.height = attackArea.height;
 
             int monsterIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
-            damageMonster(monsterIndex, attack);
+            damageMonster(monsterIndex, attack, currentWeapon.knockPower);
             int interTileIndex = gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
             damageInterTile(interTileIndex);
             int projectileIndex = gamePanel.checker.checkEntity(this,gamePanel.projectile);
@@ -371,12 +377,17 @@ public class Player extends Entity {
         }
     }
 
-    public void damageMonster(int i, int attack) {
+    public void damageMonster(int i, int attack, int knockPower) {
         if (i != 999) {
 
             if (!gamePanel.mon[gamePanel.currentMap][i].invincible) {
 
                 gamePanel.playSFX(7);
+
+                if (knockPower>0){
+                    knockEscape(gamePanel.mon[gamePanel.currentMap][i],knockPower);
+                }
+
                 int dmg = attack - gamePanel.mon[gamePanel.currentMap][i].defence;
                 if (dmg < 0) {
                     dmg = 0;

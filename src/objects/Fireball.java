@@ -4,7 +4,6 @@ import entity.Entity;
 import entity.Projectile;
 import main.GamePanel;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Fireball extends Projectile {
@@ -19,6 +18,7 @@ public class Fireball extends Projectile {
         speed = 6;
         maxLife = 80;
         life = maxLife;
+        knockPower=0;
         attack = 2;
         useCost = 1;
         isAlive = false;
@@ -55,10 +55,6 @@ public class Fireball extends Projectile {
 
     public void subtractRes(Entity user) {
         user.mana -= useCost;
-    }
-
-    public Color getParticleColor() {
-        return new Color(157, 15, 15);
     }
 
     public int getParticleSize() {
