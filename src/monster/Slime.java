@@ -48,18 +48,31 @@ public class Slime extends Entity {
         right2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
 
     }
+    public void update(){
+        super.update();
+        int xDistance =Math.abs(worldX-gamePanel.player.worldX);
+        int yDistance =Math.abs(worldY-gamePanel.player.worldY);
+        int tileDistance = (xDistance+yDistance)/gamePanel.tileSize;
+        if (!onPath&&tileDistance<5){
+            int i = new Random().nextInt(100)+1;
+            if (i>50){
+                onPath = true;
+            }
+//            if (onPath&& tileDistance>20){
+//                onPath = false;
+//            }
+        }
+    }
 
     public void setAction() {
         if (onPath) {
 
-//            int goalCol = 4;
-//            int goalRow = 4;
             int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.x) / gamePanel.tileSize;
             int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.y) / gamePanel.tileSize;
             searchPath(goalCol, goalRow);
 
-            int i = new Random().nextInt(100) + 1;
-            if (i > 99 && !projectile.isAlive && shotAvailableCounter == shotDelay) {
+            int i = new Random().nextInt(200) + 1;
+            if (i > 197&& !projectile.isAlive && shotAvailableCounter == shotDelay) {
                 projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
                 gamePanel.projectileArrayList.add(projectile);
                 shotAvailableCounter = 0;

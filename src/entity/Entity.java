@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
+    public final int maxInventorySize = 20;
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
     public int solidAreaDefaultX, solidAreaDefaultY;
@@ -31,7 +32,6 @@ public class Entity {
     public Entity currentWeapon;
     public Entity currentShield;
     public Projectile projectile;
-    public final int maxInventorySize = 20;
     public ArrayList<Entity> inventory = new ArrayList<>();
 
     public int value;
