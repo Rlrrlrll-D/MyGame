@@ -450,6 +450,13 @@ public class Player extends Entity {
         if (counter != 999) {
             if (gamePanel.objects[gamePanel.currentMap][counter] instanceof PickUpOnlyItems) {
                 gamePanel.objects[gamePanel.currentMap][counter].use(this);
+                gamePanel.objects[gamePanel.currentMap][counter] = null;
+            } else if (gamePanel.objects[gamePanel.currentMap][counter] instanceof Obstacle) {
+                if (keyHandler.enterPressed) {
+                    notAttacked = true;
+                    gamePanel.objects[gamePanel.currentMap][counter].interact();
+
+                }
             } else {
                 String txt;
 
@@ -461,54 +468,9 @@ public class Player extends Entity {
                     txt = "You cannot carry any more!";
                 }
                 gamePanel.ui.addMsg(txt);
+                gamePanel.objects[gamePanel.currentMap][counter] = null;
             }
-            gamePanel.objects[gamePanel.currentMap][counter] = null;
-
-
-/*
-            String objectName = gamePanel.motherObject[counter].name;
-            switch (objectName) {
-                case "Key":
-                    gamePanel.playSFX(1);
-                    keys++;
-                    gamePanel.motherObject[counter] = null;
-                    gamePanel.ui.showMsg("You got a key!");
-                    break;
-                case "Door":
-
-                    if (keys > 0) {
-                        gamePanel.playSFX(2);
-                        gamePanel.motherObject[counter] = null;
-                        keys--;
-                        gamePanel.ui.showMsg("You opened the door!");
-                        System.out.println(objectName + " open, Key: " + keys);
-                    } else {
-                        sfxDelay(20);
-
-                        gamePanel.ui.showMsg("You need a key!");
-                        System.out.println(objectName + " close, Key: " + keys);
-                        System.out.println(temp);
-                    }
-                    break;
-
-                case "Boots":
-                    gamePanel.playSFX(4);
-                    speed += 1;
-                    gamePanel.motherObject[counter] = null;
-                    gamePanel.ui.showMsg("Speed up!");
-                    break;
-
-                case "Chest":
-                    gamePanel.ui.finished = true;
-                    gamePanel.stopMusic();
-                    gamePanel.playSFX(5);
-                    gamePanel.motherObject[counter] = null;
-                    break;
-            }
-*/
         }
-
-
     }
 
     public void selectItem() {

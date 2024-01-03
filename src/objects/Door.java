@@ -1,12 +1,12 @@
 package objects;
 
-import entity.Entity;
 import main.GamePanel;
 
-public class Door extends Entity {
-
+public class Door extends Obstacle {
+    GamePanel gamePanel;
     public Door(GamePanel gamePanel) {
         super(gamePanel);
+        this.gamePanel = gamePanel;
         name = "Door";
         down1 = setup("/res/objects/door", gamePanel.tileSize, gamePanel.tileSize);
         collision = true;
@@ -19,4 +19,10 @@ public class Door extends Entity {
         solidAreaDefaultY = solidArea.y;
     }
 
+    @Override
+    public void interact() {
+        gamePanel.gameBehavior = GamePanel.dialogBehavior;
+        gamePanel.ui.dialogue = "You need a key to open this.";
+
+    }
 }

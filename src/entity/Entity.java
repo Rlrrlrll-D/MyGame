@@ -111,6 +111,10 @@ public class Entity {
         }
     }
 
+    public void interact() {
+
+    }
+
     public void use(Entity entity) {
     }
 
@@ -267,7 +271,6 @@ public class Entity {
         }
         spriteImageChange(17);
         invincible(40);
-        //escaping(50, this);
     }
 
     protected void shotCount(int delay) {

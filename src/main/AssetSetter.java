@@ -3,10 +3,7 @@ package main;
 import entity.Merchant;
 import entity.Oldman;
 import monster.Slime;
-import objects.Axe;
-import objects.CoinBronze;
-import objects.Heart;
-import objects.ShieldBlue;
+import objects.*;
 import tile.interactive.DryTree;
 
 public class AssetSetter {
@@ -33,6 +30,14 @@ public class AssetSetter {
         gamePanel.objects[numMap][4] = new ShieldBlue(gamePanel);
         gamePanel.objects[numMap][4].worldX = 18 * gamePanel.tileSize;
         gamePanel.objects[numMap][4].worldY = 19 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][5] = new Door(gamePanel);
+        gamePanel.objects[numMap][5].worldX = 45 * gamePanel.tileSize;
+        gamePanel.objects[numMap][5].worldY = 29 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][6] = new Door(gamePanel);
+        gamePanel.objects[numMap][6].worldX = 45 * gamePanel.tileSize;
+        gamePanel.objects[numMap][6].worldY = 26 * gamePanel.tileSize;
 //
 //        gamePanel.objects[5] = new PotionRed(gamePanel);
 //        gamePanel.objects[5].worldX = 47 * gamePanel.tileSize;
@@ -73,9 +78,8 @@ public class AssetSetter {
         gamePanel.npc[numMap][i] = new Oldman(gamePanel);
         gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 11;
         gamePanel.npc[numMap][i].worldY = gamePanel.tileSize * 15;
-        i++;
+
         numMap = 1;
-        i = 0;
         gamePanel.npc[numMap][i] = new Merchant(gamePanel);
         gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 20;
         gamePanel.npc[numMap][i].worldY = gamePanel.tileSize * 47;
