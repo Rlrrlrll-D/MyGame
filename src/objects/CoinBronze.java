@@ -16,9 +16,10 @@ public class CoinBronze extends PickUpOnlyItems {
         down1 = setup("/res/objects/coin_bronze", gamePanel.tileSize, gamePanel.tileSize);
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gamePanel.playSFX(1);
         gamePanel.ui.addMsg("Coin +" + value);
         gamePanel.player.coin += value;
+        return true;
     }
 }

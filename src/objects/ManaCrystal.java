@@ -18,10 +18,11 @@ public class ManaCrystal extends PickUpOnlyItems {
 
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gamePanel.playSFX(4);
         gamePanel.ui.addMsg("Mana +" + value);
         entity.mana += value;
+        return true;
 
     }
 }

@@ -20,7 +20,7 @@ public class Key extends Consumable {
     }
 
     @Override
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gamePanel.gameBehavior = GamePanel.dialogBehavior;
         int objIndex = getDetected(entity, gamePanel.objects, "Door");
 
@@ -28,8 +28,10 @@ public class Key extends Consumable {
             gamePanel.ui.dialogue = "You use the " + name + " and open the door.";
             gamePanel.playSFX(2);
             gamePanel.objects[gamePanel.currentMap][objIndex] = null;
+            return true;
         } else {
             gamePanel.ui.dialogue = "What are you doing?";
+            return false;
         }
     }
 }

@@ -17,10 +17,11 @@ public class PotionRed extends Consumable {
         description = "[Red Potion]\nHeals your life by  " + value;
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gamePanel.gameBehavior = GamePanel.dialogBehavior;
         gamePanel.ui.dialogue = "You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".";
         entity.life += value;
         gamePanel.playSFX(10);
+        return true;
     }
 }

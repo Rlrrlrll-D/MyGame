@@ -19,10 +19,10 @@ public class Heart extends PickUpOnlyItems {
         image2 = setup("/res/objects/heart_full", gamePanel.tileSize, gamePanel.tileSize);
     }
 
-    public void use(Entity entity) {
+    public boolean use(Entity entity) {
         gamePanel.playSFX(4);
         gamePanel.ui.addMsg("Life +" + value);
         entity.life += value;
-
+        return true;
     }
 }

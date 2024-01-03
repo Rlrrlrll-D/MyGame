@@ -487,8 +487,9 @@ public class Player extends Entity {
                 defence = getDefence();
             }
             if (selectedItem instanceof Consumable) {
-                selectedItem.use(this);
-                inventory.remove(itemIndex);
+                if (selectedItem.use(this)) {
+                    inventory.remove(itemIndex);
+                }
             }
         }
     }
