@@ -144,7 +144,8 @@ public class Player extends Entity {
 
         }
     }
-    public void knockEscape(Entity entity,int knockPower){
+
+    private void knockEscape(Entity entity, int knockPower) {
         entity.direct = direct;
         entity.speed +=knockPower;
         entity.escapeKnock=true;

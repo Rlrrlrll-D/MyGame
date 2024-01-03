@@ -38,6 +38,10 @@ public class AssetSetter {
         gamePanel.objects[numMap][6] = new Door(gamePanel);
         gamePanel.objects[numMap][6].worldX = 45 * gamePanel.tileSize;
         gamePanel.objects[numMap][6].worldY = 26 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][8] = new Chest(gamePanel, new Key(gamePanel));
+        gamePanel.objects[numMap][8].worldX = 45 * gamePanel.tileSize;
+        gamePanel.objects[numMap][8].worldY = 39 * gamePanel.tileSize;
 //
 //        gamePanel.objects[5] = new PotionRed(gamePanel);
 //        gamePanel.objects[5].worldX = 47 * gamePanel.tileSize;

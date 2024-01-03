@@ -23,6 +23,5 @@ public class ManaCrystal extends PickUpOnlyItems {
         gamePanel.ui.addMsg("Mana +" + value);
         entity.mana += value;
         return true;
-
     }
 }
