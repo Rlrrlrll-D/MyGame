@@ -63,9 +63,9 @@ public class Entity {
     public boolean hpBarOn;
     public boolean onPath;
     public int invinCounter;
-    public int dyingCounter ;
-    public int hpBarCounter ;
-    public int knockCounter ;
+    public int dyingCounter;
+    public int hpBarCounter;
+    public int knockCounter;
     public int knockPower;
     public int shotDelay;
     public BufferedImage image, image1, image2, temp;
@@ -78,6 +78,30 @@ public class Entity {
 
     public Entity(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+    }
+
+    public int getLeftX() {
+        return worldX + solidArea.x;
+    }
+
+    public int getRightX() {
+        return worldX + solidArea.x + solidArea.width;
+    }
+
+    public int getTopY() {
+        return worldY + solidArea.y;
+    }
+
+    public int getBottomY() {
+        return worldY + solidArea.y + solidArea.height;
+    }
+
+    public int getCol() {
+        return (worldX + solidArea.x) / gamePanel.tileSize;
+    }
+
+    public int getRow() {
+        return (worldY + solidArea.y) / gamePanel.tileSize;
     }
 
 
@@ -122,7 +146,43 @@ public class Entity {
 
     }
 
-    public void searchPath(int goalCol, int goalRow) {
+    public int getDetected(Entity user, Entity[][] objects, String name) {
+        int i = 999;
+        int nextWorldX = user.getLeftX();
+        int nextWorldY = user.getTopY();
+
+        switch (user.direct) {
+            case "up", "stay_up":
+                nextWorldY = user.getTopY() - 1;
+                break;
+            case "down", "stay":
+                nextWorldY = user.getBottomY() + 1;
+                break;
+            case "left", "stay_left":
+                nextWorldX = user.getLeftX() - 1;
+                break;
+            case "right", "stay_right":
+                nextWorldX = user.getRightX() + 1;
+                break;
+        }
+        int col = nextWorldX / gamePanel.tileSize;
+        int row = nextWorldY / gamePanel.tileSize;
+
+        for (int j = 0; j < objects[1].length; j++) {
+            if (objects[gamePanel.currentMap][j] != null) {
+                if (objects[gamePanel.currentMap][j].getCol() == col &&
+                        objects[gamePanel.currentMap][j].getRow() == row &&
+                        objects[gamePanel.currentMap][j].name.equals(name)) {
+
+                    i = j;
+                    break;
+                }
+            }
+        }
+        return i;
+    }
+
+    protected void searchPath(int goalCol, int goalRow) {
 
         int startCol = (worldX + solidArea.x) / gamePanel.tileSize;
         int startRow = (worldY + solidArea.y) / gamePanel.tileSize;
@@ -202,7 +262,7 @@ public class Entity {
         }
     }
 
-    public void dropItem(Entity dropped) {
+    protected void dropItem(Entity dropped) {
         for (int i = 0; i < gamePanel.objects[1].length; i++) {
             if (gamePanel.objects[gamePanel.currentMap][i] == null) {
                 gamePanel.objects[gamePanel.currentMap][i] = dropped;
@@ -214,14 +274,14 @@ public class Entity {
     }
 
     public void update() {
-        if (escapeKnock){
+        if (escapeKnock) {
             checkCollision();
-            if (collisionOn){
-                knockCounter=0;
-                escapeKnock=false;
-                speed=defaultSpeed;
-            }else {
-                switch (gamePanel.player.direct){
+            if (collisionOn) {
+                knockCounter = 0;
+                escapeKnock = false;
+                speed = defaultSpeed;
+            } else {
+                switch (gamePanel.player.direct) {
                     case "up", "stay_up":
                         worldY -= speed;
                         break;
@@ -239,13 +299,13 @@ public class Entity {
                 }
             }
             knockCounter++;
-            if (knockCounter==10){
-                knockCounter=0;
+            if (knockCounter == 10) {
+                knockCounter = 0;
                 escapeKnock = false;
                 speed = defaultSpeed;
             }
 
-        }else {
+        } else {
             setAction();
             checkCollision();
             if (!collisionOn) {
@@ -319,7 +379,7 @@ public class Entity {
         return null;
     }
 
-    public void generateParticle(Entity generator, Entity target) {
+    protected void generateParticle(Entity generator, Entity target) {
 
         int size = generator.getParticleSize();
         int speed = generator.getParticleSpeed();
@@ -335,18 +395,6 @@ public class Entity {
         gamePanel.particleArrayList.add(p3);
         gamePanel.particleArrayList.add(p4);
     }
-
-//    protected void escaping(int delay, Entity entity) {
-//        if (escape) {
-//            escapeCounter++
-//            entity.speed = 3;
-//            if (escapeCounter > delay) {
-//                escape = false;
-//                entity.speed = 1;
-//                escapeCounter = 0;
-//            }
-//        }
-//    }
 
     protected void blinkEntity(Graphics2D graphics2D, float i, int interval) {
 
