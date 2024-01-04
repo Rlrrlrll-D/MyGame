@@ -3,9 +3,6 @@ package environment;
 import main.GamePanel;
 
 import java.awt.*;
-import java.awt.geom.Area;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class Lighting {
@@ -14,29 +11,16 @@ public class Lighting {
 
     public Lighting(GamePanel gamePanel, int circleSize) {
         this.gamePanel = gamePanel;
+
         darknessFilter = new BufferedImage(gamePanel.screenWidth, gamePanel.screenHeight, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics2D = (Graphics2D) darknessFilter.getGraphics();
-
-        getScreenArea(gamePanel, circleSize, graphics2D);
-
-
-    }
-
-    private static void getScreenArea(GamePanel gamePanel, int circleSize, Graphics2D gr) {
-        Area screenArea = new Area(new Rectangle2D.Double(0, 0, gamePanel.screenWidth, gamePanel.screenHeight));
 
         int centerX = gamePanel.player.screenX + (gamePanel.tileSize) / 2;
         int centerY = gamePanel.player.screenY + (gamePanel.tileSize) / 2;
 
-        double x = centerX - ((double) circleSize / 2);
-        double y = centerY - ((double) circleSize / 2);
-
-        Shape circleShape = new Ellipse2D.Double(x, y, circleSize, circleSize);
-
-        Area lightArea = new Area(circleShape);
-        screenArea.subtract(lightArea);
         Color[] color = new Color[12];
         float[] fraction = new float[12];
+
         color[0] = new Color(0, 0, 0, 0.1f);
         color[1] = new Color(0, 0, 0, 0.42f);
         color[2] = new Color(0, 0, 0, 0.52f);
@@ -64,13 +48,11 @@ public class Lighting {
         fraction[11] = 1f;
 
         RadialGradientPaint radialGradientPaint = new RadialGradientPaint(centerX, centerY, ((float) circleSize / 2), fraction, color);
-        gr.setPaint(radialGradientPaint);
+        graphics2D.setPaint(radialGradientPaint);
+        graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+        graphics2D.dispose();
 
-        gr.fill(lightArea);
-        gr.fill(screenArea);
-        gr.dispose();
     }
-
     public void drawing(Graphics2D graphics2D) {
         graphics2D.drawImage(darknessFilter, 0, 0, null);
     }
