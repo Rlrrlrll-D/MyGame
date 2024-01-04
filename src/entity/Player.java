@@ -12,7 +12,6 @@ public class Player extends Entity {
 
     public final int screenX;
     public final int screenY;
-    public int /*keys,*/ temp;
     public boolean notAttacked;
 
     KeyHandler keyHandler;
@@ -438,14 +437,6 @@ public class Player extends Entity {
 
     }
 
-    public void sfxDelay(int delay) {
-        temp++;
-        if (temp > delay) {
-            gamePanel.playSFX(3);
-            temp = 0;
-        }
-    }
-
     private void pickUp(int counter) {
 
         if (counter != 999) {
@@ -500,7 +491,7 @@ public class Player extends Entity {
         }
     }
 
-    public int searchItemInInventory(String itemName) {
+    private int searchItemInInventory(String itemName) {
         int index = 999;
         for (int i = 0; i < inventory.size(); i++) {
             if (inventory.get(i).name.equals(itemName)) {
