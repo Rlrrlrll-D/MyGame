@@ -12,7 +12,7 @@ public class Key extends Consumable {
         this.gamePanel = gamePanel;
         name = "Key";
         collision = true;
-
+        stackable = true;
         price = 100;
         description = "[" + name + "]\nIt opens a door.";
         down1 = setup("/res/objects/key", gamePanel.tileSize, gamePanel.tileSize);

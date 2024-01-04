@@ -5,12 +5,11 @@ import main.GamePanel;
 
 public class PotionRed extends Consumable {
     GamePanel gamePanel;
-
-
     public PotionRed(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
         name = "Red Potion";
+        stackable = true;
         price = 300;
         value = 5;
         down1 = setup("/res/objects/potion_red", gamePanel.tileSize, gamePanel.tileSize);

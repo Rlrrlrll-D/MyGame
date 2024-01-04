@@ -39,23 +39,26 @@ public class AssetSetter {
         gamePanel.objects[numMap][6].worldX = 45 * gamePanel.tileSize;
         gamePanel.objects[numMap][6].worldY = 26 * gamePanel.tileSize;
 
-        gamePanel.objects[numMap][8] = new Chest(gamePanel, new Key(gamePanel));
-        gamePanel.objects[numMap][8].worldX = 45 * gamePanel.tileSize;
-        gamePanel.objects[numMap][8].worldY = 39 * gamePanel.tileSize;
-//
-//        gamePanel.objects[5] = new PotionRed(gamePanel);
-//        gamePanel.objects[5].worldX = 47 * gamePanel.tileSize;
-//        gamePanel.objects[5].worldY = 10 * gamePanel.tileSize;
-////
-//        gamePanel.objects[6] = new ManaCrystal(gamePanel);
-//        gamePanel.objects[6].worldX = 47 * gamePanel.tileSize;
-//        gamePanel.objects[6].worldY = 46 * gamePanel.tileSize;
-
-
         gamePanel.objects[numMap][7] = new Heart(gamePanel);
         gamePanel.objects[numMap][7].worldX = 41 * gamePanel.tileSize;
         gamePanel.objects[numMap][7].worldY = 43 * gamePanel.tileSize;
-//        gamePanel.objects[2] = new Door(gamePanel);
+
+        gamePanel.objects[numMap][8] = new Chest(gamePanel, new Key(gamePanel));
+        gamePanel.objects[numMap][8].worldX = 45 * gamePanel.tileSize;
+        gamePanel.objects[numMap][8].worldY = 39 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][9] = new PotionRed(gamePanel);
+        gamePanel.objects[numMap][9].worldX = 35 * gamePanel.tileSize;
+        gamePanel.objects[numMap][9].worldY = 43 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][10] = new PotionRed(gamePanel);
+        gamePanel.objects[numMap][10].worldX = 32 * gamePanel.tileSize;
+        gamePanel.objects[numMap][10].worldY = 43 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][11] = new PotionRed(gamePanel);
+        gamePanel.objects[numMap][11].worldX = 30 * gamePanel.tileSize;
+        gamePanel.objects[numMap][11].worldY = 43 * gamePanel.tileSize;
+//        gamePanel.objects[2] = nw Door(gamePanel);
 //        gamePanel.objects[2].worldX = 47 * gamePanel.tileSize;
 //        gamePanel.objects[2].worldY = 21 * gamePanel.tileSize;
 //

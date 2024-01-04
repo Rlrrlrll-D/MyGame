@@ -258,15 +258,14 @@ public class UI {
                     gamePanel.gameBehavior = GamePanel.dialogBehavior;
                     dialogue = "You need more coin to buy that!";
                     drawDialogScreen();
-                } else if (gamePanel.player.inventory.size() == gamePanel.player.maxInventorySize) {
-                    subBehavior = 0;
-                    gamePanel.gameBehavior = GamePanel.dialogBehavior;
-                    dialogue = "You cannot carry anymore!";
-
                 } else {
-                    gamePanel.playSFX(1);
-                    gamePanel.player.coin -= npc.inventory.get(itemIndex).price;
-                    gamePanel.player.inventory.add(npc.inventory.get(itemIndex));
+                    if (gamePanel.player.canObtainItem(npc.inventory.get(itemIndex))) {
+                        gamePanel.player.coin -= npc.inventory.get(itemIndex).price;
+                    } else {
+                        subBehavior = 0;
+                        gamePanel.gameBehavior = GamePanel.dialogBehavior;
+                        dialogue = "You cannot carry anymore!";
+                    }
                 }
             }
         }
@@ -310,7 +309,11 @@ public class UI {
                     gamePanel.gameBehavior = GamePanel.dialogBehavior;
                     dialogue = "You cannot sell an equipped item!";
                 } else {
-                    gamePanel.player.inventory.remove(itemIndex);
+                    if (gamePanel.player.inventory.get(itemIndex).amount > 1) {
+                        gamePanel.player.inventory.get(itemIndex).amount--;
+                    } else {
+                        gamePanel.player.inventory.remove(itemIndex);
+                    }
                     gamePanel.player.coin += price;
                 }
             }
@@ -661,6 +664,20 @@ public class UI {
                 graphics2D.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
             graphics2D.drawImage(entity.inventory.get(i).down1, slotX, slotY, null);
+
+            if (entity == gamePanel.player && entity.inventory.get(i).amount > 1) {
+                graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 20F));
+                int amountX;
+                int amountY;
+                String str = "" + entity.inventory.get(i).amount;
+                amountX = getX_Value(str, slotX + 44);
+                amountY = slotY + gamePanel.tileSize;
+                graphics2D.setColor(new Color(12, 8, 1));
+                graphics2D.drawString(str, amountX, amountY);
+                graphics2D.setColor(new Color(229, 152, 9));
+                graphics2D.drawString(str, amountX - 2, amountY - 2);
+
+            }
             slotX += gamePanel.tileSize;
             if (i == 4 || i == 9 || i == 14) {
                 slotX = slotXstart;

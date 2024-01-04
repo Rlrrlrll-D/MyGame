@@ -147,8 +147,8 @@ public class Player extends Entity {
 
     private void knockEscape(Entity entity, int knockPower) {
         entity.direct = direct;
-        entity.speed +=knockPower;
-        entity.escapeKnock=true;
+        entity.speed += knockPower;
+        entity.escapeKnock = true;
     }
 
     public void update() {
@@ -209,8 +209,8 @@ public class Player extends Entity {
             projectile.subtractRes(this);
 
             for (int i = 0; i < gamePanel.projectile[1].length; i++) {
-                if (gamePanel.projectile[gamePanel.currentMap][i]==null){
-                    gamePanel.projectile[gamePanel.currentMap][i]=projectile;
+                if (gamePanel.projectile[gamePanel.currentMap][i] == null) {
+                    gamePanel.projectile[gamePanel.currentMap][i] = projectile;
                     break;
                 }
             }
@@ -285,7 +285,7 @@ public class Player extends Entity {
             damageMonster(monsterIndex, attack, currentWeapon.knockPower);
             int interTileIndex = gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
             damageInterTile(interTileIndex);
-            int projectileIndex = gamePanel.checker.checkEntity(this,gamePanel.projectile);
+            int projectileIndex = gamePanel.checker.checkEntity(this, gamePanel.projectile);
             damageProjectile(projectileIndex);
             worldX = currentWorldX;
             worldY = currentWorldY;
@@ -300,10 +300,10 @@ public class Player extends Entity {
     }
 
     private void damageProjectile(int projectileIndex) {
-        if (projectileIndex!=999){
+        if (projectileIndex != 999) {
             Entity projectile = gamePanel.projectile[gamePanel.currentMap][projectileIndex];
             projectile.isAlive = false;
-            generateParticle(projectile,projectile);
+            generateParticle(projectile, projectile);
         }
     }
 
@@ -385,8 +385,8 @@ public class Player extends Entity {
 
                 gamePanel.playSFX(7);
 
-                if (knockPower>0){
-                    knockEscape(gamePanel.mon[gamePanel.currentMap][i],knockPower);
+                if (knockPower > 0) {
+                    knockEscape(gamePanel.mon[gamePanel.currentMap][i], knockPower);
                 }
 
                 int dmg = attack - gamePanel.mon[gamePanel.currentMap][i].defence;
@@ -461,8 +461,8 @@ public class Player extends Entity {
             } else {
                 String txt;
 
-                if (inventory.size() != maxInventorySize) {
-                    inventory.add(gamePanel.objects[gamePanel.currentMap][counter]);
+                if (canObtainItem(gamePanel.objects[gamePanel.currentMap][counter])) {
+
                     gamePanel.playSFX(1);
                     txt = "Got a " + gamePanel.objects[gamePanel.currentMap][counter].name + "!";
                 } else {
@@ -489,10 +489,48 @@ public class Player extends Entity {
             }
             if (selectedItem instanceof Consumable) {
                 if (selectedItem.use(this)) {
-                    inventory.remove(itemIndex);
+                    if (selectedItem.amount > 1) {
+                        selectedItem.amount--;
+                    } else {
+                        inventory.remove(itemIndex);
+                    }
+
                 }
             }
         }
+    }
+
+    public int searchItemInInventory(String itemName) {
+        int index = 999;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i).name.equals(itemName)) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    public boolean canObtainItem(Entity entity) {
+        boolean canObtain = false;
+        if (entity.stackable) {
+            int index = searchItemInInventory(entity.name);
+            if (index != 999) {
+                inventory.get(index).amount++;
+                canObtain = true;
+            } else {
+                if (inventory.size() != maxInventorySize) {
+                    inventory.add(entity);
+                    canObtain = true;
+                }
+            }
+        } else {
+            if (inventory.size() != maxInventorySize) {
+                inventory.add(entity);
+                canObtain = true;
+            }
+        }
+        return canObtain;
     }
 
     public void drawing(Graphics2D graphics2D) {

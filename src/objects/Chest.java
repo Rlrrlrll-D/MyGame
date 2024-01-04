@@ -34,11 +34,10 @@ public class Chest extends Obstacle {
 
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("You open the chest and find a ").append(loot.name).append("!");
-            if (gamePanel.player.inventory.size() == gamePanel.player.maxInventorySize) {
+            if (!gamePanel.player.canObtainItem(loot)) {
                 stringBuilder.append("\n...But you cannot carry and more!");
             } else {
                 stringBuilder.append("\nYou obtain the ").append(loot.name).append("!");
-                gamePanel.player.inventory.add(loot);
                 down1 = image1;
                 opened = true;
             }

@@ -62,6 +62,8 @@ public class Entity {
     public boolean isDying;
     public boolean hpBarOn;
     public boolean onPath;
+    public boolean stackable;
+    public int amount = 1;
     public int invinCounter;
     public int dyingCounter;
     public int hpBarCounter;
