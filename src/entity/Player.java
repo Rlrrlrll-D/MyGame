@@ -13,6 +13,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     public boolean notAttacked;
+    public boolean lightUp;
 
     KeyHandler keyHandler;
     BufferedImage image;
@@ -477,6 +478,14 @@ public class Player extends Entity {
             if (selectedItem instanceof ShieldWood || selectedItem instanceof ShieldBlue) {
                 currentShield = selectedItem;
                 defence = getDefence();
+            }
+            if (selectedItem instanceof Light) {
+                if (currentLight == selectedItem) {
+                    currentLight = null;
+                } else {
+                    currentLight = selectedItem;
+                }
+                lightUp = true;
             }
             if (selectedItem instanceof Consumable) {
                 if (selectedItem.use(this)) {

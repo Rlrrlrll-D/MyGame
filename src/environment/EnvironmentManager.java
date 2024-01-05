@@ -13,7 +13,11 @@ public class EnvironmentManager {
     }
 
     public void setup() {
-        lighting = new Lighting(gamePanel, 320);
+        lighting = new Lighting(gamePanel);
+    }
+
+    public void update() {
+        lighting.update();
     }
 
     public void drawing(Graphics2D graphics2D) {

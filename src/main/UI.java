@@ -652,14 +652,16 @@ public class UI {
         }
 
         drawSubWindow(x, y, width, height);
-        final int slotXstart = x + gamePanel.tileSize / 2;
-        final int slotYstart = y + gamePanel.tileSize / 2;
-        int slotX = slotXstart;
-        int slotY = slotYstart;
+        final int slotXStart = x + gamePanel.tileSize / 2;
+        final int slotYStart = y + gamePanel.tileSize / 2;
+        int slotX = slotXStart;
+        int slotY = slotYStart;
 
         for (int i = 0; i < entity.inventory.size(); i++) {
 
-            if (entity.inventory.get(i) == entity.currentWeapon || entity.inventory.get(i) == entity.currentShield) {
+            if (entity.inventory.get(i) == entity.currentWeapon ||
+                    entity.inventory.get(i) == entity.currentShield ||
+                    entity.inventory.get(i) == entity.currentLight) {
                 graphics2D.setColor(new Color(240, 190, 90));
                 graphics2D.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
@@ -680,14 +682,14 @@ public class UI {
             }
             slotX += gamePanel.tileSize;
             if (i == 4 || i == 9 || i == 14) {
-                slotX = slotXstart;
+                slotX = slotXStart;
                 slotY += gamePanel.tileSize;
             }
         }
 
         if (cursor) {
-            int curX = slotXstart + (gamePanel.tileSize * slotCol);
-            int curY = slotYstart + (gamePanel.tileSize * slotRow);
+            int curX = slotXStart + (gamePanel.tileSize * slotCol);
+            int curY = slotYStart + (gamePanel.tileSize * slotRow);
             int curWidth = gamePanel.tileSize;
             int curHeight = gamePanel.tileSize;
             graphics2D.setColor(new Color(229, 152, 9));
