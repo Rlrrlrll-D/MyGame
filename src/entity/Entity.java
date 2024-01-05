@@ -31,6 +31,8 @@ public class Entity {
     public int ammo;
     public Entity currentWeapon;
     public Entity currentShield;
+    public Entity currentLight;
+
     public Projectile projectile;
     public ArrayList<Entity> inventory = new ArrayList<>();
 
@@ -64,6 +66,7 @@ public class Entity {
     public boolean onPath;
     public boolean stackable;
     public int amount = 1;
+    public int lightRadius;
     public int invinCounter;
     public int dyingCounter;
     public int hpBarCounter;
