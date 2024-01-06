@@ -21,6 +21,7 @@ public class Tent extends Consumable {
         gamePanel.playSFX(17);
         gamePanel.player.life = gamePanel.player.maxLife;
         gamePanel.player.mana = gamePanel.player.maxMana;
+        gamePanel.player.getSleepingImg(down1);
         return true;
 
     }

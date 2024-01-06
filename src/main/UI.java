@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class UI {
 
-    public boolean finished;
     public String dialogue;
     public boolean msgOn;
     public int count;
@@ -120,52 +119,6 @@ public class UI {
         if (gamePanel.gameBehavior == GamePanel.sleepBehavior) {
             drawSleepScreen();
         }
-
-
-//        if (finished){
-//
-//            graphics2D.setFont(Unispace_Bold);
-//            graphics2D.setColor(new Color(5, 18, 91));
-//
-//            String txt;
-//            int txtLength;
-//            int x;
-//            int y;
-//            txt = "You found the treasure!";
-//            txtLength = (int)graphics2D.getFontMetrics().getStringBounds(txt,graphics2D).getWidth();
-//            x = gamePanel.screenWidth/2 - txtLength/2;
-//            y = gamePanel.screenHeight/2-(gamePanel.tileSize*3);
-//            graphics2D.drawString(txt,x,y);
-//
-//            txt = "You Time is: "+ decimalFormat.format(playTime)+"!";
-//            txtLength = (int)graphics2D.getFontMetrics().getStringBounds(txt,graphics2D).getWidth();
-//            x = gamePanel.screenWidth/2 - txtLength/2;
-//            y = gamePanel.screenHeight/2-(gamePanel.tileSize);
-//            graphics2D.drawString(txt,x,y);
-//
-//            graphics2D.setFont(Unispace_Bold2);
-//            graphics2D.setColor(new Color(229, 152, 9));
-//            txt = "CONGRATULATIONS!";
-//            txtLength = (int)graphics2D.getFontMetrics().getStringBounds(txt,graphics2D).getWidth();
-//            x = gamePanel.screenWidth/2 - txtLength/2;
-//            y = gamePanel.screenHeight/2-(gamePanel.tileSize*2);
-//            graphics2D.drawString(txt,x,y);
-//
-//            gamePanel.gameThread = null;
-//
-//        }else {
-//            graphics2D.setFont(Unispace_Bold);
-//            graphics2D.setColor(new Color(6, 18, 94));
-//            graphics2D.drawImage(key, gamePanel.tileSize / 2, gamePanel.tileSize / 2, gamePanel.tileSize / 2 + 10, gamePanel.tileSize / 2 + 10, null);
-//            graphics2D.drawString("x " + gamePanel.res.player.keys, 57, gamePanel.tileSize);
-//
-//            playTime+=(double) 1/60;
-//            graphics2D.drawString("Time: "+ decimalFormat.format(playTime), gamePanel.screenWidth- gamePanel.tileSize*3, gamePanel.tileSize);
-//            if (msgOn) {
-//                graphics2D.drawString(msg, (gamePanel.tileSize / 2) * 5, gamePanel.tileSize);
-//                msgDelay(180);
-//            }
-//        }
     }
 
     private void drawSleepScreen() {
@@ -182,7 +135,9 @@ public class UI {
                 gamePanel.environmentManager.lighting.filterAlpha = 0f;
                 count = 0;
                 gamePanel.environmentManager.lighting.dayState = gamePanel.environmentManager.lighting.day;
+                gamePanel.environmentManager.lighting.dayCounter = 0;
                 gamePanel.gameBehavior = GamePanel.playBehavior;
+                gamePanel.player.getPlayerImg();
             }
         }
     }

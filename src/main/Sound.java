@@ -56,9 +56,11 @@ public class Sound {
     public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
+
     public void stop() {
         clip.stop();
     }
+
     public void chkVolume() {
         switch (volumeScale) {
             case 0:

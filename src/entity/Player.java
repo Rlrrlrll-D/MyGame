@@ -97,7 +97,7 @@ public class Player extends Entity {
         return defence = dexterity * currentShield.defenceValue;
     }
 
-    private void getPlayerImg() {
+    public void getPlayerImg() {
 
         stay1 = setup("/res/player/stay1", gamePanel.tileSize, gamePanel.tileSize);
         stay2 = setup("/res/player/stay2", gamePanel.tileSize, gamePanel.tileSize);
@@ -119,6 +119,29 @@ public class Player extends Entity {
         left2 = setup("/res/player/me_left2", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("/res/player/me_right1", gamePanel.tileSize, gamePanel.tileSize);
         right2 = setup("/res/player/me_right2", gamePanel.tileSize, gamePanel.tileSize);
+    }
+
+    public void getSleepingImg(BufferedImage image) {
+        stay1 = image;
+        stay2 = image;
+        stay3 = image;
+        stay_up1 = image;
+        stay_up2 = image;
+        stay_up3 = image;
+        stay_left1 = image;
+        stay_left2 = image;
+        stay_left3 = image;
+        stay_right1 = image;
+        stay_right2 = image;
+        stay_right3 = image;
+        up1 = image;
+        up2 = image;
+        down1 = image;
+        down2 = image;
+        left1 = image;
+        left2 = image;
+        right1 = image;
+        right2 = image;
     }
 
     private void getPlayerAttackImage() {

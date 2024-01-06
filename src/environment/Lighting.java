@@ -14,7 +14,7 @@ public class Lighting {
     public final int dawn = 3;
     public float filterAlpha;
     public int dayState = day;
-    int dayCounter;
+    public int dayCounter;
 
     public Lighting(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
