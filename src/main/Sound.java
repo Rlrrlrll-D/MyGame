@@ -33,6 +33,7 @@ public class Sound {
         sounds[14] = new File("src/res/sound/burning.wav");
         sounds[15] = new File("src/res/sound/cut-tree.wav");
         sounds[16] = new File("src/res/sound/game-over.wav");
+        sounds[17] = new File("src/res/sound/sleep.wav");
 
     }
 

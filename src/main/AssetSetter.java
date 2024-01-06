@@ -62,6 +62,10 @@ public class AssetSetter {
         gamePanel.objects[numMap][12] = new Lantern(gamePanel);
         gamePanel.objects[numMap][12].worldX = 27 * gamePanel.tileSize;
         gamePanel.objects[numMap][12].worldY = 43 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][13] = new Tent(gamePanel);
+        gamePanel.objects[numMap][13].worldX = 25 * gamePanel.tileSize;
+        gamePanel.objects[numMap][13].worldY = 43 * gamePanel.tileSize;
 //        gamePanel.objects[2] = nw Door(gamePanel);
 //        gamePanel.objects[2].worldX = 47 * gamePanel.tileSize;
 //        gamePanel.objects[2].worldY = 21 * gamePanel.tileSize;

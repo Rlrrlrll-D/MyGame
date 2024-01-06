@@ -99,7 +99,6 @@ public class UI {
 
         }
         if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
-            // drawPlayerLife();
             drawDialogScreen();
         }
         if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
@@ -117,6 +116,9 @@ public class UI {
         }
         if (gamePanel.gameBehavior == GamePanel.tradeBehavior) {
             drawTradeScreen();
+        }
+        if (gamePanel.gameBehavior == GamePanel.sleepBehavior) {
+            drawSleepScreen();
         }
 
 
@@ -164,6 +166,25 @@ public class UI {
 //                msgDelay(180);
 //            }
 //        }
+    }
+
+    private void drawSleepScreen() {
+        count++;
+        if (count < 120) {
+            gamePanel.environmentManager.lighting.filterAlpha += 0.01f;
+            if (gamePanel.environmentManager.lighting.filterAlpha > 1f) {
+                gamePanel.environmentManager.lighting.filterAlpha = 1f;
+            }
+        }
+        if (count >= 120) {
+            gamePanel.environmentManager.lighting.filterAlpha -= 0.01f;
+            if (gamePanel.environmentManager.lighting.filterAlpha <= 0f) {
+                gamePanel.environmentManager.lighting.filterAlpha = 0f;
+                count = 0;
+                gamePanel.environmentManager.lighting.dayState = gamePanel.environmentManager.lighting.day;
+                gamePanel.gameBehavior = GamePanel.playBehavior;
+            }
+        }
     }
 
     private void drawTradeScreen() {

@@ -30,15 +30,18 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int gameOverBehavior = 6;
     public static final int transitionBehavior = 7;
     public static final int tradeBehavior = 8;
+    public static final int sleepBehavior = 9;
     //  screen settings
     private static final int originalTileSize = 16;
     private static final int scale = 3;
     private static final int FPS = 60;
+
     public int gameBehavior;
     public int currentMap = 0;
     public int tileSize = originalTileSize * scale;
     public int screenWidth = tileSize * maxScreenCol;
     public final int dfl_X = screenWidth / 2 - tileSize / 2;
+
     int screenWidth2 = screenWidth;
     public int screenHeight = tileSize * maxScreenRow;
     public final int dfl_Y = screenHeight / 2 - tileSize / 2;
