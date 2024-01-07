@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class TileManager {
@@ -17,39 +18,78 @@ public class TileManager {
     public Tile[] tiles;
     public int[][][] mapTileNum;
     boolean drawPath = true;
+    ArrayList<String> fileNames = new ArrayList<>();
+    ArrayList<String> collisionStatus = new ArrayList<>();
 
-    public TileManager(GamePanel gamePanel) {
+    public TileManager(GamePanel gamePanel) throws Exception {
         this.gamePanel = gamePanel;
-        tiles = new Tile[10];
-        mapTileNum = new int[GamePanel.maxMap][GamePanel.maxWorldCol][GamePanel.maxWorldRow];
-        getTileImage();
-        try {
-            loadMap("/maps/world01.txt", 0);
-            loadMap("/maps/world02.txt", 1);
+        InputStream inputStream = getClass().getResourceAsStream("/maps/sample_tiles_data.txt");
+        assert inputStream != null;
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            fileNames.add(line);
+            collisionStatus.add(bufferedReader.readLine());
         }
+        bufferedReader.close();
+
+        tiles = new Tile[fileNames.size()];
+
+        getTileImage();
+
+        inputStream = getClass().getResourceAsStream("/maps/sample.txt");
+
+        assert inputStream != null;
+        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+        String line2 = bufferedReader.readLine();
+        String[] maxTile = line2.split(" ");
+
+        GamePanel.maxWorldCol = maxTile.length;
+        GamePanel.maxWorldRow = maxTile.length;
+        mapTileNum = new int[GamePanel.maxMap][GamePanel.maxWorldCol][GamePanel.maxWorldRow];
+
+        bufferedReader.close();
+        loadMap("/maps/sample.txt", 0);
+//        try {
+//            loadMap("/maps/world01.txt", 0);
+//            loadMap("/maps/world02.txt", 1);
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     private void getTileImage() {
+        for (int i = 0; i < fileNames.size(); i++) {
 
-        setup(0, "grass", false);
-        setup(1, "water", true);
-        setup(2, "wall", true);
-        setup(3, "earth", false);
-        setup(4, "tree", true);
-        setup(5, "sand", false);
-        setup(6, "trunk", false);
-        setup(7, "hut", false);
-        setup(8, "hut2", false);
+            String filename;
+            boolean collision;
+
+            filename = fileNames.get(i);
+
+            collision = collisionStatus.get(i).equals("true");
+            setup(i, filename, collision);
+        }
+
+//        setup(0, "grass", false);
+//        setup(1, "water", true);
+//        setup(2, "wall", true);
+//        setup(3, "earth", false);
+//        setup(4, "tree", true);
+//        setup(5, "sand", false);
+//        setup(6, "trunk", false);
+//        setup(7, "hut", false);
+//        setup(8, "hut2", false);
 
     }
+
     public void setup(int index, String name, boolean collision) {
 
         try {
             tiles[index] = new Tile();
-            tiles[index].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/" + name + ".png")));
+            tiles[index].image = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/res/tiles/" + name)));
             tiles[index].image = UtilityTool.scaleImage(tiles[index].image, gamePanel.tileSize, gamePanel.tileSize);
             tiles[index].collision = collision;
         } catch (IOException e) {
@@ -72,6 +112,7 @@ public class TileManager {
         }
         bufferedReader.close();
     }
+
     public void drawing(Graphics2D graphics2D) {
 
         for (int worldRow = 0; worldRow < GamePanel.maxWorldRow; worldRow++) {

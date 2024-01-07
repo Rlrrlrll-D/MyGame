@@ -40,7 +40,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultVal() {
-        worldX = gamePanel.tileSize;
+        worldX = gamePanel.tileSize * 2;
         worldY = gamePanel.tileSize * 39;
         stayDirect = "begin";
         direct = "stay";

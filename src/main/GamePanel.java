@@ -18,8 +18,8 @@ import java.util.Comparator;
 public class GamePanel extends JPanel implements Runnable {
     public static final int maxScreenCol = 20;
     public static final int maxScreenRow = 12;
-    public static final int maxWorldCol = 50;
-    public static final int maxWorldRow = 50;
+    public static int maxWorldCol = 50;
+    public static int maxWorldRow = 50;
     public final static int maxMap = 10;
     public static final int titleBehavior = 0;
     public static final int playBehavior = 1;
@@ -73,7 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
     ArrayList<Entity> entityArrayList = new ArrayList<>();
 
 
-    public GamePanel() throws IOException, FontFormatException {
+    public GamePanel() throws Exception {
         setPreferredSize(new Dimension(screenWidth, screenHeight));
         setBackground(new Color(12, 23, 30));
         setDoubleBuffered(true);

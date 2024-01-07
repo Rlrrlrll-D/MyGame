@@ -1,13 +1,12 @@
 package main;
 
 import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
 
 public class Main {
 
     public static JFrame window;
-    public static void main(String[] args) throws IOException, FontFormatException {
+
+    public static void main(String[] args) throws Exception {
 
         window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
