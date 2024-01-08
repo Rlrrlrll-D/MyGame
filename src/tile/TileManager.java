@@ -69,17 +69,6 @@ public class TileManager {
             collision = collisionStatus.get(i).equals("true");
             setup(i, filename, collision);
         }
-
-//        setup(0, "grass", false);
-//        setup(1, "water", true);
-//        setup(2, "wall", true);
-//        setup(3, "earth", false);
-//        setup(4, "tree", true);
-//        setup(5, "sand", false);
-//        setup(6, "trunk", false);
-//        setup(7, "hut", false);
-//        setup(8, "hut2", false);
-
     }
 
     public void setup(int index, String name, boolean collision) {
