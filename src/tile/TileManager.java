@@ -52,8 +52,9 @@ public class TileManager {
 
         bufferedReader.close();
 
-        loadMap("/maps/sample.txt", 0);
-        //loadMap("/maps/world02.txt", 1);
+        //loadMap("/maps/sample.txt", 0);
+        loadMap("/maps/world01.txt", 0);
+        loadMap("/maps/world02.txt", 1);
 
     }
 
