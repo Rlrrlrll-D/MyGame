@@ -262,6 +262,7 @@ public class GamePanel extends JPanel implements Runnable {
             }
             entityArrayList.clear();
             environmentManager.drawing(graphics2D);
+            map.drawMiniMap(graphics2D);
             ui.drawing(graphics2D);
         }
         if (keyHandler.chkDrawTime) {

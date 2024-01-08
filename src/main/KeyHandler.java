@@ -52,8 +52,8 @@ public class KeyHandler implements KeyListener {
     }
 
     private void mapBehavior(int value) {
-        if (value ==KeyEvent.VK_CONTROL){
-            gamePanel.gameBehavior=GamePanel.playBehavior;
+        if (value == KeyEvent.VK_CONTROL) {
+            gamePanel.gameBehavior = GamePanel.playBehavior;
 
         }
     }
@@ -306,6 +306,9 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_CONTROL) {
             gamePanel.gameBehavior = GamePanel.mapBehavior;
+        }
+        if (value == KeyEvent.VK_X) {
+            gamePanel.map.miniMap = !gamePanel.map.miniMap;
         }
     }
 

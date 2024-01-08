@@ -14,9 +14,9 @@ import java.util.Objects;
 
 public class TileManager {
 
-    GamePanel gamePanel;
     public Tile[] tiles;
     public int[][][] mapTileNum;
+    GamePanel gamePanel;
     boolean drawPath = true;
     ArrayList<String> fileNames = new ArrayList<>();
     ArrayList<String> collisionStatus = new ArrayList<>();
@@ -51,14 +51,10 @@ public class TileManager {
         mapTileNum = new int[GamePanel.maxMap][GamePanel.maxWorldCol][GamePanel.maxWorldRow];
 
         bufferedReader.close();
+
         loadMap("/maps/sample.txt", 0);
-//        try {
-//            loadMap("/maps/world01.txt", 0);
-            loadMap("/maps/world02.txt", 1);
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
+        //loadMap("/maps/world02.txt", 1);
+
     }
 
     private void getTileImage() {

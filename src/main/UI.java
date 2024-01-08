@@ -27,7 +27,7 @@ public class UI {
     GamePanel gamePanel;
     BufferedImage heart_f, heart_h, heart_e, crystal_f, crystal_e, coin;
     Graphics2D graphics2D;
-    Font Purisa, Pixel, Monica;
+    public Font Purisa, Pixel, Monica;
     ArrayList<String> message = new ArrayList<>();
     int subBehavior;
     int temp;
