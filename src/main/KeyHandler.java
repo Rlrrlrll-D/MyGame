@@ -45,8 +45,17 @@ public class KeyHandler implements KeyListener {
             gameOverBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.tradeBehavior) {
             tradeBehavior(value);
+        } else if (gamePanel.gameBehavior == GamePanel.mapBehavior) {
+            mapBehavior(value);
         }
 
+    }
+
+    private void mapBehavior(int value) {
+        if (value ==KeyEvent.VK_CONTROL){
+            gamePanel.gameBehavior=GamePanel.playBehavior;
+
+        }
     }
 
     private void tradeBehavior(int value) {
@@ -294,6 +303,9 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_ESCAPE) {
             gamePanel.gameBehavior = GamePanel.optionsBehavior;
+        }
+        if (value == KeyEvent.VK_CONTROL) {
+            gamePanel.gameBehavior = GamePanel.mapBehavior;
         }
     }
 

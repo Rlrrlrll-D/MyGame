@@ -54,7 +54,7 @@ public class TileManager {
         loadMap("/maps/sample.txt", 0);
 //        try {
 //            loadMap("/maps/world01.txt", 0);
-//            loadMap("/maps/world02.txt", 1);
+            loadMap("/maps/world02.txt", 1);
 //
 //        } catch (Exception e) {
 //            throw new RuntimeException(e);

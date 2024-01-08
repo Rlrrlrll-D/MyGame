@@ -5,6 +5,7 @@ import ai.PathFinder;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
+import tile.Map;
 import tile.TileManager;
 import tile.interactive.InteractiveTile;
 
@@ -31,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int transitionBehavior = 7;
     public static final int tradeBehavior = 8;
     public static final int sleepBehavior = 9;
+    public static final int mapBehavior = 10;
     //  screen settings
     private static final int originalTileSize = 16;
     private static final int scale = 3;
@@ -53,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable {
     public EventHandler eventHandler = new EventHandler(this);
     public PathFinder pathFinder = new PathFinder(this);
     EnvironmentManager environmentManager = new EnvironmentManager(this);
+    Map map = new Map(this);
     public UI ui = new UI(this);
     public ArrayList<Entity> particleArrayList = new ArrayList<>();
     public KeyHandler keyHandler = new KeyHandler(this);
@@ -214,7 +217,10 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameBehavior == titleBehavior) {
             ui.drawing(graphics2D);
 
-        } else {
+        }else  if(gameBehavior ==mapBehavior){
+            map.drawFullMapScreen(graphics2D);
+        }
+        else {
             tileManager.drawing(graphics2D);
             for (int i = 0; i < interactiveTile[1].length; i++) {
                 if (interactiveTile[currentMap][i] != null) {
