@@ -65,25 +65,7 @@ public class AssetSetter {
         gamePanel.objects[numMap][13] = new Tent(gamePanel);
         gamePanel.objects[numMap][13].worldX = 25 * gamePanel.tileSize;
         gamePanel.objects[numMap][13].worldY = 43 * gamePanel.tileSize;
-//        gamePanel.objects[2] = nw Door(gamePanel);
-//        gamePanel.objects[2].worldX = 47 * gamePanel.tileSize;
-//        gamePanel.objects[2].worldY = 21 * gamePanel.tileSize;
-//
-//        gamePanel.objects[3] = new Door(gamePanel);
-//        gamePanel.objects[3].worldX = 47 * gamePanel.tileSize;
-//        gamePanel.objects[3].worldY = 47 * gamePanel.tileSize;
-////
-//        gamePanel.objects[4] = new Chest(gamePanel);
-//        gamePanel.objects[4].worldX = 10 * gamePanel.tileSize;
-//        gamePanel.objects[4].worldY = 46 * gamePanel.tileSize;
-////
-//
-////
-//
-////
-//        gamePanel.objects[7] = new Boots(gamePanel);
-//        gamePanel.objects[7].worldX = 49 * gamePanel.tileSize;
-//        gamePanel.objects[7].worldY = 48 * gamePanel.tileSize;
+
     }
 
     public void setNPC() {

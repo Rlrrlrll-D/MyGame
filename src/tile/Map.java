@@ -16,7 +16,7 @@ public class Map extends TileManager {
         createWorldMap();
     }
 
-    public void createWorldMap() {
+    private void createWorldMap() {
         worldMap = new BufferedImage[GamePanel.maxMap];
         int worldMapWidth = gamePanel.tileSize * GamePanel.maxWorldCol;
         int worldMapHeight = gamePanel.tileSize * GamePanel.maxWorldRow;
