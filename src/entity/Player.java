@@ -241,7 +241,7 @@ public class Player extends Entity {
             gamePanel.playSFX(14);
         }
         invincible(60);
-        shotCount(30);
+        shotCount();
         checkLife();
         checkMana();
         checkGameOver();

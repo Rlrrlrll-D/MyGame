@@ -41,6 +41,7 @@ public class Map extends TileManager {
                     row++;
                 }
             }
+            graphics2D.dispose();
         }
     }
 

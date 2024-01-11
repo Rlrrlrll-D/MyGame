@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 public class Entity {
     public final int maxInventorySize = 20;
@@ -87,6 +88,27 @@ public class Entity {
 
     public int getLeftX() {
         return worldX + solidArea.x;
+    }
+
+    public int getXDistance(Entity entity) {
+        return Math.abs(worldX - entity.worldX);
+    }
+
+    public int getYDistance(Entity entity) {
+        return Math.abs(worldY - entity.worldY);
+    }
+
+    public int getTileDistance(Entity entity) {
+        return (getXDistance(entity) + getYDistance(entity)) / gamePanel.tileSize;
+    }
+
+    public int getGoalCol(Entity entity) {
+        return (entity.worldX + entity.solidArea.x) / gamePanel.tileSize;
+    }
+
+    public int getGoalRow(Entity entity) {
+        return (entity.worldY + entity.solidArea.y) / gamePanel.tileSize;
+
     }
 
     public int getRightX() {
@@ -339,10 +361,64 @@ public class Entity {
         invincible(40);
     }
 
-    protected void shotCount(int delay) {
-        this.shotDelay = delay;
-        if (shotAvailableCounter < delay) {
+    protected void shotCount() {
+        this.shotDelay = 30;
+        if (shotAvailableCounter < 30) {
             shotAvailableCounter++;
+        }
+    }
+
+    public void checkStopNotChasing(Entity entity, int distance, int rate) {
+        if (getTileDistance(entity) > distance) {
+            int i = new Random().nextInt(rate);
+            if (i == 0) {
+                onPath = false;
+            }
+        }
+    }
+
+    public void checkStartNotChasing(Entity entity, int distance, int rate) {
+        if (getTileDistance(entity) < distance) {
+            int i = new Random().nextInt(rate);
+            if (i == 0) {
+                onPath = true;
+            }
+        }
+    }
+
+    public void getRandomDirection() {
+        actionCounter++;
+        if (actionCounter == 120) {
+
+            Random random = new Random();
+            int i = random.nextInt(100) + 1;
+            if (i <= 25) {
+                direct = "up";
+            }
+            if (i > 25 && i <= 50) {
+                direct = "down";
+            }
+            if (i > 50 && i <= 75) {
+                direct = "left";
+            }
+            if (i > 75) {
+                direct = "right";
+            }
+            actionCounter = 0;
+        }
+    }
+
+    public void checkShootOrNot(int rate, int shotInterval) {
+        int i = new Random().nextInt(rate);
+        if (i == 0 && !projectile.isAlive && shotAvailableCounter == shotInterval) {
+            projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
+            for (int j = 0; j < gamePanel.projectile[1].length; j++) {
+                if (gamePanel.projectile[gamePanel.currentMap][j] == null) {
+                    gamePanel.projectile[gamePanel.currentMap][j] = projectile;
+                    break;
+                }
+            }
+            shotAvailableCounter = 0;
         }
     }
 
