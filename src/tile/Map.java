@@ -17,6 +17,7 @@ public class Map extends TileManager {
     }
 
     private void createWorldMap() {
+
         worldMap = new BufferedImage[GamePanel.maxMap];
         int worldMapWidth = gamePanel.tileSize * GamePanel.maxWorldCol;
         int worldMapHeight = gamePanel.tileSize * GamePanel.maxWorldRow;
@@ -45,8 +46,8 @@ public class Map extends TileManager {
         }
     }
 
-
     public void drawFullMapScreen(Graphics2D graphics2D) {
+
         graphics2D.setColor(Color.black);
         graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
 
@@ -67,6 +68,7 @@ public class Map extends TileManager {
         graphics2D.drawString("Press CTRL to close", 750, 550);
     }
     public void drawMiniMap(Graphics2D graphics2D){
+
         if (miniMap){
             int width = 200;
             int height = 200;

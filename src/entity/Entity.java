@@ -389,7 +389,6 @@ public class Entity {
     public void getRandomDirection() {
         actionCounter++;
         if (actionCounter == 120) {
-
             Random random = new Random();
             int i = random.nextInt(100) + 1;
             if (i <= 25) {

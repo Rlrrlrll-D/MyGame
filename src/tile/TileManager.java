@@ -115,11 +115,12 @@ public class TileManager {
                     graphics2D.drawImage(tiles[tNum].image, scrX, scrY, null);
 
                 }
-                // graphics2D.setColor(new Color(150, 150, 150, 150));
-                //graphics2D.drawRect( scrX, scrY, gamePanel.tileSize, gamePanel.tileSize);
-                // graphics2D.drawString(worldCol + "," + worldRow, scrX + gamePanel.tileSize / 8, scrY + gamePanel.tileSize / 2);
             }
         }
+        // drawPath(graphics2D);
+    }
+
+    private void drawPath(Graphics2D graphics2D) {
         if (drawPath) {
             graphics2D.setColor(new Color(255, 0, 0, 70));
             for (int i = 0; i < gamePanel.pathFinder.pathList.size(); i++) {

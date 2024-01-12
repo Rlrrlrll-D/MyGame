@@ -47,7 +47,6 @@ public class Slime extends Entity {
         left2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
         right2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
-
     }
 
     public void setAction() {
@@ -56,9 +55,9 @@ public class Slime extends Entity {
             checkStopNotChasing(gamePanel.player, 15, 100);
 
             searchPath(getGoalCol(gamePanel.player), getGoalRow(gamePanel.player));
-
-            checkShootOrNot(100, 30);
             shotCount();
+            checkShootOrNot(100, 30);
+
         } else {
             checkStartNotChasing(gamePanel.player, 5, 100);
             getRandomDirection();
