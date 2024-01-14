@@ -2,6 +2,7 @@ package main;
 
 import entity.Merchant;
 import entity.Oldman;
+import monster.Ogr;
 import monster.Slime;
 import objects.*;
 import tile.interactive.DryTree;
@@ -100,6 +101,11 @@ public class AssetSetter {
             value++;
 
         }
+        numMap = 0;
+        gamePanel.mon[numMap][4] = new Ogr(gamePanel);
+        gamePanel.mon[numMap][4].worldX = gamePanel.tileSize * 20;
+        gamePanel.mon[numMap][4].worldY = gamePanel.tileSize * 44;
+
     }
 
     public void setInteractiveTile() {

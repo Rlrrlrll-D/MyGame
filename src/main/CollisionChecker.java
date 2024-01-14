@@ -25,7 +25,12 @@ public class CollisionChecker {
 
         int tileNum1, tileNum2;
 
-        switch (entity.direct) {
+        String direction = entity.direct;
+        if (entity.escapeKnock) {
+            direction = entity.knockBackDirect;
+        }
+
+        switch (direction) {
 
             case "up", "stay_up":
                 entityTopRow = (entityTopWorldY - entity.speed) / gamePanel.tileSize;
@@ -124,6 +129,10 @@ public class CollisionChecker {
 
     public int checkEntity(Entity entity, Entity[][] target) {
         int index = 999;
+        String direction = entity.direct;
+        if (entity.escapeKnock) {
+            direction = entity.knockBackDirect;
+        }
 
         for (int i = 0; i < target[1].length; i++) {
 
@@ -134,7 +143,7 @@ public class CollisionChecker {
                 target[gamePanel.currentMap][i].solidArea.x = target[gamePanel.currentMap][i].worldX + target[gamePanel.currentMap][i].solidArea.x;
                 target[gamePanel.currentMap][i].solidArea.y = target[gamePanel.currentMap][i].worldY + target[gamePanel.currentMap][i].solidArea.y;
 
-                switch (entity.direct) {
+                switch (direction) {
                     case "up", "stay_up":
                         entity.solidArea.y -= entity.speed;
                         break;

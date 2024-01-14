@@ -80,6 +80,8 @@ public class Entity {
     public boolean collision;
     GamePanel gamePanel;
     String[] dialogues = new String[20];
+    public Entity attacker;
+    public String knockBackDirect;
 
 
     public Entity(GamePanel gamePanel) {
@@ -139,6 +141,14 @@ public class Entity {
 
     }
 
+    public void setKnockEscape(Entity entity, Entity attacker, int knockPower) {
+        //entity.direct = direct;
+        this.attacker = attacker;
+        entity.knockBackDirect = attacker.direct;
+        entity.speed += knockPower;
+        entity.escapeKnock = true;
+    }
+
     public void speak() {
 
         switch (gamePanel.player.direct) {
@@ -171,7 +181,6 @@ public class Entity {
     }
 
     public void checkDrop() {
-
     }
 
     public int getDetected(Entity user, Entity[][] objects, String name) {
@@ -309,7 +318,7 @@ public class Entity {
                 escapeKnock = false;
                 speed = defaultSpeed;
             } else {
-                switch (gamePanel.player.direct) {
+                switch (knockBackDirect) {
                     case "up", "stay_up":
                         worldY -= speed;
                         break;
