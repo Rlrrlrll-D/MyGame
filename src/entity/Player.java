@@ -54,6 +54,9 @@ public class Player extends Entity {
         ammo = 10;
         strength = 1;
         dexterity = 1;
+//        motionDelay1 = 3;
+//        motionDelay2=6;
+//        motionDelay3=12;
         exp = 0;
         nextLevelExp = 5;
         coin = 10000;
@@ -90,6 +93,9 @@ public class Player extends Entity {
     private int getAttack() {
 
         attackArea = currentWeapon.attackArea;
+        motionDelay1 = currentWeapon.motionDelay1;
+        motionDelay2 = currentWeapon.motionDelay2;
+        motionDelay3 = currentWeapon.motionDelay3;
         return attack = strength * currentWeapon.attackValue;
     }
 
@@ -268,57 +274,8 @@ public class Player extends Entity {
         }
     }
 
-    private void attack() {
-        counter++;
-        if (counter <= 3) {
-            spriteNum = 1;
-        }
-        if (counter > 3 && counter <= 6) {
-            spriteNum = 2;
-        }
-        if (counter > 6 && counter <= 12) {
-            spriteNum = 3;
-            int currentWorldX = worldX;
-            int currentWorldY = worldY;
-            int solidAreaWidth = solidArea.width;
-            int solidAreaHeight = solidArea.height;
 
-            switch (direct) {
-                case "stay_up", "up":
-                    worldY -= gamePanel.tileSize - gamePanel.tileSize / 4;
-                    break;
-                case "stay", "down":
-                    worldY += gamePanel.tileSize - gamePanel.tileSize / 4;
-                    break;
-                case "stay_left", "left":
-                    worldX -= gamePanel.tileSize - gamePanel.tileSize / 4;
-                    break;
-                case "stay_right", "right":
-                    worldX += gamePanel.tileSize - gamePanel.tileSize / 4;
-                    break;
-            }
-            solidArea.width = attackArea.width;
-            solidArea.height = attackArea.height;
-
-            int monsterIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
-            damageMonster(monsterIndex, this, attack, currentWeapon.knockPower);
-            int interTileIndex = gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
-            damageInterTile(interTileIndex);
-            int projectileIndex = gamePanel.checker.checkEntity(this, gamePanel.projectile);
-            damageProjectile(projectileIndex);
-            worldX = currentWorldX;
-            worldY = currentWorldY;
-            solidArea.width = solidAreaWidth;
-            solidArea.height = solidAreaHeight;
-        }
-        if (counter > 12) {
-            spriteNum = 1;
-            counter = 0;
-            isAttack = false;
-        }
-    }
-
-    private void damageProjectile(int projectileIndex) {
+    public void damageProjectile(int projectileIndex) {
         if (projectileIndex != 999) {
             Entity projectile = gamePanel.projectile[gamePanel.currentMap][projectileIndex];
             projectile.isAlive = false;
@@ -326,7 +283,7 @@ public class Player extends Entity {
         }
     }
 
-    private void damageInterTile(int interTileIndex) {
+    public void damageInterTile(int interTileIndex) {
         if (interTileIndex != 999 && gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].destructible
                 && gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].isCorrectItem(this) && !gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].invincible) {
             gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].playSnd();

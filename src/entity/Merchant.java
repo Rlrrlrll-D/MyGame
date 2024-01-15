@@ -8,7 +8,7 @@ import java.awt.*;
 public class Merchant extends Entity {
     public Merchant(GamePanel gamePanel) {
         super(gamePanel);
-        direct = "down";
+        direct = "up";
         speed = 0;
 
         solidArea = new Rectangle();
@@ -45,8 +45,8 @@ public class Merchant extends Entity {
         inventory.add(new Key(gamePanel));
         inventory.add(new ShieldBlue(gamePanel));
         inventory.add(new Sword(gamePanel));
-        inventory.add(new PotionRed(gamePanel));
         inventory.add(new Axe(gamePanel));
+        inventory.add(new PotionRed(gamePanel));
     }
 
     public void speak() {
@@ -54,27 +54,4 @@ public class Merchant extends Entity {
         gamePanel.gameBehavior = GamePanel.tradeBehavior;
         gamePanel.ui.npc = this;
     }
-
-//    public void update() {
-//        collisionOn = false;
-//        gamePanel.checker.checkTile(this);
-//        gamePanel.checker.checkObject(this, false);
-//        gamePanel.checker.checkEntity(this, gamePanel.npc);
-//        gamePanel.checker.checkEntity(this, gamePanel.mon);
-//        gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
-//
-//
-//        if (!collisionOn) {
-//
-//            switch (direct) {
-//                case "up", "right", "down", "left":
-//                    speed = 0;
-//                    break;
-//                default:
-//                    throw new IllegalStateException("Unexpected value: " + direct);
-//            }
-//        }
-//        spriteImageChange(17);
-//        //invincible(40);
-//    }
 }

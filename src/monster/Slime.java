@@ -1,6 +1,6 @@
 package monster;
 
-import entity.Entity;
+import entity.Monster;
 import main.GamePanel;
 import objects.CoinBronze;
 import objects.Heart;
@@ -9,7 +9,7 @@ import objects.Rock;
 
 import java.util.Random;
 
-public class Slime extends Entity {
+public class Slime extends Monster {
 
     GamePanel gamePanel;
 

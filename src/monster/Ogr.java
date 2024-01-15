@@ -1,6 +1,6 @@
 package monster;
 
-import entity.Entity;
+import entity.Monster;
 import main.GamePanel;
 import objects.CoinBronze;
 import objects.Heart;
@@ -8,7 +8,7 @@ import objects.ManaCrystal;
 
 import java.util.Random;
 
-public class Ogr extends Entity {
+public class Ogr extends Monster {
     GamePanel gamePanel;
 
     public Ogr(GamePanel gamePanel) {
@@ -21,6 +21,9 @@ public class Ogr extends Entity {
         life = maxLife;
         attack = 8;
         defence = 2;
+        motionDelay1 = 24;
+        motionDelay2 = 48;
+        motionDelay3 = 96;
         exp = 10;
 
         solidArea.x = 4;
@@ -68,6 +71,9 @@ public class Ogr extends Entity {
         } else {
             checkStartNotChasing(gamePanel.player, 5, 100);
             getRandomDirection();
+        }
+        if (!isAttack) {
+            checkAttackOrNot(30, gamePanel.tileSize * 4, gamePanel.tileSize);
         }
     }
 
