@@ -552,7 +552,7 @@ public class Entity {
 
     private boolean getOppositeDirect() {
         return (gamePanel.player.direct.equals("up") || gamePanel.player.direct.equals("stay_up")) && direct.equals("down") ||
-                (gamePanel.player.direct.equals("down") || gamePanel.player.direct.equals("stay_down")) && direct.equals("up") ||
+                (gamePanel.player.direct.equals("down") || gamePanel.player.direct.equals("stay")) && direct.equals("up") ||
                 (gamePanel.player.direct.equals("left") || gamePanel.player.direct.equals("stay_left")) && direct.equals("right") ||
                 (gamePanel.player.direct.equals("right") || gamePanel.player.direct.equals("stay_right")) && direct.equals("left");
     }
