@@ -86,6 +86,7 @@ public class Entity {
     public Entity attacker;
     public String knockBackDirect;
     public boolean guarding;
+    public boolean transparent;
 
 
     public Entity(GamePanel gamePanel) {
@@ -545,6 +546,9 @@ public class Entity {
                     damage = 1;
                 }
             }
+            if (damage != 0) {
+                gamePanel.player.transparent = true;
+            }
             gamePanel.player.life -= damage;
             gamePanel.player.invincible = true;
         }
@@ -562,6 +566,7 @@ public class Entity {
             invinCounter++;
             if (invinCounter > delay) {
                 invincible = false;
+                transparent = false;
                 invinCounter = 0;
             }
         }

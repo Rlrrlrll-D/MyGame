@@ -381,11 +381,12 @@ public class Player extends Entity {
             if (!invincible && !gamePanel.mon[gamePanel.currentMap][i].isDying) {
                 gamePanel.playSFX(8);
                 int damage = gamePanel.mon[gamePanel.currentMap][i].attack - defence;
-                if (damage < 0) {
-                    damage = 0;
+                if (damage < 1) {
+                    damage = 1;
                 }
                 life -= damage;
                 invincible = true;
+                transparent = true;
             }
         }
     }
@@ -763,8 +764,8 @@ public class Player extends Entity {
             default:
                 throw new IllegalStateException("Unexpected value: " + direct);
         }
-        if (invincible) {
-            blinkEntity(graphics2D, 0.05f, 5);
+        if (transparent) {
+            blinkEntity(graphics2D, 0.04f, 5);
         }
 
         Color shadow = new Color(12, 12, 12, 55);
