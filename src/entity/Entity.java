@@ -838,15 +838,15 @@ public class Entity {
                     throw new IllegalStateException("Unexpected value: " + direct);
             }
 
-            if (this instanceof Slime && hpBarOn) {
+            if (this instanceof Monster && hpBarOn) {
                 double oneScale = (double) gamePanel.tileSize / maxLife;
                 double hpBarValue = oneScale * life;
 
                 graphics2D.setColor(new Color(0x090202));
-                graphics2D.fillRect(scrX - 1, scrY - 11, gamePanel.tileSize + 2, 12);
+                graphics2D.fillRect(scrX - 1, scrY - 15, gamePanel.tileSize + 2, 12);
 
                 graphics2D.setColor(new Color(0x861515));
-                graphics2D.fillRect(scrX, scrY - 10, (int) hpBarValue, 10);
+                graphics2D.fillRect(scrX, scrY - 14, (int) hpBarValue, 10);
                 hpBarCounter++;
 
                 if (hpBarCounter > 600) {
