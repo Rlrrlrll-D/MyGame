@@ -535,14 +535,26 @@ public class Entity {
 
     public void damagePlayer(int attack) {
         if (!gamePanel.player.invincible) {
-            gamePanel.playSFX(6);
             int damage = attack - gamePanel.player.defence;
-            if (damage < 0) {
-                damage = 0;
+            if (gamePanel.player.guarding && getOppositeDirect()) {
+                damage /= 3;
+                gamePanel.playSFX(18);
+            } else {
+                gamePanel.playSFX(6);
+                if (damage < 1) {
+                    damage = 1;
+                }
             }
             gamePanel.player.life -= damage;
             gamePanel.player.invincible = true;
         }
+    }
+
+    private boolean getOppositeDirect() {
+        return (gamePanel.player.direct.equals("up") || gamePanel.player.direct.equals("stay_up")) && direct.equals("down") ||
+                (gamePanel.player.direct.equals("down") || gamePanel.player.direct.equals("stay_down")) && direct.equals("up") ||
+                (gamePanel.player.direct.equals("left") || gamePanel.player.direct.equals("stay_left")) && direct.equals("right") ||
+                (gamePanel.player.direct.equals("right") || gamePanel.player.direct.equals("stay_right")) && direct.equals("left");
     }
 
     protected void invincible(int delay) {
