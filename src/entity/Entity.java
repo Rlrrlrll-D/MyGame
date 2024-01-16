@@ -548,6 +548,7 @@ public class Entity {
             }
             if (damage != 0) {
                 gamePanel.player.transparent = true;
+                setKnockEscape(gamePanel.player, this, knockPower);
             }
             gamePanel.player.life -= damage;
             gamePanel.player.invincible = true;

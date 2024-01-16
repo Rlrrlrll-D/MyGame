@@ -55,9 +55,6 @@ public class Player extends Entity {
         ammo = 10;
         strength = 1;
         dexterity = 1;
-//        motionDelay1 = 3;
-//        motionDelay2=6;
-//        motionDelay3=12;
         exp = 0;
         nextLevelExp = 5;
         coin = 10000;
@@ -92,7 +89,6 @@ public class Player extends Entity {
     }
 
     private int getAttack() {
-
         attackArea = currentWeapon.attackArea;
         motionDelay1 = currentWeapon.motionDelay1;
         motionDelay2 = currentWeapon.motionDelay2;
@@ -129,27 +125,6 @@ public class Player extends Entity {
     }
 
     public void getGuardImg() {
-
-//        stay1 = setup("/res/player/stay1", gamePanel.tileSize, gamePanel.tileSize);
-//        stay2 = setup("/res/player/stay2", gamePanel.tileSize, gamePanel.tileSize);
-//        stay3 = setup("/res/player/stay3", gamePanel.tileSize, gamePanel.tileSize);
-//        stay_up1 = setup("/res/player/stay_up1", gamePanel.tileSize, gamePanel.tileSize);
-//        stay_up2 = setup("/res/player/stay_up2", gamePanel.tileSize, gamePanel.tileSize);
-//        stay_up3 = setup("/res/player/stay_up3", gamePanel.tileSize, gamePanel.tileSize);
-//        stay_left1 = setup("/res/player/stay_left1", gamePanel.tileSize, gamePanel.tileSize);
-//        stay_left2 = setup("/res/player/stay_left2", gamePanel.tileSize, gamePanel.tileSize);
-//        stay_left3 = setup("/res/player/stay_left3", gamePanel.tileSize, gamePanel.tileSize);
-//        stay_right1 = setup("/res/player/stay_right1", gamePanel.tileSize, gamePanel.tileSize);
-//        stay_right2 = setup("/res/player/stay_right2", gamePanel.tileSize, gamePanel.tileSize);
-//        stay_right3 = setup("/res/player/stay_right3", gamePanel.tileSize, gamePanel.tileSize);
-//        up1 = setup("/res/player/me_up1", gamePanel.tileSize, gamePanel.tileSize);
-//        up2 = setup("/res/player/me_up2", gamePanel.tileSize, gamePanel.tileSize);
-//        down1 = setup("/res/player/me_down1", gamePanel.tileSize, gamePanel.tileSize);
-//        down2 = setup("/res/player/me_down2", gamePanel.tileSize, gamePanel.tileSize);
-//        left1 = setup("/res/player/me_left1", gamePanel.tileSize, gamePanel.tileSize);
-//        left2 = setup("/res/player/me_left2", gamePanel.tileSize, gamePanel.tileSize);
-//        right1 = setup("/res/player/me_right1", gamePanel.tileSize, gamePanel.tileSize);
-//        right2 = setup("/res/player/me_right2", gamePanel.tileSize, gamePanel.tileSize);
 
         guardUp = setup("/res/player/guard_up", gamePanel.tileSize, gamePanel.tileSize * 2);
         guardDown = setup("/res/player/guard_down", gamePanel.tileSize, gamePanel.tileSize * 2);
@@ -204,15 +179,50 @@ public class Player extends Entity {
         }
     }
 
-
-
     public void update() {
-        if (isAttack) {
+        if (escapeKnock) {
+            collisionOn = false;
+            gamePanel.checker.checkTile(this);
+            gamePanel.checker.checkObject(this, true);
+            gamePanel.checker.checkEntity(this, gamePanel.npc);
+            gamePanel.checker.checkEntity(this, gamePanel.mon);
+            gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
+            //checkCollision();
+            if (collisionOn) {
+                knockCounter = 0;
+                escapeKnock = false;
+                speed = defaultSpeed;
+            } else {
+                switch (knockBackDirect) {
+                    case "up", "stay_up":
+                        worldY -= speed;
+                        break;
+                    case "down", "stay":
+                        worldY += speed;
+                        break;
+                    case "left", "stay_left":
+                        worldX -= speed;
+                        break;
+                    case "right", "stay_right":
+                        worldX += speed;
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + direct);
+                }
+            }
+            knockCounter++;
+            if (knockCounter == 10) {
+                knockCounter = 0;
+                escapeKnock = false;
+                speed = defaultSpeed;
+            }
+
+        } else if (isAttack) {
             attack();
         } else if (keyHandler.spacePressed) {
 
             guarding = true;
-            
+
         } else if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.enterPressed) {
 
             if (keyHandler.upPressed) {
@@ -254,10 +264,8 @@ public class Player extends Entity {
                 counter = 0;
             }
             notAttacked = false;
-
             gamePanel.keyHandler.enterPressed = false;
             guarding = false;
-
             spriteImageChange(5);
 
         } else {
