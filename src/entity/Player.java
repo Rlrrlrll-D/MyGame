@@ -34,8 +34,9 @@ public class Player extends Entity {
         solidArea.height = 32;
 
         setDefaultVal();
-        getPlayerImg();
-        getPlayerAttackImage();
+        getImg();
+        getAttackImage();
+        getGuardImg();
         setInventory();
     }
 
@@ -103,7 +104,7 @@ public class Player extends Entity {
         return defence = dexterity * currentShield.defenceValue;
     }
 
-    public void getPlayerImg() {
+    public void getImg() {
 
         stay1 = setup("/res/player/stay1", gamePanel.tileSize, gamePanel.tileSize);
         stay2 = setup("/res/player/stay2", gamePanel.tileSize, gamePanel.tileSize);
@@ -125,6 +126,35 @@ public class Player extends Entity {
         left2 = setup("/res/player/me_left2", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("/res/player/me_right1", gamePanel.tileSize, gamePanel.tileSize);
         right2 = setup("/res/player/me_right2", gamePanel.tileSize, gamePanel.tileSize);
+    }
+
+    public void getGuardImg() {
+
+//        stay1 = setup("/res/player/stay1", gamePanel.tileSize, gamePanel.tileSize);
+//        stay2 = setup("/res/player/stay2", gamePanel.tileSize, gamePanel.tileSize);
+//        stay3 = setup("/res/player/stay3", gamePanel.tileSize, gamePanel.tileSize);
+//        stay_up1 = setup("/res/player/stay_up1", gamePanel.tileSize, gamePanel.tileSize);
+//        stay_up2 = setup("/res/player/stay_up2", gamePanel.tileSize, gamePanel.tileSize);
+//        stay_up3 = setup("/res/player/stay_up3", gamePanel.tileSize, gamePanel.tileSize);
+//        stay_left1 = setup("/res/player/stay_left1", gamePanel.tileSize, gamePanel.tileSize);
+//        stay_left2 = setup("/res/player/stay_left2", gamePanel.tileSize, gamePanel.tileSize);
+//        stay_left3 = setup("/res/player/stay_left3", gamePanel.tileSize, gamePanel.tileSize);
+//        stay_right1 = setup("/res/player/stay_right1", gamePanel.tileSize, gamePanel.tileSize);
+//        stay_right2 = setup("/res/player/stay_right2", gamePanel.tileSize, gamePanel.tileSize);
+//        stay_right3 = setup("/res/player/stay_right3", gamePanel.tileSize, gamePanel.tileSize);
+//        up1 = setup("/res/player/me_up1", gamePanel.tileSize, gamePanel.tileSize);
+//        up2 = setup("/res/player/me_up2", gamePanel.tileSize, gamePanel.tileSize);
+//        down1 = setup("/res/player/me_down1", gamePanel.tileSize, gamePanel.tileSize);
+//        down2 = setup("/res/player/me_down2", gamePanel.tileSize, gamePanel.tileSize);
+//        left1 = setup("/res/player/me_left1", gamePanel.tileSize, gamePanel.tileSize);
+//        left2 = setup("/res/player/me_left2", gamePanel.tileSize, gamePanel.tileSize);
+//        right1 = setup("/res/player/me_right1", gamePanel.tileSize, gamePanel.tileSize);
+//        right2 = setup("/res/player/me_right2", gamePanel.tileSize, gamePanel.tileSize);
+
+        guardUp = setup("/res/player/guard_up", gamePanel.tileSize, gamePanel.tileSize * 2);
+        guardDown = setup("/res/player/guard_down", gamePanel.tileSize, gamePanel.tileSize * 2);
+        guardLeft = setup("/res/player/guard_left", gamePanel.tileSize * 2, gamePanel.tileSize);
+        guardRight = setup("/res/player/guard_right", gamePanel.tileSize * 2, gamePanel.tileSize);
     }
 
     public void getSleepingImg(BufferedImage image) {
@@ -150,7 +180,7 @@ public class Player extends Entity {
         right2 = image;
     }
 
-    private void getPlayerAttackImage() {
+    private void getAttackImage() {
         if (currentWeapon instanceof Sword) {
             attackUp1 = setup("/res/player/attack_up1", gamePanel.tileSize, gamePanel.tileSize * 2);
             attackUp2 = setup("/res/player/attack_up2", gamePanel.tileSize, gamePanel.tileSize * 2);
@@ -179,6 +209,10 @@ public class Player extends Entity {
     public void update() {
         if (isAttack) {
             attack();
+        } else if (keyHandler.spacePressed) {
+
+            guarding = true;
+            
         } else if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.enterPressed) {
 
             if (keyHandler.upPressed) {
@@ -222,12 +256,14 @@ public class Player extends Entity {
             notAttacked = false;
 
             gamePanel.keyHandler.enterPressed = false;
+            guarding = false;
 
             spriteImageChange(5);
 
         } else {
             checkStayDirect();
             spriteImageChange(15);
+            guarding = false;
         }
         if (gamePanel.keyHandler.shotKeyPressed && !projectile.isAlive && shotAvailableCounter == shotDelay && projectile.haveRes(this)) {
             projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
@@ -449,7 +485,7 @@ public class Player extends Entity {
             if (selectedItem instanceof Sword || selectedItem instanceof Axe) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
-                getPlayerAttackImage();
+                getAttackImage();
             }
             if (selectedItem instanceof ShieldWood || selectedItem instanceof ShieldBlue) {
                 currentShield = selectedItem;
@@ -532,6 +568,10 @@ public class Player extends Entity {
                         image = up2;
                     }
                 }
+                if (guarding) {
+                    tempScreenY = screenY - gamePanel.tileSize;
+                    image = guardUp;
+                }
 
                 break;
             case "down":
@@ -551,6 +591,10 @@ public class Player extends Entity {
                         image = down2;
                     }
                 }
+                if (guarding) {
+                    image = guardDown;
+                }
+
                 break;
             case "left":
                 if (isAttack) {
@@ -570,6 +614,11 @@ public class Player extends Entity {
                         image = left2;
                     }
                 }
+                if (guarding) {
+                    tempScreenX = screenX - gamePanel.tileSize;
+                    image = guardLeft;
+                }
+
                 break;
             case "right":
                 if (isAttack) {
@@ -588,6 +637,10 @@ public class Player extends Entity {
                         image = right2;
                     }
                 }
+                if (guarding) {
+                    image = guardRight;
+                }
+
                 break;
 
             case "stay":
@@ -613,6 +666,10 @@ public class Player extends Entity {
                         image = stay3;
                     }
                 }
+                if (guarding) {
+                    image = guardDown;
+                }
+
                 break;
 
             case "stay_up":
@@ -639,6 +696,11 @@ public class Player extends Entity {
                         image = stay_up3;
                     }
                 }
+                if (guarding) {
+                    tempScreenY = screenY - gamePanel.tileSize;
+                    image = guardUp;
+                }
+
                 break;
             case "stay_left":
                 if (isAttack) {
@@ -664,6 +726,11 @@ public class Player extends Entity {
                         image = stay_left3;
                     }
                 }
+                if (guarding) {
+                    tempScreenX = screenX - gamePanel.tileSize;
+                    image = guardLeft;
+                }
+
                 break;
             case "stay_right":
                 if (isAttack) {
@@ -688,6 +755,10 @@ public class Player extends Entity {
                         image = stay_right3;
                     }
                 }
+                if (guarding) {
+                    image = guardRight;
+                }
+
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + direct);

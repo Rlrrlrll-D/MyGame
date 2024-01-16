@@ -9,7 +9,7 @@ import java.io.File;
 public class Sound {
 
     Clip clip;
-    File[] sounds = new File[20];
+    File[] sounds = new File[30];
     FloatControl floatControl;
     public int volumeScale = 2;
     float volume;
@@ -34,6 +34,8 @@ public class Sound {
         sounds[15] = new File("src/res/sound/cut-tree.wav");
         sounds[16] = new File("src/res/sound/game-over.wav");
         sounds[17] = new File("src/res/sound/sleep.wav");
+        sounds[18] = new File("src/res/sound/blocked.wav");
+        sounds[19] = new File("src/res/sound/parry.wav");
 
     }
 
