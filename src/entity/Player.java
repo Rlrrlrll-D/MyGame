@@ -78,6 +78,7 @@ public class Player extends Entity {
         mana = maxMana;
         life = maxLife;
         invincible = false;
+        transparent = false;
     }
 
     public void setInventory() {
@@ -187,7 +188,7 @@ public class Player extends Entity {
             gamePanel.checker.checkEntity(this, gamePanel.npc);
             gamePanel.checker.checkEntity(this, gamePanel.mon);
             gamePanel.checker.checkEntity(this, gamePanel.interactiveTile);
-            //checkCollision();
+
             if (collisionOn) {
                 knockCounter = 0;
                 escapeKnock = false;
@@ -210,18 +211,14 @@ public class Player extends Entity {
                         throw new IllegalStateException("Unexpected value: " + direct);
                 }
             }
-            knockCounter++;
-            if (knockCounter == 10) {
-                knockCounter = 0;
-                escapeKnock = false;
-                speed = defaultSpeed;
-            }
+            knockTime(15);
 
         } else if (isAttack) {
             attack();
         } else if (keyHandler.spacePressed) {
 
             guarding = true;
+            guardCounter++;
 
         } else if (keyHandler.upPressed || keyHandler.downPressed || keyHandler.leftPressed || keyHandler.rightPressed || keyHandler.enterPressed) {
 
@@ -266,12 +263,14 @@ public class Player extends Entity {
             notAttacked = false;
             gamePanel.keyHandler.enterPressed = false;
             guarding = false;
+            guardCounter = 0;
             spriteImageChange(5);
 
         } else {
             checkStayDirect();
             spriteImageChange(15);
             guarding = false;
+            guardCounter = 0;
         }
         if (gamePanel.keyHandler.shotKeyPressed && !projectile.isAlive && shotAvailableCounter == shotDelay && projectile.haveRes(this)) {
             projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
@@ -408,6 +407,9 @@ public class Player extends Entity {
 
                 if (knockPower > 0) {
                     setKnockEscape(gamePanel.mon[gamePanel.currentMap][i], attacker, knockPower);
+                }
+                if (gamePanel.mon[gamePanel.currentMap][i].offBalance) {
+                    attack *= 5;
                 }
 
                 int dmg = attack - gamePanel.mon[gamePanel.currentMap][i].defence;

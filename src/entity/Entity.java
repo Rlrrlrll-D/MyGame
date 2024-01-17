@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.UtilityTool;
+import monster.Ogr;
 import monster.Slime;
 import tile.interactive.DryTree;
 import tile.interactive.Trunk;
@@ -57,6 +58,10 @@ public class Entity {
     public int actionCounter;
     public int dialogCount;
     public int shotAvailableCounter;
+    public int guardCounter;
+    public int offBalanceCounter;
+
+
     public boolean collisionOn;
     public boolean invincible;
     public boolean escapeKnock;
@@ -66,6 +71,7 @@ public class Entity {
     public boolean hpBarOn;
     public boolean onPath;
     public boolean stackable;
+    public boolean offBalance;
     public int amount = 1;
     public int lightRadius;
     public int invinCounter;
@@ -396,12 +402,7 @@ public class Entity {
                         throw new IllegalStateException("Unexpected value: " + direct);
                 }
             }
-            knockCounter++;
-            if (knockCounter == 10) {
-                knockCounter = 0;
-                escapeKnock = false;
-                speed = defaultSpeed;
-            }
+            knockTime(10);
 
         } else if (isAttack) {
             attack();
@@ -432,6 +433,26 @@ public class Entity {
         }
         invincible(40);
         shotCount();
+        offBalanceTime();
+    }
+
+    private void offBalanceTime() {
+        if (offBalance) {
+            offBalanceCounter++;
+            if (offBalanceCounter > 60) {
+                offBalance = false;
+                offBalanceCounter = 0;
+            }
+        }
+    }
+
+    protected void knockTime(int value) {
+        knockCounter++;
+        if (knockCounter == value) {
+            knockCounter = 0;
+            escapeKnock = false;
+            speed = defaultSpeed;
+        }
     }
 
     protected void shotCount() {
@@ -538,8 +559,17 @@ public class Entity {
         if (!gamePanel.player.invincible) {
             int damage = attack - gamePanel.player.defence;
             if (gamePanel.player.guarding && getOppositeDirect()) {
-                damage /= 3;
-                gamePanel.playSFX(18);
+                System.out.println(gamePanel.player.guardCounter + " " + counter);
+                if (gamePanel.player.guardCounter < 10) {
+                    damage = 0;
+                    gamePanel.playSFX(19);
+                    setKnockEscape(this, gamePanel.player, knockPower);
+                    offBalance = true;
+                    counter = -60;
+                } else {
+                    damage /= 3;
+                    gamePanel.playSFX(18);
+                }
             } else {
                 gamePanel.playSFX(6);
                 if (damage < 1) {
@@ -889,6 +919,10 @@ public class Entity {
                 graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
             }
             graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
+            if (this instanceof Ogr) {
+                graphics2D.setColor(new Color(12, 0, 0, 50));
+                graphics2D.fillRect(scrX, scrY, attackArea.width, attackArea.height);
+            }
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }
     }

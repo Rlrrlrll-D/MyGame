@@ -354,6 +354,7 @@ public class UI {
         graphics2D.drawString(txt, textX, textY);
         if (commandNum == 0 || commandNum == -1) {
             graphics2D.drawString(">", textX - 25, textY);
+            System.out.println(commandNum);
             if (gamePanel.keyHandler.enterPressed) {
                 subBehavior = 0;
                 gamePanel.gameBehavior = GamePanel.titleBehavior;
@@ -366,6 +367,7 @@ public class UI {
         graphics2D.drawString(txt, textX, textY);
         if (commandNum == 1) {
             graphics2D.drawString(">", textX - 25, textY);
+            System.out.println(commandNum);
             if (gamePanel.keyHandler.enterPressed) {
                 subBehavior = 0;
                 gamePanel.gameBehavior = GamePanel.titleBehavior;
