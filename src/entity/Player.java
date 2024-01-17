@@ -70,6 +70,8 @@ public class Player extends Entity {
     public void setDefaultPos() {
         worldX = gamePanel.tileSize;
         worldY = gamePanel.tileSize * 39;
+        escapeKnock = false;
+        speed = defaultSpeed;
         stayDirect = "begin";
         direct = "stay";
     }
