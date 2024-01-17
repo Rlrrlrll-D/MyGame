@@ -107,13 +107,15 @@ public class KeyHandler implements KeyListener {
             }
         }
         if (value == KeyEvent.VK_ENTER) {
-            if (gamePanel.ui.commandNum == 0) {
+            if (gamePanel.ui.commandNum == 0 || gamePanel.ui.commandNum == -1) {
                 gamePanel.gameBehavior = GamePanel.playBehavior;
+                gamePanel.ui.subBehavior = 0;
                 gamePanel.retry();
                 musicCheck();
             } else if (gamePanel.ui.commandNum == 1) {
                 gamePanel.ui.commandNum = 0;
                 gamePanel.gameBehavior = GamePanel.titleBehavior;
+                gamePanel.ui.subBehavior = 0;
                 gamePanel.ui.titleScreenBehavior = 0;
                 gamePanel.restart();
             }

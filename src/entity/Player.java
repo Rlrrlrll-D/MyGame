@@ -127,7 +127,7 @@ public class Player extends Entity {
         right2 = setup("/res/player/me_right2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
-    public void getGuardImg() {
+    private void getGuardImg() {
 
         guardUp = setup("/res/player/guard_up", gamePanel.tileSize, gamePanel.tileSize * 2);
         guardDown = setup("/res/player/guard_down", gamePanel.tileSize, gamePanel.tileSize * 2);

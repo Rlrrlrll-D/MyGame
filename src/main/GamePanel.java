@@ -66,7 +66,6 @@ public class GamePanel extends JPanel implements Runnable {
     public Entity[][] mon = new Entity[maxMap][20];
     public Entity[][] projectile = new Entity[maxMap][20];
     public Sound sound = new Sound();
-    //    public ArrayList<Entity> projectileArrayList = new ArrayList<>();
     public TileManager tileManager = new TileManager(this);
     public Thread gameThread;
     BufferedImage imgTempScreen;
