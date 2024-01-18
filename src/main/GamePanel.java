@@ -102,7 +102,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.restoreLifeMana();
         assetSetter.setNPC();
         assetSetter.setMonster();
-        musicOn = true;
+        musicOn = false;
 
 
     }
