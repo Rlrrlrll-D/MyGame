@@ -2,7 +2,6 @@ package entity;
 
 import main.GamePanel;
 import main.UtilityTool;
-import monster.Ogr;
 import monster.Slime;
 import tile.interactive.DryTree;
 import tile.interactive.Trunk;
@@ -919,11 +918,6 @@ public class Entity {
 
             if (!(this instanceof DryTree) && !(this instanceof Trunk)) {
                 graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize - 6, null);
-            }
-
-            if (this instanceof Ogr) {
-                graphics2D.setColor(new Color(12, 0, 0, 50));
-                graphics2D.fillRect(scrX, scrY, attackArea.width, attackArea.height);
             }
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }
