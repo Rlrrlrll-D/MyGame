@@ -87,12 +87,12 @@ public class Entity {
     public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2, guardUp, guardDown, guardLeft, guardRight;
     public String name;
     public boolean collision;
-    GamePanel gamePanel;
-    String[] dialogues = new String[20];
     public Entity attacker;
     public String knockBackDirect;
     public boolean guarding;
     public boolean transparent;
+    GamePanel gamePanel;
+    String[] dialogues = new String[20];
 
 
     public Entity(GamePanel gamePanel) {
@@ -912,13 +912,15 @@ public class Entity {
             if (isDying) {
                 dyingAnim(graphics2D, 0.01f, 4);
             }
-            Color shadow = new Color(12, 12, 12, 55);
-            graphics2D.setColor(shadow);
+
+
+            graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
+            shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
 
             if (!(this instanceof DryTree) && !(this instanceof Trunk)) {
-                graphics2D.fillRoundRect(scrX, scrY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, gamePanel.tileSize, gamePanel.tileSize / 3, 10, 10);
+                graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize - 6, null);
             }
-            graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
+
             if (this instanceof Ogr) {
                 graphics2D.setColor(new Color(12, 0, 0, 50));
                 graphics2D.fillRect(scrX, scrY, attackArea.width, attackArea.height);

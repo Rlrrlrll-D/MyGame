@@ -329,8 +329,7 @@ public class Player extends Entity {
     }
 
     public void damageInterTile(int interTileIndex) {
-        if (interTileIndex != 999 && gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].destructible
-                && gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].isCorrectItem(this) && !gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].invincible) {
+        if (interTileIndex != 999 && gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].destructible && gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].isCorrectItem(this) && !gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].invincible) {
             gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].playSnd();
             gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].life--;
             gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].invincible = true;
@@ -780,9 +779,11 @@ public class Player extends Entity {
             blinkEntity(graphics2D, 0.04f, 5);
         }
 
-        Color shadow = new Color(12, 12, 12, 55);
-        graphics2D.setColor(shadow);
-        graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
+//        Color shadow = new Color(12, 12, 12, 55);
+//        graphics2D.setColor(shadow);
+//        graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
+        shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
+        graphics2D.drawImage(shadow, screenX, screenY - 6 + gamePanel.tileSize, null);
         graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
         graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
 
