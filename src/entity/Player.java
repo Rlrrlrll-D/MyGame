@@ -32,9 +32,7 @@ public class Player extends Entity {
         solidAreaDefaultY = solidArea.y;
         solidArea.width = 32;
         solidArea.height = 32;
-
         setDefaultVal();
-
     }
 
     public void setDefaultVal() {
@@ -56,12 +54,9 @@ public class Player extends Entity {
         nextLevelExp = 5;
         coin = 10000;
         currentWeapon = new Sword(gamePanel);
-        //currentWeapon = new Axe(gamePanel);
         currentShield = new ShieldWood(gamePanel);
         projectile = new Fireball(gamePanel);
         currentLight = null;
-        //  lightUp = false;
-        //projectile = new Rock(gamePanel);
         attack = getAttack();
         defence = getDefence();
         getImg();
