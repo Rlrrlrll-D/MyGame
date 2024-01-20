@@ -200,16 +200,16 @@ public class Entity {
 
         switch (user.direct) {
             case "up", "stay_up":
-                nextWorldY = user.getTopY() - 1;
+                nextWorldY = user.getTopY() - gamePanel.player.speed;
                 break;
             case "down", "stay":
-                nextWorldY = user.getBottomY() + 1;
+                nextWorldY = user.getBottomY() + gamePanel.player.speed;
                 break;
             case "left", "stay_left":
-                nextWorldX = user.getLeftX() - 1;
+                nextWorldX = user.getLeftX() - gamePanel.player.speed;
                 break;
             case "right", "stay_right":
-                nextWorldX = user.getRightX() + 1;
+                nextWorldX = user.getRightX() + gamePanel.player.speed;
                 break;
         }
         int col = nextWorldX / gamePanel.tileSize;
