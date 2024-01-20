@@ -110,14 +110,14 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.ui.commandNum == 0 || gamePanel.ui.commandNum == -1) {
                 gamePanel.gameBehavior = GamePanel.playBehavior;
                 gamePanel.ui.subBehavior = 0;
-                gamePanel.retry();
+                gamePanel.resetGame(false);
                 musicCheck();
             } else if (gamePanel.ui.commandNum == 1) {
                 gamePanel.ui.commandNum = 0;
                 gamePanel.gameBehavior = GamePanel.titleBehavior;
                 gamePanel.ui.subBehavior = 0;
                 gamePanel.ui.titleScreenBehavior = 0;
-                gamePanel.restart();
+                gamePanel.resetGame(true);
             }
         }
     }

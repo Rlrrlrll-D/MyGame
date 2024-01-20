@@ -412,6 +412,7 @@ public class UI {
             if (gamePanel.keyHandler.enterPressed) {
                 subBehavior = 0;
                 gamePanel.gameBehavior = GamePanel.titleBehavior;
+                gamePanel.resetGame(true);
             }
         }
         txt = "No";

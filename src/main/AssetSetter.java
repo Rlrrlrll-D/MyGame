@@ -32,11 +32,11 @@ public class AssetSetter {
         gamePanel.objects[numMap][4].worldY = 19 * gamePanel.tileSize;
 
         gamePanel.objects[numMap][5] = new Door(gamePanel);
-        gamePanel.objects[numMap][5].worldX = 45 * gamePanel.tileSize;
+        gamePanel.objects[numMap][5].worldX = 47 * gamePanel.tileSize;
         gamePanel.objects[numMap][5].worldY = 36 * gamePanel.tileSize;
 
         gamePanel.objects[numMap][6] = new Door(gamePanel);
-        gamePanel.objects[numMap][6].worldX = 45 * gamePanel.tileSize;
+        gamePanel.objects[numMap][6].worldX = 47 * gamePanel.tileSize;
         gamePanel.objects[numMap][6].worldY = 26 * gamePanel.tileSize;
 
         gamePanel.objects[numMap][7] = new Heart(gamePanel);
@@ -66,6 +66,18 @@ public class AssetSetter {
         gamePanel.objects[numMap][13] = new Tent(gamePanel);
         gamePanel.objects[numMap][13].worldX = 25 * gamePanel.tileSize;
         gamePanel.objects[numMap][13].worldY = 43 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][14] = new Door(gamePanel);
+        gamePanel.objects[numMap][14].worldX = 47 * gamePanel.tileSize;
+        gamePanel.objects[numMap][14].worldY = 28 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][15] = new Door(gamePanel);
+        gamePanel.objects[numMap][15].worldX = 47 * gamePanel.tileSize;
+        gamePanel.objects[numMap][15].worldY = 30 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][16] = new Door(gamePanel);
+        gamePanel.objects[numMap][16].worldX = 47 * gamePanel.tileSize;
+        gamePanel.objects[numMap][16].worldY = 32 * gamePanel.tileSize;
 
     }
 

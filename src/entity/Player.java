@@ -34,10 +34,7 @@ public class Player extends Entity {
         solidArea.height = 32;
 
         setDefaultVal();
-        getImg();
-        getAttackImage();
-        getGuardImg();
-        setInventory();
+
     }
 
     public void setDefaultVal() {
@@ -62,25 +59,34 @@ public class Player extends Entity {
         //currentWeapon = new Axe(gamePanel);
         currentShield = new ShieldWood(gamePanel);
         projectile = new Fireball(gamePanel);
+        currentLight = null;
+        //  lightUp = false;
         //projectile = new Rock(gamePanel);
         attack = getAttack();
         defence = getDefence();
+        getImg();
+        getAttackImage();
+        getGuardImg();
+        setInventory();
     }
 
     public void setDefaultPos() {
         worldX = gamePanel.tileSize;
         worldY = gamePanel.tileSize * 39;
-        escapeKnock = false;
         speed = defaultSpeed;
         stayDirect = "begin";
         direct = "stay";
     }
 
-    public void restoreLifeMana() {
+    public void restoreStatus() {
         mana = maxMana;
         life = maxLife;
         invincible = false;
         transparent = false;
+        isAttack = false;
+        guarding = false;
+        escapeKnock = false;
+        lightUp = true;
     }
 
     public void setInventory() {
