@@ -376,7 +376,7 @@ public class Entity {
         }
     }
 
-    public void update() {
+    public void update() throws IOException {
         if (escapeKnock) {
             checkCollision();
             if (collisionOn) {

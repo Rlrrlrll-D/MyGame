@@ -6,6 +6,7 @@ import objects.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 
 public class Player extends Entity {
@@ -183,7 +184,7 @@ public class Player extends Entity {
         }
     }
 
-    public void update() {
+    public void update() throws IOException {
         if (escapeKnock) {
             collisionOn = false;
             gamePanel.checker.checkTile(this);

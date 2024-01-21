@@ -2,6 +2,8 @@ package main;
 
 import entity.Entity;
 
+import java.io.IOException;
+
 public class EventHandler {
     GamePanel gamePanel;
     EventRect[][][] eventRect;
@@ -33,7 +35,7 @@ public class EventHandler {
 
     }
 
-    public void checkEvent() {
+    public void checkEvent() throws IOException {
         int xDistance = Math.abs(gamePanel.player.worldX - previousEventX);
         int yDistance = Math.abs(gamePanel.player.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
@@ -100,17 +102,21 @@ public class EventHandler {
         gamePanel.player.life--;
     }
 
-    public void healingPool(int gameBehavior) {
+    public void healingPool(int gameBehavior) throws IOException {
 
         if (gamePanel.keyHandler.enterPressed && gamePanel.player.life != gamePanel.player.maxLife) {
             gamePanel.player.isAttack = false;
             gamePanel.playSFX(10);
             gamePanel.gameBehavior = gameBehavior;
             gamePanel.player.notAttacked = true;
-            gamePanel.ui.dialogue = "You drink the water. \nYour life and mana have been recovered! :)";
+            gamePanel.ui.dialogue = """
+                    You drink the water.\s
+                    Your life and mana have been recovered.\s
+                    (The progress has been saved)""";
             gamePanel.player.life = gamePanel.player.maxLife;
             gamePanel.player.mana = gamePanel.player.maxMana;
             gamePanel.assetSetter.setMonster();
+            gamePanel.saveLoad.save();
         }
     }
 

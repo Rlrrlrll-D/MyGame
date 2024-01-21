@@ -2,6 +2,7 @@ package main;
 
 
 import ai.PathFinder;
+import data.SaveLoad;
 import entity.Entity;
 import entity.Player;
 import environment.EnvironmentManager;
@@ -72,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable {
     Graphics2D graphics2D;
     Config config = new Config(this);
     Sound SFX = new Sound();
+    SaveLoad saveLoad = new SaveLoad(this);
     ArrayList<Entity> entityArrayList = new ArrayList<>();
 
 
@@ -139,7 +141,11 @@ public class GamePanel extends JPanel implements Runnable {
             accumulate += (currentTime - lastTime) / interval;
             lastTime = currentTime;
             while (accumulate > 1) {
-                update();
+                try {
+                    update();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 try {
                     toBufferImage();
                 } catch (IOException e) {
@@ -151,7 +157,7 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
-    private void update() {
+    private void update() throws IOException {
 
         if (gameBehavior == playBehavior) {
 

@@ -2,6 +2,7 @@ package main;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class KeyHandler implements KeyListener {
 
@@ -25,7 +26,11 @@ public class KeyHandler implements KeyListener {
         int value = e.getKeyCode();
 
         if (gamePanel.gameBehavior == GamePanel.titleBehavior) {
-            titleBehavior(value);
+            try {
+                titleBehavior(value);
+            } catch (IOException | ClassNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (gamePanel.gameBehavior == GamePanel.playBehavior) {
             try {
                 playBehavior(value);
@@ -317,7 +322,7 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    private void titleBehavior(int value) {
+    private void titleBehavior(int value) throws IOException, ClassNotFoundException {
         if (gamePanel.ui.titleScreenBehavior == 0) {
             titleBehavior_0(value);
         } else if (gamePanel.ui.titleScreenBehavior == 1) {
@@ -366,7 +371,7 @@ public class KeyHandler implements KeyListener {
     }
 
 
-    private void titleBehavior_0(int value) {
+    private void titleBehavior_0(int value) throws IOException, ClassNotFoundException {
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
             if (gamePanel.ui.commandNum != 0) {
                 gamePanel.ui.commandNum--;
@@ -384,7 +389,10 @@ public class KeyHandler implements KeyListener {
                 gamePanel.ui.titleScreenBehavior = 1;
             }
             if (gamePanel.ui.commandNum == 1) {
-
+                gamePanel.saveLoad.load();
+                gamePanel.gameBehavior = GamePanel.playBehavior;
+                //gamePanel.playSFX(0);
+                musicCheck();
             }
             if (gamePanel.ui.commandNum == 2) {
                 System.exit(0);
