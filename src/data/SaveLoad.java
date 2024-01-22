@@ -14,8 +14,10 @@ public class SaveLoad {
     public SaveLoad(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
-public Entity getObj(String itemName){
-        Entity obj = switch (itemName) {
+
+    public Entity getObj(String itemName) {
+        Entity obj;
+        obj = switch (itemName) {
             case "Woodcutter's Axe" -> new Axe(gamePanel);
             case "Boots" -> new Boots(gamePanel);
             case "Key" -> new Key(gamePanel);
@@ -29,8 +31,9 @@ public Entity getObj(String itemName){
             case "Chest" -> new Chest(gamePanel);
             default -> null;
         };
-    return obj;
-}
+        return obj;
+    }
+
     public void save() {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("save.dat"));
@@ -50,7 +53,6 @@ public Entity getObj(String itemName){
                 dataStorage.itemAmounts.add(gamePanel.player.inventory.get(i).amount);
 
             }
-
             objectOutputStream.writeObject(dataStorage);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -75,7 +77,7 @@ public Entity getObj(String itemName){
         gamePanel.player.inventory.clear();
         for (int i = 0; i < dataStorage.itemNames.size(); i++) {
             gamePanel.player.inventory.add(getObj(dataStorage.itemNames.get(i)));
-            gamePanel.player.inventory.get(i).amount=dataStorage.itemAmounts.get(i);
+            gamePanel.player.inventory.get(i).amount = dataStorage.itemAmounts.get(i);
 
         }
     }
