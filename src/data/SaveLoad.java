@@ -1,6 +1,8 @@
 package data;
 
+import entity.Entity;
 import main.GamePanel;
+import objects.*;
 
 import java.io.*;
 
@@ -12,7 +14,23 @@ public class SaveLoad {
     public SaveLoad(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
     }
-
+public Entity getObj(String itemName){
+        Entity obj = switch (itemName) {
+            case "Woodcutter's Axe" -> new Axe(gamePanel);
+            case "Boots" -> new Boots(gamePanel);
+            case "Key" -> new Key(gamePanel);
+            case "Lantern" -> new Lantern(gamePanel);
+            case "Red Potion" -> new PotionRed(gamePanel);
+            case "ShieldBlue" -> new ShieldBlue(gamePanel);
+            case "Shield" -> new ShieldWood(gamePanel);
+            case "Sword" -> new Sword(gamePanel);
+            case "Tent" -> new Tent(gamePanel);
+            case "Door" -> new Door(gamePanel);
+            case "Chest" -> new Chest(gamePanel);
+            default -> null;
+        };
+    return obj;
+}
     public void save() {
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("save.dat"));
@@ -27,6 +45,11 @@ public class SaveLoad {
             dataStorage.exp = gamePanel.player.exp;
             dataStorage.nextLevelExp = gamePanel.player.nextLevelExp;
             dataStorage.coin = gamePanel.player.coin;
+            for (int i = 0; i < gamePanel.player.inventory.size(); i++) {
+                dataStorage.itemNames.add(gamePanel.player.inventory.get(i).name);
+                dataStorage.itemAmounts.add(gamePanel.player.inventory.get(i).amount);
+
+            }
 
             objectOutputStream.writeObject(dataStorage);
         } catch (IOException e) {
@@ -48,5 +71,12 @@ public class SaveLoad {
         gamePanel.player.exp = dataStorage.exp;
         gamePanel.player.nextLevelExp = dataStorage.nextLevelExp;
         gamePanel.player.coin = dataStorage.coin;
+
+        gamePanel.player.inventory.clear();
+        for (int i = 0; i < dataStorage.itemNames.size(); i++) {
+            gamePanel.player.inventory.add(getObj(dataStorage.itemNames.get(i)));
+            gamePanel.player.inventory.get(i).amount=dataStorage.itemAmounts.get(i);
+
+        }
     }
 }

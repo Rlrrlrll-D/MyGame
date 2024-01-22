@@ -5,14 +5,12 @@ import main.GamePanel;
 
 public class Chest extends Obstacle {
     GamePanel gamePanel;
-    Entity loot;
-    boolean opened;
 
-    public Chest(GamePanel gamePanel, Entity loot) {
+    public Chest(GamePanel gamePanel) {
         super(gamePanel);
         name = "Chest";
         this.gamePanel = gamePanel;
-        this.loot = loot;
+
 
         collision = true;
         image = setup("/res/objects/chest", gamePanel.tileSize, gamePanel.tileSize);
@@ -25,6 +23,9 @@ public class Chest extends Obstacle {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+    }
+    public void  setLoot(Entity loot){
+        this.loot = loot;
     }
 
     public void interact() {

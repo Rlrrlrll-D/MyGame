@@ -2,8 +2,6 @@ package main;
 
 import entity.Entity;
 
-import java.io.IOException;
-
 public class EventHandler {
     GamePanel gamePanel;
     EventRect[][][] eventRect;
@@ -35,7 +33,7 @@ public class EventHandler {
 
     }
 
-    public void checkEvent() throws IOException {
+    public void checkEvent() {
         int xDistance = Math.abs(gamePanel.player.worldX - previousEventX);
         int yDistance = Math.abs(gamePanel.player.worldY - previousEventY);
         int distance = Math.max(xDistance, yDistance);
@@ -102,7 +100,7 @@ public class EventHandler {
         gamePanel.player.life--;
     }
 
-    public void healingPool(int gameBehavior) throws IOException {
+    public void healingPool(int gameBehavior) {
 
         if (gamePanel.keyHandler.enterPressed && gamePanel.player.life != gamePanel.player.maxLife) {
             gamePanel.player.isAttack = false;

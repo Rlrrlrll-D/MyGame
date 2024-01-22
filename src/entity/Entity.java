@@ -71,6 +71,10 @@ public class Entity {
     public boolean onPath;
     public boolean stackable;
     public boolean offBalance;
+
+    public Entity loot;
+    public boolean opened;
+
     public int amount = 1;
     public int lightRadius;
     public int invinCounter;
@@ -148,6 +152,9 @@ public class Entity {
     }
 
     public void damageReaction() {
+
+    }
+    public void setLoot(Entity loot){
 
     }
 
