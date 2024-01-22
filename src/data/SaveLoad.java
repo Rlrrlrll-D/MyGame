@@ -75,6 +75,7 @@ public class SaveLoad {
         gamePanel.player.coin = dataStorage.coin;
 
         gamePanel.player.inventory.clear();
+
         for (int i = 0; i < dataStorage.itemNames.size(); i++) {
             gamePanel.player.inventory.add(getObj(dataStorage.itemNames.get(i)));
             gamePanel.player.inventory.get(i).amount = dataStorage.itemAmounts.get(i);
