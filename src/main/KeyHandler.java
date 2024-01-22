@@ -391,7 +391,7 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.ui.commandNum == 1) {
                 gamePanel.saveLoad.load();
                 gamePanel.gameBehavior = GamePanel.playBehavior;
-                //gamePanel.playSFX(0);
+                gamePanel.musicOn = false;
                 musicCheck();
             }
             if (gamePanel.ui.commandNum == 2) {

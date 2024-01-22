@@ -15,7 +15,7 @@ public class SaveLoad {
         this.gamePanel = gamePanel;
     }
 
-    public Entity getObj(String itemName) {
+    private Entity getObj(String itemName) {
         Entity obj;
         obj = switch (itemName) {
             case "Woodcutter's Axe" -> new Axe(gamePanel);
