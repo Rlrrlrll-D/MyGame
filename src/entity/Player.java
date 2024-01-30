@@ -6,7 +6,6 @@ import objects.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 
 public class Player extends Entity {
@@ -93,7 +92,7 @@ public class Player extends Entity {
         inventory.add(new Axe(gamePanel));
     }
 
-    private int getAttack() {
+    public int getAttack() {
         attackArea = currentWeapon.attackArea;
         motionDelay1 = currentWeapon.motionDelay1;
         motionDelay2 = currentWeapon.motionDelay2;
@@ -101,7 +100,7 @@ public class Player extends Entity {
         return attack = strength * currentWeapon.attackValue;
     }
 
-    private int getDefence() {
+    public int getDefence() {
         return defence = dexterity * currentShield.defenceValue;
     }
 
@@ -160,7 +159,7 @@ public class Player extends Entity {
         right2 = image;
     }
 
-    private void getAttackImage() {
+    public void getAttackImage() {
         if (currentWeapon instanceof Sword) {
             attackUp1 = setup("/res/player/attack_up1", gamePanel.tileSize, gamePanel.tileSize * 2);
             attackUp2 = setup("/res/player/attack_up2", gamePanel.tileSize, gamePanel.tileSize * 2);
@@ -184,7 +183,7 @@ public class Player extends Entity {
         }
     }
 
-    public void update() throws IOException {
+    public void update() {
         if (escapeKnock) {
             collisionOn = false;
             gamePanel.checker.checkTile(this);
@@ -321,6 +320,25 @@ public class Player extends Entity {
         }
     }
 
+    public int getCurrentWeaponSlot() {
+        int currentWeaponSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentWeapon) {
+                currentWeaponSlot = i;
+            }
+        }
+        return currentWeaponSlot;
+    }
+
+    public int getCurrentShieldSlot() {
+        int currentShieldSlot = 0;
+        for (int i = 0; i < inventory.size(); i++) {
+            if (inventory.get(i) == currentShield) {
+                currentShieldSlot = i;
+            }
+        }
+        return currentShieldSlot;
+    }
 
     public void damageProjectile(int projectileIndex) {
         if (projectileIndex != 999) {
@@ -785,7 +803,7 @@ public class Player extends Entity {
 //        graphics2D.setColor(shadow);
 //        graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
         shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
-        graphics2D.drawImage(shadow, screenX, screenY-6 + gamePanel.tileSize, null);
+        graphics2D.drawImage(shadow, screenX, screenY - 6 + gamePanel.tileSize, null);
         graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
         graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
 

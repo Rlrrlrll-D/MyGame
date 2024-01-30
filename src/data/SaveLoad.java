@@ -29,6 +29,8 @@ public class SaveLoad {
             case "Tent" -> new Tent(gamePanel);
             case "Door" -> new Door(gamePanel);
             case "Chest" -> new Chest(gamePanel);
+            case "Bronze Coin" -> new CoinBronze(gamePanel);
+            case "Heart" -> new Heart(gamePanel);
             default -> null;
         };
         return obj;
@@ -49,11 +51,38 @@ public class SaveLoad {
             dataStorage.nextLevelExp = gamePanel.player.nextLevelExp;
             dataStorage.coin = gamePanel.player.coin;
             for (int i = 0; i < gamePanel.player.inventory.size(); i++) {
+
                 dataStorage.itemNames.add(gamePanel.player.inventory.get(i).name);
                 dataStorage.itemAmounts.add(gamePanel.player.inventory.get(i).amount);
 
             }
+
+            dataStorage.currentWeaponSlot = gamePanel.player.getCurrentWeaponSlot();
+            dataStorage.currentShieldSlot = gamePanel.player.getCurrentShieldSlot();
+
+            dataStorage.mapObjNames = new String[GamePanel.maxMap][gamePanel.objects[1].length];
+            dataStorage.objWorldX = new int[GamePanel.maxMap][gamePanel.objects[1].length];
+            dataStorage.objWorldY = new int[GamePanel.maxMap][gamePanel.objects[1].length];
+            dataStorage.lootNames = new String[GamePanel.maxMap][gamePanel.objects[1].length];
+            dataStorage.objOpened = new boolean[GamePanel.maxMap][gamePanel.objects[1].length];
+
+            for (int i = 0; i < GamePanel.maxMap; i++) {
+                for (int j = 0; j < gamePanel.objects[1].length; j++) {
+                    if (gamePanel.objects[i][j] == null) {
+                        dataStorage.mapObjNames[i][j] = "NA";
+                    } else {
+                        dataStorage.mapObjNames[i][j] = gamePanel.objects[i][j].name;
+                        dataStorage.objWorldX[i][j] = gamePanel.objects[i][j].worldX;
+                        dataStorage.objWorldY[i][j] = gamePanel.objects[i][j].worldY;
+                        if (gamePanel.objects[i][j].loot != null) {
+                            dataStorage.lootNames[i][j] = gamePanel.objects[i][j].loot.name;
+                        }
+                        dataStorage.objOpened[i][j] = gamePanel.objects[i][j].opened;
+                    }
+                }
+            }
             objectOutputStream.writeObject(dataStorage);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -77,9 +106,33 @@ public class SaveLoad {
         gamePanel.player.inventory.clear();
 
         for (int i = 0; i < dataStorage.itemNames.size(); i++) {
+
             gamePanel.player.inventory.add(getObj(dataStorage.itemNames.get(i)));
             gamePanel.player.inventory.get(i).amount = dataStorage.itemAmounts.get(i);
 
+        }
+        gamePanel.player.currentWeapon = gamePanel.player.inventory.get(dataStorage.currentWeaponSlot);
+        gamePanel.player.currentShield = gamePanel.player.inventory.get(dataStorage.currentShieldSlot);
+        gamePanel.player.getAttack();
+        gamePanel.player.getDefence();
+        gamePanel.player.getAttackImage();
+        for (int i = 0; i < GamePanel.maxMap; i++) {
+            for (int j = 0; j < gamePanel.objects[1].length; j++) {
+                if (dataStorage.mapObjNames[i][j].equals("NA")) {
+                    gamePanel.objects[i][j] = null;
+                } else {
+                    gamePanel.objects[i][j] = getObj(dataStorage.mapObjNames[i][j]);
+                    gamePanel.objects[i][j].worldX = dataStorage.objWorldX[i][j];
+                    gamePanel.objects[i][j].worldY = dataStorage.objWorldY[i][j];
+                    if (dataStorage.lootNames[i][j] != null) {
+                        gamePanel.objects[i][j].loot = getObj(dataStorage.lootNames[i][j]);
+                    }
+                    gamePanel.objects[i][j].opened = dataStorage.objOpened[i][j];
+                    if (gamePanel.objects[i][j].opened) {
+                        gamePanel.objects[i][j].down1 = gamePanel.objects[i][j].image1;
+                    }
+                }
+            }
         }
     }
 }

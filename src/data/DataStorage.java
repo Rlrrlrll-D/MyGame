@@ -15,6 +15,14 @@ public class DataStorage implements Serializable {
     int exp;
     int nextLevelExp;
     int coin;
-    ArrayList<String>itemNames = new ArrayList<>();
-    ArrayList<Integer>itemAmounts = new ArrayList<>();
+    ArrayList<String> itemNames = new ArrayList<>();
+    ArrayList<Integer> itemAmounts = new ArrayList<>();
+    int currentWeaponSlot;
+    int currentShieldSlot;
+
+    String[][] mapObjNames;
+    int[][] objWorldX;
+    int[][] objWorldY;
+    String[][] lootNames;
+    boolean[][] objOpened;
 }
