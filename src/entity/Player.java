@@ -791,7 +791,6 @@ public class Player extends Entity {
                 if (guarding) {
                     image = guardRight;
                 }
-
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + direct);
@@ -800,40 +799,10 @@ public class Player extends Entity {
             blinkEntity(graphics2D, 0.04f, 5);
         }
 
-//        Color shadow = new Color(12, 12, 12, 55);
-//        graphics2D.setColor(shadow);
-//        graphics2D.fillRoundRect(screenX + solidArea.x, screenY + gamePanel.tileSize - gamePanel.tileSize / 3 / 2, solidArea.width, gamePanel.tileSize / 3, 10, 10);
         shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
         graphics2D.drawImage(shadow, screenX, screenY - 6 + gamePanel.tileSize, null);
         graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
         graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
-
-/*
-        // AttackArea
-        tempScreenX = screenX + solidArea.x;
-        tempScreenY = screenY + solidArea.y;
-        switch (direct) {
-            case "up", "stay_up":
-                tempScreenY = screenY - attackArea.height;
-                break;
-            case "down", "stay":
-                tempScreenY = screenY + gamePanel.tileSize;
-                break;
-            case "left", "stay_left":
-                tempScreenX = screenX - attackArea.width;
-                break;
-            case "right", "stay_right":
-                tempScreenX = screenX + gamePanel.tileSize;
-                break;
-        }
-        graphics2D.setColor(Color.red);
-        graphics2D.setStroke(new BasicStroke(1));
-        graphics2D.drawRect(tempScreenX, tempScreenY, attackArea.width, attackArea.height);
-        graphics2D.setColor(Color.white);
-        graphics2D.drawRect(screenX + solidArea.x, screenY + solidArea.y, solidArea.width, solidArea.height);
-        graphics2D.setFont(new Font("Arial", Font.PLAIN, 26));
-        graphics2D.drawString("Invincible:" + invinCounter, 10, 400);
-*/
 
     }
 
