@@ -76,6 +76,7 @@ public class Player extends Entity {
     public void restoreStatus() {
         mana = maxMana;
         life = maxLife;
+        speed = defaultSpeed;
         invincible = false;
         transparent = false;
         isAttack = false;
