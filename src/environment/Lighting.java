@@ -6,8 +6,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Lighting {
-    GamePanel gamePanel;
-    BufferedImage darknessFilter;
     public final int day = 0;
     public final int dusk = 1;
     public final int night = 2;
@@ -15,6 +13,8 @@ public class Lighting {
     public float filterAlpha;
     public int dayState = day;
     public int dayCounter;
+    GamePanel gamePanel;
+    BufferedImage darknessFilter;
 
     public Lighting(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
@@ -121,8 +121,10 @@ public class Lighting {
             default -> "";
         };
 
-        graphics2D.setColor(Color.white);
-        graphics2D.setFont(graphics2D.getFont().deriveFont(45f));
-        graphics2D.drawString(situation, 800, 500);
+        if (gamePanel.gameBehavior != GamePanel.pauseBehavior) {
+            graphics2D.setColor(Color.white);
+            graphics2D.setFont(graphics2D.getFont().deriveFont(45f));
+            graphics2D.drawString(situation, 800, 500);
+        }
     }
 }

@@ -66,6 +66,7 @@ public class Player extends Entity {
     }
 
     public void setDefaultPos() {
+        gamePanel.currentMap = 0;
         worldX = gamePanel.tileSize;
         worldY = gamePanel.tileSize * 39;
         speed = defaultSpeed;

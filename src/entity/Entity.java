@@ -102,6 +102,18 @@ public class Entity {
         this.gamePanel = gamePanel;
     }
 
+    public void resetCounter() {
+        counter = 0;
+        actionCounter = 0;
+        invinCounter = 0;
+        shotAvailableCounter = 0;
+        dyingCounter = 0;
+        hpBarCounter = 0;
+        knockCounter=0;
+        guardCounter = 0;
+        offBalanceCounter = 0;
+    }
+
     public int getLeftX() {
         return worldX + solidArea.x;
     }
@@ -154,7 +166,8 @@ public class Entity {
     public void damageReaction() {
 
     }
-    public void setLoot(Entity loot){
+
+    public void setLoot(Entity loot) {
 
     }
 
@@ -383,7 +396,7 @@ public class Entity {
         }
     }
 
-    public void update() throws IOException {
+    public void update() {
         if (escapeKnock) {
             checkCollision();
             if (collisionOn) {
