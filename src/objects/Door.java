@@ -17,12 +17,16 @@ public class Door extends Obstacle {
         solidArea.height = 32;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogues[0][0] = "You need a key to open this.";
     }
 
     @Override
     public void interact() {
-        gamePanel.gameBehavior = GamePanel.dialogBehavior;
-        gamePanel.ui.dialogue = "You need a key to open this.";
+        startDialog(this, 0);
 
     }
 }

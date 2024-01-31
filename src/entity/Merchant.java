@@ -38,7 +38,7 @@ public class Merchant extends Entity {
     }
 
     public void setDialog() {
-        dialogues[0] = "He he, so you found me. \nI have some good stuff. \nDo you want to trade?";
+        dialogues[0][0] = "He he, so you found me. \nI have some good stuff. \nDo you want to trade?";
     }
 
     public void setItem() {

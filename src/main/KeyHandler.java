@@ -256,7 +256,7 @@ public class KeyHandler implements KeyListener {
 
     private void dialogBehavior(int value) {
         if (value == KeyEvent.VK_ENTER) {
-            gamePanel.gameBehavior = GamePanel.playBehavior;
+            enterPressed = true;
         }
     }
 

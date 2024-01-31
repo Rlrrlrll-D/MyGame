@@ -961,6 +961,22 @@ public class UI {
         int height = gamePanel.tileSize * 4;
         drawSubWindow(x, y, width, height);
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
+
+        if (npc.dialogues[npc.dialogSet][npc.dialogCount] != null) {
+            dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
+            if (gamePanel.keyHandler.enterPressed) {
+                if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
+                    npc.dialogCount++;
+                    gamePanel.keyHandler.enterPressed = false;
+                }
+            }
+        } else {
+            npc.dialogCount = 0;
+            if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
+                gamePanel.gameBehavior = GamePanel.playBehavior;
+            }
+        }
+
         for (String line : dialogue.split("\n")) {
             drawDialogText(line, x, y);
             y += 30;

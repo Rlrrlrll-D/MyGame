@@ -24,27 +24,32 @@ public class Chest extends Obstacle {
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
     }
-    public void  setLoot(Entity loot){
+
+    public void setLoot(Entity loot) {
         this.loot = loot;
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogues[0][0] = "You open the chest and find a " + loot.name + "\n...But you cannot carry and more!";
+        dialogues[1][0] = "You open the chest and find a " + loot.name + "\nYou obtain the " + loot.name + "!";
+        dialogues[2][0] = "It's empty";
     }
 
     public void interact() {
-        gamePanel.gameBehavior = GamePanel.dialogBehavior;
+
         if (!opened) {
             gamePanel.playSFX(3);
 
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("You open the chest and find a ").append(loot.name).append("!");
             if (!gamePanel.player.canObtainItem(loot)) {
-                stringBuilder.append("\n...But you cannot carry and more!");
+                startDialog(this, 0);
             } else {
-                stringBuilder.append("\nYou obtain the ").append(loot.name).append("!");
+                startDialog(this, 1);
                 down1 = image1;
                 opened = true;
             }
-            gamePanel.ui.dialogue = stringBuilder.toString();
         } else {
-            gamePanel.ui.dialogue = "It's empty";
+            startDialog(this, 2);
         }
     }
 }

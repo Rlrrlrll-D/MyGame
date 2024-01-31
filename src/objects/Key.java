@@ -16,21 +16,26 @@ public class Key extends Consumable {
         price = 100;
         description = "[" + name + "]\nIt opens a door.";
         down1 = setup("/res/objects/key", gamePanel.tileSize, gamePanel.tileSize);
+        setDialogue();
+    }
 
+    public void setDialogue() {
+        dialogues[0][0] = "You use the " + name + " and open the door.";
+        dialogues[1][0] = "What are you doing?";
     }
 
     @Override
     public boolean use(Entity entity) {
-        gamePanel.gameBehavior = GamePanel.dialogBehavior;
+
         int objIndex = getDetected(entity, gamePanel.objects, "Door");
 
         if (objIndex != 999) {
-            gamePanel.ui.dialogue = "You use the " + name + " and open the door.";
+            startDialog(this, 0);
             gamePanel.playSFX(2);
             gamePanel.objects[gamePanel.currentMap][objIndex] = null;
             return true;
         } else {
-            gamePanel.ui.dialogue = "What are you doing?";
+            startDialog(this, 1);
             return false;
         }
     }

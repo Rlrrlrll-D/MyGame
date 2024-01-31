@@ -14,11 +14,16 @@ public class PotionRed extends Consumable {
         value = 5;
         down1 = setup("/res/objects/potion_red", gamePanel.tileSize, gamePanel.tileSize);
         description = "[Red Potion]\nHeals your life by  " + value;
+        setDialogue();
+    }
+
+    public void setDialogue() {
+        dialogues[0][0] = "You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".";
     }
 
     public boolean use(Entity entity) {
-        gamePanel.gameBehavior = GamePanel.dialogBehavior;
-        gamePanel.ui.dialogue = "You drink the " + name + "!\n" + "Your life has been recovered by " + value + ".";
+
+        startDialog(this, 0);
         entity.life += value;
         gamePanel.playSFX(10);
         return true;

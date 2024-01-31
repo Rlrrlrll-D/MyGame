@@ -56,6 +56,7 @@ public class Entity {
     public int mana;
     public int actionCounter;
     public int dialogCount;
+    public int dialogSet;
     public int shotAvailableCounter;
     public int guardCounter;
     public int offBalanceCounter;
@@ -95,7 +96,7 @@ public class Entity {
     public boolean guarding;
     public boolean transparent;
     GamePanel gamePanel;
-    String[] dialogues = new String[20];
+    public String[][] dialogues = new String[20][20];
 
 
     public Entity(GamePanel gamePanel) {
@@ -109,7 +110,7 @@ public class Entity {
         shotAvailableCounter = 0;
         dyingCounter = 0;
         hpBarCounter = 0;
-        knockCounter=0;
+        knockCounter = 0;
         guardCounter = 0;
         offBalanceCounter = 0;
     }
@@ -181,6 +182,17 @@ public class Entity {
 
     public void speak() {
 
+        facePlayer();
+
+    }
+
+    public void startDialog(Entity entity, int setNum) {
+        gamePanel.gameBehavior = GamePanel.dialogBehavior;
+        gamePanel.ui.npc = entity;
+        dialogSet = setNum;
+    }
+
+    protected void facePlayer() {
         switch (gamePanel.player.direct) {
             case "up", "stay_up":
                 direct = "down";
@@ -194,11 +206,6 @@ public class Entity {
             case "right", "stay_right":
                 direct = "left";
                 break;
-        }
-        gamePanel.ui.dialogue = dialogues[dialogCount];
-        dialogCount++;
-        if (dialogues[dialogCount] == null) {
-            dialogCount = 0;
         }
     }
 

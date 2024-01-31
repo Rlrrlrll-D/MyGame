@@ -63,6 +63,7 @@ public class Player extends Entity {
         getAttackImage();
         getGuardImg();
         setInventory();
+        setDialogue();
     }
 
     public void setDefaultPos() {
@@ -456,6 +457,10 @@ public class Player extends Entity {
         }
     }
 
+    public void setDialogue() {
+        dialogues[0][0] = "You are level " + level + " now!\n" + "You feel stronger!";
+    }
+
     private void checkLevelUp() {
         if (exp >= nextLevelExp) {
             level++;
@@ -467,8 +472,8 @@ public class Player extends Entity {
             defence = getDefence();
             gamePanel.playSFX(11);
             gamePanel.gameBehavior = GamePanel.dialogBehavior;
-            gamePanel.ui.dialogue = "You are level " + level + " now!\n" + "You feel stronger!";
 
+            startDialog(this, 0);
         }
     }
 
@@ -476,7 +481,6 @@ public class Player extends Entity {
         if (gamePanel.keyHandler.enterPressed) {
             if (i != 999) {
                 notAttacked = true;
-                gamePanel.gameBehavior = GamePanel.dialogBehavior;
                 gamePanel.npc[gamePanel.currentMap][i].speak();
 
             }
