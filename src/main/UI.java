@@ -671,7 +671,7 @@ public class UI {
             int txtY = descriptionFrameY + gamePanel.tileSize;
             graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 25F));
             int itemIndex = getItemIndex(slotCol, slotRow);
-            if (itemIndex < entity.inventory.size() && entity.description != null) {
+            if (itemIndex < entity.inventory.size()) {
                 drawSubWindow(x, descriptionFrameY, width, descriptionFrameHeight);
 
                 for (String line : entity.inventory.get(itemIndex).description.split("\n")) {
