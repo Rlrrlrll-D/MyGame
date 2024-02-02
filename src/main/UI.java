@@ -22,6 +22,7 @@ public class UI {
     public int npcSlotCol = 0;
     public int npcSlotRow = 0;
     public int commandNum = 0;
+    public int charIndex;
     public int titleScreenBehavior = 0;
 
     GamePanel gamePanel;
@@ -33,6 +34,7 @@ public class UI {
     int temp;
     ArrayList<Integer> counter = new ArrayList<>();
     public Entity npc;
+    String combinedText;
 
 
     public UI(GamePanel gamePanel) {
@@ -959,8 +961,16 @@ public class UI {
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
 
         if (npc.dialogues[npc.dialogSet][npc.dialogCount] != null) {
-            dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
+            char[] characters = npc.dialogues[npc.dialogSet][npc.dialogCount].toCharArray();
+            if (charIndex < characters.length) {
+                String s = String.valueOf(characters[charIndex]);
+                combinedText = combinedText + s;
+                dialogue = combinedText;
+                charIndex++;
+            }
             if (gamePanel.keyHandler.enterPressed) {
+                charIndex = 0;
+                combinedText = "";
                 if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
                     npc.dialogCount++;
                     gamePanel.keyHandler.enterPressed = false;

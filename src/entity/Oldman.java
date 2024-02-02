@@ -16,8 +16,10 @@ public class Oldman extends Entity {
         solidArea.y = 16;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 32;
-        solidArea.height = 32;
+        solidArea.width = 30;
+        solidArea.height = 30;
+
+        dialogSet = -1;
 
         getImg();
         setDialogue();
@@ -84,6 +86,13 @@ public class Oldman extends Entity {
     public void speak() {
         facePlayer();
         startDialog(this, dialogSet);
+        dialogSet++;
+        if (dialogues[dialogSet][0] == null) {
+            dialogSet--;
+        }
+//        if (gamePanel.player.life<gamePanel.player.maxLife/3){
+//            dialogSet = 1;
+//        }
         //  onPath = true;
     }
 }

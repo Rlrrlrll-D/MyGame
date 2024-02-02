@@ -101,6 +101,7 @@ public class EventHandler {
                 You drink the water.\s
                 Your life and mana have been recovered.\s
                 (The progress has been saved)""";
+        eventMaster.dialogues[1][1] = "Damn, this is good water!";
     }
 
     private void damagePit() {
