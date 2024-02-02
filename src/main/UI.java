@@ -34,7 +34,7 @@ public class UI {
     int temp;
     ArrayList<Integer> counter = new ArrayList<>();
     public Entity npc;
-    String combinedText;
+    String combinedText = "";
 
 
     public UI(GamePanel gamePanel) {
@@ -70,14 +70,6 @@ public class UI {
 
         message.add(text);
         counter.add(0);
-    }
-
-    public void msgDelay(int delay) {
-        count++;
-        if (count >= delay) {
-            count = 0;
-            msgOn = false;
-        }
     }
 
     public void drawing(Graphics2D graphics2D) throws IOException {
@@ -160,7 +152,7 @@ public class UI {
     }
 
     public void trade_select() {
-        npc.dialogCount = 0;
+        npc.dialogSet = 0;
         drawDialogScreen();
 
         int x = gamePanel.tileSize * 15;
@@ -961,10 +953,12 @@ public class UI {
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
 
         if (npc.dialogues[npc.dialogSet][npc.dialogCount] != null) {
+//            dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
             char[] characters = npc.dialogues[npc.dialogSet][npc.dialogCount].toCharArray();
             if (charIndex < characters.length) {
+                gamePanel.playSFX(20);
                 String s = String.valueOf(characters[charIndex]);
-                combinedText = combinedText + s;
+                combinedText += s;
                 dialogue = combinedText;
                 charIndex++;
             }

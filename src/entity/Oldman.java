@@ -10,7 +10,7 @@ public class Oldman extends Entity {
     public Oldman(GamePanel gamePanel) {
         super(gamePanel);
         direct = "down";
-        speed = 2;
+        speed = 1;
         solidArea = new Rectangle();
         solidArea.x = 8;
         solidArea.y = 16;
@@ -25,7 +25,7 @@ public class Oldman extends Entity {
         setDialogue();
     }
 
-    public void getImg() {
+    private void getImg() {
 
         up1 = setup("/res/npc/oldman_up1", gamePanel.tileSize, gamePanel.tileSize);
         up2 = setup("/res/npc/oldman_up2", gamePanel.tileSize, gamePanel.tileSize);

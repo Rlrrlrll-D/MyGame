@@ -54,7 +54,7 @@ public class Merchant extends Entity {
     }
 
     public void speak() {
-        facePlayer();
+        //facePlayer();
         gamePanel.gameBehavior = GamePanel.tradeBehavior;
         gamePanel.ui.npc = this;
     }

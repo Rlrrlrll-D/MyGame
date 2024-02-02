@@ -36,6 +36,7 @@ public class Sound {
         sounds[17] = new File("src/res/sound/sleep.wav");
         sounds[18] = new File("src/res/sound/blocked.wav");
         sounds[19] = new File("src/res/sound/parry.wav");
+        sounds[20] = new File("src/res/sound/speak.wav");
 
     }
 

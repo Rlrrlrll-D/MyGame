@@ -296,6 +296,7 @@ public class Player extends Entity {
         checkLife();
         checkMana();
         checkGameOver();
+        System.out.println(this.speed);
     }
 
     private void checkGameOver() {
@@ -457,7 +458,7 @@ public class Player extends Entity {
         }
     }
 
-    public void setDialogue() {
+    private void setDialogue() {
         dialogues[0][0] = "You are level " + level + " now!\n" + "You feel stronger!";
     }
 
