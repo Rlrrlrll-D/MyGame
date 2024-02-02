@@ -106,19 +106,19 @@ public class EventHandler {
     private void damagePit() {
         gamePanel.playSFX(6);
         eventMaster.startDialog(eventMaster, 0);
-        canTouchEvent = false;
         gamePanel.player.life--;
+        canTouchEvent = false;
+
     }
 
     public void healingPool(int gameBehavior) {
 
         if (gamePanel.keyHandler.enterPressed && gamePanel.player.life != gamePanel.player.maxLife) {
-            gamePanel.player.isAttack = false;
-            gamePanel.playSFX(10);
             gamePanel.gameBehavior = gameBehavior;
             gamePanel.player.notAttacked = true;
-            eventMaster.startDialog(eventMaster, 1);
+            gamePanel.playSFX(10);
 
+            eventMaster.startDialog(eventMaster, 1);
             gamePanel.player.life = gamePanel.player.maxLife;
             gamePanel.player.mana = gamePanel.player.maxMana;
             gamePanel.assetSetter.setMonster();

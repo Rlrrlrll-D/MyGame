@@ -158,6 +158,7 @@ public class UI {
     }
 
     public void trade_select() {
+        npc.dialogCount = 0;
         drawDialogScreen();
 
         int x = gamePanel.tileSize * 15;
@@ -189,8 +190,7 @@ public class UI {
             graphics2D.drawString(">", x - 25, y);
             if (gamePanel.keyHandler.enterPressed) {
                 commandNum = 0;
-                gamePanel.gameBehavior = GamePanel.dialogBehavior;
-                dialogue = "Come again, motherfucker!";
+                npc.startDialog(npc, 1);
             }
         }
 
@@ -231,16 +231,13 @@ public class UI {
             if (gamePanel.keyHandler.enterPressed) {
                 if (npc.inventory.get(itemIndex).price > gamePanel.player.coin) {
                     subBehavior = 0;
-                    gamePanel.gameBehavior = GamePanel.dialogBehavior;
-                    dialogue = "You need more coin to buy that!";
-                    drawDialogScreen();
+                    npc.startDialog(npc, 2);
                 } else {
                     if (gamePanel.player.canObtainItem(npc.inventory.get(itemIndex))) {
                         gamePanel.player.coin -= npc.inventory.get(itemIndex).price;
                     } else {
                         subBehavior = 0;
-                        gamePanel.gameBehavior = GamePanel.dialogBehavior;
-                        dialogue = "You cannot carry anymore!";
+                        npc.startDialog(npc, 3);
                     }
                 }
             }
@@ -282,8 +279,7 @@ public class UI {
                         gamePanel.player.inventory.get(itemIndex) == gamePanel.player.currentShield) {
                     commandNum = 0;
                     subBehavior = 0;
-                    gamePanel.gameBehavior = GamePanel.dialogBehavior;
-                    dialogue = "You cannot sell an equipped item!";
+                    npc.startDialog(npc, 4);
                 } else {
                     if (gamePanel.player.inventory.get(itemIndex).amount > 1) {
                         gamePanel.player.inventory.get(itemIndex).amount--;
