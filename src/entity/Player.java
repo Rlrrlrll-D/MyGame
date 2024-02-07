@@ -473,7 +473,6 @@ public class Player extends Entity {
             defence = getDefence();
             gamePanel.playSFX(11);
             gamePanel.gameBehavior = GamePanel.dialogBehavior;
-         //   dialogues[0][0] = "You are level " + level + " now!\n" + "You feel stronger!";
             setDialogue();
             startDialog(this, 0);
         }
