@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class UI {
 
     public String dialogue;
-    public boolean msgOn;
     public int count;
     public int playerSlotCol = 0;
     public int playerSlotRow = 0;
@@ -24,16 +23,15 @@ public class UI {
     public int commandNum = 0;
     public int charIndex;
     public int titleScreenBehavior = 0;
-
+    public Font Purisa, Pixel, Monica;
+    public Entity npc;
     GamePanel gamePanel;
     BufferedImage heart_f, heart_h, heart_e, crystal_f, crystal_e, coin;
     Graphics2D graphics2D;
-    public Font Purisa, Pixel, Monica;
     ArrayList<String> message = new ArrayList<>();
     int subBehavior;
     int temp;
     ArrayList<Integer> counter = new ArrayList<>();
-    public Entity npc;
     String combinedText = "";
 
 

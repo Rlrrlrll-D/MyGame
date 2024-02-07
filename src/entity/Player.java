@@ -565,7 +565,7 @@ public class Player extends Entity {
     public boolean canObtainItem(Entity entity) {
         boolean canObtain = false;
         Entity newItem = gamePanel.entityGenerator.getObj(entity.name);
-        if(newItem.stackable) {
+        if (newItem.stackable) {
             int index = searchItemInInventory(newItem.name);
             if (index != 999) {
                 inventory.get(index).amount++;

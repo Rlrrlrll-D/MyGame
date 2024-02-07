@@ -20,8 +20,6 @@ import java.util.Comparator;
 public class GamePanel extends JPanel implements Runnable {
     public static final int maxScreenCol = 20;
     public static final int maxScreenRow = 12;
-    public static int maxWorldCol = 50;
-    public static int maxWorldRow = 50;
     public final static int maxMap = 10;
     public static final int titleBehavior = 0;
     public static final int playBehavior = 1;
@@ -38,7 +36,8 @@ public class GamePanel extends JPanel implements Runnable {
     private static final int originalTileSize = 16;
     private static final int scale = 3;
     private static final int FPS = 60;
-
+    public static int maxWorldCol = 50;
+    public static int maxWorldRow = 50;
     public int gameBehavior;
     public int currentMap = 0;
     public int tileSize = originalTileSize * scale;
@@ -55,8 +54,6 @@ public class GamePanel extends JPanel implements Runnable {
     public AssetSetter assetSetter = new AssetSetter(this);
     public EventHandler eventHandler = new EventHandler(this);
     public PathFinder pathFinder = new PathFinder(this);
-    EnvironmentManager environmentManager = new EnvironmentManager(this);
-    Map map = new Map(this);
     public UI ui = new UI(this);
     public ArrayList<Entity> particleArrayList = new ArrayList<>();
     public KeyHandler keyHandler = new KeyHandler(this);
@@ -69,13 +66,15 @@ public class GamePanel extends JPanel implements Runnable {
     public Sound sound = new Sound();
     public TileManager tileManager = new TileManager(this);
     public Thread gameThread;
+    public EntityGenerator entityGenerator = new EntityGenerator(this);
+    EnvironmentManager environmentManager = new EnvironmentManager(this);
+    Map map = new Map(this);
     BufferedImage imgTempScreen;
     Graphics2D graphics2D;
     Config config = new Config(this);
     Sound SFX = new Sound();
     SaveLoad saveLoad = new SaveLoad(this);
     ArrayList<Entity> entityArrayList = new ArrayList<>();
-    public EntityGenerator entityGenerator = new EntityGenerator(this);
 
 
     public GamePanel() throws Exception {
@@ -210,6 +209,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void toBufferImage() throws IOException {
+
         super.paintComponent(graphics2D);
         long drawStart = 0;
         if (keyHandler.chkDrawTime) {
@@ -218,10 +218,9 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameBehavior == titleBehavior) {
             ui.drawing(graphics2D);
 
-        }else  if(gameBehavior ==mapBehavior){
+        } else if (gameBehavior == mapBehavior) {
             map.drawFullMapScreen(graphics2D);
-        }
-        else {
+        } else {
             tileManager.drawing(graphics2D);
             for (int i = 0; i < interactiveTile[1].length; i++) {
                 if (interactiveTile[currentMap][i] != null) {
@@ -246,7 +245,7 @@ public class GamePanel extends JPanel implements Runnable {
                     entityArrayList.add(mon[currentMap][i]);
                 }
             }
-            for (int i=0; i<projectile[1].length; i++ ) {
+            for (int i = 0; i < projectile[1].length; i++) {
                 if (projectile[currentMap][i] != null) {
                     entityArrayList.add(projectile[currentMap][i]);
                 }
