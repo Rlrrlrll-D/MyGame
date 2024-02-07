@@ -4,11 +4,12 @@ import entity.Entity;
 import main.GamePanel;
 
 public class PotionRed extends Consumable {
+    public static final String objName ="Red Potion";
     GamePanel gamePanel;
     public PotionRed(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
-        name = "Red Potion";
+        name = objName;
         stackable = true;
         price = 300;
         value = 5;

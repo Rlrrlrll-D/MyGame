@@ -75,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
     Sound SFX = new Sound();
     SaveLoad saveLoad = new SaveLoad(this);
     ArrayList<Entity> entityArrayList = new ArrayList<>();
+    public EntityGenerator entityGenerator = new EntityGenerator(this);
 
 
     public GamePanel() throws Exception {

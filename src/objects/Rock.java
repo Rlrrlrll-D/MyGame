@@ -7,13 +7,14 @@ import main.GamePanel;
 import java.awt.image.BufferedImage;
 
 public class Rock extends Projectile {
+    public static final String objName ="Rock";
     GamePanel gamePanel;
 
     public Rock(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        name = "Rock";
+        name = objName;
         speed = 8;
         maxLife = 80;
         life = maxLife;

@@ -5,10 +5,11 @@ import main.GamePanel;
 
 public class Chest extends Obstacle {
     GamePanel gamePanel;
+    public static final String objName ="Chest";
 
     public Chest(GamePanel gamePanel) {
         super(gamePanel);
-        name = "Chest";
+        name = objName;
         this.gamePanel = gamePanel;
 
 

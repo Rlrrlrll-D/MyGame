@@ -5,9 +5,10 @@ import entity.Entity;
 import main.GamePanel;
 
 public class Sword extends Entity {
+    public static final String objName = "Sword";
     public Sword(GamePanel gamePanel) {
         super(gamePanel);
-        name = "Sword";
+        name = objName;
         motionDelay1 = 3;
         motionDelay2 = 6;
         motionDelay3 = 12;

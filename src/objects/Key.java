@@ -4,13 +4,13 @@ import entity.Entity;
 import main.GamePanel;
 
 public class Key extends Consumable {
-
+    public static final String objName ="Key";
     GamePanel gamePanel;
 
     public Key(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
-        name = "Key";
+        name = objName;
         collision = true;
         stackable = true;
         price = 100;

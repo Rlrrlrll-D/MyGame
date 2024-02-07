@@ -4,14 +4,14 @@ import entity.Entity;
 import main.GamePanel;
 
 public class CoinBronze extends PickUpOnlyItems {
-
+    public static final String objName ="Bronze Coin";
     GamePanel gamePanel;
 
     public CoinBronze(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        name = "Bronze Coin";
+        name = objName;
         value = 1;
         down1 = setup("/res/objects/coin_bronze", gamePanel.tileSize, gamePanel.tileSize);
     }

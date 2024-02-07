@@ -1,8 +1,6 @@
 package data;
 
-import entity.Entity;
 import main.GamePanel;
-import objects.*;
 
 import java.io.*;
 
@@ -15,26 +13,7 @@ public class SaveLoad {
         this.gamePanel = gamePanel;
     }
 
-    private Entity getObj(String itemName) {
-        Entity obj;
-        obj = switch (itemName) {
-            case "Woodcutter's Axe" -> new Axe(gamePanel);
-            case "Boots" -> new Boots(gamePanel);
-            case "Key" -> new Key(gamePanel);
-            case "Lantern" -> new Lantern(gamePanel);
-            case "Red Potion" -> new PotionRed(gamePanel);
-            case "ShieldBlue" -> new ShieldBlue(gamePanel);
-            case "Shield" -> new ShieldWood(gamePanel);
-            case "Sword" -> new Sword(gamePanel);
-            case "Tent" -> new Tent(gamePanel);
-            case "Door" -> new Door(gamePanel);
-            case "Chest" -> new Chest(gamePanel);
-            case "Bronze Coin" -> new CoinBronze(gamePanel);
-            case "Heart" -> new Heart(gamePanel);
-            default -> null;
-        };
-        return obj;
-    }
+
 
     public void save() {
         try {
@@ -107,7 +86,7 @@ public class SaveLoad {
 
         for (int i = 0; i < dataStorage.itemNames.size(); i++) {
 
-            gamePanel.player.inventory.add(getObj(dataStorage.itemNames.get(i)));
+            gamePanel.player.inventory.add(gamePanel.entityGenerator.getObj(dataStorage.itemNames.get(i)));
             gamePanel.player.inventory.get(i).amount = dataStorage.itemAmounts.get(i);
 
         }
@@ -121,11 +100,11 @@ public class SaveLoad {
                 if (dataStorage.mapObjNames[i][j].equals("NA")) {
                     gamePanel.objects[i][j] = null;
                 } else {
-                    gamePanel.objects[i][j] = getObj(dataStorage.mapObjNames[i][j]);
+                    gamePanel.objects[i][j] = gamePanel.entityGenerator.getObj(dataStorage.mapObjNames[i][j]);
                     gamePanel.objects[i][j].worldX = dataStorage.objWorldX[i][j];
                     gamePanel.objects[i][j].worldY = dataStorage.objWorldY[i][j];
                     if (dataStorage.lootNames[i][j] != null) {
-                        gamePanel.objects[i][j].loot = getObj(dataStorage.lootNames[i][j]);
+                        gamePanel.objects[i][j].loot = gamePanel.entityGenerator.getObj(dataStorage.lootNames[i][j]);
                     }
                     gamePanel.objects[i][j].opened = dataStorage.objOpened[i][j];
                     if (gamePanel.objects[i][j].opened) {

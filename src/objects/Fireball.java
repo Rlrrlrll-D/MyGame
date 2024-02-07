@@ -7,14 +7,14 @@ import main.GamePanel;
 import java.awt.image.BufferedImage;
 
 public class Fireball extends Projectile {
-
+    public static final String objName ="Fireball";
     GamePanel gamePanel;
 
     public Fireball(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
 
-        name = "Fireball";
+        name = objName;
         speed = 6;
         maxLife = 80;
         life = maxLife;

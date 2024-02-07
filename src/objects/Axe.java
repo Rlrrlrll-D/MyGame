@@ -4,10 +4,12 @@ import entity.Entity;
 import main.GamePanel;
 
 public class Axe extends Entity {
+
+    public static final String objName = "Woodcutter's Axe";
     public Axe(GamePanel gamePanel) {
         super(gamePanel);
 
-        name = "Woodcutter's Axe";
+        name = objName;
         down1 = setup("/res/objects/axe", gamePanel.tileSize, gamePanel.tileSize);
         attackValue = 2;
         motionDelay1 = 9;

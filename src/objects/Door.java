@@ -3,11 +3,12 @@ package objects;
 import main.GamePanel;
 
 public class Door extends Obstacle {
+    public static final String objName ="Door";
     GamePanel gamePanel;
     public Door(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
-        name = "Door";
+        name = objName;
         down1 = setup("/res/objects/door", gamePanel.tileSize, gamePanel.tileSize);
         collision = true;
 
