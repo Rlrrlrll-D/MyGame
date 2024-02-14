@@ -9,21 +9,21 @@ import objects.Rock;
 
 import java.util.Random;
 
-public class Slime extends Monster {
+public class RedSlime extends Monster {
 
     GamePanel gamePanel;
 
-    public Slime(GamePanel gamePanel) {
+    public RedSlime(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
-        name = "Slime";
-        defaultSpeed = 1;
+        name = "RedSlime";
+        defaultSpeed = 2;
         speed = defaultSpeed;
-        maxLife = 4;
+        maxLife = 8;
         life = maxLife;
-        attack = 5;
+        attack = 7;
         defence = 0;
-        exp = 2;
+        exp = 5;
         projectile = new Rock(gamePanel);
 
         solidArea.x = 3;
@@ -35,18 +35,17 @@ public class Slime extends Monster {
 
         getImg();
 
-
     }
 
     private void getImg() {
-        up1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
-        up2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
-        down2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
-        left2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("/res/monster/slime-down1", gamePanel.tileSize, gamePanel.tileSize);
-        right2 = setup("/res/monster/slime-down2", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("/res/monster/redslime_1", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/res/monster/redslime_2", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/res/monster/redslime_1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/res/monster/redslime_2", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/res/monster/redslime_1", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/res/monster/redslime_2", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/res/monster/redslime_1", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/res/monster/redslime_2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public void setAction() {
@@ -55,6 +54,8 @@ public class Slime extends Monster {
             checkStopNotChasing(gamePanel.player, 15, 100);
 
             searchPath(getGoalCol(gamePanel.player), getGoalRow(gamePanel.player));
+            shotCount();
+            checkShootOrNot(200, 30);
 
         } else {
             checkStartNotChasing(gamePanel.player, 5, 100);

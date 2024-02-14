@@ -20,3 +20,7 @@ false
 true
 010.png
 true
+011.png
+false
+012.png
+false
