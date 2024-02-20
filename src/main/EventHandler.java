@@ -29,11 +29,9 @@ public class EventHandler {
                     eventRect[map][col][row].eventRectDefaultY = eventRect[map][col][row].y;
 
                 }
-
             }
         }
         setDialogue();
-
     }
 
     public void checkEvent() {
@@ -54,6 +52,17 @@ public class EventHandler {
                 teleport(1, 14, 44);
             } else if (hit(1, 14, 44, "any")) {
                 teleport(0, 14, 44);
+
+            } else if (hit(0, 4, 43, "any")) {
+                teleport(2, 2, 47);
+            } else if (hit(2, 2, 47, "any")) {
+                teleport(0, 4, 43);
+
+            } else if (hit(2, 3, 2, "any")) {
+                teleport(3, 24, 45);
+            } else if (hit(3, 24, 45, "any")) {
+                teleport(2, 3, 2);
+
             } else if (hit(0, 12, 43, "any")) {
                 healingPool(GamePanel.dialogBehavior);
             } else if (hit(1, 20, 45, "stay")) {

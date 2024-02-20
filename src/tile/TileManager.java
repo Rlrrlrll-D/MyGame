@@ -17,13 +17,12 @@ public class TileManager {
     public Tile[] tiles;
     public int[][][] mapTileNum;
     GamePanel gamePanel;
-    boolean drawPath = true;
     ArrayList<String> fileNames = new ArrayList<>();
     ArrayList<String> collisionStatus = new ArrayList<>();
 
     public TileManager(GamePanel gamePanel) throws Exception {
         this.gamePanel = gamePanel;
-        InputStream inputStream = getClass().getResourceAsStream("/maps/sample_tiles_data.txt");
+        InputStream inputStream = getClass().getResourceAsStream("/maps/tiles_data.txt");
         assert inputStream != null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
@@ -52,9 +51,10 @@ public class TileManager {
 
         bufferedReader.close();
 
-        //loadMap("/maps/sample.txt", 0);
         loadMap("/maps/world01.txt", 0);
         loadMap("/maps/world02.txt", 1);
+        loadMap("/maps/dungeon01.txt", 2);
+        loadMap("/maps/dungeon02.txt", 3);
 
     }
 
@@ -115,22 +115,6 @@ public class TileManager {
                     graphics2D.drawImage(tiles[tNum].image, scrX, scrY, null);
 
                 }
-            }
-        }
-        // drawPath(graphics2D);
-    }
-
-    private void drawPath(Graphics2D graphics2D) {
-        if (drawPath) {
-            graphics2D.setColor(new Color(255, 0, 0, 70));
-            for (int i = 0; i < gamePanel.pathFinder.pathList.size(); i++) {
-                int wrdX = gamePanel.pathFinder.pathList.get(i).col * gamePanel.tileSize;
-                int wrdY = gamePanel.pathFinder.pathList.get(i).row * gamePanel.tileSize;
-                int scrX = wrdX - gamePanel.player.worldX + gamePanel.player.screenX;
-                int scrY = wrdY - gamePanel.player.worldY + gamePanel.player.screenY;
-
-                graphics2D.fillRect(scrX, scrY, gamePanel.tileSize, gamePanel.tileSize);
-
             }
         }
     }

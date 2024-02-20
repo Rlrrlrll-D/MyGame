@@ -3,6 +3,7 @@ package main;
 import entity.Merchant;
 import entity.Oldman;
 import monster.Ogr;
+import monster.RedSlime;
 import monster.Slime;
 import objects.*;
 import tile.interactive.DryTree;
@@ -118,7 +119,7 @@ public class AssetSetter {
         }
         numMap = 1;
         for (int i = 0; i < 6; i++) {
-            gamePanel.mon[numMap][i] = new Slime(gamePanel);
+            gamePanel.mon[numMap][i] = new RedSlime(gamePanel);
             gamePanel.mon[numMap][i].worldX = gamePanel.tileSize * (11 + value);
             gamePanel.mon[numMap][i].worldY = gamePanel.tileSize * 18;
             value++;
