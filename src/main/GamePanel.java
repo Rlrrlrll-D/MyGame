@@ -40,6 +40,11 @@ public class GamePanel extends JPanel implements Runnable {
     public static int maxWorldRow = 50;
     public int gameBehavior;
     public int currentMap = 0;
+    public final int outside = 50;
+    public final int indoor = 51;
+    public final int dungeon = 52;
+    public int currentArea;
+    public int nextArea;
     public int tileSize = originalTileSize * scale;
     public int screenWidth = tileSize * maxScreenCol;
     public final int dfl_X = screenWidth / 2 - tileSize / 2;
@@ -93,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable {
         assetSetter.setInteractiveTile();
         environmentManager.setup();
         gameBehavior = titleBehavior;
+        currentArea = outside;
         imgTempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB_PRE);
         graphics2D = (Graphics2D) imgTempScreen.getGraphics();
         setFullScreen();
@@ -299,5 +305,22 @@ public class GamePanel extends JPanel implements Runnable {
     public void playGameOver() {
         sound.setFile(16);
         sound.play();
+    }
+
+    public void changeArea() {
+        if (nextArea != currentArea) {
+            stopMusic();
+            if (nextArea == outside) {
+                playMusic(0);
+            }
+            if (nextArea == indoor) {
+                playMusic(22);
+            }
+            if (nextArea == dungeon) {
+                playMusic(21);
+            }
+        }
+        currentArea = nextArea;
+        assetSetter.setMonster();
     }
 }

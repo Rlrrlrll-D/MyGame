@@ -109,8 +109,14 @@ public class Lighting {
     }
 
     public void drawing(Graphics2D graphics2D) {
-        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
-        graphics2D.drawImage(darknessFilter, 0, 0, null);
+
+        if (gamePanel.currentArea == gamePanel.outside) {
+            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
+        }
+        if (gamePanel.currentArea == gamePanel.outside || gamePanel.currentArea == gamePanel.dungeon) {
+            graphics2D.drawImage(darknessFilter, 0, 0, null);
+        }
+
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
         String situation = switch (dayState) {

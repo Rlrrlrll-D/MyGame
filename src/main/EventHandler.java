@@ -49,19 +49,19 @@ public class EventHandler {
             } else if (hit(0, 9, 44, "down")) {
                 damagePit();
             } else if (hit(0, 14, 44, "any")) {
-                teleport(1, 14, 44);
+                teleport(1, 14, 44, gamePanel.indoor);
             } else if (hit(1, 14, 44, "any")) {
-                teleport(0, 14, 44);
+                teleport(0, 14, 44, gamePanel.outside);
 
             } else if (hit(0, 4, 43, "any")) {
-                teleport(2, 2, 47);
+                teleport(2, 2, 47, gamePanel.dungeon);
             } else if (hit(2, 2, 47, "any")) {
-                teleport(0, 4, 43);
+                teleport(0, 4, 43, gamePanel.outside);
 
             } else if (hit(2, 3, 2, "any")) {
-                teleport(3, 24, 45);
+                teleport(3, 24, 45, gamePanel.dungeon);
             } else if (hit(3, 24, 45, "any")) {
-                teleport(2, 3, 2);
+                teleport(2, 3, 2, gamePanel.dungeon);
 
             } else if (hit(0, 12, 43, "any")) {
                 healingPool(GamePanel.dialogBehavior);
@@ -136,10 +136,10 @@ public class EventHandler {
         }
     }
 
-    private void teleport(int map, int col, int row) {
+    private void teleport(int map, int col, int row, int area) {
 
         gamePanel.gameBehavior = GamePanel.transitionBehavior;
-
+        gamePanel.nextArea = area;
         tmpMap = map;
         tmpCol = col;
         tmpRow = row;

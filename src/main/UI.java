@@ -300,6 +300,7 @@ public class UI {
             gamePanel.player.worldY = gamePanel.tileSize * gamePanel.eventHandler.tmpRow;
             gamePanel.eventHandler.previousEventX = gamePanel.player.worldX;
             gamePanel.eventHandler.previousEventY = gamePanel.player.worldY;
+            gamePanel.changeArea();
             graphics2D.setColor(new Color(0, 0, 0, temp * 5));
             graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
 
