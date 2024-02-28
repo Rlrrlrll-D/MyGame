@@ -184,6 +184,18 @@ public class Player extends Entity {
             attackRight2 = setup("/res/player/axe_right2", gamePanel.tileSize * 2, gamePanel.tileSize);
 
         }
+
+        if (currentWeapon instanceof Pickaxe) {
+            attackUp1 = setup("/res/player/pick_up_1", gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackUp2 = setup("/res/player/pick_up_2", gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackDown1 = setup("/res/player/pick_down_1", gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackDown2 = setup("/res/player/pick_down_2", gamePanel.tileSize, gamePanel.tileSize * 2);
+            attackLeft1 = setup("/res/player/pick_left_1", gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackLeft2 = setup("/res/player/pick_left_2", gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackRight1 = setup("/res/player/pick_right_1", gamePanel.tileSize * 2, gamePanel.tileSize);
+            attackRight2 = setup("/res/player/pick_right_2", gamePanel.tileSize * 2, gamePanel.tileSize);
+
+        }
     }
 
     public void update() {
@@ -521,7 +533,7 @@ public class Player extends Entity {
         int itemIndex = gamePanel.ui.getItemIndex(gamePanel.ui.playerSlotCol, gamePanel.ui.playerSlotRow);
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
-            if (selectedItem instanceof Sword || selectedItem instanceof Axe) {
+            if (selectedItem instanceof Sword || selectedItem instanceof Axe || selectedItem instanceof Pickaxe) {
                 currentWeapon = selectedItem;
                 attack = getAttack();
                 getAttackImage();

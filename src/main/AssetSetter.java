@@ -91,6 +91,13 @@ public class AssetSetter {
         gamePanel.objects[numMap][16].worldX = 47 * gamePanel.tileSize;
         gamePanel.objects[numMap][16].worldY = 32 * gamePanel.tileSize;
 
+
+        numMap = 2;
+        gamePanel.objects[numMap][19] = new Chest(gamePanel);
+        gamePanel.objects[numMap][19].setLoot(new Pickaxe(gamePanel));
+        gamePanel.objects[numMap][19].worldX = 45 * gamePanel.tileSize;
+        gamePanel.objects[numMap][19].worldY = 38 * gamePanel.tileSize;
+
     }
 
     public void setNPC() {

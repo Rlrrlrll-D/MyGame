@@ -29,6 +29,7 @@ public class EntityGenerator {
             case Heart.objName -> new Heart(gamePanel);
             case Rock.objName -> new Rock(gamePanel);
             case Fireball.objName -> new Fireball(gamePanel);
+            case Pickaxe.objName -> new Pickaxe(gamePanel);
             default -> null;
         };
         return obj;

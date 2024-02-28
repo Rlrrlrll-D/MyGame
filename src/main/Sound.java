@@ -39,6 +39,8 @@ public class Sound {
         sounds[20] = new File("src/res/sound/speak.wav");
         sounds[21] = new File("src/res/sound/dungeon.wav");
         sounds[22] = new File("src/res/sound/merchant.wav");
+        sounds[23] = new File("src/res/sound/chip-wall.wav");
+        sounds[24] = new File("src/res/sound/door-open.wav");
 
     }
 
