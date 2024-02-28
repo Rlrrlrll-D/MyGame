@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 import main.UtilityTool;
 import monster.Slime;
+import tile.interactive.DestructibleWall;
 import tile.interactive.DryTree;
 import tile.interactive.Trunk;
 
@@ -933,7 +934,7 @@ public class Entity {
                 }
             }
 
-            if (invincible && !(this instanceof DryTree)) {
+            if (invincible && !(this instanceof DryTree) && !(this instanceof DestructibleWall)) {
                 hpBarOn = true;
                 hpBarCounter = 0;
                 blinkEntity(graphics2D, 0.3f, 4);
@@ -946,7 +947,7 @@ public class Entity {
             graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
             shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
 
-            if (!(this instanceof DryTree) && !(this instanceof Trunk)) {
+            if (!(this instanceof DryTree) && !(this instanceof Trunk) && !(this instanceof DestructibleWall)) {
                 graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize - 6, null);
             }
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));

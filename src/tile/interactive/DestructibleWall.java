@@ -2,14 +2,14 @@ package tile.interactive;
 
 import entity.Entity;
 import main.GamePanel;
-import objects.Axe;
+import objects.Pickaxe;
 
 import java.awt.image.BufferedImage;
 
-public class DryTree extends InteractiveTile {
+public class DestructibleWall extends InteractiveTile {
     GamePanel gamePanel;
 
-    public DryTree(GamePanel gamePanel, int col, int row) {
+    public DestructibleWall(GamePanel gamePanel, int col, int row) {
         super(gamePanel, col, row);
         this.gamePanel = gamePanel;
 
@@ -17,21 +17,21 @@ public class DryTree extends InteractiveTile {
         this.worldY = gamePanel.tileSize * row;
 
 
-        down1 = setup("/res/tiles/001", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/res/tiles/013", gamePanel.tileSize, gamePanel.tileSize);
         destructible = true;
-        life = 2;
+        life = 3;
     }
 
     public boolean isCorrectItem(Entity entity) {
-        return entity.currentWeapon instanceof Axe;
+        return entity.currentWeapon instanceof Pickaxe;
     }
 
     public void playSnd() {
-        gamePanel.playSFX(15);
+        gamePanel.playSFX(23);
     }
 
     public InteractiveTile getDestroyForm() {
-        return new Trunk(gamePanel, worldX / gamePanel.tileSize, worldY / gamePanel.tileSize);
+        return super.getDestroyForm();
     }
 
     public int getParticleSize() {
