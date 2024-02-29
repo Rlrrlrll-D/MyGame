@@ -3,7 +3,6 @@ package main;
 import entity.Merchant;
 import entity.Oldman;
 import monster.Ogr;
-import monster.RedSlime;
 import monster.Slime;
 import objects.*;
 import tile.interactive.DestructibleWall;
@@ -78,7 +77,7 @@ public class AssetSetter {
 
         gamePanel.objects[numMap][13] = new Tent(gamePanel);
         gamePanel.objects[numMap][13].worldX = 25 * gamePanel.tileSize;
-        gamePanel.objects[numMap][13].worldY = 43 * gamePanel.tileSize;
+        gamePanel.objects[numMap][13].worldY = 45 * gamePanel.tileSize;
 
         gamePanel.objects[numMap][14] = new Door(gamePanel);
         gamePanel.objects[numMap][14].worldX = 47 * gamePanel.tileSize;
@@ -98,6 +97,20 @@ public class AssetSetter {
         gamePanel.objects[numMap][19].setLoot(new Pickaxe(gamePanel));
         gamePanel.objects[numMap][19].worldX = 45 * gamePanel.tileSize;
         gamePanel.objects[numMap][19].worldY = 38 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][20] = new Chest(gamePanel);
+        gamePanel.objects[numMap][20].setLoot(new PotionRed(gamePanel));
+        gamePanel.objects[numMap][20].worldX = gamePanel.tileSize;
+        gamePanel.objects[numMap][20].worldY = 22 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][21] = new Chest(gamePanel);
+        gamePanel.objects[numMap][21].setLoot(new PotionRed(gamePanel));
+        gamePanel.objects[numMap][21].worldX = 30 * gamePanel.tileSize;
+        gamePanel.objects[numMap][21].worldY = 43 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][22] = new DoorIron(gamePanel);
+        gamePanel.objects[numMap][22].worldX = 5 * gamePanel.tileSize;
+        gamePanel.objects[numMap][22].worldY = 3 * gamePanel.tileSize;
 
     }
 
@@ -123,21 +136,19 @@ public class AssetSetter {
             gamePanel.mon[numMap][i].worldX = gamePanel.tileSize * (11 + value);
             gamePanel.mon[numMap][i].worldY = gamePanel.tileSize * 18;
             value++;
-
         }
-        numMap = 1;
-        for (int i = 0; i < 6; i++) {
-            gamePanel.mon[numMap][i] = new RedSlime(gamePanel);
-            gamePanel.mon[numMap][i].worldX = gamePanel.tileSize * (11 + value);
-            gamePanel.mon[numMap][i].worldY = gamePanel.tileSize * 18;
-            value++;
-
-        }
-        numMap = 0;
         gamePanel.mon[numMap][4] = new Ogr(gamePanel);
         gamePanel.mon[numMap][4].worldX = gamePanel.tileSize * 20;
         gamePanel.mon[numMap][4].worldY = gamePanel.tileSize * 44;
 
+//        numMap = 2;
+//        for (int i = 0; i < 3; i++) {
+//            gamePanel.mon[numMap][i] = new RedSlime(gamePanel);
+//            gamePanel.mon[numMap][i].worldX = gamePanel.tileSize * (8 + value);
+//            gamePanel.mon[numMap][i].worldY = gamePanel.tileSize * 17;
+//            value++;
+//
+//        }
     }
 
     public void setInteractiveTile() {
@@ -153,5 +164,7 @@ public class AssetSetter {
                 k++;
             }
         }
+        gamePanel.interactiveTile[numMap][11] = new DestructibleWall(gamePanel, 37, 30);
+        gamePanel.interactiveTile[numMap][12] = new DestructibleWall(gamePanel, 45, 16);
     }
 }

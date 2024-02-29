@@ -24,6 +24,7 @@ public class EntityGenerator {
             case Sword.objName -> new Sword(gamePanel);
             case Tent.objName -> new Tent(gamePanel);
             case Door.objName -> new Door(gamePanel);
+            case DoorIron.objName -> new DoorIron(gamePanel);
             case Chest.objName -> new Chest(gamePanel);
             case CoinBronze.objName -> new CoinBronze(gamePanel);
             case Heart.objName -> new Heart(gamePanel);
