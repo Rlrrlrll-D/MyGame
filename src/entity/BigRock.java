@@ -46,6 +46,32 @@ public class BigRock extends Entity {
         super.setAction();
     }
 
+    public void move(String direct) {
+        this.direct = direct;
+        checkCollision();
+        if (!collisionOn) {
+            switch (direct) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + direct);
+            }
+        }
+    }
+
+    public void update() {
+    }
+
     public void speak() {
         facePlayer();
         startDialog(this, dialogSet);

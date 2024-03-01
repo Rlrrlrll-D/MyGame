@@ -490,14 +490,13 @@ public class Player extends Entity {
     }
 
     private void interactNPC(int i) {
-        if (gamePanel.keyHandler.enterPressed) {
-            if (i != 999) {
+        if (i != 999) {
+            if (gamePanel.keyHandler.enterPressed) {
                 notAttacked = true;
                 gamePanel.npc[gamePanel.currentMap][i].speak();
-
             }
+            gamePanel.npc[gamePanel.currentMap][i].move(direct);
         }
-
     }
 
     private void pickUp(int counter) {

@@ -1,5 +1,6 @@
 package main;
 
+import entity.BigRock;
 import entity.Merchant;
 import entity.Oldman;
 import monster.Ogr;
@@ -7,6 +8,7 @@ import monster.Slime;
 import objects.*;
 import tile.interactive.DestructibleWall;
 import tile.interactive.DryTree;
+import tile.interactive.MetalPlate;
 
 public class AssetSetter {
 
@@ -126,6 +128,21 @@ public class AssetSetter {
         gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 20;
         gamePanel.npc[numMap][i].worldY = gamePanel.tileSize * 47;
 
+        numMap = 2;
+        gamePanel.npc[numMap][i] = new BigRock(gamePanel);
+        gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 47;
+        gamePanel.npc[numMap][i].worldY = gamePanel.tileSize * 46;
+        i++;
+
+        gamePanel.npc[numMap][i] = new BigRock(gamePanel);
+        gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 11;
+        gamePanel.npc[numMap][i].worldY = gamePanel.tileSize * 31;
+        i++;
+
+        gamePanel.npc[numMap][i] = new BigRock(gamePanel);
+        gamePanel.npc[numMap][i].worldX = gamePanel.tileSize * 35;
+        gamePanel.npc[numMap][i].worldY = gamePanel.tileSize * 39;
+
     }
 
     public void setMonster() {
@@ -166,5 +183,9 @@ public class AssetSetter {
         }
         gamePanel.interactiveTile[numMap][11] = new DestructibleWall(gamePanel, 37, 30);
         gamePanel.interactiveTile[numMap][12] = new DestructibleWall(gamePanel, 45, 16);
+
+        gamePanel.interactiveTile[numMap][13] = new MetalPlate(gamePanel, 2, 37);
+        gamePanel.interactiveTile[numMap][14] = new MetalPlate(gamePanel, 38, 43);
+        gamePanel.interactiveTile[numMap][15] = new MetalPlate(gamePanel, 48, 20);
     }
 }

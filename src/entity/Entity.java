@@ -466,6 +466,10 @@ public class Entity {
         offBalanceTime();
     }
 
+    public void move(String direct) {
+
+    }
+
     private void offBalanceTime() {
         if (offBalance) {
             offBalanceCounter++;
