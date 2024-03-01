@@ -1,11 +1,16 @@
 package entity;
 
 import main.GamePanel;
+import objects.DoorIron;
+import tile.interactive.InteractiveTile;
+import tile.interactive.MetalPlate;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class BigRock extends Entity {
     public static final String npcName = "BigRock";
+
     public BigRock(GamePanel gamePanel) {
         super(gamePanel);
         name = npcName;
@@ -66,6 +71,7 @@ public class BigRock extends Entity {
                     throw new IllegalStateException("Unexpected value: " + direct);
             }
         }
+        detectPlate();
     }
 
     public void update() {
@@ -79,4 +85,56 @@ public class BigRock extends Entity {
             dialogSet--;
         }
     }
+
+    public void detectPlate() {
+        ArrayList<InteractiveTile> plateList = new ArrayList<>();
+        ArrayList<Entity> rockList = new ArrayList<>();
+
+        for (int i = 0; i < gamePanel.interactiveTile[1].length; i++) {
+            if (gamePanel.interactiveTile[gamePanel.currentMap][i] != null
+                    && gamePanel.interactiveTile[gamePanel.currentMap][i].name != null
+                    && gamePanel.interactiveTile[gamePanel.currentMap][i].name.equals(MetalPlate.itName)) {
+                plateList.add(gamePanel.interactiveTile[gamePanel.currentMap][i]);
+            }
+        }
+        for (int i = 0; i < gamePanel.npc[1].length; i++) {
+            if (gamePanel.npc[gamePanel.currentMap][i] != null
+                    && gamePanel.npc[gamePanel.currentMap][i].name.equals(BigRock.npcName)) {
+                rockList.add(gamePanel.npc[gamePanel.currentMap][i]);
+            }
+        }
+
+        int count = 0;
+
+        for (InteractiveTile interactiveTile : plateList) {
+            int xDistance = Math.abs(worldX - interactiveTile.worldX);
+            int yDistance = Math.abs(worldY - interactiveTile.worldY);
+            int distance = Math.max(xDistance, yDistance);
+
+            if (distance < 8) {
+                if (linkedEntity == null) {
+                    linkedEntity = interactiveTile;
+                    gamePanel.playSFX(2);
+                }
+            } else {
+                if (linkedEntity == interactiveTile) {
+                    linkedEntity = null;
+                }
+            }
+        }
+        for (Entity entity : rockList) {
+            if (entity.linkedEntity != null) {
+                count++;
+            }
+        }
+        if (count == rockList.size()) {
+            for (int i = 0; i < gamePanel.objects[1].length; i++) {
+                if (gamePanel.objects[gamePanel.currentMap][i] != null && gamePanel.objects[gamePanel.currentMap][i].name.equals(DoorIron.objName)) {
+                    gamePanel.objects[gamePanel.currentMap][i] = null;
+                    gamePanel.playSFX(24);
+                }
+            }
+        }
+    }
 }
+

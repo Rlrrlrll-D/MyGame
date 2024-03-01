@@ -96,6 +96,7 @@ public class Entity {
     public String name;
     public boolean collision;
     public Entity attacker;
+    public Entity linkedEntity;
     public String knockBackDirect;
     public boolean guarding;
     public boolean transparent;
