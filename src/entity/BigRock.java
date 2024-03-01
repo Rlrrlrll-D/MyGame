@@ -6,7 +6,6 @@ import java.awt.*;
 
 public class BigRock extends Entity {
     public static final String npcName = "BigRock";
-
     public BigRock(GamePanel gamePanel) {
         super(gamePanel);
         name = npcName;

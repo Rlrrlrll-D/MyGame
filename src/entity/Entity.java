@@ -466,7 +466,7 @@ public class Entity {
         offBalanceTime();
     }
 
-    public void move(String direct) {
+    protected void move(String direct) {
 
     }
 
