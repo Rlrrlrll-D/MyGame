@@ -308,7 +308,6 @@ public class Player extends Entity {
         checkLife();
         checkMana();
         checkGameOver();
-        System.out.println(this.speed);
     }
 
     private void checkGameOver() {

@@ -18,3 +18,5 @@ false
 false
 009.png
 false
+010.png
+true

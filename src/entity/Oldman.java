@@ -87,9 +87,9 @@ public class Oldman extends Entity {
         if (dialogues[dialogSet][0] == null) {
             dialogSet--;
         }
-//        if (gamePanel.player.life<gamePanel.player.maxLife/3){
-//            dialogSet = 1;
-//        }
-        //  onPath = true;
+        if (gamePanel.player.life < gamePanel.player.maxLife / 3) {
+            dialogSet = 1;
+        }
+        onPath = true;
     }
 }
