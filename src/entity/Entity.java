@@ -471,7 +471,7 @@ public class Entity {
 
     }
 
-    private void offBalanceTime() {
+    protected void offBalanceTime() {
         if (offBalance) {
             offBalanceCounter++;
             if (offBalanceCounter > 60) {
@@ -555,9 +555,9 @@ public class Entity {
         }
     }
 
-    public void getRandomDirection() {
+    public void getRandomDirection(int interval) {
         actionCounter++;
-        if (actionCounter == 120) {
+        if (actionCounter == interval) {
             Random random = new Random();
             int i = random.nextInt(100) + 1;
             if (i <= 25) {

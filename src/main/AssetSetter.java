@@ -3,6 +3,7 @@ package main;
 import entity.BigRock;
 import entity.Merchant;
 import entity.Oldman;
+import monster.Bat;
 import monster.Ogr;
 import monster.Slime;
 import objects.*;
@@ -158,7 +159,7 @@ public class AssetSetter {
         gamePanel.mon[numMap][4].worldX = gamePanel.tileSize * 20;
         gamePanel.mon[numMap][4].worldY = gamePanel.tileSize * 44;
 
-//        numMap = 2;
+        numMap = 2;
 //        for (int i = 0; i < 3; i++) {
 //            gamePanel.mon[numMap][i] = new RedSlime(gamePanel);
 //            gamePanel.mon[numMap][i].worldX = gamePanel.tileSize * (8 + value);
@@ -166,6 +167,14 @@ public class AssetSetter {
 //            value++;
 //
 //        }
+        gamePanel.mon[numMap][4] = new Bat(gamePanel);
+        gamePanel.mon[numMap][4].worldX = gamePanel.tileSize * 44;
+        gamePanel.mon[numMap][4].worldY = gamePanel.tileSize * 41;
+
+        gamePanel.mon[numMap][5] = new Bat(gamePanel);
+        gamePanel.mon[numMap][5].worldX = gamePanel.tileSize * 38;
+        gamePanel.mon[numMap][5].worldY = gamePanel.tileSize * 6;
+
     }
 
     public void setInteractiveTile() {

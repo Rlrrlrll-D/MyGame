@@ -71,7 +71,7 @@ public class Ogr extends Monster {
             searchPath(getGoalCol(gamePanel.player), getGoalRow(gamePanel.player));
         } else {
             checkStartNotChasing(gamePanel.player, 5, 100);
-            getRandomDirection();
+            getRandomDirection(150);
         }
         if (!isAttack) {
             checkAttackOrNot(30, gamePanel.tileSize * 4, gamePanel.tileSize);

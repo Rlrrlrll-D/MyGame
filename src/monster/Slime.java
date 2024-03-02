@@ -58,7 +58,7 @@ public class Slime extends Monster {
 
         } else {
             checkStartNotChasing(gamePanel.player, 5, 100);
-            getRandomDirection();
+            getRandomDirection(140);
         }
     }
 

@@ -59,7 +59,7 @@ public class RedSlime extends Monster {
 
         } else {
             checkStartNotChasing(gamePanel.player, 5, 100);
-            getRandomDirection();
+            getRandomDirection(120);
         }
     }
 
