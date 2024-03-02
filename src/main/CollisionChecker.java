@@ -75,6 +75,11 @@ public class CollisionChecker {
 
         int index = 999;
 
+        String direction = entity.direct;
+        if (entity.escapeKnock) {
+            direction = entity.knockBackDirect;
+        }
+
         for (int i = 0; i < gamePanel.objects[1].length; i++) {
 
             if (gamePanel.objects[gamePanel.currentMap][i] != null) {
@@ -84,7 +89,7 @@ public class CollisionChecker {
                 gamePanel.objects[gamePanel.currentMap][i].solidArea.x = gamePanel.objects[gamePanel.currentMap][i].worldX + gamePanel.objects[gamePanel.currentMap][i].solidArea.x;
                 gamePanel.objects[gamePanel.currentMap][i].solidArea.y = gamePanel.objects[gamePanel.currentMap][i].worldY + gamePanel.objects[gamePanel.currentMap][i].solidArea.y;
 
-                switch (entity.direct) {
+                switch (direction) {
                     case "up", "stay_up":
                         entity.solidArea.y -= entity.speed;
                         break;

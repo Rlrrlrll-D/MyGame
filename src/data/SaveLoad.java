@@ -104,7 +104,7 @@ public class SaveLoad {
                     gamePanel.objects[i][j].worldX = dataStorage.objWorldX[i][j];
                     gamePanel.objects[i][j].worldY = dataStorage.objWorldY[i][j];
                     if (dataStorage.lootNames[i][j] != null) {
-                        gamePanel.objects[i][j].loot = gamePanel.entityGenerator.getObj(dataStorage.lootNames[i][j]);
+                        gamePanel.objects[i][j].setLoot(gamePanel.entityGenerator.getObj(dataStorage.lootNames[i][j]));
                     }
                     gamePanel.objects[i][j].opened = dataStorage.objOpened[i][j];
                     if (gamePanel.objects[i][j].opened) {
