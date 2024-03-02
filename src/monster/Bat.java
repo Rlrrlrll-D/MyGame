@@ -58,64 +58,65 @@ public class Bat extends Entity {
             getRandomDirection(15);
         }
     }
-//    public void update() {
-//        if (escapeKnock) {
-//            checkCollision();
-//            if (collisionOn) {
-//                knockCounter = 0;
-//                escapeKnock = false;
-//                speed = defaultSpeed;
-//            } else {
-//                switch (knockBackDirect) {
-//                    case "up", "stay_up":
-//                        worldY -= speed;
-//                        break;
-//                    case "down", "stay":
-//                        worldY += speed;
-//                        break;
-//                    case "left", "stay_left":
-//                        worldX -= speed;
-//                        break;
-//                    case "right", "stay_right":
-//                        worldX += speed;
-//                        break;
-//                    default:
-//                        throw new IllegalStateException("Unexpected value: " + direct);
-//                }
-//            }
-//            knockTime(10);
-//
-//        } else if (isAttack) {
-//            attack();
-//        } else {
-//            setAction();
-//            checkCollision();
-//            if (!collisionOn) {
-//
-//                switch (direct) {
-//
-//                    case "up":
-//                        worldY -= speed;
-//                        break;
-//                    case "down":
-//                        worldY += speed;
-//                        break;
-//                    case "left":
-//                        worldX -= speed;
-//                        break;
-//                    case "right":
-//                        worldX += speed;
-//                        break;
-//                    default:
-//                        throw new IllegalStateException("Unexpected value: " + direct);
-//                }
-//            }
-//            spriteImageChange(2);
-//        }
-//        invincible(40);
-//        shotCount();
-//        offBalanceTime();
-//    }
+
+    public void update() {
+        if (escapeKnock) {
+            checkCollision();
+            if (collisionOn) {
+                knockCounter = 0;
+                escapeKnock = false;
+                speed = defaultSpeed;
+            } else {
+                switch (knockBackDirect) {
+                    case "up", "stay_up":
+                        worldY -= speed;
+                        break;
+                    case "down", "stay":
+                        worldY += speed;
+                        break;
+                    case "left", "stay_left":
+                        worldX -= speed;
+                        break;
+                    case "right", "stay_right":
+                        worldX += speed;
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + direct);
+                }
+            }
+            knockTime(10);
+
+        } else if (isAttack) {
+            attack();
+        } else {
+            setAction();
+            checkCollision();
+            if (!collisionOn) {
+
+                switch (direct) {
+
+                    case "up":
+                        worldY -= speed;
+                        break;
+                    case "down":
+                        worldY += speed;
+                        break;
+                    case "left":
+                        worldX -= speed;
+                        break;
+                    case "right":
+                        worldX += speed;
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + direct);
+                }
+            }
+            spriteImageChange(4);
+        }
+        invincible(40);
+        shotCount();
+        offBalanceTime();
+    }
 
     public void damageReaction() {
         actionCounter = 0;
