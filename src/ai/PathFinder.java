@@ -32,7 +32,7 @@ public class PathFinder {
                 row++;
             }
         }
-    }
+    }  
 
     public void resetNode() {
         int col = 0;

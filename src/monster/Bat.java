@@ -1,6 +1,6 @@
 package monster;
 
-import entity.Entity;
+import entity.Monster;
 import main.GamePanel;
 import objects.CoinBronze;
 import objects.Heart;
@@ -8,7 +8,7 @@ import objects.ManaCrystal;
 
 import java.util.Random;
 
-public class Bat extends Entity {
+public class Bat extends Monster {
     GamePanel gamePanel;
 
     public Bat(GamePanel gamePanel) {
@@ -19,7 +19,7 @@ public class Bat extends Entity {
         speed = defaultSpeed;
         maxLife = 7;
         life = maxLife;
-        attack = 7;
+        attack = 6;
         defence = 0;
         exp = 7;
 
@@ -114,8 +114,6 @@ public class Bat extends Entity {
             spriteImageChange(4);
         }
         invincible(40);
-        shotCount();
-        offBalanceTime();
     }
 
     public void damageReaction() {

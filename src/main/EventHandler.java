@@ -44,19 +44,19 @@ public class EventHandler {
 
         if (canTouchEvent) {
 
-            if (hit(0, 7, 44, "down")) {
+            if (hit(0, 7, 43, "down")) {
                 damagePit();
-            } else if (hit(0, 9, 44, "down")) {
+            } else if (hit(0, 9, 43, "down")) {
                 damagePit();
-            } else if (hit(0, 14, 44, "any")) {
+            } else if (hit(0, 14, 43, "any")) {
                 teleport(1, 14, 44, gamePanel.indoor);
             } else if (hit(1, 14, 44, "any")) {
-                teleport(0, 14, 44, gamePanel.outside);
+                teleport(0, 14, 43, gamePanel.outside);
 
-            } else if (hit(0, 4, 43, "any")) {
+            } else if (hit(0, 4, 42, "any")) {
                 teleport(2, 2, 47, gamePanel.dungeon);
             } else if (hit(2, 2, 47, "any")) {
-                teleport(0, 4, 43, gamePanel.outside);
+                teleport(0, 4, 42, gamePanel.outside);
 
             } else if (hit(2, 3, 2, "any")) {
                 teleport(3, 24, 45, gamePanel.dungeon);

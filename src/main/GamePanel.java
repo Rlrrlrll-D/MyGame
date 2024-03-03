@@ -1,6 +1,5 @@
 package main;
 
-
 import ai.PathFinder;
 import data.SaveLoad;
 import entity.Entity;
