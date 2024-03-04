@@ -34,7 +34,7 @@ public class Chest extends Obstacle {
     public void setDialogue() {
         dialogues[0][0] = "You open the chest and find a " + loot.name + "\n...But you cannot carry and more!";
         dialogues[1][0] = "You open the chest and find a " + loot.name + "\nYou obtain the " + loot.name + "!";
-        dialogues[2][0] = "It's empty";
+        dialogues[2][0] = "It's empty.";
     }
 
     public void interact() {
