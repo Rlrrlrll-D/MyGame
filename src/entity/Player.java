@@ -555,6 +555,7 @@ public class Player extends Entity {
                     } else {
                         inventory.remove(itemIndex);
                     }
+
                 }
             }
         }
