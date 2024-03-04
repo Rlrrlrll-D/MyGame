@@ -58,7 +58,6 @@ public class Bat extends Monster {
             getRandomDirection(15);
         }
     }
-
     public void update() {
         if (escapeKnock) {
             checkCollision();
@@ -114,6 +113,8 @@ public class Bat extends Monster {
             spriteImageChange(4);
         }
         invincible(40);
+//        shotCount();
+//        offBalanceTime();
     }
 
     public void damageReaction() {
