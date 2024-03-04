@@ -7,6 +7,8 @@ import tile.interactive.MetalPlate;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class BigRock extends Entity {
     public static final String npcName = "BigRock";
@@ -99,30 +101,21 @@ public class BigRock extends Entity {
     }
 
     public void detectPlate() {
-        ArrayList<InteractiveTile> plateList = new ArrayList<>();
-        ArrayList<Entity> rockList = new ArrayList<>();
+        ArrayList<InteractiveTile> plateList;
+        ArrayList<Entity> rockList;
 
-        for (int i = 0; i < gamePanel.interactiveTile[1].length; i++) {
-            if (gamePanel.interactiveTile[gamePanel.currentMap][i] != null
-                    && gamePanel.interactiveTile[gamePanel.currentMap][i].name != null
-                    && gamePanel.interactiveTile[gamePanel.currentMap][i].name.equals(MetalPlate.itName)) {
-                plateList.add(gamePanel.interactiveTile[gamePanel.currentMap][i]);
-            }
-        }
-        for (int i = 0; i < gamePanel.npc[1].length; i++) {
-            if (gamePanel.npc[gamePanel.currentMap][i] != null
-                    && gamePanel.npc[gamePanel.currentMap][i].name.equals(BigRock.npcName)) {
-                rockList.add(gamePanel.npc[gamePanel.currentMap][i]);
-            }
-        }
+        plateList = IntStream.range(0, gamePanel.interactiveTile[1].length).filter(i -> gamePanel.interactiveTile[gamePanel.currentMap][i] != null
+                && gamePanel.interactiveTile[gamePanel.currentMap][i].name != null
+                && gamePanel.interactiveTile[gamePanel.currentMap][i].name.equals(MetalPlate.itName)).mapToObj(i -> gamePanel.interactiveTile[gamePanel.currentMap][i]).collect(Collectors.toCollection(ArrayList::new));
+        rockList = IntStream.range(0, gamePanel.npc[1].length).filter(i -> gamePanel.npc[gamePanel.currentMap][i] != null
+                && gamePanel.npc[gamePanel.currentMap][i].name.equals(BigRock.npcName)).mapToObj(i -> gamePanel.npc[gamePanel.currentMap][i]).collect(Collectors.toCollection(ArrayList::new));
 
-        int count = 0;
+        int count;
 
-        for (InteractiveTile interactiveTile : plateList) {
+        plateList.forEach(interactiveTile -> {
             int xDistance = Math.abs(worldX - interactiveTile.worldX);
             int yDistance = Math.abs(worldY - interactiveTile.worldY);
             int distance = Math.max(xDistance, yDistance);
-
             if (distance < 8) {
                 if (linkedEntity == null) {
                     linkedEntity = interactiveTile;
@@ -133,12 +126,8 @@ public class BigRock extends Entity {
                     linkedEntity = null;
                 }
             }
-        }
-        for (Entity entity : rockList) {
-            if (entity.linkedEntity != null) {
-                count++;
-            }
-        }
+        });
+        count = (int) rockList.stream().filter(entity -> entity.linkedEntity != null).count();
         if (count == rockList.size()) {
             for (int i = 0; i < gamePanel.objects[1].length; i++) {
                 if (gamePanel.objects[gamePanel.currentMap][i] != null && gamePanel.objects[gamePanel.currentMap][i].name.equals(DoorIron.objName)) {
