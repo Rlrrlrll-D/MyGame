@@ -9,6 +9,7 @@ public class Oldman extends Entity {
 
     public Oldman(GamePanel gamePanel) {
         super(gamePanel);
+        name = "Oldman";
         direct = "down";
         speed = 1;
         solidArea = new Rectangle();

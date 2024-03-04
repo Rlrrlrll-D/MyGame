@@ -444,16 +444,16 @@ public class Entity {
 
                 switch (direct) {
 
-                    case "up":
+                    case "up", "stay_up":
                         worldY -= speed;
                         break;
-                    case "down":
+                    case "down", "stay":
                         worldY += speed;
                         break;
-                    case "left":
+                    case "left", "stay_left":
                         worldX -= speed;
                         break;
-                    case "right":
+                    case "right", "stay_right":
                         worldX += speed;
                         break;
                     default:

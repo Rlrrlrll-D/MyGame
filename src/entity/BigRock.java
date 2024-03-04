@@ -40,6 +40,18 @@ public class BigRock extends Entity {
         left2 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
         right1 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
         right2 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay1 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay2 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay3 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay_up1 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay_up2 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay_up3 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay_left1 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay_left2 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay_left3 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay_right1 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay_right2 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
+        stay_right3 = setup("/res/npc/bigrock", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     private void setDialogue() {
@@ -55,16 +67,16 @@ public class BigRock extends Entity {
         checkCollision();
         if (!collisionOn) {
             switch (direct) {
-                case "up":
+                case "up", "stay_up":
                     worldY -= speed;
                     break;
-                case "down":
+                case "down", "stay":
                     worldY += speed;
                     break;
-                case "left":
+                case "left", "stay_left":
                     worldX -= speed;
                     break;
-                case "right":
+                case "right", "stay_right":
                     worldX += speed;
                     break;
                 default:
