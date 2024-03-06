@@ -228,9 +228,8 @@ public class GamePanel extends JPanel implements Runnable {
         } else {
             tileManager.drawing(graphics2D);
             for (int i = 0; i < interactiveTile[1].length; i++) {
-                if (interactiveTile[currentMap][i] != null) {
+                if (interactiveTile[currentMap][i] != null)
                     interactiveTile[currentMap][i].drawing(graphics2D);
-                }
             }
 
             entityArrayList.add(player);

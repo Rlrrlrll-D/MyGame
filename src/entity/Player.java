@@ -816,7 +816,7 @@ public class Player extends Entity {
             blinkEntity(graphics2D, 0.04f, 5);
         }
 
-        shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
+       // shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
         graphics2D.drawImage(shadow, screenX, screenY - 6 + gamePanel.tileSize, null);
         graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
         graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));

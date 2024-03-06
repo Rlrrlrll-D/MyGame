@@ -40,16 +40,16 @@ public class TileManager {
         inputStream = getClass().getResourceAsStream("/maps/sample.txt");
 
         assert inputStream != null;
-        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 
-        String line2 = bufferedReader.readLine();
+        String line2 = reader.readLine();
         String[] maxTile = line2.split(" ");
 
         GamePanel.maxWorldCol = maxTile.length;
         GamePanel.maxWorldRow = maxTile.length;
         mapTileNum = new int[GamePanel.maxMap][GamePanel.maxWorldCol][GamePanel.maxWorldRow];
 
-        bufferedReader.close();
+        reader.close();
 
         loadMap("/maps/world01.txt", 0);
         loadMap("/maps/world02.txt", 1);
@@ -84,9 +84,9 @@ public class TileManager {
     }
 
     public void loadMap(String filePath, int map) throws Exception {
-        InputStream inputStream = getClass().getResourceAsStream(filePath);
+        var inputStream = getClass().getResourceAsStream(filePath);
         assert inputStream != null;
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        var bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         for (int row = 0; row < GamePanel.maxWorldRow; row++) {
             String string = bufferedReader.readLine();
             for (int col = 0; col < GamePanel.maxWorldCol; col++) {
@@ -101,7 +101,7 @@ public class TileManager {
 
     public void drawing(Graphics2D graphics2D) {
 
-        for (int worldRow = 0; worldRow < GamePanel.maxWorldRow; worldRow++) {
+        for (int worldRow = 0; worldRow < GamePanel.maxWorldRow; worldRow++)
             for (int worldCol = 0; worldCol < GamePanel.maxWorldCol; worldCol++) {
                 int tNum = mapTileNum[gamePanel.currentMap][worldCol][worldRow];
                 int wrdX = worldCol * gamePanel.tileSize;
@@ -116,6 +116,5 @@ public class TileManager {
 
                 }
             }
-        }
     }
 }
