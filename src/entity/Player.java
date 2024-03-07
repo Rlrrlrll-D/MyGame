@@ -307,7 +307,7 @@ public class Player extends Entity {
         shotCount();
         checkLife();
         checkMana();
-        checkGameOver();
+        //checkGameOver();
     }
 
     private void checkGameOver() {
@@ -379,58 +379,46 @@ public class Player extends Entity {
 
     private void checkDirect() {
         switch (direct) {
-            case "up", "stay_up":
+            case "up", "stay_up" -> {
                 worldY -= speed;
                 stayDirect = "up";
-                break;
-            case "down", "stay":
+            }
+            case "down", "stay" -> {
                 worldY += speed;
                 stayDirect = "down";
-                break;
-            case "left", "stay_left":
+            }
+            case "left", "stay_left" -> {
                 worldX -= speed;
                 stayDirect = "left";
-                break;
-            case "right", "stay_right":
+            }
+            case "right", "stay_right" -> {
                 worldX += speed;
                 stayDirect = "right";
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + direct);
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + direct);
         }
     }
 
     private void checkStayDirect() {
         switch (stayDirect) {
-            case "begin", "down":
-                direct = "stay";
-                break;
-            case "up":
-                direct = "stay_up";
-                break;
-            case "left":
-                direct = "stay_left";
-                break;
-            case "right":
-                direct = "stay_right";
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + stayDirect);
+            case "begin", "down" -> direct = "stay";
+            case "up" -> direct = "stay_up";
+            case "left" -> direct = "stay_left";
+            case "right" -> direct = "stay_right";
+            default -> throw new IllegalStateException("Unexpected value: " + stayDirect);
         }
     }
 
     private void touchMonster(int i) {
-        if (i != 999) {
-            if (!invincible && !gamePanel.mon[gamePanel.currentMap][i].isDying) {
-                gamePanel.playSFX(8);
-                int damage = gamePanel.mon[gamePanel.currentMap][i].attack - defence;
-                if (damage < 1) {
-                    damage = 1;
-                }
-                life -= damage;
-                invincible = true;
-                transparent = true;
+        if (i != 999 && !invincible && !gamePanel.mon[gamePanel.currentMap][i].isDying) {
+            gamePanel.playSFX(8);
+            int damage = gamePanel.mon[gamePanel.currentMap][i].attack - defence;
+            if (damage < 1) {
+                damage = 1;
             }
+            life -= damage;
+            invincible = true;
+            transparent = true;
         }
     }
 
@@ -528,7 +516,7 @@ public class Player extends Entity {
     }
 
     public void selectItem() {
-        int itemIndex = gamePanel.ui.getItemIndex(gamePanel.ui.playerSlotCol, gamePanel.ui.playerSlotRow);
+        var itemIndex = gamePanel.ui.getItemIndex(gamePanel.ui.playerSlotCol, gamePanel.ui.playerSlotRow);
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
             if (selectedItem instanceof Sword || selectedItem instanceof Axe || selectedItem instanceof Pickaxe) {
@@ -548,14 +536,11 @@ public class Player extends Entity {
                 }
                 lightUp = true;
             }
-            if (selectedItem instanceof Consumable) {
-                if (selectedItem.use(this)) {
-                    if (selectedItem.amount > 1) {
-                        selectedItem.amount--;
-                    } else {
-                        inventory.remove(itemIndex);
-                    }
-
+            if (selectedItem instanceof Consumable && selectedItem.use(this)) {
+                if (selectedItem.amount > 1) {
+                    selectedItem.amount--;
+                } else {
+                    inventory.remove(itemIndex);
                 }
             }
         }
