@@ -213,20 +213,11 @@ public class Player extends Entity {
                 speed = defaultSpeed;
             } else {
                 switch (knockBackDirect) {
-                    case "up", "stay_up":
-                        worldY -= speed;
-                        break;
-                    case "down", "stay":
-                        worldY += speed;
-                        break;
-                    case "left", "stay_left":
-                        worldX -= speed;
-                        break;
-                    case "right", "stay_right":
-                        worldX += speed;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + direct);
+                    case "up", "stay_up" -> worldY -= speed;
+                    case "down", "stay" -> worldY += speed;
+                    case "left", "stay_left" -> worldX -= speed;
+                    case "right", "stay_right" -> worldX += speed;
+                    default -> throw new IllegalStateException("Unexpected value: " + direct);
                 }
             }
             knockTime(15);
@@ -307,7 +298,7 @@ public class Player extends Entity {
         shotCount();
         checkLife();
         checkMana();
-        //checkGameOver();
+        checkGameOver();
     }
 
     private void checkGameOver() {

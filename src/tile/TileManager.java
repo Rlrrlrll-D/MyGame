@@ -101,7 +101,7 @@ public class TileManager {
 
     public void drawing(Graphics2D graphics2D) {
 
-        for (int worldRow = 0; worldRow < GamePanel.maxWorldRow; worldRow++)
+        for (int worldRow = 0; worldRow < GamePanel.maxWorldRow; worldRow++){
             for (int worldCol = 0; worldCol < GamePanel.maxWorldCol; worldCol++) {
                 int tNum = mapTileNum[gamePanel.currentMap][worldCol][worldRow];
                 int wrdX = worldCol * gamePanel.tileSize;
@@ -116,5 +116,6 @@ public class TileManager {
 
                 }
             }
+        }
     }
 }

@@ -119,7 +119,7 @@ public class Lighting {
 
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
-        String situation = switch (dayState) {
+        var situation = switch (dayState) {
             case day -> "Day";
             case dusk -> "Dusk";
             case night -> "Night";
