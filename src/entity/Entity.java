@@ -5,7 +5,6 @@ import main.UtilityTool;
 import monster.Slime;
 import tile.interactive.DestructibleWall;
 import tile.interactive.DryTree;
-import tile.interactive.Trunk;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -705,9 +704,9 @@ public class Entity {
     public void drawing(Graphics2D graphics2D) {
         var scrX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
         var scrY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
-        if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
+        if (worldX + gamePanel.tileSize * 5 > gamePanel.player.worldX - gamePanel.player.screenX &&
                 worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
-                worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
+                worldY + gamePanel.tileSize * 5 > gamePanel.player.worldY - gamePanel.player.screenY &&
                 worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
             var tempScreenX = scrX;
             var tempScreenY = scrY;
@@ -922,7 +921,7 @@ public class Entity {
             graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
             //shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
 
-            if (!(this instanceof DryTree) && !(this instanceof Trunk) && !(this instanceof DestructibleWall)) {
+            if (this instanceof Monster) {
                 graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize - 6, null);
             }
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
