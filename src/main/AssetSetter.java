@@ -5,6 +5,7 @@ import entity.Merchant;
 import entity.Oldman;
 import monster.Bat;
 import monster.Ogr;
+import monster.SkeletonZ;
 import monster.Slime;
 import objects.*;
 import tile.interactive.DestructibleWall;
@@ -175,6 +176,11 @@ public class AssetSetter {
         gamePanel.mon[numMap][5].worldX = gamePanel.tileSize * 38;
         gamePanel.mon[numMap][5].worldY = gamePanel.tileSize * 6;
 
+
+        numMap = 3;
+        gamePanel.mon[numMap][0] = new SkeletonZ(gamePanel);
+        gamePanel.mon[numMap][0].worldX = gamePanel.tileSize * 23;
+        gamePanel.mon[numMap][0].worldY = gamePanel.tileSize * 16;
     }
 
     public void setInteractiveTile() {

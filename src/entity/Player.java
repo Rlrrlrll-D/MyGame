@@ -298,7 +298,10 @@ public class Player extends Entity {
         shotCount();
         checkLife();
         checkMana();
-        checkGameOver();
+        if (!keyHandler.modeOfGod) {
+            checkGameOver();
+        }
+
     }
 
     private void checkGameOver() {
@@ -401,15 +404,17 @@ public class Player extends Entity {
     }
 
     private void touchMonster(int i) {
-        if (i != 999 && !invincible && !gamePanel.mon[gamePanel.currentMap][i].isDying) {
-            gamePanel.playSFX(8);
-            int damage = gamePanel.mon[gamePanel.currentMap][i].attack - defence;
-            if (damage < 1) {
-                damage = 1;
+        if (i != 999) {
+            if (!invincible && !gamePanel.mon[gamePanel.currentMap][i].isDying) {
+                gamePanel.playSFX(8);
+                int damage = gamePanel.mon[gamePanel.currentMap][i].attack - defence;
+                if (damage < 1) {
+                    damage = 1;
+                }
+                life -= damage;
+                invincible = true;
+                transparent = true;
             }
-            life -= damage;
-            invincible = true;
-            transparent = true;
         }
     }
 
@@ -507,7 +512,7 @@ public class Player extends Entity {
     }
 
     public void selectItem() {
-        var itemIndex = gamePanel.ui.getItemIndex(gamePanel.ui.playerSlotCol, gamePanel.ui.playerSlotRow);
+        int itemIndex = gamePanel.ui.getItemIndex(gamePanel.ui.playerSlotCol, gamePanel.ui.playerSlotRow);
         if (itemIndex < inventory.size()) {
             Entity selectedItem = inventory.get(itemIndex);
             if (selectedItem instanceof Sword || selectedItem instanceof Axe || selectedItem instanceof Pickaxe) {
@@ -527,11 +532,14 @@ public class Player extends Entity {
                 }
                 lightUp = true;
             }
-            if (selectedItem instanceof Consumable && selectedItem.use(this)) {
-                if (selectedItem.amount > 1) {
-                    selectedItem.amount--;
-                } else {
-                    inventory.remove(itemIndex);
+            if (selectedItem instanceof Consumable) {
+                if (selectedItem.use(this)) {
+                    if (selectedItem.amount > 1) {
+                        selectedItem.amount--;
+                    } else {
+                        inventory.remove(itemIndex);
+                    }
+
                 }
             }
         }
@@ -576,7 +584,7 @@ public class Player extends Entity {
         int tempScreenY = screenY;
 
         switch (direct) {
-            case "up":
+            case "up" -> {
                 if (isAttack) {
                     tempScreenY = screenY - gamePanel.tileSize;
                     if (spriteNum == 1) {
@@ -598,9 +606,8 @@ public class Player extends Entity {
                     tempScreenY = screenY - gamePanel.tileSize;
                     image = guardUp;
                 }
-
-                break;
-            case "down":
+            }
+            case "down" -> {
                 if (isAttack) {
                     if (spriteNum == 1) {
                         image = attackDown1;
@@ -620,9 +627,8 @@ public class Player extends Entity {
                 if (guarding) {
                     image = guardDown;
                 }
-
-                break;
-            case "left":
+            }
+            case "left" -> {
                 if (isAttack) {
                     tempScreenX = screenX - gamePanel.tileSize;
                     if (spriteNum == 1) {
@@ -644,9 +650,8 @@ public class Player extends Entity {
                     tempScreenX = screenX - gamePanel.tileSize;
                     image = guardLeft;
                 }
-
-                break;
-            case "right":
+            }
+            case "right" -> {
                 if (isAttack) {
                     if (spriteNum == 1) {
                         image = attackRight1;
@@ -666,10 +671,8 @@ public class Player extends Entity {
                 if (guarding) {
                     image = guardRight;
                 }
-
-                break;
-
-            case "stay":
+            }
+            case "stay" -> {
                 if (isAttack) {
                     if (spriteNum == 1) {
                         image = attackDown1;
@@ -695,10 +698,8 @@ public class Player extends Entity {
                 if (guarding) {
                     image = guardDown;
                 }
-
-                break;
-
-            case "stay_up":
+            }
+            case "stay_up" -> {
                 if (isAttack) {
                     tempScreenY = screenY - gamePanel.tileSize;
                     if (spriteNum == 1) {
@@ -726,9 +727,8 @@ public class Player extends Entity {
                     tempScreenY = screenY - gamePanel.tileSize;
                     image = guardUp;
                 }
-
-                break;
-            case "stay_left":
+            }
+            case "stay_left" -> {
                 if (isAttack) {
                     tempScreenX = screenX - gamePanel.tileSize;
                     if (spriteNum == 1) {
@@ -756,9 +756,8 @@ public class Player extends Entity {
                     tempScreenX = screenX - gamePanel.tileSize;
                     image = guardLeft;
                 }
-
-                break;
-            case "stay_right":
+            }
+            case "stay_right" -> {
                 if (isAttack) {
                     if (spriteNum == 1) {
                         image = attackRight1;
@@ -784,15 +783,14 @@ public class Player extends Entity {
                 if (guarding) {
                     image = guardRight;
                 }
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + direct);
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + direct);
         }
         if (transparent) {
             blinkEntity(graphics2D, 0.04f, 5);
         }
 
-       // shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
+        shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
         graphics2D.drawImage(shadow, screenX, screenY - 6 + gamePanel.tileSize, null);
         graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
         graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));

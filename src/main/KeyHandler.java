@@ -9,6 +9,7 @@ public class KeyHandler implements KeyListener {
     public boolean upPressed, downPressed, leftPressed, rightPressed, enterPressed, shotKeyPressed, spacePressed;
     public boolean chkDrawTime = false;
 
+    public boolean modeOfGod;
     GamePanel gamePanel;
 
     public KeyHandler(GamePanel gamePanel) {
@@ -292,6 +293,10 @@ public class KeyHandler implements KeyListener {
 
             chkDrawTime = !chkDrawTime;
         }
+        if (value == KeyEvent.VK_G) {
+
+            modeOfGod = !modeOfGod;
+        }
         if (value == KeyEvent.VK_M) {
             musTrigger();
         }
@@ -320,6 +325,7 @@ public class KeyHandler implements KeyListener {
         if (value == KeyEvent.VK_SPACE) {
             spacePressed = true;
         }
+
     }
 
     private void titleBehavior(int value) throws IOException, ClassNotFoundException {

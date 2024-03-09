@@ -126,11 +126,11 @@ public class Entity {
     }
 
     public int getXDistance(Entity entity) {
-        return Math.abs(worldX - entity.worldX);
+        return Math.abs(getCenterX() - entity.getCenterX());
     }
 
     public int getYDistance(Entity entity) {
-        return Math.abs(worldY - entity.worldY);
+        return Math.abs(getCenterY() - entity.getCenterY());
     }
 
     public int getTileDistance(Entity entity) {
@@ -200,18 +200,10 @@ public class Entity {
 
     protected void facePlayer() {
         switch (gamePanel.player.direct) {
-            case "up", "stay_up":
-                direct = "down";
-                break;
-            case "down", "stay":
-                direct = "up";
-                break;
-            case "left", "stay_left":
-                direct = "right";
-                break;
-            case "right", "stay_right":
-                direct = "left";
-                break;
+            case "up", "stay_up" -> direct = "down";
+            case "down", "stay" -> direct = "up";
+            case "left", "stay_left" -> direct = "right";
+            case "right", "stay_right" -> direct = "left";
         }
     }
 
@@ -232,18 +224,10 @@ public class Entity {
         int nextWorldY = user.getTopY();
 
         switch (user.direct) {
-            case "up", "stay_up":
-                nextWorldY = user.getTopY() - gamePanel.player.speed;
-                break;
-            case "down", "stay":
-                nextWorldY = user.getBottomY() + gamePanel.player.speed;
-                break;
-            case "left", "stay_left":
-                nextWorldX = user.getLeftX() - gamePanel.player.speed;
-                break;
-            case "right", "stay_right":
-                nextWorldX = user.getRightX() + gamePanel.player.speed;
-                break;
+            case "up", "stay_up" -> nextWorldY = user.getTopY() - gamePanel.player.speed;
+            case "down", "stay" -> nextWorldY = user.getBottomY() + gamePanel.player.speed;
+            case "left", "stay_left" -> nextWorldX = user.getLeftX() - gamePanel.player.speed;
+            case "right", "stay_right" -> nextWorldX = user.getRightX() + gamePanel.player.speed;
         }
         int col = nextWorldX / gamePanel.tileSize;
         int row = nextWorldY / gamePanel.tileSize;
@@ -345,18 +329,10 @@ public class Entity {
             int solidAreaHeight = solidArea.height;
 
             switch (direct) {
-                case "stay_up", "up":
-                    worldY -= gamePanel.tileSize - gamePanel.tileSize / 4;
-                    break;
-                case "stay", "down":
-                    worldY += gamePanel.tileSize - gamePanel.tileSize / 4;
-                    break;
-                case "stay_left", "left":
-                    worldX -= gamePanel.tileSize - gamePanel.tileSize / 4;
-                    break;
-                case "stay_right", "right":
-                    worldX += gamePanel.tileSize - gamePanel.tileSize / 4;
-                    break;
+                case "stay_up", "up" -> worldY -= gamePanel.tileSize - gamePanel.tileSize / 4;
+                case "stay", "down" -> worldY += gamePanel.tileSize - gamePanel.tileSize / 4;
+                case "stay_left", "left" -> worldX -= gamePanel.tileSize - gamePanel.tileSize / 4;
+                case "stay_right", "right" -> worldX += gamePanel.tileSize - gamePanel.tileSize / 4;
             }
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
@@ -418,20 +394,11 @@ public class Entity {
                 speed = defaultSpeed;
             } else {
                 switch (knockBackDirect) {
-                    case "up", "stay_up":
-                        worldY -= speed;
-                        break;
-                    case "down", "stay":
-                        worldY += speed;
-                        break;
-                    case "left", "stay_left":
-                        worldX -= speed;
-                        break;
-                    case "right", "stay_right":
-                        worldX += speed;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + direct);
+                    case "up", "stay_up" -> worldY -= speed;
+                    case "down", "stay" -> worldY += speed;
+                    case "left", "stay_left" -> worldX -= speed;
+                    case "right", "stay_right" -> worldX += speed;
+                    default -> throw new IllegalStateException("Unexpected value: " + direct);
                 }
             }
             knockTime(10);
@@ -444,21 +411,11 @@ public class Entity {
             if (!collisionOn) {
 
                 switch (direct) {
-
-                    case "up", "stay_up":
-                        worldY -= speed;
-                        break;
-                    case "down", "stay":
-                        worldY += speed;
-                        break;
-                    case "left", "stay_left":
-                        worldX -= speed;
-                        break;
-                    case "right", "stay_right":
-                        worldX += speed;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + direct);
+                    case "up", "stay_up" -> worldY -= speed;
+                    case "down", "stay" -> worldY += speed;
+                    case "left", "stay_left" -> worldX -= speed;
+                    case "right", "stay_right" -> worldX += speed;
+                    default -> throw new IllegalStateException("Unexpected value: " + direct);
                 }
             }
             spriteImageChange(17);
@@ -498,34 +455,46 @@ public class Entity {
         }
     }
 
+    public int getCenterX() {
+        int centerX;
+        centerX = worldX + left1.getWidth() / 2;
+        return centerX;
+    }
+
+    public int getCenterY() {
+        int centerY;
+        centerY = worldY + up1.getHeight() / 2;
+        return centerY;
+    }
+
+
     protected void checkAttackOrNot(int rate, int straight, int horizontal) {
         boolean targetInRange = false;
         int xD = getXDistance(gamePanel.player);
         int yD = getYDistance(gamePanel.player);
 
         switch (direct) {
-            case "up":
-                if (gamePanel.player.worldY < worldY && yD < straight && xD < horizontal) {
+            case "up" -> {
+                if (gamePanel.player.getCenterY() < getCenterY() && yD < straight && xD < horizontal) {
                     targetInRange = true;
                 }
-                break;
-            case "down":
-                if (gamePanel.player.worldY > worldY && yD < straight && xD < horizontal) {
+            }
+            case "down" -> {
+                if (gamePanel.player.getCenterY() > getCenterY() && yD < straight && xD < horizontal) {
                     targetInRange = true;
                 }
-                break;
-            case "left":
-                if (gamePanel.player.worldX < worldX && xD < straight && yD < horizontal) {
+            }
+            case "left" -> {
+                if (gamePanel.player.getCenterX() < getCenterX() && xD < straight && yD < horizontal) {
                     targetInRange = true;
                 }
-                break;
-            case "right":
-                if (gamePanel.player.worldX > worldX && xD < straight && yD < horizontal) {
+            }
+            case "right" -> {
+                if (gamePanel.player.getCenterX() > getCenterX() && xD < straight && yD < horizontal) {
                     targetInRange = true;
                 }
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + direct);
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + direct);
         }
         if (targetInRange) {
             int i = new Random().nextInt(rate);
@@ -734,19 +703,19 @@ public class Entity {
     }
 
     public void drawing(Graphics2D graphics2D) {
-        int scrX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
-        int scrY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
+        var scrX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
+        var scrY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
         if (worldX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
                 worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
                 worldY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
                 worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
-            int tempScreenX = scrX;
-            int tempScreenY = scrY;
+            var tempScreenX = scrX;
+            var tempScreenY = scrY;
 
             switch (direct) {
                 case "up":
                     if (isAttack) {
-                        tempScreenY = scrY - gamePanel.tileSize;
+                        tempScreenY = scrY - up1.getHeight();
                         if (spriteNum == 1) {
                             image = attackUp1;
                         }
@@ -784,7 +753,7 @@ public class Entity {
                     break;
                 case "left":
                     if (isAttack) {
-                        tempScreenX = scrX - gamePanel.tileSize;
+                        tempScreenX = scrX - left1.getWidth();
                         if (spriteNum == 1) {
                             image = attackLeft1;
                         }
@@ -847,7 +816,7 @@ public class Entity {
 
                 case "stay_up":
                     if (isAttack) {
-                        tempScreenY = scrY - gamePanel.tileSize;
+                        tempScreenY = scrY - up1.getHeight();
                         if (spriteNum == 1) {
                             image = attackUp1;
                         }
@@ -872,7 +841,7 @@ public class Entity {
                     break;
                 case "stay_left":
                     if (isAttack) {
-                        tempScreenX = scrX - gamePanel.tileSize;
+                        tempScreenX = scrX - left1.getWidth();
                         if (spriteNum == 1) {
                             image = attackLeft1;
                         }
