@@ -865,8 +865,8 @@ public class UI {
 
     public void drawPlayerLife() {
 
-        int x = gamePanel.tileSize / 4;
-        int y = gamePanel.tileSize / 4;
+        var x = gamePanel.tileSize / 4;
+        var y = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.maxLife / 2; i++) {
             graphics2D.drawImage(heart_e, x, y, null);
@@ -894,11 +894,22 @@ public class UI {
             graphics2D.drawImage(crystal_f, x, y, null);
             x += (int) (gamePanel.tileSize / 1.3);
         }
+        y += gamePanel.tileSize + 20;
+        x = gamePanel.tileSize / 4;
+        drawGodMode(y, x);
+    }
+    private void drawGodMode(int y, int x) {
+        var txt = "GOD MODE";
+        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
+        graphics2D.setColor(new Color(12, 5, 1, 224));
+        graphics2D.drawString(txt, x + 1, y + 1);
+        graphics2D.setColor(gamePanel.keyHandler.modeOfGod ? new Color(84, 161, 18) : new Color(241, 42, 23, 255));
+            graphics2D.drawString(txt, x, y);
     }
 
     private void drawMessage() {
-        int msgX = gamePanel.tileSize;
-        int msgY = gamePanel.tileSize * 3;
+        var msgX = gamePanel.tileSize;
+        var msgY = gamePanel.tileSize * 3;
 
 
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
@@ -912,7 +923,7 @@ public class UI {
                 graphics2D.drawString(message.get(i), msgX, msgY);
 
 
-                int count = counter.get(i) + 1;
+                var count = counter.get(i) + 1;
                 counter.set(i, count);
                 msgY += 30;
                 if (counter.get(i) > 180) {
