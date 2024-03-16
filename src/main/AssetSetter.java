@@ -178,9 +178,9 @@ public class AssetSetter {
 
 
         numMap = 3;
-        gamePanel.mon[numMap][0] = new SkeletonZ(gamePanel);
-        gamePanel.mon[numMap][0].worldX = gamePanel.tileSize * 23;
-        gamePanel.mon[numMap][0].worldY = gamePanel.tileSize * 16;
+        gamePanel.mon[numMap][6] = new SkeletonZ(gamePanel);
+        gamePanel.mon[numMap][6].worldX = gamePanel.tileSize * 23;
+        gamePanel.mon[numMap][6].worldY = gamePanel.tileSize * 16;
     }
 
     public void setInteractiveTile() {
