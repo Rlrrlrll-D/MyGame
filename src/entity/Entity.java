@@ -19,6 +19,7 @@ public class Entity {
 
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
+    private final Random random = new Random();
 
     public int solidAreaDefaultX, solidAreaDefaultY;
 
@@ -100,8 +101,8 @@ public class Entity {
     public String knockBackDirect;
     public boolean guarding;
     public boolean transparent;
-    GamePanel gamePanel;
     public String[][] dialogues = new String[20][20];
+    GamePanel gamePanel;
 
 
     public Entity(GamePanel gamePanel) {
@@ -335,6 +336,7 @@ public class Entity {
             }
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
+            System.out.println(up1.getHeight()+" "+up1.getWidth()+" "+left1.getHeight()+" "+left1.getWidth());
             if (this instanceof Monster) {
                 if (gamePanel.checker.checkPlayer(this)) {
                     damagePlayer(attack);
@@ -496,8 +498,8 @@ public class Entity {
             default -> throw new IllegalStateException("Unexpected value: " + direct);
         }
         if (targetInRange) {
-            int i = new Random().nextInt(rate);
-            if (i == 0) {
+            int i=random.nextInt(rate);
+            if (i== 0) {
                 isAttack = true;
                 spriteNum = 1;
                 counter = 0;
@@ -508,7 +510,7 @@ public class Entity {
 
     public void checkStopNotChasing(Entity entity, int distance, int rate) {
         if (getTileDistance(entity) > distance) {
-            int i = new Random().nextInt(rate);
+            int i = random.nextInt(rate);
             if (i == 0) {
                 onPath = false;
             }
@@ -517,7 +519,7 @@ public class Entity {
 
     public void checkStartNotChasing(Entity entity, int distance, int rate) {
         if (getTileDistance(entity) < distance) {
-            int i = new Random().nextInt(rate);
+            int i = random.nextInt(rate);
             if (i == 0) {
                 onPath = true;
             }
@@ -527,7 +529,7 @@ public class Entity {
     public void getRandomDirection(int interval) {
         actionCounter++;
         if (actionCounter == interval) {
-            Random random = new Random();
+
             int i = random.nextInt(100) + 1;
             if (i <= 25) {
                 direct = "up";
@@ -546,7 +548,7 @@ public class Entity {
     }
 
     public void checkShootOrNot(int rate, int shotInterval) {
-        int i = new Random().nextInt(rate);
+        int i = random.nextInt(rate);
         if (i == 0 && !projectile.isAlive && shotAvailableCounter == shotInterval) {
             projectile.set(worldX + gamePanel.tileSize / 4, worldY + gamePanel.tileSize / 4, direct, true, this);
             for (int j = 0; j < gamePanel.projectile[1].length; j++) {
@@ -563,7 +565,6 @@ public class Entity {
         if (!gamePanel.player.invincible) {
             int damage = attack - gamePanel.player.defence;
             if (gamePanel.player.guarding && getOppositeDirect()) {
-                System.out.println(gamePanel.player.guardCounter + " " + counter);
                 if (gamePanel.player.guardCounter < 10) {
                     damage = 0;
                     gamePanel.playSFX(19);
@@ -712,7 +713,7 @@ public class Entity {
             var tempScreenY = scrY;
 
             switch (direct) {
-                case "up":
+                case "up" -> {
                     if (isAttack) {
                         tempScreenY = scrY - up1.getHeight();
                         if (spriteNum == 1) {
@@ -730,9 +731,8 @@ public class Entity {
                             image = up2;
                         }
                     }
-
-                    break;
-                case "down":
+                }
+                case "down" -> {
                     if (isAttack) {
                         if (spriteNum == 1) {
                             image = attackDown1;
@@ -749,8 +749,8 @@ public class Entity {
                             image = down2;
                         }
                     }
-                    break;
-                case "left":
+                }
+                case "left" -> {
                     if (isAttack) {
                         tempScreenX = scrX - left1.getWidth();
                         if (spriteNum == 1) {
@@ -768,8 +768,8 @@ public class Entity {
                             image = left2;
                         }
                     }
-                    break;
-                case "right":
+                }
+                case "right" -> {
                     if (isAttack) {
                         if (spriteNum == 1) {
                             image = attackRight1;
@@ -786,9 +786,8 @@ public class Entity {
                             image = right2;
                         }
                     }
-                    break;
-
-                case "stay":
+                }
+                case "stay" -> {
                     if (isAttack) {
                         if (spriteNum == 1) {
                             image = attackDown1;
@@ -811,9 +810,8 @@ public class Entity {
                             image = stay3;
                         }
                     }
-                    break;
-
-                case "stay_up":
+                }
+                case "stay_up" -> {
                     if (isAttack) {
                         tempScreenY = scrY - up1.getHeight();
                         if (spriteNum == 1) {
@@ -837,8 +835,8 @@ public class Entity {
                             image = stay_up3;
                         }
                     }
-                    break;
-                case "stay_left":
+                }
+                case "stay_left" -> {
                     if (isAttack) {
                         tempScreenX = scrX - left1.getWidth();
                         if (spriteNum == 1) {
@@ -862,8 +860,8 @@ public class Entity {
                             image = stay_left3;
                         }
                     }
-                    break;
-                case "stay_right":
+                }
+                case "stay_right" -> {
                     if (isAttack) {
                         if (spriteNum == 1) {
                             image = attackRight1;
@@ -886,9 +884,8 @@ public class Entity {
                             image = stay_right3;
                         }
                     }
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + direct);
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + direct);
             }
 
             if (this instanceof Monster && hpBarOn) {
@@ -920,7 +917,7 @@ public class Entity {
 
             graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
             //shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
-
+graphics2D.drawRect(scrX, scrY, attackArea.width, attackArea.height);
             if (this instanceof Monster) {
                 graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize - 6, null);
             }
