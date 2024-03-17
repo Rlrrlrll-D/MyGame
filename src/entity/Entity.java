@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.UtilityTool;
+import monster.SkeletonZ;
 import monster.Slime;
 import tile.interactive.DestructibleWall;
 import tile.interactive.DryTree;
@@ -16,11 +17,9 @@ import java.util.Random;
 
 public class Entity {
     public final int maxInventorySize = 20;
-
+    private final Random random = new Random();
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public Rectangle attackArea = new Rectangle(0, 0, 0, 0);
-    private final Random random = new Random();
-
     public int solidAreaDefaultX, solidAreaDefaultY;
 
     public int worldX, worldY;
@@ -329,14 +328,14 @@ public class Entity {
             int solidAreaHeight = solidArea.height;
 
             switch (direct) {
-                case "stay_up", "up" -> worldY -= gamePanel.tileSize - gamePanel.tileSize / 4;
-                case "stay", "down" -> worldY += gamePanel.tileSize - gamePanel.tileSize / 4;
-                case "stay_left", "left" -> worldX -= gamePanel.tileSize - gamePanel.tileSize / 4;
-                case "stay_right", "right" -> worldX += gamePanel.tileSize - gamePanel.tileSize / 4;
+                case "stay_up", "up" -> worldY -= attackArea.height;
+                case "stay", "down" -> worldY += attackArea.height;
+                case "stay_left", "left" -> worldX -= attackArea.width;
+                case "stay_right", "right" -> worldX += attackArea.width;
             }
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
-            System.out.println(up1.getHeight()+" "+up1.getWidth()+" "+left1.getHeight()+" "+left1.getWidth());
+            System.out.println(attackArea.x + " " + attackArea.y + " " + attackArea.width + " " + attackArea.height);
             if (this instanceof Monster) {
                 if (gamePanel.checker.checkPlayer(this)) {
                     damagePlayer(attack);
@@ -475,22 +474,22 @@ public class Entity {
         int yD = getYDistance(gamePanel.player);
 
         switch (direct) {
-            case "up" -> {
+            case "up", "stay_up" -> {
                 if (gamePanel.player.getCenterY() < getCenterY() && yD < straight && xD < horizontal) {
                     targetInRange = true;
                 }
             }
-            case "down" -> {
+            case "down", "stay" -> {
                 if (gamePanel.player.getCenterY() > getCenterY() && yD < straight && xD < horizontal) {
                     targetInRange = true;
                 }
             }
-            case "left" -> {
+            case "left", "stay_left" -> {
                 if (gamePanel.player.getCenterX() < getCenterX() && xD < straight && yD < horizontal) {
                     targetInRange = true;
                 }
             }
-            case "right" -> {
+            case "right", "stay_right" -> {
                 if (gamePanel.player.getCenterX() > getCenterX() && xD < straight && yD < horizontal) {
                     targetInRange = true;
                 }
@@ -498,8 +497,8 @@ public class Entity {
             default -> throw new IllegalStateException("Unexpected value: " + direct);
         }
         if (targetInRange) {
-            int i=random.nextInt(rate);
-            if (i== 0) {
+            int i = random.nextInt(rate);
+            if (i == 0) {
                 isAttack = true;
                 spriteNum = 1;
                 counter = 0;
@@ -916,10 +915,15 @@ public class Entity {
 
 
             graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
-            //shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
-graphics2D.drawRect(scrX, scrY, attackArea.width, attackArea.height);
-            if (this instanceof Monster) {
+            shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
+
+            if (this instanceof Monster&&!(this instanceof SkeletonZ)) {
                 graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize - 6, null);
+
+            }
+            if (this instanceof SkeletonZ) {
+                shadow = setup("/res/objects/shadow", gamePanel.tileSize * 5, gamePanel.tileSize);
+                graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize * 5 -gamePanel.tileSize/2, null);
             }
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }
