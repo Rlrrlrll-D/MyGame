@@ -915,15 +915,15 @@ public class Entity {
 
 
             graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
-            shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
+            //shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
 
-            if (this instanceof Monster&&!(this instanceof SkeletonZ)) {
+            if (this instanceof Monster && !(this instanceof SkeletonZ)) {
                 graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize - 6, null);
 
             }
             if (this instanceof SkeletonZ) {
                 shadow = setup("/res/objects/shadow", gamePanel.tileSize * 5, gamePanel.tileSize);
-                graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize * 5 -gamePanel.tileSize/2, null);
+                graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize * 5 - gamePanel.tileSize / 2, null);
             }
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }
