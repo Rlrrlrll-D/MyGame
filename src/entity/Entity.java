@@ -110,16 +110,8 @@ public class Entity {
     }
 
     public void resetCounter() {
-        counter = 0;
-        actionCounter = 0;
-        invinCounter = 0;
-        shotAvailableCounter = 0;
-        dyingCounter = 0;
-        hpBarCounter = 0;
-        knockCounter = 0;
-        guardCounter = 0;
-        offBalanceCounter = 0;
-    }
+    counter = actionCounter = invinCounter = shotAvailableCounter = dyingCounter = hpBarCounter = knockCounter = guardCounter = offBalanceCounter = 0;
+}
 
     public int getLeftX() {
         return worldX + solidArea.x;
