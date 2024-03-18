@@ -525,9 +525,31 @@ public class Entity {
         }
     }
 
+    public void moveTowardPlayer(int interval) {
+        actionCounter++;
+        if (actionCounter > interval) {
+
+            if (getXDistance(gamePanel.player) > getYDistance(gamePanel.player)) {
+                if (gamePanel.player.getCenterX() < getCenterX()) {
+                    direct = "left";
+                } else {
+                    direct = "right";
+                }
+
+            } else if (getXDistance(gamePanel.player) < getYDistance(gamePanel.player)) {
+                if (gamePanel.player.getCenterY() < getCenterY()) {
+                    direct = "up";
+                } else {
+                    direct = "down";
+                }
+            }
+            actionCounter = 0;
+        }
+    }
+
     public void getRandomDirection(int interval) {
         actionCounter++;
-        if (actionCounter == interval) {
+        if (actionCounter > interval) {
 
             int i = random.nextInt(100) + 1;
             if (i <= 25) {

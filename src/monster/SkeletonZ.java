@@ -72,13 +72,13 @@ public class SkeletonZ extends Monster {
 
     public void setAction() {
 
-        if (onPath) {
-
+        if (getTileDistance(gamePanel.player) < 10) {
+            moveTowardPlayer(60);
         } else {
             getRandomDirection(150);
         }
         if (!isAttack) {
-            checkAttackOrNot(60, gamePanel.tileSize * 10, gamePanel.tileSize * 5);
+            checkAttackOrNot(60, gamePanel.tileSize * 7, gamePanel.tileSize * 5);
         }
     }
 
