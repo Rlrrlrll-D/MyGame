@@ -198,13 +198,15 @@ public class Entity {
     }
 
     protected void facePlayer() {
-        switch (gamePanel.player.direct) {
-            case "up", "stay_up" -> direct = "down";
-            case "down", "stay" -> direct = "up";
-            case "left", "stay_left" -> direct = "right";
-            case "right", "stay_right" -> direct = "left";
-        }
-    }
+    String playerDirect = gamePanel.player.direct;
+    direct = switch (playerDirect) {
+        case "up", "stay_up" -> "down";
+        case "down", "stay" -> "up";
+        case "left", "stay_left" -> "right";
+        case "right", "stay_right" -> "left";
+        default -> direct;
+    };
+}
 
     public void interact() {
 
@@ -526,47 +528,29 @@ public class Entity {
     }
 
     public void moveTowardPlayer(int interval) {
-        actionCounter++;
-        if (actionCounter > interval) {
-
-            if (getXDistance(gamePanel.player) > getYDistance(gamePanel.player)) {
-                if (gamePanel.player.getCenterX() < getCenterX()) {
-                    direct = "left";
-                } else {
-                    direct = "right";
-                }
-
-            } else if (getXDistance(gamePanel.player) < getYDistance(gamePanel.player)) {
-                if (gamePanel.player.getCenterY() < getCenterY()) {
-                    direct = "up";
-                } else {
-                    direct = "down";
-                }
-            }
-            actionCounter = 0;
-        }
+    actionCounter++;
+    if (actionCounter > interval) {
+        direct = determineDirection();
+        actionCounter = 0;
     }
+}
+
+private String determineDirection() {
+    if (getXDistance(gamePanel.player) > getYDistance(gamePanel.player)) {
+        return (gamePanel.player.getCenterX() < getCenterX()) ? "left" : "right";
+    } else {
+        return (gamePanel.player.getCenterY() < getCenterY()) ? "up" : "down";
+    }
+}
 
     public void getRandomDirection(int interval) {
-        actionCounter++;
-        if (actionCounter > interval) {
-
-            int i = random.nextInt(100) + 1;
-            if (i <= 25) {
-                direct = "up";
-            }
-            if (i > 25 && i <= 50) {
-                direct = "down";
-            }
-            if (i > 50 && i <= 75) {
-                direct = "left";
-            }
-            if (i > 75) {
-                direct = "right";
-            }
-            actionCounter = 0;
-        }
+    actionCounter++;
+    if (actionCounter > interval) {
+        String[] directions = {"up", "down", "left", "right"};
+        direct = directions[random.nextInt(directions.length)];
+        actionCounter = 0;
     }
+}
 
     public void checkShootOrNot(int rate, int shotInterval) {
         int i = random.nextInt(rate);
