@@ -76,6 +76,7 @@ public class Entity {
     public boolean onPath;
     public boolean stackable;
     public boolean offBalance;
+    public boolean inRage;
 
     public Entity loot;
     public boolean opened;

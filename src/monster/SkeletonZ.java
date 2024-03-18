@@ -47,31 +47,63 @@ public class SkeletonZ extends Monster {
 
     private void getImg() {
         var i = 5;
+        if (!inRage) {
+            up1 = setup("/res/monster/skeleton_up_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            up2 = setup("/res/monster/skeleton_up_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            down1 = setup("/res/monster/skeleton_down_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            down2 = setup("/res/monster/skeleton_down_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            left1 = setup("/res/monster/skeleton_left_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            left2 = setup("/res/monster/skeleton_left_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            right1 = setup("/res/monster/skeleton_right_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            right2 = setup("/res/monster/skeleton_right_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+        }
+        if (inRage) {
+            up1 = setup("/res/monster/skeleton_phase2_up_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            up2 = setup("/res/monster/skeleton_phase2_up_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            down1 = setup("/res/monster/skeleton_phase2_down_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            down2 = setup("/res/monster/skeleton_phase2_down_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            left1 = setup("/res/monster/skeleton_phase2_left_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            left2 = setup("/res/monster/skeleton_phase2_left_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            right1 = setup("/res/monster/skeleton_phase2_right_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+            right2 = setup("/res/monster/skeleton_phase2_right_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+        }
 
-        up1 = setup("/res/monster/skeleton_up_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-        up2 = setup("/res/monster/skeleton_up_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-        down1 = setup("/res/monster/skeleton_down_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-        down2 = setup("/res/monster/skeleton_down_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-        left1 = setup("/res/monster/skeleton_left_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-        left2 = setup("/res/monster/skeleton_left_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-        right1 = setup("/res/monster/skeleton_right_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-        right2 = setup("/res/monster/skeleton_right_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
     }
 
     private void getAttackImg() {
         var i = 5;
-        attackUp1 = setup("/res/monster/skeleton_attack_up_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-        attackUp2 = setup("/res/monster/skeleton_attack_up_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-        attackDown1 = setup("/res/monster/skeleton_attack_down_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-        attackDown2 = setup("/res/monster/skeleton_attack_down_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-        attackLeft1 = setup("/res/monster/skeleton_attack_left_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-        attackLeft2 = setup("/res/monster/skeleton_attack_left_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-        attackRight1 = setup("/res/monster/skeleton_attack_right_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-        attackRight2 = setup("/res/monster/skeleton_attack_right_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+        if (!inRage) {
+            attackUp1 = setup("/res/monster/skeleton_attack_up_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+            attackUp2 = setup("/res/monster/skeleton_attack_up_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+            attackDown1 = setup("/res/monster/skeleton_attack_down_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+            attackDown2 = setup("/res/monster/skeleton_attack_down_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+            attackLeft1 = setup("/res/monster/skeleton_attack_left_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+            attackLeft2 = setup("/res/monster/skeleton_attack_left_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+            attackRight1 = setup("/res/monster/skeleton_attack_right_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+            attackRight2 = setup("/res/monster/skeleton_attack_right_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+        }
+        if (inRage) {
+            attackUp1 = setup("/res/monster/skeleton_phase2_attack_up_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+            attackUp2 = setup("/res/monster/skeleton_phase2_attack_up_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+            attackDown1 = setup("/res/monster/skeleton_phase2_attack_down_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+            attackDown2 = setup("/res/monster/skeleton_phase2_attack_down_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+            attackLeft1 = setup("/res/monster/skeleton_phase2_attack_left_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+            attackLeft2 = setup("/res/monster/skeleton_phase2_attack_left_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+            attackRight1 = setup("/res/monster/skeleton_phase2_attack_right_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+            attackRight2 = setup("/res/monster/skeleton_phase2_attack_right_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+        }
+
     }
 
     public void setAction() {
-
+        if (!inRage && life < maxLife / 2) {
+            inRage = true;
+            getImg();
+            getAttackImg();
+            defaultSpeed++;
+            speed = defaultSpeed;
+            attack *= 2;
+        }
         if (getTileDistance(gamePanel.player) < 10) {
             moveTowardPlayer(60);
         } else {
