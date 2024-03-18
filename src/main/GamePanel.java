@@ -22,6 +22,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final static int maxMap = 10;
     public static final int titleBehavior = 0;
     public static final int playBehavior = 1;
+
     public static final int pauseBehavior = 2;
     public static final int dialogBehavior = 3;
     public static final int characterBehavior = 4;
