@@ -190,7 +190,7 @@ public class AssetSetter {
         }
         numMap = 2;
         int k = 0;
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 gamePanel.interactiveTile[numMap][k] = new DestructibleWall(gamePanel, 8 + j, 35 + i);
                 k++;

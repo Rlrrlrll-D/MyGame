@@ -139,27 +139,8 @@ public class Player extends Entity {
         guardRight = setup("/res/player/guard_right", gamePanel.tileSize * 2, gamePanel.tileSize);
     }
 
-    public void getSleepingImg(BufferedImage image) {
-        stay1 = image;
-        stay2 = image;
-        stay3 = image;
-        stay_up1 = image;
-        stay_up2 = image;
-        stay_up3 = image;
-        stay_left1 = image;
-        stay_left2 = image;
-        stay_left3 = image;
-        stay_right1 = image;
-        stay_right2 = image;
-        stay_right3 = image;
-        up1 = image;
-        up2 = image;
-        down1 = image;
-        down2 = image;
-        left1 = image;
-        left2 = image;
-        right1 = image;
-        right2 = image;
+    public void setSleepingImg(BufferedImage image) {
+        stay1 = stay2 = stay3 = stay_up1 = stay_up2 = stay_up3 = stay_left1 = stay_left2 = stay_left3 = stay_right1 = stay_right2 = stay_right3 = up1 = up2 = down1 = down2 = left1 = left2 = right1 = right2 = image;
     }
 
     public void getAttackImage() {

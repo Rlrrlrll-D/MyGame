@@ -119,17 +119,23 @@ public class GamePanel extends JPanel implements Runnable {
             assetSetter.setInteractiveTile();
             environmentManager.lighting.resetDay();
             musicOn = false;
+
+
         }
     }
 
     private void setFullScreen() {
-        if (fullScreenOn) {
-            GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            GraphicsDevice graphicsDevice = graphicsEnvironment.getDefaultScreenDevice();
-            graphicsDevice.setFullScreenWindow(Main.window);
+        GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice graphicsDevice = graphicsEnvironment.getDefaultScreenDevice();
 
+        if (fullScreenOn) {
+            graphicsDevice.setFullScreenWindow(Main.window);
             screenWidth2 = Main.window.getWidth();
             screenHeight2 = Main.window.getHeight();
+        } else {
+            graphicsDevice.setFullScreenWindow(null);
+            screenWidth2 = screenWidth;
+            screenHeight2 = screenHeight;
         }
     }
 
