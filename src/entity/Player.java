@@ -71,7 +71,7 @@ public class Player extends Entity {
         worldX = gamePanel.tileSize;
         worldY = gamePanel.tileSize * 39;
         speed = defaultSpeed;
-        stayDirect = "begin";
+        stayDirect = "down";
         direct = "stay";
     }
 
@@ -353,30 +353,19 @@ public class Player extends Entity {
     }
 
     private void checkDirect() {
-        switch (direct) {
-            case "up", "stay_up" -> {
-                worldY -= speed;
-                stayDirect = "up";
-            }
-            case "down", "stay" -> {
-                worldY += speed;
-                stayDirect = "down";
-            }
-            case "left", "stay_left" -> {
-                worldX -= speed;
-                stayDirect = "left";
-            }
-            case "right", "stay_right" -> {
-                worldX += speed;
-                stayDirect = "right";
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + direct);
-        }
+    switch (direct) {
+        case "up", "stay_up" -> worldY -= speed;
+        case "down", "stay" -> worldY += speed;
+        case "left", "stay_left" -> worldX -= speed;
+        case "right", "stay_right" -> worldX += speed;
+        default -> throw new IllegalStateException("Unexpected value: " + direct);
     }
+    stayDirect = direct.replace("stay_", "");
+}
 
     private void checkStayDirect() {
         switch (stayDirect) {
-            case "begin", "down" -> direct = "stay";
+            case "down" -> direct = "stay";
             case "up" -> direct = "stay_up";
             case "left" -> direct = "stay_left";
             case "right" -> direct = "stay_right";
