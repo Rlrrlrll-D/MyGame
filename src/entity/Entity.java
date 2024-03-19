@@ -330,7 +330,6 @@ public class Entity {
             }
             solidArea.width = attackArea.width;
             solidArea.height = attackArea.height;
-            System.out.println(attackArea.x + " " + attackArea.y + " " + attackArea.width + " " + attackArea.height);
             if (this instanceof Monster) {
                 if (gamePanel.checker.checkPlayer(this)) {
                     damagePlayer(attack);

@@ -4,7 +4,7 @@ import entity.Entity;
 import main.GamePanel;
 
 public class Key extends Consumable {
-    public static final String objName ="Key";
+    public static final String objName = "Key";
     GamePanel gamePanel;
 
     public Key(GamePanel gamePanel) {
@@ -26,17 +26,16 @@ public class Key extends Consumable {
 
     @Override
     public boolean use(Entity entity) {
-
         int objIndex = getDetected(entity, gamePanel.objects, "Door");
 
-        if (objIndex != 999) {
-            startDialog(this, 0);
-            gamePanel.playSFX(2);
-            gamePanel.objects[gamePanel.currentMap][objIndex] = null;
-            return true;
-        } else {
+        if (objIndex == 999) {
             startDialog(this, 1);
             return false;
         }
+
+        startDialog(this, 0);
+        gamePanel.playSFX(2);
+        gamePanel.objects[gamePanel.currentMap][objIndex] = null;
+        return true;
     }
 }

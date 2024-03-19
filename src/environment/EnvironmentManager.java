@@ -21,6 +21,6 @@ public class EnvironmentManager {
     }
 
     public void drawing(Graphics2D graphics2D) {
-        //lighting.drawing(graphics2D);
+        lighting.drawing(graphics2D);
     }
 }

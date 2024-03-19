@@ -10,6 +10,6 @@ public class Lantern extends Light {
         down1 = setup("/res/objects/lantern", gamePanel.tileSize, gamePanel.tileSize);
         description = "[Lantern]\nIlluminates your \nsurroundings.";
         price = 200;
-        lightRadius = 230;
+        lightRadius = 300;
     }
 }
