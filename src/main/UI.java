@@ -778,87 +778,31 @@ public class UI {
     }
 
     private void drawTitleScreen() {
+        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, titleScreenBehavior == 0 ? 37F : 30F));
+        String text = titleScreenBehavior == 0 ? "My hero adventure" : "Select your class:";
+        int x = getX_Text(text.toUpperCase());
+        int y = (int) (gamePanel.tileSize * 2.5);
+        graphics2D.setColor(new Color(0, 0, 7));
+        graphics2D.drawString(text.toUpperCase(), x + 4, y + 4);
+        graphics2D.setColor(new Color(229, 152, 9));
+        graphics2D.drawString(text.toUpperCase(), x, y);
+
         if (titleScreenBehavior == 0) {
+            drawTitleOptions(new String[]{"New game", "Load game", "Quit"}, y);
+        } else {
+            drawTitleOptions(new String[]{"Fighter", "Thief", "Sorcerer", "Back"}, y);
+        }
+    }
 
-            graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 37F));
-            String text = "My hero adventure";
-            int x = getX_Text(text.toUpperCase());
-            int y = (int) (gamePanel.tileSize * 2.5);
-            graphics2D.setColor(new Color(0, 0, 7));
-            graphics2D.drawString(text.toUpperCase(), x + 4, y + 4);
-            graphics2D.setColor(new Color(229, 152, 9));
+    private void drawTitleOptions(String[] options, int y) {
+        graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
+        for (int i = 0; i < options.length; i++) {
+            String text = options[i];
+            int x = getX_Text(text);
+            y += gamePanel.tileSize * (i == 0 ? 4 : 1);
             graphics2D.drawString(text.toUpperCase(), x, y);
-
-            x = gamePanel.screenWidth / 2;
-            y += (int) (gamePanel.tileSize * 1.5);
-            graphics2D.drawImage(gamePanel.player.down1, x - gamePanel.tileSize, y, gamePanel.tileSize * 2, gamePanel.tileSize * 2, null);
-            graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
-
-            text = "New game";
-            x = getX_Text(text);
-            y += gamePanel.tileSize * 4;
-            graphics2D.drawString(text.toUpperCase(), x, y);
-            if (commandNum == 0) {
+            if (commandNum == i) {
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
-            }
-
-            text = "Load game";
-            x = getX_Text(text);
-            y += gamePanel.tileSize;
-            graphics2D.drawString(text.toUpperCase(), x, y);
-            if (commandNum == 1) {
-                graphics2D.drawString(">", x - gamePanel.tileSize, y);
-            }
-
-
-            text = "Quit";
-            x = getX_Text(text);
-            y += gamePanel.tileSize;
-            graphics2D.drawString(text.toUpperCase(), x, y);
-            if (commandNum == 2) {
-                graphics2D.drawString(">", x - gamePanel.tileSize, y);
-            }
-
-        } else if (titleScreenBehavior == 1) {
-            graphics2D.setColor(new Color(229, 152, 9));
-            graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 30F));
-            String text = "Select your class:";
-            int x = getX_Text(text.toUpperCase());
-            int y = (int) (gamePanel.tileSize * 2.5);
-            graphics2D.drawString(text.toUpperCase(), x, y);
-
-            graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
-
-            text = "Fighter";
-            x = getX_Text(text);
-            y += (gamePanel.tileSize * 2);
-            graphics2D.drawString(text.toUpperCase(), x, y);
-            if (commandNum == 0) {
-                graphics2D.drawString(">", x - gamePanel.tileSize, y);
-            }
-
-            text = "Thief";
-            x = getX_Text(text);
-            y += (gamePanel.tileSize);
-            graphics2D.drawString(text.toUpperCase(), x, y);
-            if (commandNum == 1) {
-                graphics2D.drawString(">", x - gamePanel.tileSize, y);
-            }
-
-            text = "Sorcerer";
-            x = getX_Text(text);
-            y += (gamePanel.tileSize);
-            graphics2D.drawString(text.toUpperCase(), x, y);
-            if (commandNum == 2) {
-                graphics2D.drawString(">", x - gamePanel.tileSize, y);
-            }
-            text = "Back";
-            x = getX_Text(text);
-            y += (gamePanel.tileSize * 3);
-            graphics2D.drawString(text.toUpperCase(), x, y);
-            if (commandNum == 3) {
-                graphics2D.drawString(">", x - gamePanel.tileSize, y);
-
             }
         }
     }
@@ -894,17 +838,18 @@ public class UI {
             graphics2D.drawImage(crystal_f, x, y, null);
             x += (int) (gamePanel.tileSize / 1.3);
         }
-        y += gamePanel.tileSize + 20;
-        x = gamePanel.tileSize / 4;
+        y = (int) (gamePanel.tileSize * .4) + gamePanel.tileSize / 4;
+        x = gamePanel.screenWidth - gamePanel.tileSize * 2;
         drawGodMode(y, x);
     }
+
     private void drawGodMode(int y, int x) {
-        var txt = "GOD MODE";
+        String txt = "GOD MODE";
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
         graphics2D.setColor(new Color(12, 5, 1, 224));
         graphics2D.drawString(txt, x + 1, y + 1);
         graphics2D.setColor(gamePanel.keyHandler.modeOfGod ? new Color(84, 161, 18) : new Color(241, 42, 23, 255));
-            graphics2D.drawString(txt, x, y);
+        graphics2D.drawString(txt, x, y);
     }
 
     private void drawMessage() {
