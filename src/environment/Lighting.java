@@ -22,50 +22,41 @@ public class Lighting {
     }
 
     private void setLightSource() {
-        darknessFilter = new BufferedImage(gamePanel.screenWidth, gamePanel.screenHeight, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D graphics2D = (Graphics2D) darknessFilter.getGraphics();
+    darknessFilter = new BufferedImage(gamePanel.screenWidth, gamePanel.screenHeight, BufferedImage.TYPE_INT_ARGB);
+    Graphics2D graphics2D = (Graphics2D) darknessFilter.getGraphics();
 
-        if (gamePanel.player.currentLight == null) {
-            graphics2D.setColor(new Color(0, 0, 0.1f, 0.97f));
+    if (gamePanel.player.currentLight == null) {
+        graphics2D.setColor(new Color(0, 0, 0.1f, 0.97f));
+    } else {
+        int centerX = gamePanel.player.screenX + (gamePanel.tileSize) / 2;
+        int centerY = gamePanel.player.screenY + (gamePanel.tileSize) / 2;
 
-        } else {
-            int centerX = gamePanel.player.screenX + (gamePanel.tileSize) / 2;
-            int centerY = gamePanel.player.screenY + (gamePanel.tileSize) / 2;
+        RadialGradientPaint radialGradientPaint = getRadialGradientPaint(centerX, centerY);
+        graphics2D.setPaint(radialGradientPaint);
+    }
+    graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
+    graphics2D.dispose();
+}
 
-            Color[] color = new Color[12];
-            float[] fraction = new float[12];
+    private RadialGradientPaint getRadialGradientPaint(int centerX, int centerY) {
+        Color[] color = {
+            new Color(0, 0, 0.1f, 0.1f),
+            new Color(0, 0, 0.1f, 0.42f),
+            new Color(0, 0, 0.1f, 0.52f),
+            new Color(0, 0, 0.1f, 0.61f),
+            new Color(0, 0, 0.1f, 0.69f),
+            new Color(0, 0, 0.1f, 0.76f),
+            new Color(0, 0, 0.1f, 0.82f),
+            new Color(0, 0, 0.1f, 0.87f),
+            new Color(0, 0, 0.1f, 0.91f),
+            new Color(0, 0, 0.1f, 0.92f),
+            new Color(0, 0, 0.1f, 0.93f),
+            new Color(0, 0, 0.1f, 0.94f)
+        };
 
-            color[0] = new Color(0, 0, 0.1f, 0.1f);
-            color[1] = new Color(0, 0, 0.1f, 0.42f);
-            color[2] = new Color(0, 0, 0.1f, 0.52f);
-            color[3] = new Color(0, 0, 0.1f, 0.61f);
-            color[4] = new Color(0, 0, 0.1f, 0.69f);
-            color[5] = new Color(0, 0, 0.1f, 0.76f);
-            color[6] = new Color(0, 0, 0.1f, 0.82f);
-            color[7] = new Color(0, 0, 0.1f, 0.87f);
-            color[8] = new Color(0, 0, 0.1f, 0.91f);
-            color[9] = new Color(0, 0, 0.1f, 0.92f);
-            color[10] = new Color(0, 0, 0.1f, 0.93f);
-            color[11] = new Color(0, 0, 0.1f, 0.94f);
+        float[] fraction = {0f, 0.4f, 0.5f, 0.6f, 0.65f, 0.7f, 0.75f, 0.8f, 0.85f, 0.9f, 0.95f, 1f};
 
-            fraction[0] = 0f;
-            fraction[1] = 0.4f;
-            fraction[2] = 0.5f;
-            fraction[3] = 0.6f;
-            fraction[4] = 0.65f;
-            fraction[5] = 0.7f;
-            fraction[6] = 0.75f;
-            fraction[7] = 0.8f;
-            fraction[8] = 0.85f;
-            fraction[9] = 0.9f;
-            fraction[10] = 0.95f;
-            fraction[11] = 1f;
-
-            RadialGradientPaint radialGradientPaint = new RadialGradientPaint(centerX, centerY, gamePanel.player.currentLight.lightRadius, fraction, color);
-            graphics2D.setPaint(radialGradientPaint);
-        }
-        graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
-        graphics2D.dispose();
+        return new RadialGradientPaint(centerX, centerY, gamePanel.player.currentLight.lightRadius, fraction, color);
     }
 
     public void resetDay() {

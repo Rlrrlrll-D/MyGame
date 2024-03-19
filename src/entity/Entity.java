@@ -110,8 +110,8 @@ public class Entity {
     }
 
     public void resetCounter() {
-    counter = actionCounter = invinCounter = shotAvailableCounter = dyingCounter = hpBarCounter = knockCounter = guardCounter = offBalanceCounter = 0;
-}
+        counter = actionCounter = invinCounter = shotAvailableCounter = dyingCounter = hpBarCounter = knockCounter = guardCounter = offBalanceCounter = 0;
+    }
 
     public int getLeftX() {
         return worldX + solidArea.x;
@@ -191,15 +191,15 @@ public class Entity {
     }
 
     protected void facePlayer() {
-    String playerDirect = gamePanel.player.direct;
-    direct = switch (playerDirect) {
-        case "up", "stay_up" -> "down";
-        case "down", "stay" -> "up";
-        case "left", "stay_left" -> "right";
-        case "right", "stay_right" -> "left";
-        default -> direct;
-    };
-}
+        String playerDirect = gamePanel.player.direct;
+        direct = switch (playerDirect) {
+            case "up", "stay_up" -> "down";
+            case "down", "stay" -> "up";
+            case "left", "stay_left" -> "right";
+            case "right", "stay_right" -> "left";
+            default -> direct;
+        };
+    }
 
     public void interact() {
 
@@ -241,7 +241,6 @@ public class Entity {
     }
 
     protected void searchPath(int goalCol, int goalRow) {
-
         int startCol = (worldX + solidArea.x) / gamePanel.tileSize;
         int startRow = (worldY + solidArea.y) / gamePanel.tileSize;
 
@@ -257,55 +256,21 @@ public class Entity {
             int entBottomY = worldY + solidArea.y + solidArea.height;
 
             if (entTopY > nextY && entLeftX >= nextX && entRightX < nextX + gamePanel.tileSize) {
-
                 direct = "up";
-
             } else if (entTopY < nextY && entLeftX >= nextX && entRightX < nextX + gamePanel.tileSize) {
                 direct = "down";
-
-
             } else if (entTopY >= nextY && entBottomY < nextY + gamePanel.tileSize) {
-
-                if (entLeftX > nextX) {
-                    direct = "left";
-                }
-                if (entLeftX < nextX) {
-                    direct = "right";
-                }
-            } else if (entTopY > nextY && entLeftX > nextX) {
-
-                direct = "up";
+                direct = (entLeftX > nextX) ? "left" : "right";
+            } else {
+                direct = (entTopY > nextY) ? "up" : "down";
                 checkCollision();
                 if (collisionOn) {
-                    direct = "left";
-                }
-            } else if (entTopY > nextY && entLeftX < nextX) {
-                direct = "up";
-                checkCollision();
-                if (collisionOn) {
-                    direct = "right";
-                }
-            } else if (entTopY < nextY && entLeftX > nextX) {
-                direct = "down";
-                checkCollision();
-                if (collisionOn) {
-                    direct = "left";
-                }
-            } else if (entTopY < nextY && entLeftX < nextX) {
-                direct = "down";
-                checkCollision();
-                if (collisionOn) {
-                    direct = "right";
+                    direct = (entLeftX > nextX) ? "left" : "right";
                 }
             }
-//            int nextCol = gamePanel.pathFinder.pathList.get(0).col;
-//            int nextRow = gamePanel.pathFinder.pathList.get(0).row;
-//
-//            if (nextCol == goalCol && nextRow == goalRow) {
-//                onPath = false;
-//            }
         }
     }
+
 
     protected void attack() {
         counter++;
@@ -467,29 +432,16 @@ public class Entity {
         int xD = getXDistance(gamePanel.player);
         int yD = getYDistance(gamePanel.player);
 
-        switch (direct) {
-            case "up", "stay_up" -> {
-                if (gamePanel.player.getCenterY() < getCenterY() && yD < straight && xD < horizontal) {
-                    targetInRange = true;
-                }
-            }
-            case "down", "stay" -> {
-                if (gamePanel.player.getCenterY() > getCenterY() && yD < straight && xD < horizontal) {
-                    targetInRange = true;
-                }
-            }
-            case "left", "stay_left" -> {
-                if (gamePanel.player.getCenterX() < getCenterX() && xD < straight && yD < horizontal) {
-                    targetInRange = true;
-                }
-            }
-            case "right", "stay_right" -> {
-                if (gamePanel.player.getCenterX() > getCenterX() && xD < straight && yD < horizontal) {
-                    targetInRange = true;
-                }
-            }
-            default -> throw new IllegalStateException("Unexpected value: " + direct);
+        if (gamePanel.player.getCenterY() < getCenterY() && yD < straight && xD < horizontal && direct.equals("up")) {
+            targetInRange = true;
+        } else if (gamePanel.player.getCenterY() > getCenterY() && yD < straight && xD < horizontal && direct.equals("down")) {
+            targetInRange = true;
+        } else if (gamePanel.player.getCenterX() < getCenterX() && xD < straight && yD < horizontal && direct.equals("left")) {
+            targetInRange = true;
+        } else if (gamePanel.player.getCenterX() > getCenterX() && xD < straight && yD < horizontal && direct.equals("right")) {
+            targetInRange = true;
         }
+
         if (targetInRange) {
             int i = random.nextInt(rate);
             if (i == 0) {
@@ -500,6 +452,7 @@ public class Entity {
             }
         }
     }
+//
 
     public void checkStopNotChasing(Entity entity, int distance, int rate) {
         if (getTileDistance(entity) > distance) {
@@ -520,29 +473,29 @@ public class Entity {
     }
 
     public void moveTowardPlayer(int interval) {
-    actionCounter++;
-    if (actionCounter > interval) {
-        direct = determineDirection();
-        actionCounter = 0;
+        actionCounter++;
+        if (actionCounter > interval) {
+            direct = determineDirection();
+            actionCounter = 0;
+        }
     }
-}
 
-private String determineDirection() {
-    if (getXDistance(gamePanel.player) > getYDistance(gamePanel.player)) {
-        return (gamePanel.player.getCenterX() < getCenterX()) ? "left" : "right";
-    } else {
-        return (gamePanel.player.getCenterY() < getCenterY()) ? "up" : "down";
+    private String determineDirection() {
+        if (getXDistance(gamePanel.player) > getYDistance(gamePanel.player)) {
+            return (gamePanel.player.getCenterX() < getCenterX()) ? "left" : "right";
+        } else {
+            return (gamePanel.player.getCenterY() < getCenterY()) ? "up" : "down";
+        }
     }
-}
 
     public void getRandomDirection(int interval) {
-    actionCounter++;
-    if (actionCounter > interval) {
-        String[] directions = {"up", "down", "left", "right"};
-        direct = directions[random.nextInt(directions.length)];
-        actionCounter = 0;
+        actionCounter++;
+        if (actionCounter > interval) {
+            String[] directions = {"up", "down", "left", "right"};
+            direct = directions[random.nextInt(directions.length)];
+            actionCounter = 0;
+        }
     }
-}
 
     public void checkShootOrNot(int rate, int shotInterval) {
         int i = random.nextInt(rate);
