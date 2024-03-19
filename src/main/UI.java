@@ -813,30 +813,30 @@ public class UI {
         var y = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.maxLife / 2; i++) {
-            graphics2D.drawImage(heart_e, x, y, null);
-            x += gamePanel.tileSize;
+            graphics2D.drawImage(heart_e, x, y,gamePanel.tileSize/2,gamePanel.tileSize/2, null);
+            x += gamePanel.tileSize/2;
         }
         x = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.life; i++) {
-            graphics2D.drawImage(heart_h, x, y, null);
+            graphics2D.drawImage(heart_h, x, y,gamePanel.tileSize/2,gamePanel.tileSize/2, null);
             i++;
             if (i < gamePanel.player.life) {
-                graphics2D.drawImage(heart_f, x, y, null);
+                graphics2D.drawImage(heart_f, x, y,gamePanel.tileSize/2,gamePanel.tileSize/2, null);
             }
-            x += gamePanel.tileSize;
+            x += gamePanel.tileSize/2;
         }
         x = gamePanel.tileSize / 4;
-        y += gamePanel.tileSize + 5;
+        y += gamePanel.tileSize /2;
         for (int i = 0; i < gamePanel.player.maxMana; i++) {
-            graphics2D.drawImage(crystal_e, x, y, null);
-            x += (int) (gamePanel.tileSize / 1.3);
+            graphics2D.drawImage(crystal_e, x, y, gamePanel.tileSize/2,gamePanel.tileSize/2,null);
+            x += (int) (gamePanel.tileSize /2.5);
         }
         x = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.mana; i++) {
-            graphics2D.drawImage(crystal_f, x, y, null);
-            x += (int) (gamePanel.tileSize / 1.3);
+            graphics2D.drawImage(crystal_f, x, y,gamePanel.tileSize/2,gamePanel.tileSize/2, null);
+            x += (int) (gamePanel.tileSize / 2.5);
         }
         y = (int) (gamePanel.tileSize * .4) + gamePanel.tileSize / 4;
         x = gamePanel.screenWidth - gamePanel.tileSize * 2;
