@@ -24,7 +24,7 @@ public class Projectile extends Entity {
         if (user == gamePanel.player) {
             int monIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
             if (monIndex != 999) {
-                gamePanel.player.damageMonster(monIndex, this, attack, knockPower);
+                gamePanel.player.damageMonster(monIndex, this, attack*(gamePanel.player.level/2), knockPower);
                 generateParticle(user.projectile, gamePanel.mon[gamePanel.currentMap][monIndex]);
                 isAlive = false;
             }
@@ -39,18 +39,11 @@ public class Projectile extends Entity {
 
         }
         switch (direct) {
-            case "up", "stay_up":
-                worldY -= speed;
-                break;
-            case "down", "stay":
-                worldY += speed;
-                break;
-            case "left", "stay_left":
-                worldX -= speed;
-                break;
-            case "right", "stay_right":
-                worldX += speed;
-                break;
+            case "up", "stay_up" -> worldY -= speed;
+            case "down", "stay" -> worldY += speed;
+            case "left", "stay_left" -> worldX -= speed;
+            case "right", "stay_right" -> worldX += speed;
+            default -> throw new IllegalStateException("Unexpected value: " + direct);
         }
 
         life--;

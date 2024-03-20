@@ -77,6 +77,7 @@ public class Entity {
     public boolean stackable;
     public boolean offBalance;
     public boolean inRage;
+    public boolean boss;
 
     public Entity loot;
     public boolean opened;
@@ -651,21 +652,23 @@ public class Entity {
             isAlive = false;
         }
     }
-
-    public void drawing(Graphics2D graphics2D) {
-        var scrX = worldX - gamePanel.player.worldX + gamePanel.player.screenX;
-        var scrY = worldY - gamePanel.player.worldY + gamePanel.player.screenY;
-        if (worldX + gamePanel.tileSize * 5 > gamePanel.player.worldX - gamePanel.player.screenX &&
+public boolean inFocus(){
+     return worldX + gamePanel.tileSize * 5 > gamePanel.player.worldX - gamePanel.player.screenX &&
                 worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
                 worldY + gamePanel.tileSize * 5 > gamePanel.player.worldY - gamePanel.player.screenY &&
-                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
-            var tempScreenX = scrX;
-            var tempScreenY = scrY;
+                worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY;
+
+}
+    public void drawing(Graphics2D graphics2D) {
+
+        if (inFocus()) {
+            var tempScreenX = getScrX();
+            var tempScreenY = getScrY();
 
             switch (direct) {
                 case "up" -> {
                     if (isAttack) {
-                        tempScreenY = scrY - up1.getHeight();
+                        tempScreenY = getScrY() - up1.getHeight();
                         if (spriteNum == 1) {
                             image = attackUp1;
                         }
@@ -702,7 +705,7 @@ public class Entity {
                 }
                 case "left" -> {
                     if (isAttack) {
-                        tempScreenX = scrX - left1.getWidth();
+                        tempScreenX = getScrX() - left1.getWidth();
                         if (spriteNum == 1) {
                             image = attackLeft1;
                         }
@@ -763,7 +766,7 @@ public class Entity {
                 }
                 case "stay_up" -> {
                     if (isAttack) {
-                        tempScreenY = scrY - up1.getHeight();
+                        tempScreenY = getScrY() - up1.getHeight();
                         if (spriteNum == 1) {
                             image = attackUp1;
                         }
@@ -788,7 +791,7 @@ public class Entity {
                 }
                 case "stay_left" -> {
                     if (isAttack) {
-                        tempScreenX = scrX - left1.getWidth();
+                        tempScreenX = getScrX() - left1.getWidth();
                         if (spriteNum == 1) {
                             image = attackLeft1;
                         }
@@ -838,22 +841,7 @@ public class Entity {
                 default -> throw new IllegalStateException("Unexpected value: " + direct);
             }
 
-            if (this instanceof Monster && hpBarOn) {
-                double oneScale = (double) gamePanel.tileSize / maxLife;
-                double hpBarValue = oneScale * life;
 
-                graphics2D.setColor(new Color(0x090202));
-                graphics2D.fillRect(scrX - 1, scrY - 15, gamePanel.tileSize + 2, 12);
-
-                graphics2D.setColor(new Color(0x861515));
-                graphics2D.fillRect(scrX, scrY - 14, (int) hpBarValue, 10);
-                hpBarCounter++;
-
-                if (hpBarCounter > 600) {
-                    hpBarCounter = 0;
-                    hpBarOn = false;
-                }
-            }
 
             if (invincible && !(this instanceof DryTree) && !(this instanceof DestructibleWall)) {
                 hpBarOn = true;
@@ -869,15 +857,23 @@ public class Entity {
             //shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
 
             if (this instanceof Monster && !(this instanceof SkeletonZ)) {
-                graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize - 6, null);
+                graphics2D.drawImage(shadow, getScrX(), getScrY() + gamePanel.tileSize - 6, null);
 
             }
             if (this instanceof SkeletonZ) {
                 shadow = setup("/res/objects/shadow", gamePanel.tileSize * 5, gamePanel.tileSize);
-                graphics2D.drawImage(shadow, scrX, scrY + gamePanel.tileSize * 5 - gamePanel.tileSize / 2, null);
+                graphics2D.drawImage(shadow, getScrX(), getScrY() + gamePanel.tileSize * 5 - gamePanel.tileSize / 2, null);
             }
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }
+    }
+
+    public int getScrY() {
+        return worldY - gamePanel.player.worldY + gamePanel.player.screenY;
+    }
+
+    public int getScrX() {
+        return worldX - gamePanel.player.worldX + gamePanel.player.screenX;
     }
 }
 

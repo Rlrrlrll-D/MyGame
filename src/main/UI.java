@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import entity.Monster;
 import entity.Player;
 import objects.CoinBronze;
 import objects.Heart;
@@ -81,6 +82,7 @@ public class UI {
 
         if (gamePanel.gameBehavior == GamePanel.playBehavior) {
             drawPlayerLife();
+            drawMonsterLife();
             drawMessage();
         }
         if (gamePanel.gameBehavior == GamePanel.pauseBehavior) {
@@ -112,6 +114,53 @@ public class UI {
             drawSleepScreen();
         }
     }
+
+    private void drawMonsterLife() {
+    Entity[] monsters = gamePanel.mon[gamePanel.currentMap];
+    Color color1 = new Color(0xC94106);
+    Color color2 = new Color(0x861515);
+    Color color3 = new Color(229, 152, 9);
+
+    for (Entity monster : monsters) {
+        if (monster != null && monster.inFocus()) {
+            double oneScale = (double) gamePanel.tileSize / monster.maxLife;
+            double hpBarValue = oneScale * monster.life;
+            int x = monster.getScrX();
+            int y = monster.getScrY() - 15;
+
+            if (monster.hpBarOn && !monster.boss) {
+                graphics2D.setColor(color1);
+                graphics2D.fillRect(x - 1, y, gamePanel.tileSize + 2, 12);
+
+                graphics2D.setColor(color2);
+                graphics2D.fillRect(x, y + 1, (int) hpBarValue, 10);
+                monster.hpBarCounter++;
+
+                if (monster.hpBarCounter > 600) {
+                    monster.hpBarCounter = 0;
+                    monster.hpBarOn = false;
+                }
+            } else if (monster.boss) {
+                oneScale = (double) gamePanel.tileSize * 8 / monster.maxLife;
+                hpBarValue = oneScale * monster.life;
+                x = gamePanel.screenWidth / 2 - gamePanel.tileSize * 4;
+                y = (int) (gamePanel.tileSize / 1.7);
+
+                graphics2D.setColor(color2);
+                graphics2D.fillRect(x, y, (int) hpBarValue, 20);
+
+                graphics2D.setColor(color1);
+                graphics2D.drawRect(x - 1, y - 1, gamePanel.tileSize * 8 + 2, 22);
+
+
+
+                graphics2D.setFont(Monica.deriveFont(Font.BOLD, 20F));
+                graphics2D.setColor(color3);
+                graphics2D.drawString(monster.name, x + gamePanel.tileSize * 4 - monster.name.length() * 5, y - 5);
+            }
+        }
+    }
+}
 
     private void drawSleepScreen() {
         count++;
@@ -813,29 +862,29 @@ public class UI {
         var y = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.maxLife / 2; i++) {
-            graphics2D.drawImage(heart_e, x, y,gamePanel.tileSize/2,gamePanel.tileSize/2, null);
-            x += gamePanel.tileSize/2;
+            graphics2D.drawImage(heart_e, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
+            x += gamePanel.tileSize / 2;
         }
         x = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.life; i++) {
-            graphics2D.drawImage(heart_h, x, y,gamePanel.tileSize/2,gamePanel.tileSize/2, null);
+            graphics2D.drawImage(heart_h, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
             i++;
             if (i < gamePanel.player.life) {
-                graphics2D.drawImage(heart_f, x, y,gamePanel.tileSize/2,gamePanel.tileSize/2, null);
+                graphics2D.drawImage(heart_f, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
             }
-            x += gamePanel.tileSize/2;
+            x += gamePanel.tileSize / 2;
         }
         x = gamePanel.tileSize / 4;
-        y += gamePanel.tileSize /2;
+        y += gamePanel.tileSize / 2;
         for (int i = 0; i < gamePanel.player.maxMana; i++) {
-            graphics2D.drawImage(crystal_e, x, y, gamePanel.tileSize/2,gamePanel.tileSize/2,null);
-            x += (int) (gamePanel.tileSize /2.5);
+            graphics2D.drawImage(crystal_e, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
+            x += (int) (gamePanel.tileSize / 2.5);
         }
         x = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.mana; i++) {
-            graphics2D.drawImage(crystal_f, x, y,gamePanel.tileSize/2,gamePanel.tileSize/2, null);
+            graphics2D.drawImage(crystal_f, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
             x += (int) (gamePanel.tileSize / 2.5);
         }
         y = (int) (gamePanel.tileSize * .4) + gamePanel.tileSize / 4;

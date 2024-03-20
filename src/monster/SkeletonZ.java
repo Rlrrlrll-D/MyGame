@@ -17,6 +17,7 @@ public class SkeletonZ extends Monster {
         super(gamePanel);
         this.gamePanel = gamePanel;
         name = monName;
+        boss = true;
         defaultSpeed = 1;
         speed = defaultSpeed;
         maxLife = 50;
