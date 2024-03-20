@@ -1,7 +1,6 @@
 package main;
 
 import entity.Entity;
-import entity.Monster;
 import entity.Player;
 import objects.CoinBronze;
 import objects.Heart;
@@ -117,9 +116,10 @@ public class UI {
 
     private void drawMonsterLife() {
     Entity[] monsters = gamePanel.mon[gamePanel.currentMap];
-    Color color1 = new Color(0xC94106);
+    Color color1 = new Color(0x090202);
     Color color2 = new Color(0x861515);
     Color color3 = new Color(229, 152, 9);
+    Color color4 = new Color(187, 53, 29);
 
     for (Entity monster : monsters) {
         if (monster != null && monster.inFocus()) {
@@ -149,10 +149,8 @@ public class UI {
                 graphics2D.setColor(color2);
                 graphics2D.fillRect(x, y, (int) hpBarValue, 20);
 
-                graphics2D.setColor(color1);
+                graphics2D.setColor(color4);
                 graphics2D.drawRect(x - 1, y - 1, gamePanel.tileSize * 8 + 2, 22);
-
-
 
                 graphics2D.setFont(Monica.deriveFont(Font.BOLD, 20F));
                 graphics2D.setColor(color3);
