@@ -76,5 +76,22 @@ public class CutSceneManager {
             gamePanel.ui.drawDialogScreen();
 
         }
+        if (scenePhase == 4) {
+            for (int i = 0; i < gamePanel.npc[1].length; i++) {
+                if (gamePanel.npc[gamePanel.currentMap][i] != null && Objects.equals(gamePanel.npc[gamePanel.currentMap][i].name, "PlayerDummy")) {
+                    gamePanel.player.worldX = gamePanel.npc[gamePanel.currentMap][i].worldX;
+                    gamePanel.player.worldY = gamePanel.npc[gamePanel.currentMap][i].worldY;
+                    gamePanel.npc[gamePanel.currentMap][i] = null;
+                    break;
+                }
+
+            }
+            gamePanel.player.draw = true;
+            scene = NA;
+            scenePhase = 0;
+            gamePanel.gameBehavior = GamePanel.playBehavior;
+            gamePanel.stopMusic();
+            gamePanel.playSFX(25);
+        }
     }
 }

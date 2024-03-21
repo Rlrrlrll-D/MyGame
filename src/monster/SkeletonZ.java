@@ -1,11 +1,13 @@
 package monster;
 
+import data.Progress;
 import entity.Monster;
 import main.GamePanel;
 import objects.CoinBronze;
 import objects.Heart;
 import objects.ManaCrystal;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class SkeletonZ extends Monster {
@@ -49,7 +51,7 @@ public class SkeletonZ extends Monster {
 
     public void setDialog() {
 
-        dialogues[0][0] = "I am the king of the dead!" ;
+        dialogues[0][0] = "I am the king of the dead!";
         dialogues[0][1] = "You are not welcome here.\nNo one can steal my treasure!";
         dialogues[0][2] = "I will kill you and take your soul!";
         dialogues[0][3] = "WELCOME TO YOUR DOOM!";
@@ -129,6 +131,16 @@ public class SkeletonZ extends Monster {
     }
 
     public void checkDrop() {
+        gamePanel.bossBattleOn = false;
+        Progress.bossDefeated= true;
+        gamePanel.stopMusic();
+        gamePanel.playSFX(21);
+        for (int i = 0; i < gamePanel.objects[1].length; i++) {
+            if (gamePanel.objects[gamePanel.currentMap][i] != null && Objects.equals(gamePanel.objects[gamePanel.currentMap][i].name, "DoorIron")) {
+                gamePanel.playSFX(24);
+                gamePanel.objects[gamePanel.currentMap][i] = null;
+            }
+        }
         int i = new Random().nextInt(100) + 1;
         if (i < 50) {
             dropItem(new CoinBronze(gamePanel));

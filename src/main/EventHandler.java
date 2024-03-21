@@ -1,5 +1,6 @@
 package main;
 
+import data.Progress;
 import entity.Entity;
 
 public class EventHandler {
@@ -123,7 +124,6 @@ public class EventHandler {
         canTouchEvent = false;
 
     }
-
     public void healingPool(int gameBehavior) {
 
         if (gamePanel.keyHandler.enterPressed && gamePanel.player.life != gamePanel.player.maxLife) {
@@ -138,7 +138,6 @@ public class EventHandler {
             gamePanel.saveLoad.save();
         }
     }
-
     private void teleport(int map, int col, int row, int area) {
 
         gamePanel.gameBehavior = GamePanel.transitionBehavior;
@@ -146,14 +145,10 @@ public class EventHandler {
         tmpMap = map;
         tmpCol = col;
         tmpRow = row;
-
         canTouchEvent = false;
-
-
     }
-
     private void skeletonZ() {
-        if (!gamePanel.bossBattleOn) {
+        if (!gamePanel.bossBattleOn&&! Progress.bossDefeated) {
             gamePanel.gameBehavior = GamePanel.cutSceneBehavior;
             gamePanel.cutSceneManager.scene = gamePanel.cutSceneManager.skeletonZ;
 
