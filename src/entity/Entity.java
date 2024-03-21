@@ -78,6 +78,9 @@ public class Entity {
     public boolean offBalance;
     public boolean inRage;
     public boolean boss;
+    public boolean sleeping;
+    public boolean mustDelete;
+    public boolean draw = true;
 
     public Entity loot;
     public boolean opened;
@@ -346,43 +349,45 @@ public class Entity {
     }
 
     public void update() {
-        if (escapeKnock) {
-            checkCollision();
-            if (collisionOn) {
-                knockCounter = 0;
-                escapeKnock = false;
-                speed = defaultSpeed;
+        if (!sleeping) {
+            if (escapeKnock) {
+                checkCollision();
+                if (collisionOn) {
+                    knockCounter = 0;
+                    escapeKnock = false;
+                    speed = defaultSpeed;
+                } else {
+                    switch (knockBackDirect) {
+                        case "up", "stay_up" -> worldY -= speed;
+                        case "down", "stay" -> worldY += speed;
+                        case "left", "stay_left" -> worldX -= speed;
+                        case "right", "stay_right" -> worldX += speed;
+                        default -> throw new IllegalStateException("Unexpected value: " + direct);
+                    }
+                }
+                knockTime(10);
+
+            } else if (isAttack) {
+                attack();
             } else {
-                switch (knockBackDirect) {
-                    case "up", "stay_up" -> worldY -= speed;
-                    case "down", "stay" -> worldY += speed;
-                    case "left", "stay_left" -> worldX -= speed;
-                    case "right", "stay_right" -> worldX += speed;
-                    default -> throw new IllegalStateException("Unexpected value: " + direct);
-                }
-            }
-            knockTime(10);
+                setAction();
+                checkCollision();
+                if (!collisionOn) {
 
-        } else if (isAttack) {
-            attack();
-        } else {
-            setAction();
-            checkCollision();
-            if (!collisionOn) {
-
-                switch (direct) {
-                    case "up", "stay_up" -> worldY -= speed;
-                    case "down", "stay" -> worldY += speed;
-                    case "left", "stay_left" -> worldX -= speed;
-                    case "right", "stay_right" -> worldX += speed;
-                    default -> throw new IllegalStateException("Unexpected value: " + direct);
+                    switch (direct) {
+                        case "up", "stay_up" -> worldY -= speed;
+                        case "down", "stay" -> worldY += speed;
+                        case "left", "stay_left" -> worldX -= speed;
+                        case "right", "stay_right" -> worldX += speed;
+                        default -> throw new IllegalStateException("Unexpected value: " + direct);
+                    }
                 }
+                spriteImageChange(17);
             }
-            spriteImageChange(17);
+            invincible(40);
+            shotCount();
+            offBalanceTime();
         }
-        invincible(40);
-        shotCount();
-        offBalanceTime();
     }
 
     protected void move(String direct) {

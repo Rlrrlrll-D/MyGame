@@ -18,6 +18,7 @@ public class SkeletonZ extends Monster {
         this.gamePanel = gamePanel;
         name = monName;
         boss = true;
+        sleeping = true;
         defaultSpeed = 1;
         speed = defaultSpeed;
         maxLife = 50;
@@ -42,8 +43,16 @@ public class SkeletonZ extends Monster {
 
         getImg();
         getAttackImg();
+        setDialog();
 
+    }
 
+    public void setDialog() {
+
+        dialogues[0][0] = "I am the king of the dead!" ;
+        dialogues[0][1] = "You are not welcome here.\nNo one can steal my treasure!";
+        dialogues[0][2] = "I will kill you and take your soul!";
+        dialogues[0][3] = "WELCOME TO YOUR DOOM!";
     }
 
     private void getImg() {

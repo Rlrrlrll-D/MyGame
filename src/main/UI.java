@@ -115,50 +115,50 @@ public class UI {
     }
 
     private void drawMonsterLife() {
-    Entity[] monsters = gamePanel.mon[gamePanel.currentMap];
-    Color color1 = new Color(0x090202);
-    Color color2 = new Color(0x861515);
-    Color color3 = new Color(229, 152, 9);
-    Color color4 = new Color(187, 53, 29);
+        Entity[] monsters = gamePanel.mon[gamePanel.currentMap];
+        Color color1 = new Color(0x090202);
+        Color color2 = new Color(0x861515);
+        Color color3 = new Color(229, 152, 9);
+        Color color4 = new Color(187, 53, 29);
 
-    for (Entity monster : monsters) {
-        if (monster != null && monster.inFocus()) {
-            double oneScale = (double) gamePanel.tileSize / monster.maxLife;
-            double hpBarValue = oneScale * monster.life;
-            int x = monster.getScrX();
-            int y = monster.getScrY() - 15;
+        for (Entity monster : monsters) {
+            if (monster != null && monster.inFocus()) {
+                double oneScale = (double) gamePanel.tileSize / monster.maxLife;
+                double hpBarValue = oneScale * monster.life;
+                int x = monster.getScrX();
+                int y = monster.getScrY() - 15;
 
-            if (monster.hpBarOn && !monster.boss) {
-                graphics2D.setColor(color1);
-                graphics2D.fillRect(x - 1, y, gamePanel.tileSize + 2, 12);
+                if (monster.hpBarOn && !monster.boss) {
+                    graphics2D.setColor(color1);
+                    graphics2D.fillRect(x - 1, y, gamePanel.tileSize + 2, 12);
 
-                graphics2D.setColor(color2);
-                graphics2D.fillRect(x, y + 1, (int) hpBarValue, 10);
-                monster.hpBarCounter++;
+                    graphics2D.setColor(color2);
+                    graphics2D.fillRect(x, y + 1, (int) hpBarValue, 10);
+                    monster.hpBarCounter++;
 
-                if (monster.hpBarCounter > 600) {
-                    monster.hpBarCounter = 0;
-                    monster.hpBarOn = false;
+                    if (monster.hpBarCounter > 600) {
+                        monster.hpBarCounter = 0;
+                        monster.hpBarOn = false;
+                    }
+                } else if (monster.boss) {
+                    oneScale = (double) gamePanel.tileSize * 8 / monster.maxLife;
+                    hpBarValue = oneScale * monster.life;
+                    x = gamePanel.screenWidth / 2 - gamePanel.tileSize * 4;
+                    y = (int) (gamePanel.tileSize / 1.7);
+
+                    graphics2D.setColor(color2);
+                    graphics2D.fillRect(x, y, (int) hpBarValue, 20);
+
+                    graphics2D.setColor(color4);
+                    graphics2D.drawRect(x - 1, y - 1, gamePanel.tileSize * 8 + 2, 22);
+
+                    graphics2D.setFont(Monica.deriveFont(Font.BOLD, 20F));
+                    graphics2D.setColor(color3);
+                    graphics2D.drawString(monster.name, x + gamePanel.tileSize * 4 - monster.name.length() * 5, y - 5);
                 }
-            } else if (monster.boss) {
-                oneScale = (double) gamePanel.tileSize * 8 / monster.maxLife;
-                hpBarValue = oneScale * monster.life;
-                x = gamePanel.screenWidth / 2 - gamePanel.tileSize * 4;
-                y = (int) (gamePanel.tileSize / 1.7);
-
-                graphics2D.setColor(color2);
-                graphics2D.fillRect(x, y, (int) hpBarValue, 20);
-
-                graphics2D.setColor(color4);
-                graphics2D.drawRect(x - 1, y - 1, gamePanel.tileSize * 8 + 2, 22);
-
-                graphics2D.setFont(Monica.deriveFont(Font.BOLD, 20F));
-                graphics2D.setColor(color3);
-                graphics2D.drawString(monster.name, x + gamePanel.tileSize * 4 - monster.name.length() * 5, y - 5);
             }
         }
     }
-}
 
     private void drawSleepScreen() {
         count++;
@@ -946,7 +946,7 @@ public class UI {
 
     }
 
-    private void drawDialogScreen() {
+    protected void drawDialogScreen() {
         int x = gamePanel.tileSize * 3;
         int y = (int) (gamePanel.tileSize * 1.5);
         int width = gamePanel.screenWidth - (gamePanel.tileSize * 6);
@@ -967,7 +967,7 @@ public class UI {
             if (gamePanel.keyHandler.enterPressed) {
                 charIndex = 0;
                 combinedText = "";
-                if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
+                if (gamePanel.gameBehavior == GamePanel.dialogBehavior || gamePanel.gameBehavior == GamePanel.cutSceneBehavior) {
                     npc.dialogCount++;
                     gamePanel.keyHandler.enterPressed = false;
                 }
@@ -976,6 +976,9 @@ public class UI {
             npc.dialogCount = 0;
             if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
                 gamePanel.gameBehavior = GamePanel.playBehavior;
+            }
+            if (gamePanel.gameBehavior == GamePanel.cutSceneBehavior) {
+                gamePanel.cutSceneManager.scenePhase++;
             }
         }
 

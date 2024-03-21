@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     public static final int tradeBehavior = 8;
     public static final int sleepBehavior = 9;
     public static final int mapBehavior = 10;
+    public static final int cutSceneBehavior = 11;
     //  screen settings
     private static final int originalTileSize = 16;
     private static final int scale = 3;
@@ -55,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable {
     int screenHeight2 = screenHeight;
     public boolean fullScreenOn;
     public boolean musicOn;
+    public boolean bossBattleOn;
     public CollisionChecker checker = new CollisionChecker(this);
     public AssetSetter assetSetter = new AssetSetter(this);
     public EventHandler eventHandler = new EventHandler(this);
@@ -72,6 +74,7 @@ public class GamePanel extends JPanel implements Runnable {
     public TileManager tileManager = new TileManager(this);
     public Thread gameThread;
     public EntityGenerator entityGenerator = new EntityGenerator(this);
+    public CutSceneManager cutSceneManager = new CutSceneManager(this);
     EnvironmentManager environmentManager = new EnvironmentManager(this);
     Map map = new Map(this);
     BufferedImage imgTempScreen;
@@ -108,6 +111,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void resetGame(boolean restart) {
         currentArea = outside;
+        removeTempEntity();
+        bossBattleOn = false;
         player.setDefaultPos();
         player.restoreStatus();
         player.resetCounter();
@@ -275,6 +280,7 @@ public class GamePanel extends JPanel implements Runnable {
             entityArrayList.clear();
             environmentManager.drawing(graphics2D);
             map.drawMiniMap(graphics2D);
+            cutSceneManager.drawing(graphics2D);
             ui.drawing(graphics2D);
         }
         if (keyHandler.chkDrawTime) {
@@ -329,5 +335,14 @@ public class GamePanel extends JPanel implements Runnable {
         }
         currentArea = nextArea;
         assetSetter.setMonster();
+    }
+    public void removeTempEntity() {
+        for (int i = 0; i < maxMap; i++) {
+            for (int j = 0; j < objects[1].length; j++) {
+                if (objects[i][j] != null && objects[i][j].mustDelete) {
+                    objects[i][j] = null;
+                }
+            }
+        }
     }
 }

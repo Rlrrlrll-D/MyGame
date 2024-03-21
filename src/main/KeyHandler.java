@@ -41,7 +41,7 @@ public class KeyHandler implements KeyListener {
         } else if (gamePanel.gameBehavior == GamePanel.pauseBehavior) {
             pauseBehavior(value);
 
-        } else if (gamePanel.gameBehavior == GamePanel.dialogBehavior) {
+        } else if (gamePanel.gameBehavior == GamePanel.dialogBehavior||gamePanel.gameBehavior == GamePanel.cutSceneBehavior) {
             dialogBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
             characterBehavior(value);

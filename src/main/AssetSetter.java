@@ -116,6 +116,11 @@ public class AssetSetter {
         gamePanel.objects[numMap][22].worldX = 5 * gamePanel.tileSize;
         gamePanel.objects[numMap][22].worldY = 3 * gamePanel.tileSize;
 
+        numMap = 3;
+        gamePanel.objects[numMap][0] = new DoorIron(gamePanel);
+        gamePanel.objects[numMap][0].worldX = 25 * gamePanel.tileSize;
+        gamePanel.objects[numMap][0].worldY = 15 * gamePanel.tileSize;
+
     }
 
     public void setNPC() {
@@ -168,19 +173,19 @@ public class AssetSetter {
 //            value++;
 //
 //        }
-        gamePanel.mon[numMap][4] = new Bat(gamePanel);
-        gamePanel.mon[numMap][4].worldX = gamePanel.tileSize * 44;
-        gamePanel.mon[numMap][4].worldY = gamePanel.tileSize * 41;
+        gamePanel.mon[numMap][0] = new Bat(gamePanel);
+        gamePanel.mon[numMap][0].worldX = gamePanel.tileSize * 44;
+        gamePanel.mon[numMap][0].worldY = gamePanel.tileSize * 41;
 
-        gamePanel.mon[numMap][5] = new Bat(gamePanel);
-        gamePanel.mon[numMap][5].worldX = gamePanel.tileSize * 38;
-        gamePanel.mon[numMap][5].worldY = gamePanel.tileSize * 6;
+        gamePanel.mon[numMap][1] = new Bat(gamePanel);
+        gamePanel.mon[numMap][1].worldX = gamePanel.tileSize * 38;
+        gamePanel.mon[numMap][1].worldY = gamePanel.tileSize * 6;
 
 
         numMap = 3;
-        gamePanel.mon[numMap][6] = new SkeletonZ(gamePanel);
-        gamePanel.mon[numMap][6].worldX = gamePanel.tileSize * 23;
-        gamePanel.mon[numMap][6].worldY = gamePanel.tileSize * 16;
+        gamePanel.mon[numMap][1] = new SkeletonZ(gamePanel);
+        gamePanel.mon[numMap][1].worldX = gamePanel.tileSize * 23;
+        gamePanel.mon[numMap][1].worldY = gamePanel.tileSize * 16;
     }
 
     public void setInteractiveTile() {

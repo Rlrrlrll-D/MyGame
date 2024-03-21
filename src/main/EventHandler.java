@@ -62,11 +62,14 @@ public class EventHandler {
                 teleport(3, 24, 45, gamePanel.dungeon);
             } else if (hit(3, 24, 45, "any")) {
                 teleport(2, 3, 2, gamePanel.dungeon);
+            } else if (hit(3, 24, 38, "up")) {
+                skeletonZ();
 
             } else if (hit(0, 12, 42, "any")) {
                 healingPool(GamePanel.dialogBehavior);
             } else if (hit(1, 20, 45, "stay")) {
                 speak(gamePanel.npc[1][0]);
+
             }
         }
     }
@@ -147,5 +150,13 @@ public class EventHandler {
         canTouchEvent = false;
 
 
+    }
+
+    private void skeletonZ() {
+        if (!gamePanel.bossBattleOn) {
+            gamePanel.gameBehavior = GamePanel.cutSceneBehavior;
+            gamePanel.cutSceneManager.scene = gamePanel.cutSceneManager.skeletonZ;
+
+        }
     }
 }
