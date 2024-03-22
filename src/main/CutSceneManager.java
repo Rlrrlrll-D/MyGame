@@ -52,6 +52,7 @@ public class CutSceneManager {
                 }
             }
             gamePanel.player.draw = false;
+            gamePanel.stopMusic();
             scenePhase++;
         }
         if (scenePhase == 1) {
@@ -90,8 +91,10 @@ public class CutSceneManager {
             scene = NA;
             scenePhase = 0;
             gamePanel.gameBehavior = GamePanel.playBehavior;
+            gamePanel.musicOn = false;
             gamePanel.stopMusic();
-            gamePanel.playSFX(25);
+            gamePanel.keyHandler.musicCheck(25);
+
         }
     }
 }

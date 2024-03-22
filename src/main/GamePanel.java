@@ -118,14 +118,13 @@ public class GamePanel extends JPanel implements Runnable {
         player.resetCounter();
         assetSetter.setNPC();
         assetSetter.setMonster();
+        musicOn = false;
+        keyHandler.musicCheck(0);
         if (restart) {
             player.setDefaultVal();
             assetSetter.setObject();
             assetSetter.setInteractiveTile();
             environmentManager.lighting.resetDay();
-            musicOn = false;
-
-
         }
     }
 

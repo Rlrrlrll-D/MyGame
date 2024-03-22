@@ -117,7 +117,7 @@ public class KeyHandler implements KeyListener {
                 gamePanel.gameBehavior = GamePanel.playBehavior;
                 gamePanel.ui.subBehavior = 0;
                 gamePanel.resetGame(false);
-                musicCheck();
+                musicCheck(0);
             } else if (gamePanel.ui.commandNum == 1) {
                 gamePanel.ui.commandNum = 0;
                 gamePanel.gameBehavior = GamePanel.titleBehavior;
@@ -354,19 +354,19 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.ui.commandNum == 0) {
                 System.out.println("Do some fighter specific stuff!");
                 gamePanel.gameBehavior = GamePanel.playBehavior;
-                musicCheck();
+                musicCheck(0);
                 enterPressed = false;
             }
             if (gamePanel.ui.commandNum == 1) {
                 System.out.println("Do some thief specific stuff!");
                 gamePanel.gameBehavior = GamePanel.playBehavior;
-                musicCheck();
+                musicCheck(0);
                 enterPressed = false;
             }
             if (gamePanel.ui.commandNum == 2) {
                 System.out.println("Do some sorcerer specific stuff!");
                 gamePanel.gameBehavior = GamePanel.playBehavior;
-                musicCheck();
+                musicCheck(0);
                 enterPressed = false;
             }
             if (gamePanel.ui.commandNum == 3) {
@@ -398,7 +398,7 @@ public class KeyHandler implements KeyListener {
                 gamePanel.saveLoad.load();
                 gamePanel.gameBehavior = GamePanel.playBehavior;
                 gamePanel.musicOn = false;
-                musicCheck();
+                musicCheck(0);
             }
             if (gamePanel.ui.commandNum == 2) {
                 System.exit(0);
@@ -406,14 +406,14 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    private void musicCheck() {
+    protected void musicCheck(int value) {
         if (!gamePanel.musicOn) {
-            gamePanel.playMusic(0);
+            gamePanel.playMusic(value);
             gamePanel.musicOn = true;
         }
     }
 
-    private void musTrigger() {
+    public void musTrigger() {
         if (gamePanel.musicOn) {
             if (gamePanel.sound.volumeScale > 0) {
                 gamePanel.sound.volumeScale = 0;

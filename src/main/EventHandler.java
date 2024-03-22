@@ -3,6 +3,9 @@ package main;
 import data.Progress;
 import entity.Entity;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class EventHandler {
     GamePanel gamePanel;
     EventRect[][][] eventRect;
@@ -44,33 +47,25 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
+            Map<Event, Runnable> eventActionMap = new LinkedHashMap<>();
+            eventActionMap.put(new Event(0, 7, 43, "down"), this::damagePit);
+            eventActionMap.put(new Event(0, 9, 43, "down"), this::damagePit);
+            eventActionMap.put(new Event(0, 14, 43, "any"), () -> teleport(1, 14, 44, gamePanel.indoor));
+            eventActionMap.put(new Event(1, 14, 44, "any"), () -> teleport(0, 14, 43, gamePanel.outside));
+            eventActionMap.put(new Event(0, 4, 42, "any"), () -> teleport(2, 2, 47, gamePanel.dungeon));
+            eventActionMap.put(new Event(2, 2, 47, "any"), () -> teleport(0, 4, 42, gamePanel.outside));
+            eventActionMap.put(new Event(2, 3, 2, "any"), () -> teleport(3, 24, 45, gamePanel.dungeon));
+            eventActionMap.put(new Event(3, 24, 45, "any"), () -> teleport(2, 3, 2, gamePanel.dungeon));
+            eventActionMap.put(new Event(3, 24, 38, "up"), this::skeletonZ);
+            eventActionMap.put(new Event(0, 12, 42, "any"), () -> healingPool(GamePanel.dialogBehavior));
+            eventActionMap.put(new Event(1, 20, 45, "stay"), () -> speak(gamePanel.npc[1][0]));
 
-            if (hit(0, 7, 43, "down")) {
-                damagePit();
-            } else if (hit(0, 9, 43, "down")) {
-                damagePit();
-            } else if (hit(0, 14, 43, "any")) {
-                teleport(1, 14, 44, gamePanel.indoor);
-            } else if (hit(1, 14, 44, "any")) {
-                teleport(0, 14, 43, gamePanel.outside);
-
-            } else if (hit(0, 4, 42, "any")) {
-                teleport(2, 2, 47, gamePanel.dungeon);
-            } else if (hit(2, 2, 47, "any")) {
-                teleport(0, 4, 42, gamePanel.outside);
-
-            } else if (hit(2, 3, 2, "any")) {
-                teleport(3, 24, 45, gamePanel.dungeon);
-            } else if (hit(3, 24, 45, "any")) {
-                teleport(2, 3, 2, gamePanel.dungeon);
-            } else if (hit(3, 24, 38, "up")) {
-                skeletonZ();
-
-            } else if (hit(0, 12, 42, "any")) {
-                healingPool(GamePanel.dialogBehavior);
-            } else if (hit(1, 20, 45, "stay")) {
-                speak(gamePanel.npc[1][0]);
-
+            for (Map.Entry<Event, Runnable> entry : eventActionMap.entrySet()) {
+                Event event = entry.getKey();
+                if (hit(event.map, event.col, event.row, event.direction)) {
+                    entry.getValue().run();
+                    break;
+                }
             }
         }
     }
@@ -124,6 +119,7 @@ public class EventHandler {
         canTouchEvent = false;
 
     }
+
     public void healingPool(int gameBehavior) {
 
         if (gamePanel.keyHandler.enterPressed && gamePanel.player.life != gamePanel.player.maxLife) {
@@ -138,6 +134,7 @@ public class EventHandler {
             gamePanel.saveLoad.save();
         }
     }
+
     private void teleport(int map, int col, int row, int area) {
 
         gamePanel.gameBehavior = GamePanel.transitionBehavior;
@@ -147,11 +144,26 @@ public class EventHandler {
         tmpRow = row;
         canTouchEvent = false;
     }
+
     private void skeletonZ() {
-        if (!gamePanel.bossBattleOn&&! Progress.bossDefeated) {
+        if (!gamePanel.bossBattleOn && !Progress.bossDefeated) {
             gamePanel.gameBehavior = GamePanel.cutSceneBehavior;
             gamePanel.cutSceneManager.scene = gamePanel.cutSceneManager.skeletonZ;
 
+        }
+    }
+
+    private static class Event {
+        int map;
+        int col;
+        int row;
+        String direction;
+
+        Event(int map, int col, int row, String direction) {
+            this.map = map;
+            this.col = col;
+            this.row = row;
+            this.direction = direction;
         }
     }
 }

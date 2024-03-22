@@ -70,26 +70,10 @@ public class Sound {
     }
 
     public void chkVolume() {
-        switch (volumeScale) {
-            case 0:
-                volume = -80f;
-                break;
-            case 1:
-                volume = -20f;
-                break;
-            case 2:
-                volume = -12f;
-                break;
-            case 3:
-                volume = -5f;
-                break;
-            case 4:
-                volume = 1f;
-                break;
-            case 5:
-                volume = 6f;
-                break;
-        }
-        floatControl.setValue(volume);
+    float[] volumeLevels = {-80f, -20f, -12f, -5f, 1f, 6f};
+    if (volumeScale >= 0 && volumeScale < volumeLevels.length) {
+        volume = volumeLevels[volumeScale];
     }
+    floatControl.setValue(volume);
+}
 }
