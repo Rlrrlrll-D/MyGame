@@ -145,6 +145,25 @@ public class CutSceneManager {
             String string = "The End";
             drawString(alpha, 55f, gamePanel.screenHeight / 2, string);
             if(counterReached(600)) {
+                gamePanel.playMusic(0);
+                scenePhase++;
+            }
+        }
+        if (scenePhase == 6) {
+            drawFade(1f);
+            drawString(1f, 20f, gamePanel.screenHeight - 20, "Thank you for playing!");
+            if(counterReached(600)) {
+                scenePhase++;
+            }
+        }
+        if
+        (scenePhase == 7) {
+            drawFade(1f);
+            drawString(1f, 20f, gamePanel.screenHeight - 20, """
+                    Created by: RLRRLRLL
+                    Special Thanks to:\s
+                    RyiSnow https://www.youtube.com/c/RyiSnow/""");
+            if(counterReached(600)) {
                 scenePhase++;
             }
         }
