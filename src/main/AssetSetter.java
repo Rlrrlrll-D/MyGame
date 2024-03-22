@@ -118,9 +118,13 @@ public class AssetSetter {
         gamePanel.objects[numMap][22].worldY = 3 * gamePanel.tileSize;
 
         numMap = 3;
-        gamePanel.objects[numMap][0] = new DoorIron(gamePanel);
-        gamePanel.objects[numMap][0].worldX = 25 * gamePanel.tileSize;
-        gamePanel.objects[numMap][0].worldY = 15 * gamePanel.tileSize;
+//        gamePanel.objects[numMap][0] = new DoorIron(gamePanel);
+//        gamePanel.objects[numMap][0].worldX = 25 * gamePanel.tileSize;
+//        gamePanel.objects[numMap][0].worldY = 15 * gamePanel.tileSize;
+
+        gamePanel.objects[numMap][1] = new BigDiamond(gamePanel);
+        gamePanel.objects[numMap][1].worldX = 21 * gamePanel.tileSize;
+        gamePanel.objects[numMap][1].worldY = 7 * gamePanel.tileSize;
 
     }
 
