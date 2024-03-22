@@ -1,5 +1,6 @@
 package main;
 
+import data.Progress;
 import entity.BigRock;
 import entity.Merchant;
 import entity.Oldman;
@@ -183,9 +184,11 @@ public class AssetSetter {
 
 
         numMap = 3;
-        gamePanel.mon[numMap][1] = new SkeletonZ(gamePanel);
-        gamePanel.mon[numMap][1].worldX = gamePanel.tileSize * 23;
-        gamePanel.mon[numMap][1].worldY = gamePanel.tileSize * 16;
+        if (!Progress.bossDefeated) {
+            gamePanel.mon[numMap][1] = new SkeletonZ(gamePanel);
+            gamePanel.mon[numMap][1].worldX = gamePanel.tileSize * 23;
+            gamePanel.mon[numMap][1].worldY = gamePanel.tileSize * 16;
+        }
     }
 
     public void setInteractiveTile() {
