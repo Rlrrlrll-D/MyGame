@@ -1,6 +1,7 @@
 package main;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class Main {
 
@@ -12,6 +13,7 @@ public class Main {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("My Hero Adventure");
+        new Main().setIcon();
 
         GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
@@ -26,5 +28,9 @@ public class Main {
 
         gamePanel.setupGame();
         gamePanel.startGameThread();
+    }
+    private void setIcon() {
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/res/player/me_down1.png")));
+        window.setIconImage(icon.getImage());
     }
 }
