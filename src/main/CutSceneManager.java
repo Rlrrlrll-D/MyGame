@@ -34,6 +34,8 @@ public class CutSceneManager {
             case end:
                 end();
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + scene);
         }
     }
 
@@ -107,71 +109,82 @@ public class CutSceneManager {
     }
 
     private void end() {
-        if (scenePhase == 0) {
-            gamePanel.stopMusic();
-            gamePanel.ui.npc = new BigDiamond(gamePanel);
-            scenePhase++;
-        }
-        if (scenePhase == 1) {
-            gamePanel.ui.drawDialogScreen();
-            //scenePhase++;
-        }
-        if (scenePhase == 2) {
-            gamePanel.playSFX(26);
-            scenePhase++;
-        }
-        if (scenePhase == 3) {
-            if (counterReached(300)) {
+        switch (scenePhase) {
+            case 0:
+                gamePanel.stopMusic();
+                gamePanel.ui.npc = new BigDiamond(gamePanel);
                 scenePhase++;
-            }
-        }
-        if (scenePhase == 4) {
-            alpha += 0.007f;
-            if (alpha > 1f) {
-                alpha = 1f;
-            }
-            drawFade(alpha);
-            if (alpha == 1f) {
-                alpha = 0;
+                break;
+            case 1:
+                gamePanel.ui.drawDialogScreen();
+                break;
+            case 2:
+                gamePanel.playSFX(26);
                 scenePhase++;
-            }
-        }
-        if (scenePhase == 5) {
-            drawFade(1f);
-            alpha += 0.007f;
-            if (alpha > 1f) {
-                alpha = 1f;
-            }
-            String string = "The End";
-            drawString(alpha, 55f, gamePanel.screenHeight / 2, string);
-            if(counterReached(600)) {
-                gamePanel.playMusic(0);
-                scenePhase++;
-            }
-        }
-        if (scenePhase == 6) {
-            drawFade(1f);
-            drawString(1f, 20f, gamePanel.screenHeight - 20, "Thank you for playing!");
-            if(counterReached(600)) {
-                scenePhase++;
-            }
-        }
-        if
-        (scenePhase == 7) {
-            drawFade(1f);
-            drawString(1f, 20f, gamePanel.screenHeight - 20, """
-                    Created by: RLRRLRLL
-                    Special Thanks to:\s
-                    RyiSnow https://www.youtube.com/c/RyiSnow/""");
-            if(counterReached(600)) {
-                scenePhase++;
-            }
+                break;
+            case 3:
+                if (counterReached(300)) scenePhase++;
+                break;
+            case 4:
+                alpha = Math.min(alpha + 0.007f, 1f);
+                drawFade(alpha);
+                if (alpha == 1f) {
+                    alpha = 0;
+                    scenePhase++;
+                }
+                break;
+            case 5:
+                drawFade(1f);
+                alpha = Math.min(alpha + 0.007f, 1f);
+                String string = "The End";
+                drawString(alpha, 55f, gamePanel.screenHeight / 2 , string);
+                if (counterReached(600)) {
+                    gamePanel.playMusic(0);
+                    scenePhase++;
+                }
+                break;
+            case 6:
+                drawFade(1f);
+                String string1 = "Thank you for playing!";
+                drawString(1f, 20f, gamePanel.screenHeight / 2 , string1);
+                if (counterReached(600)) scenePhase++;
+                break;
+            case 7:
+                drawFade(1f);
+            
+                String string2 = """
+                        Created by:    RLRRLRLL
+                                            
+                           Special Thanks to:  \s
+                                            
+                        RyiSnow    https://www.youtube.com/c/RyiSnow/""";
+                y = gamePanel.screenHeight / 2 ;
+                drawString(1f, 20f, y, string2);
+                if (counterReached(600)) scenePhase++;
+                break;
+            case 8:
+                drawFade(1f);
+                String string3 = "Goodbye!";
+                y--;
+                drawString(1f, 20f, y, string3);
+                if (counterReached(1200)) {
+                    playAgain();
+                }
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + scenePhase);
         }
     }
 
+    private void playAgain() {
+        gamePanel.gameBehavior = GamePanel.titleBehavior;
+        gamePanel.resetGame(true);
+        scene = NA;
+        scenePhase = 0;
+    }
+
     private boolean counterReached(int count) {
-        counter++;
-        if (counter >= count) {
+        if (++counter >= count) {
             counter = 0;
             return true;
         }
@@ -179,19 +192,27 @@ public class CutSceneManager {
     }
 
     private void drawFade(float alpha) {
-
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
         graphics2D.setColor(Color.BLACK);
         graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
     }
 
-    public void drawString(float alpha, float fontSize, int y, String string ) {
-        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-        graphics2D.setFont(graphics2D.getFont().deriveFont(fontSize));
-        graphics2D.setColor(Color.WHITE);
-        graphics2D.drawString(string, gamePanel.screenWidth / 2 - string.length() * 5, y);
-        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+    public void drawString(float alpha, float fontSize, int y, String string) {
+    setGraphics2D(alpha, fontSize);
+    FontMetrics fontMetrics = graphics2D.getFontMetrics();
+    int width = fontMetrics.stringWidth(string);
+    graphics2D.drawString(string, (float) gamePanel.screenWidth / 2 - (float) width /2, y);
+    resetGraphics2D();
+}
 
-    }
+private void setGraphics2D(float alpha, float fontSize) {
+    graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+    graphics2D.setFont(graphics2D.getFont().deriveFont(fontSize));
+    graphics2D.setColor(Color.WHITE);
+}
+
+private void resetGraphics2D() {
+    graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+}
 }
