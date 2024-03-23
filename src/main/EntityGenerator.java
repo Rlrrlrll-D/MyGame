@@ -3,36 +3,39 @@ package main;
 import entity.Entity;
 import objects.*;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 public class EntityGenerator {
     GamePanel gamePanel;
+    private final Map<String, Function<GamePanel, Entity>> entityCreators;
 
     public EntityGenerator(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
+        entityCreators = new HashMap<>();
+        entityCreators.put(Axe.objName, Axe::new);
+        entityCreators.put(Boots.objName, Boots::new);
+        entityCreators.put(Key.objName, Key::new);
+        entityCreators.put(Lantern.objName, Lantern::new);
+        entityCreators.put(PotionRed.objName, PotionRed::new);
+        entityCreators.put(ManaCrystal.objName, ManaCrystal::new);
+        entityCreators.put(ShieldBlue.objName, ShieldBlue::new);
+        entityCreators.put(ShieldWood.objName, ShieldWood::new);
+        entityCreators.put(Sword.objName, Sword::new);
+        entityCreators.put(Tent.objName, Tent::new);
+        entityCreators.put(Door.objName, Door::new);
+        entityCreators.put(DoorIron.objName, DoorIron::new);
+        entityCreators.put(Chest.objName, Chest::new);
+        entityCreators.put(CoinBronze.objName, CoinBronze::new);
+        entityCreators.put(Heart.objName, Heart::new);
+        entityCreators.put(Rock.objName, Rock::new);
+        entityCreators.put(Fireball.objName, Fireball::new);
+        entityCreators.put(Pickaxe.objName, Pickaxe::new);
     }
 
     public Entity getObj(String itemName) {
-        Entity obj;
-        obj = switch (itemName) {
-            case Axe.objName -> new Axe(gamePanel);
-            case Boots.objName -> new Boots(gamePanel);
-            case Key.objName -> new Key(gamePanel);
-            case Lantern.objName -> new Lantern(gamePanel);
-            case PotionRed.objName -> new PotionRed(gamePanel);
-            case ManaCrystal.objName -> new ManaCrystal(gamePanel);
-            case ShieldBlue.objName -> new ShieldBlue(gamePanel);
-            case ShieldWood.objName -> new ShieldWood(gamePanel);
-            case Sword.objName -> new Sword(gamePanel);
-            case Tent.objName -> new Tent(gamePanel);
-            case Door.objName -> new Door(gamePanel);
-            case DoorIron.objName -> new DoorIron(gamePanel);
-            case Chest.objName -> new Chest(gamePanel);
-            case CoinBronze.objName -> new CoinBronze(gamePanel);
-            case Heart.objName -> new Heart(gamePanel);
-            case Rock.objName -> new Rock(gamePanel);
-            case Fireball.objName -> new Fireball(gamePanel);
-            case Pickaxe.objName -> new Pickaxe(gamePanel);
-            default -> null;
-        };
-        return obj;
+        Function<GamePanel, Entity> creator = entityCreators.get(itemName);
+        return creator != null ? creator.apply(gamePanel) : null;
     }
 }
