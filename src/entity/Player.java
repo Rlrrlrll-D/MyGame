@@ -381,10 +381,10 @@ public class Player extends Entity {
 
     private void checkStayDirect() {
         switch (stayDirect) {
-            case "down" -> direct = "stay";
-            case "up" -> direct = "stay_up";
-            case "left" -> direct = "stay_left";
-            case "right" -> direct = "stay_right";
+            case "down","stay" -> direct = "stay";
+            case "up","stay_up" -> direct = "stay_up";
+            case "left","stay_left" -> direct = "stay_left";
+            case "right","stay_right"-> direct = "stay_right";
             default -> throw new IllegalStateException("Unexpected value: " + stayDirect);
         }
     }
