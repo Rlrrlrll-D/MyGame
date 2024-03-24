@@ -114,9 +114,9 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_ENTER) {
             if (gamePanel.ui.commandNum == 0 || gamePanel.ui.commandNum == -1) {
+                gamePanel.resetGame(false);
                 gamePanel.gameBehavior = GamePanel.playBehavior;
                 gamePanel.ui.subBehavior = 0;
-                gamePanel.resetGame(false);
                 musicCheck(0);
             } else if (gamePanel.ui.commandNum == 1) {
                 gamePanel.ui.commandNum = 0;

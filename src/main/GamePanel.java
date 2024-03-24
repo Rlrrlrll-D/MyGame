@@ -94,7 +94,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void setupGame() {
-
         assetSetter.setObject();
         assetSetter.setNPC();
         assetSetter.setMonster();
@@ -105,7 +104,6 @@ public class GamePanel extends JPanel implements Runnable {
         imgTempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB_PRE);
         graphics2D = (Graphics2D) imgTempScreen.getGraphics();
         setFullScreen();
-
     }
 
 
