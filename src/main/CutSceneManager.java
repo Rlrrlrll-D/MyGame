@@ -137,7 +137,7 @@ public class CutSceneManager {
                 drawFade(1f);
                 alpha = Math.min(alpha + 0.007f, 1f);
                 String string = "The End";
-                drawString(alpha, 55f, gamePanel.screenHeight / 2 , string);
+                drawString(alpha, 55f, gamePanel.screenHeight / 2, string);
                 if (counterReached(600)) {
                     gamePanel.playMusic(0);
                     scenePhase++;
@@ -146,19 +146,19 @@ public class CutSceneManager {
             case 6:
                 drawFade(1f);
                 String string1 = "Thank you for playing!";
-                drawString(1f, 20f, gamePanel.screenHeight / 2 , string1);
+                drawString(1f, 20f, gamePanel.screenHeight / 2, string1);
                 if (counterReached(600)) scenePhase++;
                 break;
             case 7:
                 drawFade(1f);
-            
+
                 String string2 = """
                         Created by:    RLRRLRLL
                                             
                             Special Thanks to:   \s
                                             
                         RyiSnow    https://www.youtube.com/c/RyiSnow/""";
-                y = gamePanel.screenHeight / 2 ;
+                y = gamePanel.screenHeight / 2;
                 drawString(1f, 20f, y, string2);
                 if (counterReached(600)) scenePhase++;
                 break;
@@ -199,20 +199,20 @@ public class CutSceneManager {
     }
 
     public void drawString(float alpha, float fontSize, int y, String string) {
-    setGraphics2D(alpha, fontSize);
-    FontMetrics fontMetrics = graphics2D.getFontMetrics();
-    int width = fontMetrics.stringWidth(string);
-    graphics2D.drawString(string, (float) gamePanel.screenWidth / 2 - (float) width /2, y);
-    resetGraphics2D();
-}
+        setGraphics2D(alpha, fontSize);
+        FontMetrics fontMetrics = graphics2D.getFontMetrics();
+        int width = fontMetrics.stringWidth(string);
+        graphics2D.drawString(string, (float) gamePanel.screenWidth / 2 - (float) width / 2, y);
+        resetGraphics2D();
+    }
 
-private void setGraphics2D(float alpha, float fontSize) {
-    graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-    graphics2D.setFont(graphics2D.getFont().deriveFont(fontSize));
-    graphics2D.setColor(new Color(229, 152, 9));
-}
+    private void setGraphics2D(float alpha, float fontSize) {
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(fontSize));
+        graphics2D.setColor(new Color(229, 152, 9));
+    }
 
-private void resetGraphics2D() {
-    graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
-}
+    private void resetGraphics2D() {
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
+    }
 }
