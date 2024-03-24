@@ -140,9 +140,6 @@ public class Player extends Entity {
         guardRight = setup("/res/player/guard_right", gamePanel.tileSize * 2, gamePanel.tileSize);
     }
 
-    public void setSleepingImg(BufferedImage image) {
-        stay1 = stay2 = stay3 = stay_up1 = stay_up2 = stay_up3 = stay_left1 = stay_left2 = stay_left3 = stay_right1 = stay_right2 = stay_right3 = up1 = up2 = down1 = down2 = left1 = left2 = right1 = right2 = image;
-    }
 
     public void getAttackImage() {
         if (currentWeapon instanceof Sword) {
@@ -180,6 +177,9 @@ public class Player extends Entity {
         }
     }
 
+    public void setSleepingImg(BufferedImage image) {
+        stay1 = stay2 = stay3 = stay_up1 = stay_up2 = stay_up3 = stay_left1 = stay_left2 = stay_left3 = stay_right1 = stay_right2 = stay_right3 = up1 = up2 = down1 = down2 = left1 = left2 = right1 = right2 = image;
+    }
     public void update() {
         if (escapeKnock) {
             handleEscapeKnock();

@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class UI {
 
@@ -554,61 +556,38 @@ public class UI {
     }
 
     private void control(int x, int y) {
-        int textX;
-        int textY;
-
         String txt = "Control";
-        textX = getX_Text(txt);
-        textY = y + gamePanel.tileSize;
+        int textX = getX_Text(txt);
+        int textY = y + gamePanel.tileSize;
         graphics2D.drawString(txt, textX, textY);
+
+        Map<String, String> controls = new LinkedHashMap<>() {{
+            put("Move", "WASD");
+            put("Confirm/Attack", "Enter");
+            put("Shoot/Cast", "F");
+            put("Character Screen", "C");
+            put("Pause", "P");
+            put("Mute", "M");
+            put("Options", "Esc");
+            put("Back", "");
+        }};
 
         textX = x + gamePanel.tileSize;
         textY += gamePanel.tileSize;
-        graphics2D.drawString("Move", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("Confirm/Attack", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("Shoot/Cast", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("Character Screen", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("Pause", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("Mute", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("Options", textX, textY);
+        int keyTextX = x + gamePanel.tileSize * 6;
 
-
-        textX = x + gamePanel.tileSize * 6;
-        textY = y + gamePanel.tileSize * 2;
-        graphics2D.drawString("WASD", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("Enter", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("F", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("C", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("P", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("M", textX, textY);
-        textY += (int) (gamePanel.tileSize * 0.85);
-        graphics2D.drawString("Esc", textX, textY);
-
-
-        txt = "Back";
-        textX = getX_Text(txt);
-        textY = y + gamePanel.tileSize * 9;
-        graphics2D.drawString(txt, textX, textY);
-        if (commandNum == 0) {
+        for (Map.Entry<String, String> control : controls.entrySet()) {
+            graphics2D.drawString(control.getKey(), textX, textY);
+            graphics2D.drawString(control.getValue(), keyTextX, textY);
+            if (commandNum == 0 && control.getKey().equals("Back")) {
             graphics2D.drawString(">", textX - 25, textY);
             if (gamePanel.keyHandler.enterPressed) {
                 subBehavior = 0;
                 commandNum = 3;
             }
         }
-
-
+            textY += (int) (gamePanel.tileSize * 0.85);
+        }
     }
 
     private void fullScreenNotification(int x, int y) {
@@ -900,25 +879,26 @@ public class UI {
     }
 
     private void drawMessage() {
-        var msgX = gamePanel.tileSize;
-        var msgY = gamePanel.tileSize * 3;
-
+        int msgX = gamePanel.tileSize;
+        int msgYStart = gamePanel.tileSize * 3;
+        int lineHeight = 30;
 
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
 
         for (int i = 0; i < message.size(); i++) {
-            if (message.get(i) != null) {
+            String msg = message.get(i);
+            if (msg != null) {
+                int msgY = msgYStart + i * lineHeight;
 
                 graphics2D.setColor(new Color(12, 5, 1, 224));
-                graphics2D.drawString(message.get(i), msgX + 2, msgY + 2);
+                graphics2D.drawString(msg, msgX + 2, msgY + 2);
                 graphics2D.setColor(new Color(213, 195, 194));
-                graphics2D.drawString(message.get(i), msgX, msgY);
+                graphics2D.drawString(msg, msgX, msgY);
 
-
-                var count = counter.get(i) + 1;
+                int count = counter.get(i) + 1;
                 counter.set(i, count);
-                msgY += 30;
-                if (counter.get(i) > 180) {
+
+                if (count > 180) {
                     message.remove(i);
                     counter.remove(i);
                 }

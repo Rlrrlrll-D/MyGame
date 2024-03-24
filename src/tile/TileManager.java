@@ -37,7 +37,7 @@ public class TileManager {
 
         getTileImage();
 
-        inputStream = getClass().getResourceAsStream("/maps/sample.txt");
+        inputStream = getClass().getResourceAsStream("/maps/world01.txt");
 
         assert inputStream != null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
