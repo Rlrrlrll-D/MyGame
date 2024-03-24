@@ -611,27 +611,12 @@ public class UI {
     }
 
     private void drawInventory(Entity entity, boolean cursor) {
-        int x;
-        int y;
-        int height;
-        int width;
-        int slotCol;
-        int slotRow;
-        if (entity instanceof Player) {
-            x = gamePanel.tileSize * 12;
-            y = gamePanel.tileSize;
-            height = gamePanel.tileSize * 5;
-            width = gamePanel.tileSize * 6;
-            slotCol = playerSlotCol;
-            slotRow = playerSlotRow;
-        } else {
-            x = gamePanel.tileSize * 2;
-            y = gamePanel.tileSize;
-            height = gamePanel.tileSize * 5;
-            width = gamePanel.tileSize * 6;
-            slotCol = npcSlotCol;
-            slotRow = npcSlotRow;
-        }
+        int x = entity instanceof Player ? gamePanel.tileSize * 12 : gamePanel.tileSize * 2;
+        int y = gamePanel.tileSize;
+        int height = gamePanel.tileSize * 5;
+        int width = gamePanel.tileSize * 6;
+        int slotCol = entity instanceof Player ? playerSlotCol : npcSlotCol;
+        int slotRow = entity instanceof Player ? playerSlotRow : npcSlotRow;
 
         drawSubWindow(x, y, width, height);
         final int slotXStart = x + gamePanel.tileSize / 2;
@@ -639,31 +624,24 @@ public class UI {
         int slotX = slotXStart;
         int slotY = slotYStart;
 
-        for (int i = 0; i < entity.inventory.size(); i++) {
-
-            if (entity.inventory.get(i) == entity.currentWeapon ||
-                    entity.inventory.get(i) == entity.currentShield ||
-                    entity.inventory.get(i) == entity.currentLight) {
+        for (Entity item : entity.inventory) {
+            if (item == entity.currentWeapon || item == entity.currentShield || item == entity.currentLight) {
                 graphics2D.setColor(new Color(240, 190, 90));
                 graphics2D.fillRoundRect(slotX, slotY, gamePanel.tileSize, gamePanel.tileSize, 10, 10);
             }
-            graphics2D.drawImage(entity.inventory.get(i).down1, slotX, slotY, null);
+            graphics2D.drawImage(item.down1, slotX, slotY, null);
 
-            if (entity == gamePanel.player && entity.inventory.get(i).amount > 1) {
+            if (entity == gamePanel.player && item.amount > 1) {
                 graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 20F));
-                int amountX;
-                int amountY;
-                String str = "" + entity.inventory.get(i).amount;
-                amountX = getX_Value(str, slotX + 44);
-                amountY = slotY + gamePanel.tileSize;
+                int amountX = getX_Value("" + item.amount, slotX + 44);
+                int amountY = slotY + gamePanel.tileSize;
                 graphics2D.setColor(new Color(12, 8, 1));
-                graphics2D.drawString(str, amountX, amountY);
+                graphics2D.drawString("" + item.amount, amountX, amountY);
                 graphics2D.setColor(new Color(229, 152, 9));
-                graphics2D.drawString(str, amountX - 2, amountY - 2);
-
+                graphics2D.drawString("" + item.amount, amountX - 2, amountY - 2);
             }
             slotX += gamePanel.tileSize;
-            if (i == 4 || i == 9 || i == 14) {
+            if (entity.inventory.indexOf(item) == 4 || entity.inventory.indexOf(item) == 9 || entity.inventory.indexOf(item) == 14) {
                 slotX = slotXStart;
                 slotY += gamePanel.tileSize;
             }
@@ -680,7 +658,6 @@ public class UI {
 
             int descriptionFrameY = y + height;
             int descriptionFrameHeight = gamePanel.tileSize * 3;
-
 
             int txtX = x + 20;
             int txtY = descriptionFrameY + gamePanel.tileSize;

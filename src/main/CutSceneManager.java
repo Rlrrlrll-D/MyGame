@@ -155,7 +155,7 @@ public class CutSceneManager {
                 String string2 = """
                         Created by:    RLRRLRLL
                                             
-                           Special Thanks to:  \s
+                            Special Thanks to:   \s
                                             
                         RyiSnow    https://www.youtube.com/c/RyiSnow/""";
                 y = gamePanel.screenHeight / 2 ;
@@ -193,7 +193,7 @@ public class CutSceneManager {
 
     private void drawFade(float alpha) {
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
-        graphics2D.setColor(Color.BLACK);
+        graphics2D.setColor(new Color(12, 23, 30));
         graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1));
     }
@@ -209,7 +209,7 @@ public class CutSceneManager {
 private void setGraphics2D(float alpha, float fontSize) {
     graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
     graphics2D.setFont(graphics2D.getFont().deriveFont(fontSize));
-    graphics2D.setColor(Color.WHITE);
+    graphics2D.setColor(new Color(229, 152, 9));
 }
 
 private void resetGraphics2D() {
