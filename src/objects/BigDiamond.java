@@ -4,13 +4,13 @@ import entity.Entity;
 import main.GamePanel;
 
 public class BigDiamond extends PickUpOnlyItems {
-    public static final String objectName = "BigDiamond";
+    public static final String objName = "BigDiamond";
     GamePanel gamePanel;
 
     public BigDiamond(GamePanel gamePanel) {
         super(gamePanel);
         this.gamePanel = gamePanel;
-        this.name = objectName;
+        this.name = objName;
         down1 = setup("/res/objects/BigDiamond", 32, 32);
         setDialogues();
     }

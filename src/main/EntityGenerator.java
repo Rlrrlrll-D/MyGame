@@ -32,6 +32,7 @@ public class EntityGenerator {
         entityCreators.put(Rock.objName, Rock::new);
         entityCreators.put(Fireball.objName, Fireball::new);
         entityCreators.put(Pickaxe.objName, Pickaxe::new);
+        entityCreators.put(BigDiamond.objName, BigDiamond::new);
     }
 
     public Entity getObj(String itemName) {
