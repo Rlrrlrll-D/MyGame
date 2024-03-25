@@ -24,7 +24,6 @@ public class UI {
     public int npcSlotRow = 0;
     public int commandNum = 0;
     public int charIndex;
-    public int titleScreenBehavior = 0;
     public Font Purisa, Pixel, Monica;
     public Entity npc;
     GamePanel gamePanel;
@@ -580,12 +579,12 @@ public class UI {
             graphics2D.drawString(control.getKey(), textX, textY);
             graphics2D.drawString(control.getValue(), keyTextX, textY);
             if (commandNum == 0 && control.getKey().equals("Back")) {
-            graphics2D.drawString(">", textX - 25, textY);
-            if (gamePanel.keyHandler.enterPressed) {
-                subBehavior = 0;
-                commandNum = 3;
+                graphics2D.drawString(">", textX - 25, textY);
+                if (gamePanel.keyHandler.enterPressed) {
+                    subBehavior = 0;
+                    commandNum = 3;
+                }
             }
-        }
             textY += (int) (gamePanel.tileSize * 0.85);
         }
     }
@@ -781,20 +780,15 @@ public class UI {
     }
 
     private void drawTitleScreen() {
-        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, titleScreenBehavior == 0 ? 37F : 30F));
-        String text = titleScreenBehavior == 0 ? "My hero adventure" : "Select your class:";
+        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 37F));
+        String text = "My hero adventure";
         int x = getX_Text(text.toUpperCase());
         int y = (int) (gamePanel.tileSize * 2.5);
         graphics2D.setColor(new Color(0, 0, 7));
         graphics2D.drawString(text.toUpperCase(), x + 4, y + 4);
         graphics2D.setColor(new Color(229, 152, 9));
         graphics2D.drawString(text.toUpperCase(), x, y);
-
-        if (titleScreenBehavior == 0) {
-            drawTitleOptions(new String[]{"New game", "Load game", "Quit"}, y);
-        } else {
-            drawTitleOptions(new String[]{"Fighter", "Thief", "Sorcerer", "Back"}, y);
-        }
+        drawTitleOptions(new String[]{"New game", "Load game", "Quit"}, y);
     }
 
     private void drawTitleOptions(String[] options, int y) {
@@ -884,6 +878,7 @@ public class UI {
     }
 
     private void drawPauseScreenYellow() {
+
         graphics2D.setColor(new Color(229, 152, 9));
         graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 50F));
         String txt = "Paused!";

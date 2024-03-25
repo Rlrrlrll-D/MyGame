@@ -41,7 +41,7 @@ public class KeyHandler implements KeyListener {
         } else if (gamePanel.gameBehavior == GamePanel.pauseBehavior) {
             pauseBehavior(value);
 
-        } else if (gamePanel.gameBehavior == GamePanel.dialogBehavior||gamePanel.gameBehavior == GamePanel.cutSceneBehavior) {
+        } else if (gamePanel.gameBehavior == GamePanel.dialogBehavior || gamePanel.gameBehavior == GamePanel.cutSceneBehavior) {
             dialogBehavior(value);
         } else if (gamePanel.gameBehavior == GamePanel.characterBehavior) {
             characterBehavior(value);
@@ -122,7 +122,6 @@ public class KeyHandler implements KeyListener {
                 gamePanel.ui.commandNum = 0;
                 gamePanel.gameBehavior = GamePanel.titleBehavior;
                 gamePanel.ui.subBehavior = 0;
-                gamePanel.ui.titleScreenBehavior = 0;
                 gamePanel.resetGame(true);
             }
         }
@@ -308,6 +307,12 @@ public class KeyHandler implements KeyListener {
                 case 1:
                     gamePanel.tileManager.loadMap("/maps/world02.txt", 1);
                     break;
+                case 2:
+                    gamePanel.tileManager.loadMap("/maps/dungeon01.txt", 2);
+                    break;
+                case 3:
+                    gamePanel.tileManager.loadMap("/maps/dungeon02.txt", 3);
+                    break;
             }
         }
         if (value == KeyEvent.VK_C) {
@@ -329,52 +334,52 @@ public class KeyHandler implements KeyListener {
     }
 
     private void titleBehavior(int value) throws IOException, ClassNotFoundException {
-        if (gamePanel.ui.titleScreenBehavior == 0) {
+        //if (gamePanel.ui.titleScreenBehavior == 0)// {
             titleBehavior_0(value);
-        } else if (gamePanel.ui.titleScreenBehavior == 1) {
-            titleBehavior_1(value);
-        }
+//        } else if (gamePanel.ui.titleScreenBehavior == 1) {
+//            titleBehavior_1(value);
+//        }
     }
 
-    private void titleBehavior_1(int value) {
-        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-
-            if (gamePanel.ui.commandNum != 0) {
-                gamePanel.ui.commandNum--;
-                gamePanel.playSFX(12);
-            }
-        }
-        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-            if (gamePanel.ui.commandNum != 3) {
-                gamePanel.ui.commandNum++;
-                gamePanel.playSFX(12);
-            }
-        }
-        if (value == KeyEvent.VK_ENTER) {
-            if (gamePanel.ui.commandNum == 0) {
-                System.out.println("Do some fighter specific stuff!");
-                gamePanel.gameBehavior = GamePanel.playBehavior;
-                musicCheck(0);
-                enterPressed = false;
-            }
-            if (gamePanel.ui.commandNum == 1) {
-                System.out.println("Do some thief specific stuff!");
-                gamePanel.gameBehavior = GamePanel.playBehavior;
-                musicCheck(0);
-                enterPressed = false;
-            }
-            if (gamePanel.ui.commandNum == 2) {
-                System.out.println("Do some sorcerer specific stuff!");
-                gamePanel.gameBehavior = GamePanel.playBehavior;
-                musicCheck(0);
-                enterPressed = false;
-            }
-            if (gamePanel.ui.commandNum == 3) {
-                gamePanel.ui.titleScreenBehavior = 0;
-                gamePanel.ui.commandNum = 0;
-            }
-        }
-    }
+//    private void titleBehavior_1(int value) {
+//        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
+//
+//            if (gamePanel.ui.commandNum != 0) {
+//                gamePanel.ui.commandNum--;
+//                gamePanel.playSFX(12);
+//            }
+//        }
+//        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
+//            if (gamePanel.ui.commandNum != 3) {
+//                gamePanel.ui.commandNum++;
+//                gamePanel.playSFX(12);
+//            }
+//        }
+//        if (value == KeyEvent.VK_ENTER) {
+//            if (gamePanel.ui.commandNum == 0) {
+//
+//                gamePanel.gameBehavior = GamePanel.playBehavior;
+//                musicCheck(0);
+//                enterPressed = false;
+//            }
+//            if (gamePanel.ui.commandNum == 1) {
+//
+//                gamePanel.gameBehavior = GamePanel.playBehavior;
+//                musicCheck(0);
+//                enterPressed = false;
+//            }
+//            if (gamePanel.ui.commandNum == 2) {
+//
+//                gamePanel.gameBehavior = GamePanel.playBehavior;
+//                musicCheck(0);
+//                enterPressed = false;
+//            }
+//            if (gamePanel.ui.commandNum == 3) {
+//                gamePanel.ui.titleScreenBehavior = 0;
+//                gamePanel.ui.commandNum = 0;
+//            }
+//        }
+//    }
 
 
     private void titleBehavior_0(int value) throws IOException, ClassNotFoundException {
@@ -392,7 +397,9 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_ENTER) {
             if (gamePanel.ui.commandNum == 0) {
-                gamePanel.ui.titleScreenBehavior = 1;
+                gamePanel.gameBehavior = GamePanel.playBehavior;
+                gamePanel.musicOn = false;
+                musicCheck(0);
             }
             if (gamePanel.ui.commandNum == 1) {
                 gamePanel.saveLoad.load();
