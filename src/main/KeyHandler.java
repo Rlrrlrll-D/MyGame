@@ -334,55 +334,6 @@ public class KeyHandler implements KeyListener {
     }
 
     private void titleBehavior(int value) throws IOException, ClassNotFoundException {
-        //if (gamePanel.ui.titleScreenBehavior == 0)// {
-            titleBehavior_0(value);
-//        } else if (gamePanel.ui.titleScreenBehavior == 1) {
-//            titleBehavior_1(value);
-//        }
-    }
-
-//    private void titleBehavior_1(int value) {
-//        if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
-//
-//            if (gamePanel.ui.commandNum != 0) {
-//                gamePanel.ui.commandNum--;
-//                gamePanel.playSFX(12);
-//            }
-//        }
-//        if (value == KeyEvent.VK_S || value == KeyEvent.VK_DOWN) {
-//            if (gamePanel.ui.commandNum != 3) {
-//                gamePanel.ui.commandNum++;
-//                gamePanel.playSFX(12);
-//            }
-//        }
-//        if (value == KeyEvent.VK_ENTER) {
-//            if (gamePanel.ui.commandNum == 0) {
-//
-//                gamePanel.gameBehavior = GamePanel.playBehavior;
-//                musicCheck(0);
-//                enterPressed = false;
-//            }
-//            if (gamePanel.ui.commandNum == 1) {
-//
-//                gamePanel.gameBehavior = GamePanel.playBehavior;
-//                musicCheck(0);
-//                enterPressed = false;
-//            }
-//            if (gamePanel.ui.commandNum == 2) {
-//
-//                gamePanel.gameBehavior = GamePanel.playBehavior;
-//                musicCheck(0);
-//                enterPressed = false;
-//            }
-//            if (gamePanel.ui.commandNum == 3) {
-//                gamePanel.ui.titleScreenBehavior = 0;
-//                gamePanel.ui.commandNum = 0;
-//            }
-//        }
-//    }
-
-
-    private void titleBehavior_0(int value) throws IOException, ClassNotFoundException {
         if (value == KeyEvent.VK_W || value == KeyEvent.VK_UP) {
             if (gamePanel.ui.commandNum != 0) {
                 gamePanel.ui.commandNum--;
@@ -455,6 +406,5 @@ public class KeyHandler implements KeyListener {
         if (value == KeyEvent.VK_SPACE) {
             spacePressed = false;
         }
-
     }
 }
