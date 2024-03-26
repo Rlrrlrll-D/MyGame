@@ -4,6 +4,7 @@ import main.GamePanel;
 import main.UtilityTool;
 import monster.SkeletonZ;
 import monster.Slime;
+import objects.ManaCrystal;
 import tile.interactive.DestructibleWall;
 import tile.interactive.DryTree;
 
@@ -341,10 +342,19 @@ public class Entity {
         for (int i = 0; i < gamePanel.objects[1].length; i++) {
             if (gamePanel.objects[gamePanel.currentMap][i] == null) {
                 gamePanel.objects[gamePanel.currentMap][i] = dropped;
-                gamePanel.objects[gamePanel.currentMap][i].worldX = worldX;
-                gamePanel.objects[gamePanel.currentMap][i].worldY = worldY;
+                dropItemPosition(dropped, i);
                 break;
             }
+        }
+    }
+
+    private void dropItemPosition(Entity dropped, int i) {
+        if (dropped instanceof ManaCrystal) {
+            gamePanel.objects[gamePanel.currentMap][i].worldX = worldX + 5;
+            gamePanel.objects[gamePanel.currentMap][i].worldY = worldY + 5;
+        } else {
+            gamePanel.objects[gamePanel.currentMap][i].worldX = worldX;
+            gamePanel.objects[gamePanel.currentMap][i].worldY = worldY;
         }
     }
 
@@ -657,13 +667,15 @@ public class Entity {
             isAlive = false;
         }
     }
-public boolean inFocus(){
-     return worldX + gamePanel.tileSize * 5 > gamePanel.player.worldX - gamePanel.player.screenX &&
+
+    public boolean inFocus() {
+        return worldX + gamePanel.tileSize * 5 > gamePanel.player.worldX - gamePanel.player.screenX &&
                 worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
                 worldY + gamePanel.tileSize * 5 > gamePanel.player.worldY - gamePanel.player.screenY &&
                 worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY;
 
-}
+    }
+
     public void drawing(Graphics2D graphics2D) {
 
         if (inFocus()) {
@@ -845,7 +857,6 @@ public boolean inFocus(){
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + direct);
             }
-
 
 
             if (invincible && !(this instanceof DryTree) && !(this instanceof DestructibleWall)) {

@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class TileManager {
-
     public Tile[] tiles;
     public int[][][] mapTileNum;
     GamePanel gamePanel;

@@ -315,7 +315,6 @@ public class GamePanel extends JPanel implements Runnable {
         sound.setFile(16);
         sound.play();
     }
-
     public void changeArea() {
         if (nextArea != currentArea) {
             stopMusic();
