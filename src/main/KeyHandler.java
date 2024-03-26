@@ -289,11 +289,9 @@ public class KeyHandler implements KeyListener {
             gamePanel.gameBehavior = GamePanel.pauseBehavior;
         }
         if (value == KeyEvent.VK_T) {
-
             chkDrawTime = !chkDrawTime;
         }
         if (value == KeyEvent.VK_G) {
-
             modeOfGod = !modeOfGod;
         }
         if (value == KeyEvent.VK_M) {
@@ -313,6 +311,8 @@ public class KeyHandler implements KeyListener {
                 case 3:
                     gamePanel.tileManager.loadMap("/maps/dungeon02.txt", 3);
                     break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + gamePanel.currentMap);
             }
         }
         if (value == KeyEvent.VK_C) {
