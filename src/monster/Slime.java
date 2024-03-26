@@ -52,12 +52,12 @@ public class Slime extends Monster {
     public void setAction() {
 
         if (onPath) {
-            checkStopNotChasing(gamePanel.player, 15, 100);
+            //checkStopNotChasing(gamePanel.player, 15, 100);
 
-            searchPath(getGoalCol(gamePanel.player), getGoalRow(gamePanel.player));
+            //searchPath(getGoalCol(gamePanel.player), getGoalRow(gamePanel.player));
 
         } else {
-            checkStartNotChasing(gamePanel.player, 5, 100);
+            //checkStartNotChasing(gamePanel.player, 5, 100);
             getRandomDirection(140);
         }
     }

@@ -6,6 +6,7 @@ import objects.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 
 public class Player extends Entity {
@@ -364,7 +365,20 @@ public class Player extends Entity {
 
             if (gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].life == 0) {
                 gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex] = gamePanel.interactiveTile[gamePanel.currentMap][interTileIndex].getDestroyForm();
+                checkDrop();
             }
+        }
+    }
+
+    @Override
+    public void checkDrop() {
+        int i = new Random().nextInt(100) + 1;
+
+        if (i > 80 && i <= 90) {
+            dropItem(new Heart(gamePanel));
+        }
+        if (i > 90) {
+            dropItem(new ManaCrystal(gamePanel));
         }
     }
 
