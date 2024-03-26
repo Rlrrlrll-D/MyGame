@@ -51,34 +51,18 @@ public class Slime extends Monster {
 
     public void setAction() {
 
-        if (onPath) {
-            //checkStopNotChasing(gamePanel.player, 15, 100);
-
-            //searchPath(getGoalCol(gamePanel.player), getGoalRow(gamePanel.player));
-
-        } else {
-            //checkStartNotChasing(gamePanel.player, 5, 100);
             getRandomDirection(140);
-        }
     }
 
     public void damageReaction() {
         actionCounter = 0;
         switch (gamePanel.player.direct) {
-            case "up", "stay_up":
-                direct = "up";
-                break;
-            case "down", "stay":
-                direct = "down";
-                break;
-            case "left", "stay_left":
-                direct = "left";
-                break;
-            case "right", "stay_right":
-                direct = "right";
-                break;
+            case "up", "stay_up" -> direct = "up";
+            case "down", "stay" -> direct = "down";
+            case "left", "stay_left" -> direct = "left";
+            case "right", "stay_right" -> direct = "right";
+            default -> throw new IllegalStateException("Unexpected value: " + gamePanel.player.direct);
         }
-        onPath = true;
     }
 
     public void checkDrop() {
