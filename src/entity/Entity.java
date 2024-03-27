@@ -350,8 +350,8 @@ public class Entity {
 
     private void dropItemPosition(Entity dropped, int i) {
         if (dropped instanceof ManaCrystal) {
-            gamePanel.objects[gamePanel.currentMap][i].worldX = worldX + 5;
-            gamePanel.objects[gamePanel.currentMap][i].worldY = worldY + 5;
+            gamePanel.objects[gamePanel.currentMap][i].worldX = worldX + 10;
+            gamePanel.objects[gamePanel.currentMap][i].worldY = worldY + 10;
         } else {
             gamePanel.objects[gamePanel.currentMap][i].worldX = worldX;
             gamePanel.objects[gamePanel.currentMap][i].worldY = worldY;
