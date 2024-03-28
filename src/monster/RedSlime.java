@@ -38,14 +38,14 @@ public class RedSlime extends Monster {
     }
 
     private void getImg() {
-        up1 = setup("/res/monster/redslime_1", gamePanel.tileSize, gamePanel.tileSize);
-        up2 = setup("/res/monster/redslime_2", gamePanel.tileSize, gamePanel.tileSize);
-        down1 = setup("/res/monster/redslime_1", gamePanel.tileSize, gamePanel.tileSize);
-        down2 = setup("/res/monster/redslime_2", gamePanel.tileSize, gamePanel.tileSize);
-        left1 = setup("/res/monster/redslime_1", gamePanel.tileSize, gamePanel.tileSize);
-        left2 = setup("/res/monster/redslime_2", gamePanel.tileSize, gamePanel.tileSize);
-        right1 = setup("/res/monster/redslime_1", gamePanel.tileSize, gamePanel.tileSize);
-        right2 = setup("/res/monster/redslime_2", gamePanel.tileSize, gamePanel.tileSize);
+        up1 = setup("/res/monster/red_slime_1", gamePanel.tileSize, gamePanel.tileSize);
+        up2 = setup("/res/monster/red_slime_2", gamePanel.tileSize, gamePanel.tileSize);
+        down1 = setup("/res/monster/red_slime_1", gamePanel.tileSize, gamePanel.tileSize);
+        down2 = setup("/res/monster/red_slime_2", gamePanel.tileSize, gamePanel.tileSize);
+        left1 = setup("/res/monster/red_slime_1", gamePanel.tileSize, gamePanel.tileSize);
+        left2 = setup("/res/monster/red_slime_2", gamePanel.tileSize, gamePanel.tileSize);
+        right1 = setup("/res/monster/red_slime_1", gamePanel.tileSize, gamePanel.tileSize);
+        right2 = setup("/res/monster/red_slime_2", gamePanel.tileSize, gamePanel.tileSize);
     }
 
     public void setAction() {
@@ -66,18 +66,10 @@ public class RedSlime extends Monster {
     public void damageReaction() {
         actionCounter = 0;
         switch (gamePanel.player.direct) {
-            case "up", "stay_up":
-                direct = "up";
-                break;
-            case "down", "stay":
-                direct = "down";
-                break;
-            case "left", "stay_left":
-                direct = "left";
-                break;
-            case "right", "stay_right":
-                direct = "right";
-                break;
+            case "up", "stay_up" -> direct = "up";
+            case "down", "stay" -> direct = "down";
+            case "left", "stay_left" -> direct = "left";
+            case "right", "stay_right" -> direct = "right";
         }
         onPath = true;
     }

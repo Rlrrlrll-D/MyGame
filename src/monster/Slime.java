@@ -5,8 +5,6 @@ import main.GamePanel;
 import objects.CoinBronze;
 import objects.Heart;
 import objects.ManaCrystal;
-import objects.Rock;
-
 import java.util.Random;
 
 public class Slime extends Monster {
@@ -24,7 +22,6 @@ public class Slime extends Monster {
         attack = 5;
         defence = 0;
         exp = 2;
-        projectile = new Rock(gamePanel);
 
         solidArea.x = 3;
         solidArea.y = 18;
@@ -50,7 +47,6 @@ public class Slime extends Monster {
     }
 
     public void setAction() {
-
             getRandomDirection(140);
     }
 
