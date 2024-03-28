@@ -67,20 +67,11 @@ public class Bat extends Monster {
                 speed = defaultSpeed;
             } else {
                 switch (knockBackDirect) {
-                    case "up", "stay_up":
-                        worldY -= speed;
-                        break;
-                    case "down", "stay":
-                        worldY += speed;
-                        break;
-                    case "left", "stay_left":
-                        worldX -= speed;
-                        break;
-                    case "right", "stay_right":
-                        worldX += speed;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + direct);
+                    case "up", "stay_up" -> worldY -= speed;
+                    case "down", "stay" -> worldY += speed;
+                    case "left", "stay_left" -> worldX -= speed;
+                    case "right", "stay_right" -> worldX += speed;
+                    default -> throw new IllegalStateException("Unexpected value: " + direct);
                 }
             }
             knockTime(10);
@@ -93,21 +84,11 @@ public class Bat extends Monster {
             if (!collisionOn) {
 
                 switch (direct) {
-
-                    case "up":
-                        worldY -= speed;
-                        break;
-                    case "down":
-                        worldY += speed;
-                        break;
-                    case "left":
-                        worldX -= speed;
-                        break;
-                    case "right":
-                        worldX += speed;
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + direct);
+                    case "up" -> worldY -= speed;
+                    case "down" -> worldY += speed;
+                    case "left" -> worldX -= speed;
+                    case "right" -> worldX += speed;
+                    default -> throw new IllegalStateException("Unexpected value: " + direct);
                 }
             }
             spriteImageChange(4);
