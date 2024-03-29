@@ -48,15 +48,8 @@ public class Bat extends Monster {
 
     public void setAction() {
 
-        if (onPath) {
-//            checkStopNotChasing(gamePanel.player, 15, 100);
-//
-//            searchPath(getGoalCol(gamePanel.player), getGoalRow(gamePanel.player));
+        getRandomDirection(15);
 
-        } else {
-//            checkStartNotChasing(gamePanel.player, 5, 100);
-            getRandomDirection(15);
-        }
     }
     public void update() {
         if (escapeKnock) {
@@ -94,27 +87,10 @@ public class Bat extends Monster {
             spriteImageChange(4);
         }
         invincible(40);
-//        shotCount();
-//        offBalanceTime();
     }
 
     public void damageReaction() {
         actionCounter = 0;
-//        switch (gamePanel.player.direct) {
-//            case "up", "stay_up":
-//                direct = "up";
-//                break;
-//            case "down", "stay":
-//                direct = "down";
-//                break;
-//            case "left", "stay_left":
-//                direct = "left";
-//                break;
-//            case "right", "stay_right":
-//                direct = "right";
-//                break;
-//        }
-//        onPath = true;
     }
 
 
