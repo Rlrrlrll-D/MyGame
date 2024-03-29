@@ -34,3 +34,7 @@ true
 true
 017.png
 true
+018.png
+false
+019.png
+false
