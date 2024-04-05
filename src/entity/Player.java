@@ -45,7 +45,7 @@ public class Player extends Entity {
         speed = defaultSpeed;
         level = 1;
         maxLife = 6;
-        maxMana = 4;
+        maxMana = 2;
         mana = maxMana;
         life = maxLife;
         ammo = 10;
@@ -174,7 +174,6 @@ public class Player extends Entity {
             attackLeft2 = setup("/res/player/pick_left_2", gamePanel.tileSize * 2, gamePanel.tileSize);
             attackRight1 = setup("/res/player/pick_right_1", gamePanel.tileSize * 2, gamePanel.tileSize);
             attackRight2 = setup("/res/player/pick_right_2", gamePanel.tileSize * 2, gamePanel.tileSize);
-
         }
     }
 
