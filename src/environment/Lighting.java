@@ -107,21 +107,7 @@ public class Lighting {
         if (gamePanel.currentArea == gamePanel.outside || gamePanel.currentArea == gamePanel.dungeon) {
             graphics2D.drawImage(darknessFilter, 0, 0, null);
         }
-
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
-        var situation = switch (dayState) {
-            case day -> "Day";
-            case dusk -> "Dusk";
-            case night -> "Night";
-            case dawn -> "Dawn";
-            default -> "";
-        };
-
-        if (gamePanel.gameBehavior != GamePanel.pauseBehavior) {
-            graphics2D.setColor(Color.white);
-            graphics2D.setFont(graphics2D.getFont().deriveFont(45f));
-            graphics2D.drawString(situation, 800, 500);
-        }
     }
 }
