@@ -4,7 +4,8 @@ import entity.Entity;
 import main.GamePanel;
 
 public class ShieldWood extends Entity {
-    public static final String objName ="Shield";
+    public static final String objName = "Shield";
+
     public ShieldWood(GamePanel gamePanel) {
         super(gamePanel);
         name = objName;
