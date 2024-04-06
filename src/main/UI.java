@@ -184,15 +184,9 @@ public class UI {
 
     private void drawTradeScreen() {
         switch (subBehavior) {
-            case 0:
-                trade_select();
-                break;
-            case 1:
-                trade_buy();
-                break;
-            case 2:
-                trade_sell();
-                break;
+            case 0 -> trade_select();
+            case 1 -> trade_buy();
+            case 2 -> trade_sell();
         }
         gamePanel.keyHandler.enterPressed = false;
     }
@@ -233,7 +227,6 @@ public class UI {
                 npc.startDialog(npc, 1);
             }
         }
-
     }
 
     public void trade_buy() {
