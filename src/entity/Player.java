@@ -44,8 +44,8 @@ public class Player extends Entity {
         defaultSpeed = 4;
         speed = defaultSpeed;
         level = 1;
-        maxLife = 6;
-        maxMana = 2;
+        maxLife =11;
+        maxMana = 4;
         mana = maxMana;
         life = maxLife;
         ammo = 10;
@@ -53,7 +53,7 @@ public class Player extends Entity {
         dexterity = 1;
         exp = 0;
         nextLevelExp = 5;
-        coin = 500;
+        coin = 1;
         currentWeapon = new Sword(gamePanel);
         currentShield = new ShieldWood(gamePanel);
         projectile = new Fireball(gamePanel);
@@ -174,6 +174,7 @@ public class Player extends Entity {
             attackLeft2 = setup("/res/player/pick_left_2", gamePanel.tileSize * 2, gamePanel.tileSize);
             attackRight1 = setup("/res/player/pick_right_1", gamePanel.tileSize * 2, gamePanel.tileSize);
             attackRight2 = setup("/res/player/pick_right_2", gamePanel.tileSize * 2, gamePanel.tileSize);
+
         }
     }
 

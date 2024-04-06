@@ -810,12 +810,26 @@ public class UI {
         var y = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.maxLife / 2; i++) {
+
+            if (i % 5 == 0 && i != 0) {
+                x = gamePanel.tileSize / 4;
+                y += gamePanel.tileSize / 2;
+            }
+
             graphics2D.drawImage(heart_e, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
             x += gamePanel.tileSize / 2;
+
+
         }
         x = gamePanel.tileSize / 4;
+        y = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.life; i++) {
+            if (i % 5 == 0 && i != 0) {
+                x = gamePanel.tileSize / 4;
+                y += gamePanel.tileSize / 2;
+
+            }
             graphics2D.drawImage(heart_h, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
             i++;
             if (i < gamePanel.player.life) {
