@@ -19,7 +19,7 @@ public class Fireball extends Projectile {
         maxLife = 80;
         life = maxLife;
         knockPower = 5;
-        attack = 1;
+        attack = 5;
         useCost = 1;
         isAlive = false;
         getImg();

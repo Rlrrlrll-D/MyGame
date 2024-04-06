@@ -33,16 +33,15 @@ public class SkeletonZ extends Monster {
         motionDelay3 = 48;
         exp = 50;
 
-        int size = gamePanel.tileSize * 5;
+        int size = gamePanel.tileSize * 4;
         solidArea.x = 48;
         solidArea.y = 48;
         solidArea.width = size - 48 * 2;
         solidArea.height = size - 48;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        attackArea.width = 170;
-        attackArea.height = 170;
-
+        attackArea.width = 120;
+        attackArea.height = 120;
         getImg();
         getAttackImg();
         setDialog();
@@ -58,7 +57,7 @@ public class SkeletonZ extends Monster {
     }
 
     private void getImg() {
-        var i = 5;
+        var i = 4;
         if (!inRage) {
             up1 = setup("/res/monster/skeleton_up_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
             up2 = setup("/res/monster/skeleton_up_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
@@ -83,7 +82,7 @@ public class SkeletonZ extends Monster {
     }
 
     private void getAttackImg() {
-        var i = 5;
+        var i = 4;
         if (!inRage) {
             attackUp1 = setup("/res/monster/skeleton_attack_up_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
             attackUp2 = setup("/res/monster/skeleton_attack_up_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);

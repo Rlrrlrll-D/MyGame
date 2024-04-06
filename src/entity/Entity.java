@@ -669,9 +669,9 @@ public class Entity {
     }
 
     public boolean inFocus() {
-        return worldX + gamePanel.tileSize * 5 > gamePanel.player.worldX - gamePanel.player.screenX &&
+        return worldX + gamePanel.tileSize * 4 > gamePanel.player.worldX - gamePanel.player.screenX &&
                 worldX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
-                worldY + gamePanel.tileSize * 5 > gamePanel.player.worldY - gamePanel.player.screenY &&
+                worldY + gamePanel.tileSize * 4 > gamePanel.player.worldY - gamePanel.player.screenY &&
                 worldY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY;
 
     }
@@ -877,8 +877,8 @@ public class Entity {
 
             }
             if (this instanceof SkeletonZ) {
-                shadow = setup("/res/objects/shadow", gamePanel.tileSize * 5, gamePanel.tileSize);
-                graphics2D.drawImage(shadow, getScrX(), getScrY() + gamePanel.tileSize * 5 - gamePanel.tileSize / 2, null);
+                shadow = setup("/res/objects/shadow", gamePanel.tileSize * 4, gamePanel.tileSize);
+                graphics2D.drawImage(shadow, getScrX(), getScrY() + gamePanel.tileSize * 4 - gamePanel.tileSize / 2, null);
             }
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
         }

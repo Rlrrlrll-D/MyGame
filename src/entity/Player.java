@@ -44,7 +44,7 @@ public class Player extends Entity {
         defaultSpeed = 4;
         speed = defaultSpeed;
         level = 1;
-        maxLife =6;
+        maxLife = 6;
         maxMana = 2;
         mana = maxMana;
         life = maxLife;
@@ -181,6 +181,7 @@ public class Player extends Entity {
     public void setSleepingImg(BufferedImage image) {
         stay1 = stay2 = stay3 = stay_up1 = stay_up2 = stay_up3 = stay_left1 = stay_left2 = stay_left3 = stay_right1 = stay_right2 = stay_right3 = up1 = up2 = down1 = down2 = left1 = left2 = right1 = right2 = image;
     }
+
     public void update() {
         if (escapeKnock) {
             handleEscapeKnock();
@@ -395,10 +396,10 @@ public class Player extends Entity {
 
     private void checkStayDirect() {
         switch (stayDirect) {
-            case "down","stay" -> direct = "stay";
-            case "up","stay_up" -> direct = "stay_up";
-            case "left","stay_left" -> direct = "stay_left";
-            case "right","stay_right"-> direct = "stay_right";
+            case "down", "stay" -> direct = "stay";
+            case "up", "stay_up" -> direct = "stay_up";
+            case "left", "stay_left" -> direct = "stay_left";
+            case "right", "stay_right" -> direct = "stay_right";
             default -> throw new IllegalStateException("Unexpected value: " + stayDirect);
         }
     }
