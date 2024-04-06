@@ -813,13 +813,10 @@ public class UI {
 
             if (i % 5 == 0 && i != 0) {
                 x = gamePanel.tileSize / 4;
-                y += gamePanel.tileSize / 2;
+                y += gamePanel.tileSize-8;
             }
-
-            graphics2D.drawImage(heart_e, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
-            x += gamePanel.tileSize / 2;
-
-
+            graphics2D.drawImage(heart_e, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+            x += gamePanel.tileSize-8;
         }
         x = gamePanel.tileSize / 4;
         y = gamePanel.tileSize / 4;
@@ -827,27 +824,26 @@ public class UI {
         for (int i = 0; i < gamePanel.player.life; i++) {
             if (i % 5 == 0 && i != 0) {
                 x = gamePanel.tileSize / 4;
-                y += gamePanel.tileSize / 2;
-
+                y += gamePanel.tileSize-8;
             }
-            graphics2D.drawImage(heart_h, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
+            graphics2D.drawImage(heart_h, x, y, gamePanel.tileSize , gamePanel.tileSize , null);
             i++;
             if (i < gamePanel.player.life) {
-                graphics2D.drawImage(heart_f, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
+                graphics2D.drawImage(heart_f, x, y, gamePanel.tileSize , gamePanel.tileSize , null);
             }
-            x += gamePanel.tileSize / 2;
+            x += gamePanel.tileSize-8;
         }
         x = gamePanel.tileSize / 4;
-        y += gamePanel.tileSize / 2;
+        y += gamePanel.tileSize;
         for (int i = 0; i < gamePanel.player.maxMana; i++) {
-            graphics2D.drawImage(crystal_e, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
-            x += (int) (gamePanel.tileSize / 2.5);
+            graphics2D.drawImage(crystal_e, x, y, gamePanel.tileSize , gamePanel.tileSize, null);
+            x += gamePanel.tileSize-10;
         }
         x = gamePanel.tileSize / 4;
 
         for (int i = 0; i < gamePanel.player.mana; i++) {
-            graphics2D.drawImage(crystal_f, x, y, gamePanel.tileSize / 2, gamePanel.tileSize / 2, null);
-            x += (int) (gamePanel.tileSize / 2.5);
+            graphics2D.drawImage(crystal_f, x, y, gamePanel.tileSize , gamePanel.tileSize , null);
+            x += gamePanel.tileSize-10;
         }
         y = (int) (gamePanel.tileSize * .4) + gamePanel.tileSize / 4;
         x = gamePanel.screenWidth - gamePanel.tileSize * 2;
