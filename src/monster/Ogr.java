@@ -24,9 +24,9 @@ public class Ogr extends Monster {
         attack = 8;
         defence = 2;
         knockPower = 5;
-        motionDelay1 = 24;
-        motionDelay2 = 48;
-        motionDelay3 = 96;
+        motionDelay1 = 18;
+        motionDelay2 = 36;
+        motionDelay3 = 72;
         exp = 10;
 
         solidArea.x = 4;
