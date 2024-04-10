@@ -373,6 +373,7 @@ public class Player extends Entity {
 
     @Override
     public void checkDrop() {
+
         int i = new Random().nextInt(100) + 1;
 
         if (i > 80 && i <= 90) {

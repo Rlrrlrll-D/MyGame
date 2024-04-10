@@ -69,33 +69,40 @@ public class Lighting {
             setLightSource();
             gamePanel.player.lightUp = false;
         }
-        if (dayState == day) {
-            dayCounter++;
-            if (dayCounter > 1200) {
-                dayState = dusk;
-                dayCounter = 0;
-            }
-        }
-        if (dayState == dusk) {
+
+        switch (dayState) {
+            case day:
+                updateDayState(dusk, 1800);
+                break;
+            case dusk:
             filterAlpha += 0.001f;
-            if (filterAlpha > 1f) {
-                filterAlpha = 1f;
-                dayState = night;
-            }
-        }
-        if (dayState == night) {
-            dayCounter++;
-            if (dayCounter > 1200) {
-                dayState = dawn;
-                dayCounter = 0;
-            }
-        }
-        if (dayState == dawn) {
+                filterAlphaChange();
+                break;
+            case night:
+                updateDayState(dawn, 1200);
+                break;
+            case dawn:
             filterAlpha -= 0.001f;
-            if (filterAlpha < 0) {
-                filterAlpha = 0;
-                dayState = day;
-            }
+                filterAlphaChange();
+                break;
+        }
+    }
+
+    private void filterAlphaChange() {
+        if (filterAlpha > 1f) {
+            filterAlpha = 1f;
+            dayState = night;
+        } else if (filterAlpha < 0) {
+            filterAlpha = 0;
+            dayState = day;
+        }
+    }
+
+    private void updateDayState(int nextState, int counterLimit) {
+        dayCounter++;
+        if (dayCounter > counterLimit) {
+            dayState = nextState;
+            dayCounter = 0;
         }
     }
 

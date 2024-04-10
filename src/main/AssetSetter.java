@@ -4,10 +4,7 @@ import data.Progress;
 import entity.BigRock;
 import entity.Merchant;
 import entity.Oldman;
-import monster.Bat;
-import monster.Ogr;
-import monster.SkeletonZ;
-import monster.Slime;
+import monster.*;
 import objects.*;
 import tile.interactive.DestructibleWall;
 import tile.interactive.DryTree;
@@ -195,12 +192,18 @@ public class AssetSetter {
             gamePanel.mon[numMap][i].worldY = gamePanel.tileSize * 18;
             value++;
         }
-        gamePanel.mon[numMap][4] = new Ogr(gamePanel);
-        gamePanel.mon[numMap][4].worldX = gamePanel.tileSize * 20;
-        gamePanel.mon[numMap][4].worldY = gamePanel.tileSize * 44;
-        // ... rest of the code for setting monsters for map 0
-    }
+        for (int i = 0; i < 3; i++) {
+            gamePanel.mon[numMap][i] = new RedSlime(gamePanel);
+            gamePanel.mon[numMap][i].worldX = gamePanel.tileSize * (38 + value);
+            gamePanel.mon[numMap][i].worldY = gamePanel.tileSize * 5;
+            value++;
 
+            gamePanel.mon[numMap][4] = new Ogr(gamePanel);
+            gamePanel.mon[numMap][4].worldX = gamePanel.tileSize * 20;
+            gamePanel.mon[numMap][4].worldY = gamePanel.tileSize * 44;
+            // ... rest of the code for setting monsters for map 0
+        }
+    }
     private void setMonsterForMap2() {
         int numMap = 2;
 

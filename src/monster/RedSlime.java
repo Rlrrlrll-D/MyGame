@@ -55,7 +55,7 @@ public class RedSlime extends Monster {
 
             searchPath(getGoalCol(gamePanel.player), getGoalRow(gamePanel.player));
             shotCount();
-            checkShootOrNot(200, 30);
+            checkShootOrNot(100, 30);
 
         } else {
             checkStartNotChasing(gamePanel.player, 5, 100);
