@@ -58,7 +58,7 @@ public class RedSlime extends Monster {
             checkShootOrNot(100, 30);
 
         } else {
-            checkStartNotChasing(gamePanel.player, 5, 100);
+            checkStartNotChasing(gamePanel.player, 7, 100);
             getRandomDirection(120);
         }
     }
