@@ -448,7 +448,6 @@ public class Player extends Entity {
                     gamePanel.ui.addMsg("Exp +" + gamePanel.mon[gamePanel.currentMap][i].exp);
                     exp += gamePanel.mon[gamePanel.currentMap][i].exp;
                     checkLevelUp();
-
                 }
             }
         }
@@ -463,6 +462,7 @@ public class Player extends Entity {
             level++;
             nextLevelExp *= 2;
             maxLife += 2;
+            maxMana += 1;
             strength++;
             dexterity++;
             attack = getAttack();

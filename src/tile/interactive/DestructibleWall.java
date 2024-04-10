@@ -16,7 +16,6 @@ public class DestructibleWall extends InteractiveTile {
         this.worldX = gamePanel.tileSize * col;
         this.worldY = gamePanel.tileSize * row;
 
-
         down1 = setup("/tile/pictures/destructible_wall", gamePanel.tileSize, gamePanel.tileSize);
         destructible = true;
         life = 3;

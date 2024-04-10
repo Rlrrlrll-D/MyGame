@@ -85,7 +85,7 @@ public class Ogr extends Monster {
 
     public void damageReaction() {
         actionCounter = 0;
-        direct = gamePanel.player.direct.replace("stay_", "");
+        //direct = gamePanel.player.direct.replace("stay_", "");
         onPath = true;
     }
 

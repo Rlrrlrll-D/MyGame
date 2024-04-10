@@ -224,7 +224,6 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void toBufferImage() throws IOException {
-
         super.paintComponent(graphics2D);
         long drawStart = 0;
         if (keyHandler.chkDrawTime) {

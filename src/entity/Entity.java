@@ -468,7 +468,6 @@ public class Entity {
             }
         }
     }
-//
 
     public void checkStopNotChasing(Entity entity, int distance, int rate) {
         if (getTileDistance(entity) > distance) {
@@ -573,7 +572,6 @@ public class Entity {
             }
         }
     }
-
 
     public int getParticleSize() {
         return 0;

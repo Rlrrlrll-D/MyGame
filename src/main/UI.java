@@ -81,12 +81,12 @@ public class UI {
         }
 
         if (gamePanel.gameBehavior == GamePanel.playBehavior) {
-            drawPlayerLife();
+            drawPlayerStats();
             drawMonsterLife();
             drawMessage();
         }
         if (gamePanel.gameBehavior == GamePanel.pauseBehavior) {
-            drawPlayerLife();
+            drawPlayerStats();
             drawPauseScreenShadow();
             drawPauseScreenYellow();
 
@@ -797,19 +797,20 @@ public class UI {
         }
     }
 
-    public void drawPlayerLife() {
+    public void drawPlayerStats() {
 
         var x = gamePanel.tileSize / 4;
         var y = gamePanel.tileSize / 4;
-
+        var step = 1;
         for (int i = 0; i < gamePanel.player.maxLife / 2; i++) {
 
             if (i % 5 == 0 && i != 0) {
                 x = gamePanel.tileSize / 4;
-                y += gamePanel.tileSize-8;
+                y += gamePanel.tileSize - 8;
+                step++;
             }
             graphics2D.drawImage(heart_e, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
-            x += gamePanel.tileSize-8;
+            x += gamePanel.tileSize - 8;
         }
         x = gamePanel.tileSize / 4;
         y = gamePanel.tileSize / 4;
@@ -817,26 +818,36 @@ public class UI {
         for (int i = 0; i < gamePanel.player.life; i++) {
             if (i % 5 == 0 && i != 0) {
                 x = gamePanel.tileSize / 4;
-                y += gamePanel.tileSize-8;
+                y += gamePanel.tileSize - 8;
             }
-            graphics2D.drawImage(heart_h, x, y, gamePanel.tileSize , gamePanel.tileSize , null);
+            graphics2D.drawImage(heart_h, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
             i++;
             if (i < gamePanel.player.life) {
-                graphics2D.drawImage(heart_f, x, y, gamePanel.tileSize , gamePanel.tileSize , null);
+                graphics2D.drawImage(heart_f, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
             }
-            x += gamePanel.tileSize-8;
+            x += gamePanel.tileSize - 8;
         }
-        x = gamePanel.tileSize / 4;
-        y += gamePanel.tileSize;
-        for (int i = 0; i < gamePanel.player.maxMana; i++) {
-            graphics2D.drawImage(crystal_e, x, y, gamePanel.tileSize , gamePanel.tileSize, null);
-            x += gamePanel.tileSize-10;
-        }
-        x = gamePanel.tileSize / 4;
 
+        x = gamePanel.tileSize / 4;
+        y = (int) ((gamePanel.tileSize - 8) * step + gamePanel.tileSize / 2.6);
+
+        for (int i = 0; i < gamePanel.player.maxMana; i++) {
+            if (i % 5 == 0 && i != 0) {
+                x = gamePanel.tileSize / 4;
+                y += gamePanel.tileSize;
+            }
+            graphics2D.drawImage(crystal_e, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+            x += gamePanel.tileSize - 10;
+        }
+        x = gamePanel.tileSize / 4;
+        y = (int) ((gamePanel.tileSize - 8) * step + gamePanel.tileSize / 2.6);
         for (int i = 0; i < gamePanel.player.mana; i++) {
-            graphics2D.drawImage(crystal_f, x, y, gamePanel.tileSize , gamePanel.tileSize , null);
-            x += gamePanel.tileSize-10;
+            if (i % 5 == 0 && i != 0) {
+                x = gamePanel.tileSize / 4;
+                y += gamePanel.tileSize;
+            }
+            graphics2D.drawImage(crystal_f, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
+            x += gamePanel.tileSize - 10;
         }
         y = (int) (gamePanel.tileSize * .4) + gamePanel.tileSize / 4;
         x = gamePanel.screenWidth - gamePanel.tileSize * 2;
@@ -845,9 +856,10 @@ public class UI {
 
     private void drawGodMode(int y, int x) {
         String txt = "GOD MODE";
-        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
-        graphics2D.setColor(new Color(12, 5, 1, 224));
+        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 10F));
+        graphics2D.setColor(new Color(12, 5, 1, 225));
         graphics2D.drawString(txt, x + 1, y + 1);
+        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 10F));
         graphics2D.setColor(gamePanel.keyHandler.modeOfGod ? new Color(84, 161, 18) : new Color(241, 42, 23, 255));
         graphics2D.drawString(txt, x, y);
     }
