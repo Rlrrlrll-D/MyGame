@@ -192,6 +192,7 @@ public class AssetSetter {
             gamePanel.mon[numMap][i].worldY = gamePanel.tileSize * 18;
             value++;
         }
+
         for (int i = 0; i < 3; i++) {
             gamePanel.mon[numMap][i + 5] = new RedSlime(gamePanel);
             gamePanel.mon[numMap][i + 5].worldX = gamePanel.tileSize * (38 + value);
