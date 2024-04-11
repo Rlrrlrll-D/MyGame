@@ -193,9 +193,9 @@ public class AssetSetter {
             value++;
         }
         for (int i = 0; i < 3; i++) {
-            gamePanel.mon[numMap][i] = new RedSlime(gamePanel);
-            gamePanel.mon[numMap][i].worldX = gamePanel.tileSize * (38 + value);
-            gamePanel.mon[numMap][i].worldY = gamePanel.tileSize * 5;
+            gamePanel.mon[numMap][i + 5] = new RedSlime(gamePanel);
+            gamePanel.mon[numMap][i + 5].worldX = gamePanel.tileSize * (38 + value);
+            gamePanel.mon[numMap][i + 5].worldY = gamePanel.tileSize * 5;
             value++;
 
             gamePanel.mon[numMap][4] = new Ogr(gamePanel);
@@ -207,13 +207,6 @@ public class AssetSetter {
     private void setMonsterForMap2() {
         int numMap = 2;
 
-        //        for (int i = 0; i < 3; i++) {
-//            gamePanel.mon[numMap][i] = new RedSlime(gamePanel);
-//            gamePanel.mon[numMap][i].worldX = gamePanel.tileSize * (8 + value);
-//            gamePanel.mon[numMap][i].worldY = gamePanel.tileSize * 17;
-//            value++;
-//
-//        }
         gamePanel.mon[numMap][0] = new Bat(gamePanel);
         gamePanel.mon[numMap][0].worldX = gamePanel.tileSize * 44;
         gamePanel.mon[numMap][0].worldY = gamePanel.tileSize * 41;
