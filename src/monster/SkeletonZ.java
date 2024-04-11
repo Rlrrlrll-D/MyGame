@@ -57,54 +57,30 @@ public class SkeletonZ extends Monster {
     }
 
     private void getImg() {
-        var i = 4;
-        if (!inRage) {
-            up1 = setup("/res/monster/skeleton_up_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            up2 = setup("/res/monster/skeleton_up_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            down1 = setup("/res/monster/skeleton_down_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            down2 = setup("/res/monster/skeleton_down_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            left1 = setup("/res/monster/skeleton_left_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            left2 = setup("/res/monster/skeleton_left_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            right1 = setup("/res/monster/skeleton_right_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            right2 = setup("/res/monster/skeleton_right_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-        }
-        if (inRage) {
-            up1 = setup("/res/monster/skeleton_phase2_up_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            up2 = setup("/res/monster/skeleton_phase2_up_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            down1 = setup("/res/monster/skeleton_phase2_down_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            down2 = setup("/res/monster/skeleton_phase2_down_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            left1 = setup("/res/monster/skeleton_phase2_left_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            left2 = setup("/res/monster/skeleton_phase2_left_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            right1 = setup("/res/monster/skeleton_phase2_right_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-            right2 = setup("/res/monster/skeleton_phase2_right_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-        }
+    var i = 4;
+    String prefix = inRage ? "/res/monster/skeleton_phase2_" : "/res/monster/skeleton_";
+    up1 = setup(prefix + "up_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+    up2 = setup(prefix + "up_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+    down1 = setup(prefix + "down_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+    down2 = setup(prefix + "down_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+    left1 = setup(prefix + "left_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+    left2 = setup(prefix + "left_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+    right1 = setup(prefix + "right_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+    right2 = setup(prefix + "right_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+}
 
-    }
-
-    private void getAttackImg() {
-        var i = 4;
-        if (!inRage) {
-            attackUp1 = setup("/res/monster/skeleton_attack_up_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-            attackUp2 = setup("/res/monster/skeleton_attack_up_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-            attackDown1 = setup("/res/monster/skeleton_attack_down_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-            attackDown2 = setup("/res/monster/skeleton_attack_down_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-            attackLeft1 = setup("/res/monster/skeleton_attack_left_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-            attackLeft2 = setup("/res/monster/skeleton_attack_left_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-            attackRight1 = setup("/res/monster/skeleton_attack_right_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-            attackRight2 = setup("/res/monster/skeleton_attack_right_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-        }
-        if (inRage) {
-            attackUp1 = setup("/res/monster/skeleton_phase2_attack_up_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-            attackUp2 = setup("/res/monster/skeleton_phase2_attack_up_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-            attackDown1 = setup("/res/monster/skeleton_phase2_attack_down_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-            attackDown2 = setup("/res/monster/skeleton_phase2_attack_down_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-            attackLeft1 = setup("/res/monster/skeleton_phase2_attack_left_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-            attackLeft2 = setup("/res/monster/skeleton_phase2_attack_left_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-            attackRight1 = setup("/res/monster/skeleton_phase2_attack_right_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-            attackRight2 = setup("/res/monster/skeleton_phase2_attack_right_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-        }
-
-    }
+private void getAttackImg() {
+    var i = 4;
+    String prefix = inRage ? "/res/monster/skeleton_phase2_attack_" : "/res/monster/skeleton_attack_";
+    attackUp1 = setup(prefix + "up_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+    attackUp2 = setup(prefix + "up_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+    attackDown1 = setup(prefix + "down_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+    attackDown2 = setup(prefix + "down_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+    attackLeft1 = setup(prefix + "left_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+    attackLeft2 = setup(prefix + "left_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+    attackRight1 = setup(prefix + "right_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+    attackRight2 = setup(prefix + "right_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+}
 
     public void setAction() {
         if (!inRage && life < maxLife / 2) {
@@ -140,6 +116,10 @@ public class SkeletonZ extends Monster {
                 gamePanel.objects[gamePanel.currentMap][i] = null;
             }
         }
+        randomReward();
+    }
+
+    private void randomReward() {
         int i = new Random().nextInt(100) + 1;
         if (i < 50) {
             dropItem(new CoinBronze(gamePanel));
