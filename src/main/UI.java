@@ -827,7 +827,6 @@ public class UI {
             }
             x += gamePanel.tileSize - 8;
         }
-
         x = gamePanel.tileSize / 4;
         y = (int) ((gamePanel.tileSize - 8) * step + gamePanel.tileSize / 2.6);
 
