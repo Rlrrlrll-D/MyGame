@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class UI {
             inputStream = getClass().getResourceAsStream("/res/fonts/Pixel Regular.otf");
             assert inputStream != null;
             Pixel = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-            inputStream = getClass().getResourceAsStream("/res/fonts/x12y16pxMaruMonica.ttf");
+            inputStream = getClass().getResourceAsStream("/res/fonts/MaruMonica.ttf");
             assert inputStream != null;
             Monica = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
@@ -864,30 +865,38 @@ public class UI {
     }
 
     private void drawMessage() {
-        int msgX = gamePanel.tileSize;
-        int msgYStart = gamePanel.tileSize * 3;
-        int lineHeight = 30;
+        int msgX = gamePanel.tileSize / 4;
+        int msgYStart = gamePanel.tileSize * 6;
+        int lineHeight = 20;
 
-        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
+        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 17F));
 
-        for (int i = 0; i < message.size(); i++) {
-            String msg = message.get(i);
+        Iterator<String> messageIterator = message.iterator();
+        Iterator<Integer> counterIterator = counter.iterator();
+
+        int i = 0;
+        while (messageIterator.hasNext() && counterIterator.hasNext()) {
+            String msg = messageIterator.next();
+            int count = counterIterator.next();
+
             if (msg != null) {
                 int msgY = msgYStart + i * lineHeight;
 
-                graphics2D.setColor(new Color(12, 5, 1, 224));
-                graphics2D.drawString(msg, msgX + 2, msgY + 2);
-                graphics2D.setColor(new Color(213, 195, 194));
+                graphics2D.setColor(new Color(12, 5, 1));
+                graphics2D.drawString(msg, msgX + 1, msgY + 1);
+                graphics2D.setColor(new Color(229, 152, 9));
                 graphics2D.drawString(msg, msgX, msgY);
 
-                int count = counter.get(i) + 1;
+                count++;
                 counter.set(i, count);
 
                 if (count > 180) {
-                    message.remove(i);
-                    counter.remove(i);
+                    messageIterator.remove();
+                    counterIterator.remove();
+                    continue;
                 }
             }
+            i++;
         }
     }
 
@@ -921,7 +930,7 @@ public class UI {
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
 
         if (npc.dialogues[npc.dialogSet][npc.dialogCount] != null) {
-//            dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
+            //    dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
             char[] characters = npc.dialogues[npc.dialogSet][npc.dialogCount].toCharArray();
             if (charIndex < characters.length) {
                 gamePanel.playSFX(20);
