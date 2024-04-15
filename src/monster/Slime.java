@@ -5,9 +5,11 @@ import main.GamePanel;
 import objects.CoinBronze;
 import objects.Heart;
 import objects.ManaCrystal;
+
 import java.util.Random;
 
 public class Slime extends Monster {
+    private final Random random = new Random();
 
     GamePanel gamePanel;
 
@@ -61,15 +63,14 @@ public class Slime extends Monster {
         }
     }
 
+
     public void checkDrop() {
-        int i = new Random().nextInt(100) + 1;
+        int i = random.nextInt(100) + 1;
         if (i < 50) {
             dropItem(new CoinBronze(gamePanel));
-        }
-        if (i >= 50 && i < 75) {
+        } else if (i < 75) {
             dropItem(new Heart(gamePanel));
-        }
-        if (i >= 75 && i < 100) {
+        } else {
             dropItem(new ManaCrystal(gamePanel));
         }
     }
