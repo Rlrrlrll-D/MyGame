@@ -7,6 +7,8 @@ import java.util.Random;
 
 public class Oldman extends Entity {
 
+    private final Random random = new Random();
+
     public Oldman(GamePanel gamePanel) {
         super(gamePanel);
         name = "Oldman";
@@ -59,30 +61,21 @@ public class Oldman extends Entity {
 
     }
 
+
     public void setAction() {
         if (onPath) {
             int goalCol = (gamePanel.player.worldX + gamePanel.player.solidArea.x) / gamePanel.tileSize;
             int goalRow = (gamePanel.player.worldY + gamePanel.player.solidArea.y) / gamePanel.tileSize;
             searchPath(goalCol, goalRow);
-
         } else {
-
             actionCounter++;
             if (actionCounter == 120) {
-
-                Random random = new Random();
-                int i = random.nextInt(100) + 1;
-                if (i <= 25) {
-                    direct = "up";
-                }
-                if (i > 25 && i <= 50) {
-                    direct = "down";
-                }
-                if (i > 50 && i <= 75) {
-                    direct = "left";
-                }
-                if (i > 75) {
-                    direct = "right";
+                int i = random.nextInt(4);
+                switch (i) {
+                    case 0 -> direct = "up";
+                    case 1 -> direct = "down";
+                    case 2 -> direct = "left";
+                    case 3 -> direct = "right";
                 }
                 actionCounter = 0;
             }
@@ -99,6 +92,6 @@ public class Oldman extends Entity {
         if (gamePanel.player.life < gamePanel.player.maxLife / 3) {
             dialogSet = 1;
         }
-        onPath = true;
+        //onPath = true;
     }
 }
