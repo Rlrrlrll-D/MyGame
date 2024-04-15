@@ -48,7 +48,15 @@ public class Oldman extends Entity {
         dialogues[1][1] = "However, the monsters reappear if you rest. \nI don't know why but that's how it works.";
         dialogues[1][2] = "In any case, don't push yourself too hard.";
 
+
         dialogues[2][0] = "I wonder how to open that door...";
+        dialogues[2][1] = "I heard that there is a key somewhere in this island.";
+
+        dialogues[3][0] = "You can block projectiles with your shield.";
+        dialogues[3][1] = "You can also parry an attack from monsters who swing a weapon.";
+        dialogues[3][2] = "If you miss the timing you receive damage \nso it is a bit risky action but you can give \nmassive damage if you succeed.";
+
+
     }
 
     public void setAction() {
