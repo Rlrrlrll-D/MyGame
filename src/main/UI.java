@@ -867,34 +867,32 @@ public class UI {
     private void drawMessage() {
         int msgX = gamePanel.tileSize / 4;
         int msgYStart = gamePanel.tileSize * 6;
-        int lineHeight = 20;
+        int lineHeight = 11;
 
-        graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 17F));
+        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 8F));
 
         Iterator<String> messageIterator = message.iterator();
         Iterator<Integer> counterIterator = counter.iterator();
 
         int i = 0;
         while (messageIterator.hasNext() && counterIterator.hasNext()) {
-            String msg = messageIterator.next();
+            String msg = messageIterator.next().toUpperCase();
             int count = counterIterator.next();
 
-            if (msg != null) {
-                int msgY = msgYStart + i * lineHeight;
+            int msgY = msgYStart + i * lineHeight;
 
-                graphics2D.setColor(new Color(12, 5, 1));
-                graphics2D.drawString(msg, msgX + 1, msgY + 1);
-                graphics2D.setColor(new Color(229, 152, 9));
-                graphics2D.drawString(msg, msgX, msgY);
+            graphics2D.setColor(new Color(12, 5, 1));
+            graphics2D.drawString(msg, msgX + 1, msgY + 1);
+            graphics2D.setColor(new Color(229, 152, 9));
+            graphics2D.drawString(msg, msgX, msgY);
 
-                count++;
-                counter.set(i, count);
+            count++;
+            counter.set(i, count);
 
-                if (count > 180) {
-                    messageIterator.remove();
-                    counterIterator.remove();
-                    continue;
-                }
+            if (count > 180) {
+                messageIterator.remove();
+                counterIterator.remove();
+                continue;
             }
             i++;
         }
