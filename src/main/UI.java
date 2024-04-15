@@ -34,7 +34,7 @@ public class UI {
     int subBehavior;
     int temp;
     ArrayList<Integer> counter = new ArrayList<>();
-    String combinedText = "";
+    StringBuilder combinedText = new StringBuilder();
 
 
     public UI(GamePanel gamePanel) {
@@ -192,7 +192,7 @@ public class UI {
         gamePanel.keyHandler.enterPressed = false;
     }
 
-    public void trade_select() {
+    private void trade_select() {
         npc.dialogSet = 0;
         drawDialogScreen();
 
@@ -230,7 +230,7 @@ public class UI {
         }
     }
 
-    public void trade_buy() {
+    private void trade_buy() {
         drawInventory(gamePanel.player, false);
         drawInventory(npc, true);
 
@@ -278,7 +278,7 @@ public class UI {
         }
     }
 
-    public void trade_sell() {
+    private void trade_sell() {
         drawInventory(gamePanel.player, true);
         int x = gamePanel.tileSize * 2;
         int y = gamePanel.tileSize * 9;
@@ -929,17 +929,10 @@ public class UI {
 
         if (npc.dialogues[npc.dialogSet][npc.dialogCount] != null) {
             //    dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
-            char[] characters = npc.dialogues[npc.dialogSet][npc.dialogCount].toCharArray();
-            if (charIndex < characters.length) {
-                gamePanel.playSFX(20);
-                String s = String.valueOf(characters[charIndex]);
-                combinedText += s;
-                dialogue = combinedText;
-                charIndex++;
-            }
+            soundTaping();
             if (gamePanel.keyHandler.enterPressed) {
                 charIndex = 0;
-                combinedText = "";
+                combinedText = new StringBuilder();
                 if (gamePanel.gameBehavior == GamePanel.dialogBehavior || gamePanel.gameBehavior == GamePanel.cutSceneBehavior) {
                     npc.dialogCount++;
                     gamePanel.keyHandler.enterPressed = false;
@@ -958,6 +951,16 @@ public class UI {
         for (String line : dialogue.split("\n")) {
             drawDialogText(line, x, y);
             y += 30;
+        }
+    }
+
+    private void soundTaping() {
+        char[] characters = npc.dialogues[npc.dialogSet][npc.dialogCount].toCharArray();
+        if (charIndex < characters.length) {
+            gamePanel.playSFX(20);
+            combinedText.append(characters[charIndex]);
+            dialogue = combinedText.toString();
+            charIndex++;
         }
     }
 
