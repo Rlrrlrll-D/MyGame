@@ -855,13 +855,13 @@ public class UI {
     }
 
     private void drawGodMode(int y, int x) {
-        String txt = "GOD MODE";
+        String txt = "God mode";
         graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 10F));
         graphics2D.setColor(new Color(12, 5, 1, 225));
-        graphics2D.drawString(txt, x + 1, y + 1);
+        graphics2D.drawString(txt.toUpperCase(), x + 1, y + 1);
         graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 10F));
         graphics2D.setColor(gamePanel.keyHandler.modeOfGod ? new Color(84, 161, 18) : new Color(241, 42, 23, 255));
-        graphics2D.drawString(txt, x, y);
+        graphics2D.drawString(txt.toUpperCase(), x, y);
     }
 
     private void drawMessage() {
