@@ -24,21 +24,21 @@ public class Boots extends Consumable {
     }
 
     private void setDialogue() {
-        dialogues[0][0] = "You put on the " + name + "and feel a sudden burst of speed!";
+        dialogues[0][0] = "You put on the " + name + " and feel a sudden burst of speed!";
     }
 
     public boolean use(Entity entity) {
         startDialog(this, 0);
-        booster();
+        booster(entity);
         return true;
     }
 
-    private void booster() {
-        gamePanel.player.speed += value;
+    private void booster(Entity e) {
+        e.speed += value;
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                gamePanel.player.speed = gamePanel.player.defaultSpeed;
+                e.speed = e.defaultSpeed;
                 gamePanel.ui.addMsg("The effect of the " + name + " has worn off.");
             }
         }, 10000);
