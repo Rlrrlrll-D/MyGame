@@ -857,28 +857,40 @@ public class Entity {
             }
 
 
-            if (invincible && !(this instanceof DryTree) && !(this instanceof DestructibleWall)) {
-                hpBarOn = true;
-                hpBarCounter = 0;
-                blinkEntity(graphics2D, 0.3f, 4);
-            }
-            if (isDying) {
-                dyingAnim(graphics2D, 0.01f, 4);
-            }
+            handleInvincible(graphics2D);
+            handleDying(graphics2D);
 
 
             graphics2D.drawImage(image, tempScreenX, tempScreenY, null);
             //shadow = setup("/res/objects/shadow", gamePanel.tileSize, gamePanel.tileSize / 4);
 
-            if (this instanceof Monster && !(this instanceof SkeletonZ)) {
-                graphics2D.drawImage(shadow, getScrX(), getScrY() + gamePanel.tileSize - 6, null);
-
-            }
-            if (this instanceof SkeletonZ) {
-                shadow = setup("/res/objects/shadow", gamePanel.tileSize * 4, gamePanel.tileSize);
-                graphics2D.drawImage(shadow, getScrX(), getScrY() + gamePanel.tileSize * 4 - gamePanel.tileSize / 2, null);
-            }
+            drawShadow(graphics2D);
             graphics2D.setComposite((AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f)));
+        }
+    }
+
+    private void drawShadow(Graphics2D graphics2D) {
+        if (this instanceof Monster && !(this instanceof SkeletonZ)) {
+            graphics2D.drawImage(shadow, getScrX(), getScrY() + gamePanel.tileSize - 6, null);
+
+        }
+        if (this instanceof SkeletonZ) {
+            shadow = setup("/res/objects/shadow", gamePanel.tileSize * 4, gamePanel.tileSize);
+            graphics2D.drawImage(shadow, getScrX(), getScrY() + gamePanel.tileSize * 4 - gamePanel.tileSize / 2, null);
+        }
+    }
+
+    private void handleDying(Graphics2D graphics2D) {
+        if (isDying) {
+            dyingAnim(graphics2D, 0.01f, 4);
+        }
+    }
+
+    private void handleInvincible(Graphics2D graphics2D) {
+        if (invincible && !(this instanceof DryTree) && !(this instanceof DestructibleWall)) {
+            hpBarOn = true;
+            hpBarCounter = 0;
+            blinkEntity(graphics2D, 0.3f, 4);
         }
     }
 
