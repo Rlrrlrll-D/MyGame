@@ -98,23 +98,31 @@ public class TileManager {
         bufferedReader.close();
     }
 
-    public void drawing(Graphics2D graphics2D) {
 
+    public void drawing(Graphics2D graphics2D) {
         for (int worldRow = 0; worldRow < GamePanel.maxWorldRow; worldRow++){
             for (int worldCol = 0; worldCol < GamePanel.maxWorldCol; worldCol++) {
                 int tNum = mapTileNum[gamePanel.currentMap][worldCol][worldRow];
                 int wrdX = worldCol * gamePanel.tileSize;
                 int wrdY = worldRow * gamePanel.tileSize;
-                int scrX = wrdX - gamePanel.player.worldX + gamePanel.player.screenX;
-                int scrY = wrdY - gamePanel.player.worldY + gamePanel.player.screenY;
-                if (wrdX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
-                        wrdX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
-                        wrdY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
-                        wrdY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY) {
-                    graphics2D.drawImage(tiles[tNum].image, scrX, scrY, null);
-
+                if (isInViewport(wrdX, wrdY)) {
+                    int scrX = wrdX - gamePanel.player.worldX + gamePanel.player.screenX;
+                    int scrY = wrdY - gamePanel.player.worldY + gamePanel.player.screenY;
+                    drawTile(graphics2D, tNum, scrX, scrY);
                 }
             }
         }
     }
+
+    private boolean isInViewport(int wrdX, int wrdY) {
+        return wrdX + gamePanel.tileSize > gamePanel.player.worldX - gamePanel.player.screenX &&
+                wrdX - gamePanel.tileSize < gamePanel.player.worldX + gamePanel.player.screenX &&
+                wrdY + gamePanel.tileSize > gamePanel.player.worldY - gamePanel.player.screenY &&
+                wrdY - gamePanel.tileSize < gamePanel.player.worldY + gamePanel.player.screenY;
+    }
+
+    private void drawTile(Graphics2D graphics2D, int tNum, int scrX, int scrY) {
+        graphics2D.drawImage(tiles[tNum].image, scrX, scrY, null);
+    }
 }
+

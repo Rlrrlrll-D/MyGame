@@ -71,20 +71,16 @@ public class Lighting {
         }
 
         switch (dayState) {
-            case day:
-                updateDayState(dusk, 1800);
-                break;
-            case dusk:
-            filterAlpha += 0.001f;
+            case day -> updateDayState(dusk, 1800);
+            case dusk -> {
+                filterAlpha += 0.001f;
                 filterAlphaChange();
-                break;
-            case night:
-                updateDayState(dawn, 1200);
-                break;
-            case dawn:
-            filterAlpha -= 0.001f;
+            }
+            case night -> updateDayState(dawn, 1200);
+            case dawn -> {
+                filterAlpha -= 0.001f;
                 filterAlphaChange();
-                break;
+            }
         }
     }
 
