@@ -299,20 +299,11 @@ public class KeyHandler implements KeyListener {
         }
         if (value == KeyEvent.VK_R) {
             switch (gamePanel.currentMap) {
-                case 0:
-                    gamePanel.tileManager.loadMap("/maps/world01.txt", 0);
-                    break;
-                case 1:
-                    gamePanel.tileManager.loadMap("/maps/world02.txt", 1);
-                    break;
-                case 2:
-                    gamePanel.tileManager.loadMap("/maps/dungeon01.txt", 2);
-                    break;
-                case 3:
-                    gamePanel.tileManager.loadMap("/maps/dungeon02.txt", 3);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + gamePanel.currentMap);
+                case 0 -> gamePanel.tileManager.loadMap("/maps/world01.txt", 0);
+                case 1 -> gamePanel.tileManager.loadMap("/maps/world02.txt", 1);
+                case 2 -> gamePanel.tileManager.loadMap("/maps/dungeon01.txt", 2);
+                case 3 -> gamePanel.tileManager.loadMap("/maps/dungeon02.txt", 3);
+                default -> throw new IllegalStateException("Unexpected value: " + gamePanel.currentMap);
             }
         }
         if (value == KeyEvent.VK_C) {
