@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Iterator;
 
 public class GamePanel extends JPanel implements Runnable {
     public static final int maxScreenCol = 20;
@@ -174,9 +175,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     private void update() throws IOException {
-
         if (gameBehavior == playBehavior) {
-
             player.update();
 
             for (int i = 0; i < npc[1].length; i++) {
@@ -203,15 +202,15 @@ public class GamePanel extends JPanel implements Runnable {
                         projectile[currentMap][i] = null;
                     }
                 }
-            for (int i = 0; i < particleArrayList.size(); i++)
-                if (particleArrayList.get(i) != null) {
-                    if (particleArrayList.get(i).isAlive) {
-                        particleArrayList.get(i).update();
-                    }
-                    if (!particleArrayList.get(i).isAlive) {
-                        particleArrayList.remove(i);
-                    }
+            Iterator<Entity> iterator = particleArrayList.iterator();
+            while (iterator.hasNext()) {
+                Entity particle = iterator.next();
+                if (particle.isAlive) {
+                    particle.update();
+                } else {
+                    iterator.remove();
                 }
+            }
             for (int i = 0; i < interactiveTile[1].length; i++) {
                 if (interactiveTile[currentMap][i] != null) {
                     interactiveTile[currentMap][i].update();
