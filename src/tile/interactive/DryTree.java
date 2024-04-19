@@ -3,15 +3,28 @@ package tile.interactive;
 import entity.Entity;
 import main.GamePanel;
 import objects.Axe;
+import objects.CoinBronze;
+import objects.Heart;
+import objects.ManaCrystal;
 
 import java.awt.image.BufferedImage;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class DryTree extends InteractiveTile {
     GamePanel gamePanel;
+    private final Map<Class<? extends Entity>, Integer> dropRates;
+    private final Random random = new Random();
 
     public DryTree(GamePanel gamePanel, int col, int row) {
-        super(gamePanel, col, row);
+        super(gamePanel);
         this.gamePanel = gamePanel;
+        dropRates = new LinkedHashMap<>(); // Maintain insertion order
+        dropRates.put(null, 60); // 60% chance to drop nothing
+        dropRates.put(CoinBronze.class, 27); // 27% chance to drop Heart
+        dropRates.put(Heart.class, 9); //9% chance to drop ManaCrystal
+        dropRates.put(ManaCrystal.class, 4); // 4% chance to drop Pickaxe
 
         this.worldX = gamePanel.tileSize * col;
         this.worldY = gamePanel.tileSize * row;
@@ -48,5 +61,25 @@ public class DryTree extends InteractiveTile {
 
     public BufferedImage getParticleImg() {
         return this.down1;
+    }
+
+    public void checkDrop() {
+        int rand = random.nextInt(100) + 1;
+        int accumulatedProbability = 0;
+        for (Map.Entry<Class<? extends Entity>, Integer> entry : dropRates.entrySet()) {
+            accumulatedProbability += entry.getValue();
+            if (rand <= accumulatedProbability) {
+                Entity item = null;
+                if (entry.getKey() != null) {
+                    try {
+                        item = entry.getKey().getConstructor(GamePanel.class).newInstance(gamePanel);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                dropItem(item);
+                break;
+            }
+        }
     }
 }

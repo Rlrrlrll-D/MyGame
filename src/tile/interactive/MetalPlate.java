@@ -7,7 +7,7 @@ public class MetalPlate extends InteractiveTile {
     GamePanel gamePanel;
 
     public MetalPlate(GamePanel gamePanel, int col, int row) {
-        super(gamePanel, col, row);
+        super(gamePanel);
         this.gamePanel = gamePanel;
 
         this.worldX = gamePanel.tileSize * col;

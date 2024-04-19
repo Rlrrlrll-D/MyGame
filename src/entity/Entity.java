@@ -4,7 +4,6 @@ import main.GamePanel;
 import main.UtilityTool;
 import monster.SkeletonZ;
 import monster.Slime;
-import objects.ManaCrystal;
 import tile.interactive.DestructibleWall;
 import tile.interactive.DryTree;
 
@@ -340,23 +339,15 @@ public class Entity {
 
     protected void dropItem(Entity dropped) {
         for (int i = 0; i < gamePanel.objects[1].length; i++) {
-            if (gamePanel.objects[gamePanel.currentMap][i] == null) {
+            if (gamePanel.objects[gamePanel.currentMap][i] == null && dropped != null) {
                 gamePanel.objects[gamePanel.currentMap][i] = dropped;
-                dropItemPosition(dropped, i);
+                gamePanel.objects[gamePanel.currentMap][i].worldX = worldX;
+                gamePanel.objects[gamePanel.currentMap][i].worldY = worldY;
                 break;
             }
         }
     }
 
-    private void dropItemPosition(Entity dropped, int i) {
-        if (dropped instanceof ManaCrystal) {
-            gamePanel.objects[gamePanel.currentMap][i].worldX = worldX + 10;
-            gamePanel.objects[gamePanel.currentMap][i].worldY = worldY + 10;
-        } else {
-            gamePanel.objects[gamePanel.currentMap][i].worldX = worldX;
-            gamePanel.objects[gamePanel.currentMap][i].worldY = worldY;
-        }
-    }
 
     public void update() {
         if (!sleeping) {

@@ -6,7 +6,7 @@ public class Trunk extends InteractiveTile {
     GamePanel gamePanel;
 
     public Trunk(GamePanel gamePanel, int col, int row) {
-        super(gamePanel, col, row);
+        super(gamePanel);
         this.gamePanel = gamePanel;
 
         this.worldX = gamePanel.tileSize * col;
