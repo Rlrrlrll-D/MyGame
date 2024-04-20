@@ -36,8 +36,8 @@ public class Player extends Entity {
     }
 
     public void setDefaultVal() {
-        worldX = gamePanel.tileSize * 2;
-        worldY = gamePanel.tileSize * 39;
+        worldX = gamePanel.tileSize * 26;
+        worldY = gamePanel.tileSize * 23;
         stayDirect = "down";
         direct = "stay";
         defaultSpeed = 4;
@@ -68,8 +68,8 @@ public class Player extends Entity {
 
     public void setDefaultPos() {
         gamePanel.currentMap = 0;
-        worldX = gamePanel.tileSize;
-        worldY = gamePanel.tileSize * 39;
+        worldX = gamePanel.tileSize * 29;
+        worldY = gamePanel.tileSize * 22;
         speed = defaultSpeed;
         stayDirect = "down";
         direct = "stay";

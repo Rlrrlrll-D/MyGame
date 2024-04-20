@@ -48,16 +48,15 @@ public class EventHandler {
 
         if (canTouchEvent) {
             Map<Event, Runnable> eventActionMap = new LinkedHashMap<>();
-            eventActionMap.put(new Event(0, 7, 43, "down"), this::damagePit);
-            eventActionMap.put(new Event(0, 9, 43, "down"), this::damagePit);
-            eventActionMap.put(new Event(0, 14, 43, "any"), () -> teleport(1, 14, 44, gamePanel.indoor));
-            eventActionMap.put(new Event(1, 14, 44, "any"), () -> teleport(0, 14, 43, gamePanel.outside));
-            eventActionMap.put(new Event(0, 4, 42, "any"), () -> teleport(2, 2, 47, gamePanel.dungeon));
-            eventActionMap.put(new Event(2, 2, 47, "any"), () -> teleport(0, 4, 42, gamePanel.outside));
+
+            eventActionMap.put(new Event(0, 36, 12, "any"), () -> teleport(1, 14, 44, gamePanel.indoor));
+            eventActionMap.put(new Event(1, 14, 44, "any"), () -> teleport(0, 36, 12, gamePanel.outside));
+            eventActionMap.put(new Event(0, 11, 39, "any"), () -> teleport(2, 2, 47, gamePanel.dungeon));
+            eventActionMap.put(new Event(2, 2, 47, "any"), () -> teleport(0, 11, 39, gamePanel.outside));
             eventActionMap.put(new Event(2, 3, 2, "any"), () -> teleport(3, 24, 45, gamePanel.dungeon));
             eventActionMap.put(new Event(3, 24, 45, "any"), () -> teleport(2, 3, 2, gamePanel.dungeon));
             eventActionMap.put(new Event(3, 24, 38, "up"), this::skeletonZ);
-            eventActionMap.put(new Event(0, 12, 42, "any"), () -> healingPool(GamePanel.dialogBehavior));
+            eventActionMap.put(new Event(0, 33, 38, "any"), () -> healingPool(GamePanel.dialogBehavior));
             eventActionMap.put(new Event(1, 20, 45, "stay"), () -> speak(gamePanel.npc[1][0]));
 
             for (Map.Entry<Event, Runnable> entry : eventActionMap.entrySet()) {
@@ -112,13 +111,13 @@ public class EventHandler {
         eventMaster.dialogues[1][1] = "Damn, this is good water!";
     }
 
-    private void damagePit() {
-        gamePanel.playSFX(6);
-        eventMaster.startDialog(eventMaster, 0);
-        gamePanel.player.life--;
-        canTouchEvent = false;
-
-    }
+//    private void damagePit() {
+//        gamePanel.playSFX(6);
+//        eventMaster.startDialog(eventMaster, 0);
+//        gamePanel.player.life--;
+//        canTouchEvent = false;
+//
+//    }
 
     public void healingPool(int gameBehavior) {
 
