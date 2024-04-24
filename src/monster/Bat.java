@@ -67,7 +67,7 @@ public class Bat extends Monster {
                     default -> throw new IllegalStateException("Unexpected value: " + direct);
                 }
             }
-            knockTime(10);
+            knockTime(20);
 
         } else if (isAttack) {
             attack();
