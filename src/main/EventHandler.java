@@ -53,8 +53,8 @@ public class EventHandler {
             eventActionMap.put(new Event(1, 14, 44, "any"), () -> teleport(0, 36, 12, gamePanel.outside));
             eventActionMap.put(new Event(0, 11, 39, "any"), () -> teleport(2, 2, 47, gamePanel.dungeon));
             eventActionMap.put(new Event(2, 2, 47, "any"), () -> teleport(0, 11, 39, gamePanel.outside));
-            eventActionMap.put(new Event(2, 3, 2, "any"), () -> teleport(3, 24, 45, gamePanel.dungeon));
-            eventActionMap.put(new Event(3, 24, 45, "any"), () -> teleport(2, 3, 2, gamePanel.dungeon));
+            eventActionMap.put(new Event(2, 47, 2, "any"), () -> teleport(3, 24, 45, gamePanel.dungeon));
+            eventActionMap.put(new Event(3, 24, 45, "any"), () -> teleport(2, 47, 2, gamePanel.dungeon));
             eventActionMap.put(new Event(3, 24, 38, "up"), this::skeletonZ);
             eventActionMap.put(new Event(0, 33, 38, "any"), () -> healingPool(GamePanel.dialogBehavior));
             eventActionMap.put(new Event(1, 20, 45, "stay"), () -> speak(gamePanel.npc[1][0]));

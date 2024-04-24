@@ -117,7 +117,14 @@ public class KeyHandler implements KeyListener {
                 gamePanel.resetGame(false);
                 gamePanel.gameBehavior = GamePanel.playBehavior;
                 gamePanel.ui.subBehavior = 0;
-                musicCheck(0);
+                //gamePanel.musicOn = false;
+                var number = 0;
+                switch (gamePanel.currentMap) {
+                    case 2 -> number = 22;
+                    case 3 -> number = 21;
+                    default -> throw new IllegalStateException("Unexpected value: " + gamePanel.currentMap);
+                }
+                musicCheck(number);
             } else if (gamePanel.ui.commandNum == 1) {
                 gamePanel.ui.commandNum = 0;
                 gamePanel.gameBehavior = GamePanel.titleBehavior;

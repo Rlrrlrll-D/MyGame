@@ -66,14 +66,35 @@ public class Player extends Entity {
         setDialogue();
     }
 
+
     public void setDefaultPos() {
-        gamePanel.currentMap = 0;
-        worldX = gamePanel.tileSize * 29;
-        worldY = gamePanel.tileSize * 22;
+        //gamePanel.currentMap = 0;
+        changePosition();
         speed = defaultSpeed;
         stayDirect = "down";
         direct = "stay";
     }
+
+    private void changePosition() {
+        switch (gamePanel.currentMap) {
+            case 0 -> {
+                worldX = gamePanel.tileSize * 27;
+                worldY = gamePanel.tileSize * 23;
+            }
+            case 2 -> {
+                worldX = gamePanel.tileSize * 2;
+                worldY = gamePanel.tileSize * 46;
+            }
+            case 3 -> {
+                worldX = gamePanel.tileSize * 24;
+                worldY = gamePanel.tileSize * 44;
+            }
+            default -> {
+            }
+        }
+    }
+
+
 
     public void restoreStatus() {
         mana = maxMana;

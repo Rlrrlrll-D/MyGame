@@ -66,10 +66,10 @@ public class GamePanel extends JPanel implements Runnable {
     public ArrayList<Entity> particleArrayList = new ArrayList<>();
     public KeyHandler keyHandler = new KeyHandler(this);
     public Player player = new Player(this, keyHandler);
-    public Entity[][] npc = new Entity[maxMap][10];
+    public Entity[][] npc = new Entity[maxMap][15];
     public Entity[][] objects = new Entity[maxMap][30];
     public InteractiveTile[][] interactiveTile = new InteractiveTile[maxMap][150];
-    public Entity[][] mon = new Entity[maxMap][20];
+    public Entity[][] mon = new Entity[maxMap][50];
     public Entity[][] projectile = new Entity[maxMap][20];
     public Sound sound = new Sound();
     public TileManager tileManager = new TileManager(this);
@@ -110,7 +110,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void resetGame(boolean restart) {
         stopMusic();
-        currentArea = outside;
+        //currentArea = outside;
         removeTempEntity();
         bossBattleOn = false;
         player.setDefaultPos();
@@ -118,12 +118,15 @@ public class GamePanel extends JPanel implements Runnable {
         player.resetCounter();
         assetSetter.setNPC();
         assetSetter.setMonster();
-        musicOn = false;
+        sndCheck();
+
         if (restart) {
+            stopMusic();
             player.setDefaultVal();
             assetSetter.setObject();
             assetSetter.setInteractiveTile();
             environmentManager.lighting.resetDay();
+
         }
     }
 
@@ -145,6 +148,14 @@ public class GamePanel extends JPanel implements Runnable {
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start();
+    }
+
+    public void sndCheck() {
+        switch (currentArea) {
+            case outside -> playMusic(0);
+            case indoor -> playMusic(22);
+            case dungeon -> playMusic(21);
+        }
     }
 
     @Override
