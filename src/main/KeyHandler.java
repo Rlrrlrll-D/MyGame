@@ -122,7 +122,6 @@ public class KeyHandler implements KeyListener {
                 switch (gamePanel.currentMap) {
                     case 2 -> number = 22;
                     case 3 -> number = 21;
-                    default -> throw new IllegalStateException("Unexpected value: " + gamePanel.currentMap);
                 }
                 musicCheck(number);
             } else if (gamePanel.ui.commandNum == 1) {
@@ -162,6 +161,7 @@ public class KeyHandler implements KeyListener {
                     gamePanel.ui.commandNum++;
                     gamePanel.playSFX(12);
                 }
+
             }
         }
         if (value == KeyEvent.VK_A || value == KeyEvent.VK_LEFT) {
