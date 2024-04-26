@@ -292,6 +292,14 @@ public class AssetSetter {
         gamePanel.mon[numMap][20].worldX = gamePanel.tileSize * 15;
         gamePanel.mon[numMap][20].worldY = gamePanel.tileSize * 40;
 
+        gamePanel.mon[numMap][21] = new RedSlime(gamePanel);
+        gamePanel.mon[numMap][21].worldX = gamePanel.tileSize * 15;
+        gamePanel.mon[numMap][21].worldY = gamePanel.tileSize * 27;
+
+        gamePanel.mon[numMap][22] = new RedSlime(gamePanel);
+        gamePanel.mon[numMap][22].worldX = gamePanel.tileSize * 15;
+        gamePanel.mon[numMap][22].worldY = gamePanel.tileSize * 28;
+
         // ... rest of the code for setting monsters for map 2
     }
 

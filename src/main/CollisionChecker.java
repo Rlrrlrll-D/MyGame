@@ -11,6 +11,74 @@ public class CollisionChecker {
 
     }
 
+    public Entity getCollidingEntity(Entity entity) {
+        int entityLeftWorldX = entity.worldX + entity.solidArea.x;
+        int entityRightWorldX = entity.worldX + entity.solidArea.x + entity.solidArea.width;
+        int entityTopWorldY = entity.worldY + entity.solidArea.y;
+        int entityBottomWorldY = entity.worldY + entity.solidArea.y + entity.solidArea.height;
+
+        int entityLeftCol = entityLeftWorldX / gamePanel.tileSize;
+        int entityRightCol = entityRightWorldX / gamePanel.tileSize;
+        int entityTopRow = entityTopWorldY / gamePanel.tileSize;
+        int entityBottomRow = entityBottomWorldY / gamePanel.tileSize;
+
+        int tileNum1, tileNum2;
+
+        var direction = entity.direct;
+        if (entity.escapeKnock) {
+            direction = entity.knockBackDirect;
+        }
+        switch (direction) {
+            case "up", "stay_up" -> {
+                entityTopRow = (entityTopWorldY - entity.speed) / gamePanel.tileSize;
+                tileNum1 = gamePanel.tileManager.mapTileNum[gamePanel.currentMap][entityLeftCol][entityTopRow];
+                tileNum2 = gamePanel.tileManager.mapTileNum[gamePanel.currentMap][entityRightCol][entityTopRow];
+                if (gamePanel.tileManager.tiles[tileNum1].collision || gamePanel.tileManager.tiles[tileNum2].collision) {
+                    entity.collisionOn = true;
+                    entity.worldX = entity.worldX - gamePanel.tileSize / 4;
+                    entity.worldY = entity.worldY - gamePanel.tileSize;
+                    return entity;
+                }
+            }
+            case "down", "stay" -> {
+                entityBottomRow = (entityBottomWorldY + entity.speed) / gamePanel.tileSize;
+                tileNum1 = gamePanel.tileManager.mapTileNum[gamePanel.currentMap][entityLeftCol][entityBottomRow];
+                tileNum2 = gamePanel.tileManager.mapTileNum[gamePanel.currentMap][entityRightCol][entityBottomRow];
+                if (gamePanel.tileManager.tiles[tileNum1].collision || gamePanel.tileManager.tiles[tileNum2].collision) {
+                    entity.collisionOn = true;
+                    //entity.worldX = entity.worldX + gamePanel.tileSize;
+                    entity.worldY = entity.worldY + gamePanel.tileSize / 2;
+                    return entity;
+                }
+            }
+            case "left", "stay_left" -> {
+                entityLeftCol = (entityLeftWorldX - entity.speed) / gamePanel.tileSize;
+                tileNum1 = gamePanel.tileManager.mapTileNum[gamePanel.currentMap][entityLeftCol][entityTopRow];
+                tileNum2 = gamePanel.tileManager.mapTileNum[gamePanel.currentMap][entityLeftCol][entityBottomRow];
+                if (gamePanel.tileManager.tiles[tileNum1].collision || gamePanel.tileManager.tiles[tileNum2].collision) {
+                    entity.collisionOn = true;
+                    entity.worldX = entity.worldX - gamePanel.tileSize;
+                    //entity.worldY = entity.worldY + gamePanel.tileSize;
+                    return entity;
+                }
+            }
+            case "right", "stay_right" -> {
+                entityRightCol = (entityRightWorldX + entity.speed) / gamePanel.tileSize;
+                tileNum1 = gamePanel.tileManager.mapTileNum[gamePanel.currentMap][entityRightCol][entityTopRow];
+                tileNum2 = gamePanel.tileManager.mapTileNum[gamePanel.currentMap][entityRightCol][entityBottomRow];
+                if (gamePanel.tileManager.tiles[tileNum1].collision || gamePanel.tileManager.tiles[tileNum2].collision) {
+                    entity.collisionOn = true;
+                    entity.worldX = entity.worldX + gamePanel.tileSize / 2;
+                    //entity.worldY = entity.worldY + gamePanel.tileSize;
+                    return entity;
+                }
+            }
+            default ->
+                    throw new IllegalStateException("Unexpected value: " + entity.direct + " " + gamePanel.keyHandler.enterPressed);
+        }
+        return null;
+    }
+
     public void checkTile(Entity entity) throws IllegalStateException {
 
         int entityLeftWorldX = entity.worldX + entity.solidArea.x;

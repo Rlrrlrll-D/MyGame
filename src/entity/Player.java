@@ -44,7 +44,7 @@ public class Player extends Entity {
         speed = defaultSpeed;
         level = 1;
         maxLife = 6;
-        maxMana = 2;
+        maxMana = 40;
         mana = maxMana;
         life = maxLife;
         ammo = 10;

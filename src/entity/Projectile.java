@@ -7,6 +7,8 @@ public class Projectile extends Entity {
 
     public Projectile(GamePanel gamePanel) {
         super(gamePanel);
+        solidArea.width = 10;
+        solidArea.height = 10;
     }
 
     public void set(int worldX, int worldY, String direct, boolean isAlive, Entity user) {
@@ -20,11 +22,20 @@ public class Projectile extends Entity {
     }
 
     public void update() {
+        collisionOn = false;
+        //gamePanel.checker.checkTile(this);
+        Entity entity = gamePanel.checker.getCollidingEntity(this);
+
+        if (collisionOn) {
+            generateParticle(user.projectile, entity);
+            isAlive = false;
+        }
+
 
         if (user == gamePanel.player) {
             int monIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
             if (monIndex != 999) {
-                gamePanel.player.damageMonster(monIndex, this, attack * (gamePanel.player.level/2 ), knockPower);
+                gamePanel.player.damageMonster(monIndex, this, attack * (gamePanel.player.level / 2), knockPower);
                 generateParticle(user.projectile, gamePanel.mon[gamePanel.currentMap][monIndex]);
                 isAlive = false;
             }
