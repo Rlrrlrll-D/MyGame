@@ -1,6 +1,7 @@
 package main;
 
 import entity.Entity;
+import entity.Projectile;
 
 public class CollisionChecker {
 
@@ -9,6 +10,28 @@ public class CollisionChecker {
     public CollisionChecker(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
 
+    }
+
+    public boolean checkProjectileCollision(Projectile projectile1, Projectile projectile2) {
+        // Calculate the positions of the projectiles
+        projectile1.solidArea.x = projectile1.worldX + projectile1.solidArea.x;
+        projectile1.solidArea.y = projectile1.worldY + projectile1.solidArea.y;
+
+        projectile2.solidArea.x = projectile2.worldX + projectile2.solidArea.x;
+        projectile2.solidArea.y = projectile2.worldY + projectile2.solidArea.y;
+
+        // Check if the solid areas of the two projectiles intersect
+        boolean collision = projectile1.solidArea.intersects(projectile2.solidArea);
+
+        // Reset the solid area positions
+        projectile1.solidArea.x = projectile1.solidAreaDefaultX;
+        projectile1.solidArea.y = projectile1.solidAreaDefaultY;
+
+        projectile2.solidArea.x = projectile2.solidAreaDefaultX;
+        projectile2.solidArea.y = projectile2.solidAreaDefaultY;
+
+        // Return the result of the collision check
+        return collision;
     }
 
     public Entity getCollidingEntity(Entity entity) {

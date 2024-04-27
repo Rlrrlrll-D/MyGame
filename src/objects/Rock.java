@@ -11,9 +11,9 @@ public class Rock extends Projectile {
     GamePanel gamePanel;
 
     public Rock(GamePanel gamePanel) {
+
         super(gamePanel);
         this.gamePanel = gamePanel;
-
         name = objName;
         speed = 8;
         maxLife = 80;
@@ -55,7 +55,6 @@ public class Rock extends Projectile {
     public void subtractRes(Entity user) {
         user.ammo -= useCost;
     }
-
 
     public int getParticleSize() {
         return 10;

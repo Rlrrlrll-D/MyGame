@@ -7,8 +7,8 @@ public class Projectile extends Entity {
 
     public Projectile(GamePanel gamePanel) {
         super(gamePanel);
-        solidArea.width = 10;
-        solidArea.height = 10;
+        solidArea.width = 20;
+        solidArea.height = 20;
     }
 
     public void set(int worldX, int worldY, String direct, boolean isAlive, Entity user) {
@@ -18,20 +18,43 @@ public class Projectile extends Entity {
         this.direct = direct;
         this.isAlive = isAlive;
         this.life = this.maxLife;
-
     }
 
     public void update() {
-        collisionOn = false;
-        //gamePanel.checker.checkTile(this);
-        Entity entity = gamePanel.checker.getCollidingEntity(this);
+        explosionHittingProjectiles();
+        explosionHittingObstacle();
+        explosionHittingMonster();
+        explosionHittingPlayer();
+        directChange();
+        lifeSpan();
+        spriteImageChange(7);
+    }
 
+    private void explosionHittingProjectiles() {
+        for (int i = 0; i < gamePanel.projectile[1].length; i++) {
+            if (gamePanel.projectile[gamePanel.currentMap][i] != null) {
+                Projectile otherProjectile = (Projectile) gamePanel.projectile[gamePanel.currentMap][i];
+                if (otherProjectile != this && gamePanel.checker.checkProjectileCollision(this, otherProjectile)) {
+                    generateParticle(user.projectile, user.projectile);
+                    generateParticle(otherProjectile.user.projectile, otherProjectile.user.projectile);
+                    isAlive = false;
+                    otherProjectile.isAlive = false;
+                    break;
+                }
+            }
+        }
+    }
+
+    private void explosionHittingObstacle() {
+        collisionOn = false;
+        Entity entity = gamePanel.checker.getCollidingEntity(this);
         if (collisionOn) {
             generateParticle(user.projectile, entity);
             isAlive = false;
         }
+    }
 
-
+    private void explosionHittingMonster() {
         if (user == gamePanel.player) {
             int monIndex = gamePanel.checker.checkEntity(this, gamePanel.mon);
             if (monIndex != 999) {
@@ -40,6 +63,9 @@ public class Projectile extends Entity {
                 isAlive = false;
             }
         }
+    }
+
+    private void explosionHittingPlayer() {
         if (user != gamePanel.player) {
             boolean contactPlayer = gamePanel.checker.checkPlayer(this);
             if (!gamePanel.player.invincible && contactPlayer) {
@@ -47,8 +73,10 @@ public class Projectile extends Entity {
                 generateParticle(user.projectile, user.projectile);
                 isAlive = false;
             }
-
         }
+    }
+
+    private void directChange() {
         switch (direct) {
             case "up", "stay_up" -> worldY -= speed;
             case "down", "stay" -> worldY += speed;
@@ -56,12 +84,13 @@ public class Projectile extends Entity {
             case "right", "stay_right" -> worldX += speed;
             default -> throw new IllegalStateException("Unexpected value: " + direct);
         }
+    }
 
+    private void lifeSpan() {
         life--;
         if (life <= 0) {
             isAlive = false;
         }
-        spriteImageChange(7);
     }
 
     public boolean haveRes(Entity user) {
