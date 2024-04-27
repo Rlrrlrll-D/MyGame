@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Lighting {
+
     public final int day = 0;
     public final int dusk = 1;
     public final int night = 2;
@@ -28,11 +29,12 @@ public class Lighting {
     if (gamePanel.player.currentLight == null) {
         graphics2D.setColor(new Color(0, 0, 0.1f, 0.97f));
     } else {
+
         int centerX = gamePanel.player.screenX + (gamePanel.tileSize) / 2;
         int centerY = gamePanel.player.screenY + (gamePanel.tileSize) / 2;
-
         RadialGradientPaint radialGradientPaint = getRadialGradientPaint(centerX, centerY);
         graphics2D.setPaint(radialGradientPaint);
+
     }
     graphics2D.fillRect(0, 0, gamePanel.screenWidth, gamePanel.screenHeight);
     graphics2D.dispose();

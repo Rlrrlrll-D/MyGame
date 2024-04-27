@@ -16,7 +16,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class UI {
-
+    private static final Color DARK_COLOR = new Color(0, 0, 7);
+    private static final Color LIGHT_COLOR = new Color(229, 152, 9);
+    private static final int X_OFFSET = 2;
+    private static final int Y_OFFSET = 2;
     public String dialogue;
     public int count;
     public int playerSlotCol = 0;
@@ -25,7 +28,7 @@ public class UI {
     public int npcSlotRow = 0;
     public int commandNum = 0;
     public int charIndex;
-    public Font Purisa, Pixel, Monica;
+    public Font Purisa, Pixel, Monica, Abaddon1, Abaddon2, Dungeon;
     public Entity npc;
     GamePanel gamePanel;
     BufferedImage heart_f, heart_h, heart_e, crystal_f, crystal_e, coin;
@@ -50,6 +53,15 @@ public class UI {
             inputStream = getClass().getResourceAsStream("/res/fonts/MaruMonica.ttf");
             assert inputStream != null;
             Monica = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            inputStream = getClass().getResourceAsStream("/res/fonts/Abaddon_Bold.ttf");
+            assert inputStream != null;
+            Abaddon1 = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            inputStream = getClass().getResourceAsStream("/res/fonts/Abaddon_Light.ttf");
+            assert inputStream != null;
+            Abaddon2 = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            inputStream = getClass().getResourceAsStream("/res/fonts/DungeonFont.ttf");
+            assert inputStream != null;
+            Dungeon = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
@@ -774,7 +786,7 @@ public class UI {
     }
 
     private void drawTitleScreen() {
-        graphics2D.setFont(Pixel.deriveFont(Font.BOLD, 37F));
+        graphics2D.setFont(Monica.deriveFont(Font.BOLD, 57F));
         String text = "My hero adventure";
         int x = getX_Text(text.toUpperCase());
         int y = (int) (gamePanel.tileSize * 2.5);
@@ -786,15 +798,22 @@ public class UI {
     }
 
     private void drawTitleOptions(String[] options, int y) {
-        graphics2D.setFont(Pixel.deriveFont(Font.PLAIN, 25F));
-        for (int i = 0; i < options.length; i++) {
-            String text = options[i];
+        graphics2D.setFont(Monica.deriveFont(Font.BOLD, 40F));
+        int i = 0;
+        for (String text : options) {
             int x = getX_Text(text);
             y += gamePanel.tileSize * (i == 0 ? 4 : 1);
+            graphics2D.setColor(DARK_COLOR);
+            graphics2D.drawString(text.toUpperCase(), x + X_OFFSET, y + Y_OFFSET);
+            graphics2D.setColor(LIGHT_COLOR);
             graphics2D.drawString(text.toUpperCase(), x, y);
             if (commandNum == i) {
+                graphics2D.setColor(DARK_COLOR);
+                graphics2D.drawString(">", x - gamePanel.tileSize + X_OFFSET, y + Y_OFFSET);
+                graphics2D.setColor(LIGHT_COLOR);
                 graphics2D.drawString(">", x - gamePanel.tileSize, y);
             }
+            i++;
         }
     }
 
@@ -828,26 +847,26 @@ public class UI {
             }
             x += gamePanel.tileSize - 8;
         }
-        x = gamePanel.tileSize / 4;
+        x = 0;
         y = (int) ((gamePanel.tileSize - 8) * step + gamePanel.tileSize / 2.6);
 
         for (int i = 0; i < gamePanel.player.maxMana; i++) {
             if (i % 5 == 0 && i != 0) {
-                x = gamePanel.tileSize / 4;
+                x = 0;
                 y += gamePanel.tileSize;
             }
             graphics2D.drawImage(crystal_e, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
-            x += gamePanel.tileSize - 10;
+            x += (int) (gamePanel.tileSize - gamePanel.tileSize / 2.2);
         }
-        x = gamePanel.tileSize / 4;
+        x = 0;
         y = (int) ((gamePanel.tileSize - 8) * step + gamePanel.tileSize / 2.6);
         for (int i = 0; i < gamePanel.player.mana; i++) {
             if (i % 5 == 0 && i != 0) {
-                x = gamePanel.tileSize / 4;
+                x = 0;
                 y += gamePanel.tileSize;
             }
             graphics2D.drawImage(crystal_f, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
-            x += gamePanel.tileSize - 10;
+            x += (int) (gamePanel.tileSize - gamePanel.tileSize / 2.2);
         }
         y = (int) (gamePanel.tileSize * .4) + gamePanel.tileSize / 4;
         x = gamePanel.screenWidth - gamePanel.tileSize * 2;
@@ -928,7 +947,7 @@ public class UI {
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
 
         if (npc.dialogues[npc.dialogSet][npc.dialogCount] != null) {
-            //    dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
+            //dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
             soundTaping();
             if (gamePanel.keyHandler.enterPressed) {
                 charIndex = 0;
