@@ -26,17 +26,7 @@ public class InteractiveTile extends Entity {
     }
 
     public void update() {
-        // Only update if the tile is visible on the screen
-        if (isOnScreen()) {
         invincible(20);
-    }
-    }
-
-    private boolean isOnScreen() {
-        // Check if the tile's world coordinates are within the screen's bounds
-        int screenWidth = gamePanel.getWidth();
-        int screenHeight = gamePanel.getHeight();
-        return worldX >= 0 && worldX <= screenWidth && worldY >= 0 && worldY <= screenHeight;
     }
 
 
