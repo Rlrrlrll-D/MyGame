@@ -305,8 +305,11 @@ public class KeyHandler implements KeyListener {
             musTrigger();
         }
         if (value == KeyEvent.VK_R) {
+            //gamePanel.tileManager.loadMap("/maps/world01.txt", 0);
+            System.out.println("Map reloaded");
+            System.out.println(gamePanel.currentMap);
             switch (gamePanel.currentMap) {
-                case 0 -> gamePanel.tileManager.loadMap("/maps/shit.txt", 0);
+                case 0 -> gamePanel.tileManager.loadMap("/maps/world01.txt", 0);
                 case 1 -> gamePanel.tileManager.loadMap("/maps/world02.txt", 1);
                 case 2 -> gamePanel.tileManager.loadMap("/maps/dungeon01.txt", 2);
                 case 3 -> gamePanel.tileManager.loadMap("/maps/dungeon02.txt", 3);
