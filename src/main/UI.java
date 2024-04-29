@@ -947,8 +947,8 @@ public class UI {
         graphics2D.setFont(Monica.deriveFont(Font.PLAIN, 21F));
 
         if (npc.dialogues[npc.dialogSet][npc.dialogCount] != null) {
-            //dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
-            soundTaping();
+            dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
+            //soundTaping();
             if (gamePanel.keyHandler.enterPressed) {
                 charIndex = 0;
                 combinedText = new StringBuilder();
