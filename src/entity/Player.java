@@ -2,6 +2,8 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import monster.RedSlime;
+import monster.Slime;
 import objects.*;
 
 import java.awt.*;
@@ -433,7 +435,12 @@ public class Player extends Entity {
 
             if (!gamePanel.mon[gamePanel.currentMap][i].invincible) {
 
-                gamePanel.playSFX(7);
+                if (gamePanel.mon[gamePanel.currentMap][i] instanceof Slime || gamePanel.mon[gamePanel.currentMap][i] instanceof RedSlime) {
+
+                    gamePanel.playSFX(27);
+                } else {
+                    gamePanel.playSFX(7);
+                }
 
                 if (knockPower > 0) {
                     setKnockEscape(gamePanel.mon[gamePanel.currentMap][i], attacker, knockPower);

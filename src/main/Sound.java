@@ -43,6 +43,7 @@ public class Sound {
         sounds[24] = new File("src/res/sound/door-open.wav");
         sounds[25] = new File("src/res/sound/FinalBattle.wav");
         sounds[26] = new File("src/res/sound/fanfare.wav");
+        sounds[27] = new File("src/res/sound/slime.wav");
 
     }
 
