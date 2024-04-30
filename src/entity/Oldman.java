@@ -55,8 +55,9 @@ public class Oldman extends Entity {
         dialogues[2][1] = "I heard that there is a key somewhere in this island.";
 
         dialogues[3][0] = "You can block projectiles with your shield.";
-        dialogues[3][1] = "You can also parry an attack from monsters who swing a weapon.";
-        dialogues[3][2] = "If you miss the timing you receive damage \nso it is a bit risky action but you can give \nmassive damage if you succeed.";
+        dialogues[3][1] = "Also you can block projectiles with your projectiles.";
+        dialogues[3][2] = "You can also parry an attack from monsters who swing a weapon.";
+        dialogues[3][3] = "If you miss the timing you receive damage \nso it is a bit risky action but you can give \nmassive damage if you succeed.";
 
 
     }
