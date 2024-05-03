@@ -22,6 +22,7 @@ public class Bat extends Monster {
         attack = 6;
         defence = 0;
         exp = 7;
+        delay = 4;
 
         solidArea.x = 3;
         solidArea.y = 15;
@@ -50,43 +51,6 @@ public class Bat extends Monster {
 
         getRandomDirection(15);
 
-    }
-    public void update() {
-        if (escapeKnock) {
-            checkCollision();
-            if (collisionOn) {
-                knockCounter = 0;
-                escapeKnock = false;
-                speed = defaultSpeed;
-            } else {
-                switch (knockBackDirect) {
-                    case "up", "stay_up" -> worldY -= speed;
-                    case "down", "stay" -> worldY += speed;
-                    case "left", "stay_left" -> worldX -= speed;
-                    case "right", "stay_right" -> worldX += speed;
-                    default -> throw new IllegalStateException("Unexpected value: " + direct);
-                }
-            }
-            knockTime(20);
-
-        } else if (isAttack) {
-            attack();
-        } else {
-            setAction();
-            checkCollision();
-            if (!collisionOn) {
-
-                switch (direct) {
-                    case "up" -> worldY -= speed;
-                    case "down" -> worldY += speed;
-                    case "left" -> worldX -= speed;
-                    case "right" -> worldX += speed;
-                    default -> throw new IllegalStateException("Unexpected value: " + direct);
-                }
-            }
-            spriteImageChange(4);
-        }
-        invincible(40);
     }
 
     public void damageReaction() {

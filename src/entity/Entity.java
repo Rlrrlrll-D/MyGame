@@ -23,7 +23,8 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
 
     public int worldX, worldY;
-
+    public int defaultDelay = 17;
+    public int delay = defaultDelay;
     public int speed;
     public int level;
     public int strength;
@@ -383,7 +384,7 @@ public class Entity {
                         default -> throw new IllegalStateException("Unexpected value: " + direct);
                     }
                 }
-                spriteImageChange(17);
+                spriteImageChange(delay);
             }
             invincible(40);
             shotCount();
@@ -608,6 +609,7 @@ public class Entity {
     }
 
     protected void spriteImageChange(int delay) {
+        this.delay = delay;
         counter++;
         if (counter > delay) {
             if (spriteNum == 1) {

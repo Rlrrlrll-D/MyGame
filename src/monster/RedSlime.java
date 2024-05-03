@@ -24,6 +24,7 @@ public class RedSlime extends Monster {
         attack = 7;
         defence = 0;
         exp = 5;
+        delay = 10;
         projectile = new Rock(gamePanel);
 
         solidArea.x = 3;
@@ -37,47 +38,6 @@ public class RedSlime extends Monster {
 
     }
 
-    public void update() {
-        if (!sleeping) {
-            if (escapeKnock) {
-                checkCollision();
-                if (collisionOn) {
-                    knockCounter = 0;
-                    escapeKnock = false;
-                    speed = defaultSpeed;
-                } else {
-                    switch (knockBackDirect) {
-                        case "up", "stay_up" -> worldY -= speed;
-                        case "down", "stay" -> worldY += speed;
-                        case "left", "stay_left" -> worldX -= speed;
-                        case "right", "stay_right" -> worldX += speed;
-                        default -> throw new IllegalStateException("Unexpected value: " + direct);
-                    }
-                }
-                knockTime(20);
-
-            } else if (isAttack) {
-                attack();
-            } else {
-                setAction();
-                checkCollision();
-                if (!collisionOn) {
-
-                    switch (direct) {
-                        case "up", "stay_up" -> worldY -= speed;
-                        case "down", "stay" -> worldY += speed;
-                        case "left", "stay_left" -> worldX -= speed;
-                        case "right", "stay_right" -> worldX += speed;
-                        default -> throw new IllegalStateException("Unexpected value: " + direct);
-                    }
-                }
-                spriteImageChange(17);
-            }
-            invincible(40);
-            shotCount();
-            offBalanceTime();
-        }
-    }
 
     private void getImg() {
         up1 = setup("/res/monster/red_slime_1", gamePanel.tileSize, gamePanel.tileSize);

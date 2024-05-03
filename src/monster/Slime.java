@@ -18,6 +18,7 @@ public class Slime extends Monster {
         this.gamePanel = gamePanel;
         name = "Slime";
         defaultSpeed = 1;
+        delay = 30;
         speed = defaultSpeed;
         maxLife = 4;
         life = maxLife;
@@ -49,7 +50,7 @@ public class Slime extends Monster {
     }
 
     public void setAction() {
-            getRandomDirection(140);
+        getRandomDirection(140);
     }
 
     public void damageReaction() {

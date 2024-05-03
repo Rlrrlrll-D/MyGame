@@ -9,6 +9,7 @@ public class Projectile extends Entity {
         super(gamePanel);
         solidArea.width = 20;
         solidArea.height = 20;
+        delay = 7;
     }
 
     public void set(int worldX, int worldY, String direct, boolean isAlive, Entity user) {
@@ -27,7 +28,7 @@ public class Projectile extends Entity {
         explosionHittingPlayer();
         directChange();
         lifeSpan();
-        spriteImageChange(7);
+        spriteImageChange(delay);
     }
 
     private void explosionHittingProjectiles() {
