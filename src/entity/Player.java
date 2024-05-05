@@ -44,7 +44,6 @@ public class Player extends Entity {
         direct = "stay";
         defaultSpeed = 4;
         speed = defaultSpeed;
-        // delay = 17;
         level = 1;
         maxLife = 6;
         maxMana = 2;
