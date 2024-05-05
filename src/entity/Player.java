@@ -44,7 +44,7 @@ public class Player extends Entity {
         direct = "stay";
         defaultSpeed = 4;
         speed = defaultSpeed;
-        delay = 17;
+        // delay = 17;
         level = 1;
         maxLife = 6;
         maxMana = 2;
@@ -274,7 +274,7 @@ public class Player extends Entity {
         gamePanel.keyHandler.enterPressed = false;
         guarding = false;
         guardCounter = 0;
-        delay = 4;
+        delay = 5;
         spriteImageChange(delay);
         delay = defaultDelay;
     }
