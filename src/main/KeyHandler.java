@@ -295,19 +295,16 @@ public class KeyHandler implements KeyListener {
         if (value == KeyEvent.VK_P) {
             gamePanel.gameBehavior = GamePanel.pauseBehavior;
         }
-        if (value == KeyEvent.VK_T) {
-            chkDrawTime = !chkDrawTime;
-        }
-        if (value == KeyEvent.VK_G) {
-            modeOfGod = !modeOfGod;
-        }
+//        if (value == KeyEvent.VK_T) {
+//            chkDrawTime = !chkDrawTime;
+//        }
+//        if (value == KeyEvent.VK_G) {
+//            modeOfGod = !modeOfGod;
+//        }
         if (value == KeyEvent.VK_M) {
             musTrigger();
         }
         if (value == KeyEvent.VK_R) {
-            //gamePanel.tileManager.loadMap("/maps/world01.txt", 0);
-            System.out.println("Map reloaded");
-            System.out.println(gamePanel.currentMap);
             switch (gamePanel.currentMap) {
                 case 0 -> gamePanel.tileManager.loadMap("/maps/world01.txt", 0);
                 case 1 -> gamePanel.tileManager.loadMap("/maps/world02.txt", 1);
@@ -351,12 +348,14 @@ public class KeyHandler implements KeyListener {
             if (gamePanel.ui.commandNum == 0) {
                 gamePanel.gameBehavior = GamePanel.playBehavior;
                 gamePanel.musicOn = false;
+                gamePanel.sound.volumeScale = 1;
                 musicCheck(0);
             }
             if (gamePanel.ui.commandNum == 1) {
                 gamePanel.saveLoad.load();
                 gamePanel.gameBehavior = GamePanel.playBehavior;
                 gamePanel.musicOn = false;
+                gamePanel.sound.volumeScale = 1;
                 musicCheck(0);
             }
             if (gamePanel.ui.commandNum == 2) {
@@ -372,12 +371,12 @@ public class KeyHandler implements KeyListener {
         }
     }
 
-    public void musTrigger() {
+    private void musTrigger() {
         if (gamePanel.musicOn) {
             if (gamePanel.sound.volumeScale > 0) {
                 gamePanel.sound.volumeScale = 0;
             } else {
-                gamePanel.sound.volumeScale = 2;
+                gamePanel.sound.volumeScale = 1;
             }
             gamePanel.sound.chkVolume();
         }

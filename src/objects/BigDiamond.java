@@ -11,7 +11,7 @@ public class BigDiamond extends PickUpOnlyItems {
         super(gamePanel);
         this.gamePanel = gamePanel;
         this.name = objName;
-        down1 = setup("/res/objects/BigDiamond", 32, 32);
+        down1 = setup("/res/objects/BigDiamond", 64, 64);
         setDialogues();
     }
 

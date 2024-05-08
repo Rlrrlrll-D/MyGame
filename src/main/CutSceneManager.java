@@ -139,7 +139,9 @@ public class CutSceneManager {
                 String string = "The End";
                 drawString(alpha, 55f, gamePanel.screenHeight / 2, string);
                 if (counterReached(600)) {
-                    gamePanel.playMusic(0);
+                    gamePanel.musicOn = false;
+                    gamePanel.sound.volumeScale = 1;
+                    gamePanel.keyHandler.musicCheck(0);
                     scenePhase++;
                 }
                 break;
@@ -152,21 +154,23 @@ public class CutSceneManager {
             case 7:
                 drawFade(1f);
 
-                String string2 = """
-                        Created by:    RLRRLRLL
-                                            
-                            Special Thanks to:   \s
-                                            
-                        RyiSnow    https://www.youtube.com/c/RyiSnow/""";
+                String string2 = "Created by RLRRLRLL.";
+                String string3 = "Special thanks RyiSnow https://www.youtube.com/@RyiSnow.";
+                String string4 = "Music by Joshua McLean https://www.youtube.com/@mrjoshuamclean \nKevin MacLeod https://incompetech.com";
+
                 y = gamePanel.screenHeight / 2;
                 drawString(1f, 20f, y, string2);
+                y += 30;
+                drawString(1f, 20f, y, string3);
+                y += 30;
+                drawString(1f, 20f, y, string4);
                 if (counterReached(600)) scenePhase++;
                 break;
             case 8:
                 drawFade(1f);
-                String string3 = "Goodbye!";
+                String string5 = "Goodbye!";
                 y--;
-                drawString(1f, 20f, y, string3);
+                drawString(1f, 20f, y, string5);
                 if (counterReached(1200)) {
                     playAgain();
                 }

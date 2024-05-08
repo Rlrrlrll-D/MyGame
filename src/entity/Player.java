@@ -3,6 +3,7 @@ package entity;
 import main.GamePanel;
 import main.KeyHandler;
 import monster.RedSlime;
+import monster.SkeletonZ;
 import monster.Slime;
 import objects.*;
 
@@ -70,8 +71,8 @@ public class Player extends Entity {
 
 
     public void setDefaultPos() {
-        //gamePanel.currentMap = 0;
         changePosition();
+        gamePanel.sound.volumeScale = 1;
         speed = defaultSpeed;
         stayDirect = "down";
         direct = "stay";
@@ -90,8 +91,6 @@ public class Player extends Entity {
             case 3 -> {
                 worldX = gamePanel.tileSize * 24;
                 worldY = gamePanel.tileSize * 44;
-            }
-            default -> {
             }
         }
     }
@@ -113,8 +112,7 @@ public class Player extends Entity {
         inventory.clear();
         inventory.add(currentWeapon);
         inventory.add(currentShield);
-        inventory.add(new Key(gamePanel));
-        inventory.add(new Axe(gamePanel));
+        inventory.add(new Tent(gamePanel));
         inventory.add(new Lantern(gamePanel));
     }
 
@@ -447,7 +445,11 @@ public class Player extends Entity {
                     setKnockEscape(gamePanel.mon[gamePanel.currentMap][i], attacker, knockPower);
                 }
                 if (gamePanel.mon[gamePanel.currentMap][i].offBalance) {
-                    attack *= 5;
+                    if (gamePanel.mon[gamePanel.currentMap][i] instanceof SkeletonZ) {
+                        attack *= 2;
+                    } else {
+                        attack *= 5;
+                    }
                 }
 
                 int dmg = attack - gamePanel.mon[gamePanel.currentMap][i].defence;

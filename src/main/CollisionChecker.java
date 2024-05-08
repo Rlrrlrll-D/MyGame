@@ -163,6 +163,11 @@ public class CollisionChecker {
     public int checkObject(Entity entity, boolean player) {
 
         int index = 999;
+
+        var direction = entity.direct;
+        if (entity.escapeKnock) {
+            direction = entity.knockBackDirect;
+        }
         for (int i = 0; i < gamePanel.objects[1].length; i++) {
 
             if (gamePanel.objects[gamePanel.currentMap][i] != null) {
@@ -172,7 +177,7 @@ public class CollisionChecker {
                 gamePanel.objects[gamePanel.currentMap][i].solidArea.x = gamePanel.objects[gamePanel.currentMap][i].worldX + gamePanel.objects[gamePanel.currentMap][i].solidArea.x;
                 gamePanel.objects[gamePanel.currentMap][i].solidArea.y = gamePanel.objects[gamePanel.currentMap][i].worldY + gamePanel.objects[gamePanel.currentMap][i].solidArea.y;
 
-                switch (entity.direct) {
+                switch (direction) {
                     case "up", "stay_up" -> entity.solidArea.y -= entity.speed;
                     case "down", "stay" -> entity.solidArea.y += entity.speed;
                     case "left", "stay_left" -> entity.solidArea.x -= entity.speed;

@@ -9,14 +9,14 @@ import java.io.File;
 public class Sound {
 
     Clip clip;
-    File[] sounds = new File[30];
+    File[] sounds = new File[40];
     FloatControl floatControl;
     public int volumeScale = 2;
     float volume;
 
     public Sound() {
 
-        sounds[0] = new File("src/res/sound/epic.wav");
+        sounds[0] = new File("src/res/sound/Joshua McLean - Mountain Trials.wav");
         sounds[1] = new File("src/res/sound/coin.wav");
         sounds[2] = new File("src/res/sound/unlock.wav");
         sounds[3] = new File("src/res/sound/close.wav");
@@ -37,7 +37,7 @@ public class Sound {
         sounds[18] = new File("src/res/sound/blocked.wav");
         sounds[19] = new File("src/res/sound/parry.wav");
         sounds[20] = new File("src/res/sound/speak.wav");
-        sounds[21] = new File("src/res/sound/dungeon.wav");
+        sounds[21] = new File("src/res/sound/Kevin MacLeod - 8bit Dungeon Level.wav");
         sounds[22] = new File("src/res/sound/merchant.wav");
         sounds[23] = new File("src/res/sound/chip-wall.wav");
         sounds[24] = new File("src/res/sound/door-open.wav");

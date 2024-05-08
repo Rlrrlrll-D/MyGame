@@ -57,30 +57,30 @@ public class SkeletonZ extends Monster {
     }
 
     private void getImg() {
-    var i = 4;
-    String prefix = inRage ? "/res/monster/skeleton_phase2_" : "/res/monster/skeleton_";
-    up1 = setup(prefix + "up_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-    up2 = setup(prefix + "up_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-    down1 = setup(prefix + "down_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-    down2 = setup(prefix + "down_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-    left1 = setup(prefix + "left_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-    left2 = setup(prefix + "left_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-    right1 = setup(prefix + "right_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
-    right2 = setup(prefix + "right_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
-}
+        var i = 4;
+        String prefix = inRage ? "/res/monster/skeleton_phase2_" : "/res/monster/skeleton_";
+        up1 = setup(prefix + "up_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+        up2 = setup(prefix + "up_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+        down1 = setup(prefix + "down_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+        down2 = setup(prefix + "down_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+        left1 = setup(prefix + "left_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+        left2 = setup(prefix + "left_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+        right1 = setup(prefix + "right_1", gamePanel.tileSize * i, gamePanel.tileSize * i);
+        right2 = setup(prefix + "right_2", gamePanel.tileSize * i, gamePanel.tileSize * i);
+    }
 
-private void getAttackImg() {
-    var i = 4;
-    String prefix = inRage ? "/res/monster/skeleton_phase2_attack_" : "/res/monster/skeleton_attack_";
-    attackUp1 = setup(prefix + "up_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-    attackUp2 = setup(prefix + "up_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-    attackDown1 = setup(prefix + "down_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-    attackDown2 = setup(prefix + "down_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
-    attackLeft1 = setup(prefix + "left_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-    attackLeft2 = setup(prefix + "left_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-    attackRight1 = setup(prefix + "right_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-    attackRight2 = setup(prefix + "right_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
-}
+    private void getAttackImg() {
+        var i = 4;
+        String prefix = inRage ? "/res/monster/skeleton_phase2_attack_" : "/res/monster/skeleton_attack_";
+        attackUp1 = setup(prefix + "up_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+        attackUp2 = setup(prefix + "up_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+        attackDown1 = setup(prefix + "down_1", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+        attackDown2 = setup(prefix + "down_2", gamePanel.tileSize * i, gamePanel.tileSize * 2 * i);
+        attackLeft1 = setup(prefix + "left_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+        attackLeft2 = setup(prefix + "left_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+        attackRight1 = setup(prefix + "right_1", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+        attackRight2 = setup(prefix + "right_2", gamePanel.tileSize * 2 * i, gamePanel.tileSize * i);
+    }
 
     public void setAction() {
         if (!inRage && life < maxLife / 2) {
@@ -107,9 +107,9 @@ private void getAttackImg() {
 
     public void checkDrop() {
         gamePanel.bossBattleOn = false;
-        Progress.bossDefeated= true;
+        Progress.bossDefeated = true;
         gamePanel.stopMusic();
-        gamePanel.playSFX(21);
+        //gamePanel.playSFX(21);
         for (int i = 0; i < gamePanel.objects[1].length; i++) {
             if (gamePanel.objects[gamePanel.currentMap][i] != null && Objects.equals(gamePanel.objects[gamePanel.currentMap][i].name, "DoorIron")) {
                 gamePanel.playSFX(24);

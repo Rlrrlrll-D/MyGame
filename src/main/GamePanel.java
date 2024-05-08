@@ -150,7 +150,7 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
     }
 
-    public void sndCheck() {
+    private void sndCheck() {
         switch (currentArea) {
             case outside -> playMusic(0);
             case indoor -> playMusic(22);

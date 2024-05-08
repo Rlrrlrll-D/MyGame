@@ -868,9 +868,9 @@ public class UI {
             graphics2D.drawImage(crystal_f, x, y, gamePanel.tileSize, gamePanel.tileSize, null);
             x += (int) (gamePanel.tileSize - gamePanel.tileSize / 2.2);
         }
-        y = (int) (gamePanel.tileSize * .4) + gamePanel.tileSize / 4;
-        x = gamePanel.screenWidth - gamePanel.tileSize * 2;
-        drawGodMode(y, x);
+//        y = (int) (gamePanel.tileSize * .4) + gamePanel.tileSize / 4;
+//        x = gamePanel.screenWidth - gamePanel.tileSize * 2;
+        //drawGodMode(y, x);
     }
 
     private void drawGodMode(int y, int x) {
@@ -950,6 +950,7 @@ public class UI {
             dialogue = npc.dialogues[npc.dialogSet][npc.dialogCount];
             //soundTaping();
             if (gamePanel.keyHandler.enterPressed) {
+                gamePanel.playSFX(12);
                 charIndex = 0;
                 combinedText = new StringBuilder();
                 if (gamePanel.gameBehavior == GamePanel.dialogBehavior || gamePanel.gameBehavior == GamePanel.cutSceneBehavior) {

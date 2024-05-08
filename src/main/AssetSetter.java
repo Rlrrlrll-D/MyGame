@@ -70,9 +70,9 @@ public class AssetSetter {
         gamePanel.objects[numMap][21].worldX = 33 * gamePanel.tileSize;
         gamePanel.objects[numMap][21].worldY = 40 * gamePanel.tileSize;
 
-        gamePanel.objects[numMap][22] = new DoorIron(gamePanel);
-        gamePanel.objects[numMap][22].worldX = 41 * gamePanel.tileSize;
-        gamePanel.objects[numMap][22].worldY = 5 * gamePanel.tileSize;
+//        gamePanel.objects[numMap][22] = new DoorIron(gamePanel);
+//        gamePanel.objects[numMap][22].worldX = 41 * gamePanel.tileSize;
+//        gamePanel.objects[numMap][22].worldY = 5 * gamePanel.tileSize;
 
         gamePanel.objects[numMap][23] = new Chest(gamePanel);
         gamePanel.objects[numMap][23].setLoot(new Boots(gamePanel));
