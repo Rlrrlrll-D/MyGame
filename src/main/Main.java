@@ -30,7 +30,7 @@ public class Main {
         gamePanel.startGameThread();
     }
     private void setIcon() {
-        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/res/player/Icon.png")));
+        ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("/res/player/icon.png")));
         window.setIconImage(icon.getImage());
     }
 }
