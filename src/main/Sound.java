@@ -44,6 +44,8 @@ public class Sound {
         soundURL[25] = getClass().getResource("/res/sound/FinalBattle.wav");
         soundURL[26] = getClass().getResource("/res/sound/fanfare.wav");
         soundURL[27] = getClass().getResource("/res/sound/slime.wav");
+        soundURL[28] = getClass().getResource("/res/sound/ogre.wav");
+        soundURL[29] = getClass().getResource("/res/sound/giant.wav");
 
     }
 

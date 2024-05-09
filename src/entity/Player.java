@@ -417,7 +417,7 @@ public class Player extends Entity {
     private void touchMonster(int i) {
         if (i != 999) {
             if (!invincible && !gamePanel.mon[gamePanel.currentMap][i].isDying) {
-                gamePanel.playSFX(8);
+                gamePanel.playSFX(6);
                 int damage = gamePanel.mon[gamePanel.currentMap][i].attack - defence;
                 if (damage < 1) {
                     damage = 1;
