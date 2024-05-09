@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="MHA">
+    <output-path>$PROJECT_DIR$/out/artifacts/MHA</output-path>
+    <root id="archive" name="MHA.jar">
+      <element id="module-output" name="MyGame" />
+    </root>
+  </artifact>
+</component>
