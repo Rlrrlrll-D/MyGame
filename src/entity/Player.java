@@ -2,6 +2,7 @@ package entity;
 
 import main.GamePanel;
 import main.KeyHandler;
+import monster.Ogr;
 import monster.RedSlime;
 import monster.SkeletonZ;
 import monster.Slime;
@@ -114,6 +115,7 @@ public class Player extends Entity {
         inventory.add(currentShield);
         inventory.add(new Tent(gamePanel));
         inventory.add(new Lantern(gamePanel));
+
     }
 
     public int getAttack() {
@@ -435,11 +437,13 @@ public class Player extends Entity {
             if (!gamePanel.mon[gamePanel.currentMap][i].invincible) {
 
                 if (gamePanel.mon[gamePanel.currentMap][i] instanceof Slime || gamePanel.mon[gamePanel.currentMap][i] instanceof RedSlime) {
-
                     gamePanel.playSFX(27);
-                } else {
-                    gamePanel.playSFX(7);
+                } else if (gamePanel.mon[gamePanel.currentMap][i] instanceof Ogr) {
+                    gamePanel.playSFX(28);
+                } else if (gamePanel.mon[gamePanel.currentMap][i] instanceof SkeletonZ) {
+                    gamePanel.playSFX(29);
                 }
+
 
                 if (knockPower > 0) {
                     setKnockEscape(gamePanel.mon[gamePanel.currentMap][i], attacker, knockPower);
